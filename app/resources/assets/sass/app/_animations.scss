@@ -1,0 +1,45 @@
+
+
+@-webkit-keyframes rotation {
+	from {
+		-webkit-transform: rotate(0deg);
+	}
+	to {
+		-webkit-transform: rotate(359deg);
+	}
+}
+
+@keyframes sour {
+
+    0%   {
+    	border-top-color: var(--fastest);
+    }
+    15%  {
+    	border-top-color: var(--faster);
+    }
+    30%  {
+    	border-top-color: var(--fast);
+    }
+    40%  {
+    	border-top-color: var(--not-fast);
+    }
+    80% {
+    	border-top-color: var(--slow);
+    }
+    90% {
+    	border-top-color: var(--slower);
+    }
+    95% {
+    	border-top-color: var(--slowest);
+    }
+		
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

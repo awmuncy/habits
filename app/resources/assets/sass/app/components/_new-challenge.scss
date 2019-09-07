@@ -1,0 +1,151 @@
+.new-challenge {
+	margin: 0 auto;
+	.btn.new-challenge-button {
+		display: grid;
+		border: none;
+		text-align: center;
+		font-weight: 900;
+		font-family: sans-serif;
+		font-size: var(--lg-font);;
+		width: 100%;
+		margin: 10px 0px;
+		@include media-breakpoint-down(md) {
+			margin: 10px;
+			width: calc(100% - 20px);
+		}
+		i {
+			display: block;
+			font-size: var(--xl-font);
+		}
+	}
+	.new-challenge-form {
+		background-color: white;
+		border: 1px solid #f6f6f6;
+    margin-top: 10px;
+		padding: 0px;
+		padding: 10px;
+		display: grid;
+		gap: 10px;
+		width: 100%;
+		grid-template-columns: 100%;
+		select, input[type="text"] {
+			padding: 5px 10px;
+		}
+		&>* {
+			display: block;
+			width: 100%;
+		}
+		.interval-select {
+			border: 1px solid #ddd;
+			display: grid;
+			grid-template-columns: 50% 50%;
+			@include media-breakpoint-down(md) {
+				grid-template-columns: 30% 70%;
+			}
+			background-color: white;
+			.daily {
+				font-weight: 800;
+				text-transform: uppercase;
+				display: grid;
+				font-size: var(--lg-heading-font);
+				place-items: center;
+				color: #ccc;
+			}
+			.timeframe-select {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: stretch;
+				background-color: #f6f6f6;
+			}
+			input[type="radio"] {
+				display: none;
+				&:checked + label {
+					color: var(--brand-primary);
+					background-color: white;
+					//border: 1px solid #444;
+				}
+				& + label {
+					color: #333;
+					font-size: var(--md-font);
+					width: 100%;
+					padding: 5px 10px;
+					text-align: center;
+					background-color: #f3f3f3;
+					//border: 1px solid transparent;
+				}
+			}
+		}
+
+		.weekdays-select {
+			display: flex;
+			padding: 10px;
+			margin: 0px;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+			@include media-breakpoint-down(md) {
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr 1fr;
+				place-items: center;
+			
+			}
+			li {
+				margin: 0px 10px;
+				@include media-breakpoint-down(md) {
+					margin: 0px 5px;
+				}
+				label {
+					border: 1px solid #777;
+					border-radius: 100%;
+					width: 30px;
+					height: 30px;
+					display: flex;
+					justify-content: center;
+					place-items: center;
+					color: #999;
+					font-size: var(--md-font);
+					
+				}
+				&:hover label {
+					background-color: #eee;
+					color: black;
+					border-color: var(--brand-secondary);
+				}
+				input[type="checkbox"] {
+					display: none;
+					&:checked + label {
+						background-color: var(--brand-primary);
+						color: white;
+						border-color: var(--brand-secondary);
+					}
+				}
+				span {
+					font-size: var(--xs-font);
+					vertical-align: sub;
+					display: block;
+					padding-top: .2em;
+				}
+
+			}
+		}
+	}
+	input[type="submit"] {
+		display: block;
+		width: initial;
+	}
+	h3 {
+		margin: 5px 0px 10px;
+	}
+	.nevermind {
+		display: block;
+		float: right;
+		color: var(--slow);
+	}
+	.react-datepicker-wrapper,
+	.react-datepicker__input-container {
+		display: block;
+		input[type="text"] {
+			width: 100%;
+		}
+ 	}
+}

@@ -1,0 +1,34 @@
+html {
+	--ornate: 'Satisfy', cursive;
+	--sans: 'Nunito Sans', sans-serif;
+	--serif: 'Corben', cursive;
+
+
+	--xl-font: 24px;
+	--lg-font: 20px;
+	--md-font: 16px;
+	--sm-font: 12px;
+	--xs-font: 8px;
+
+	font-family: var(--sans);
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--sans);
+	margin: .5em 0px 1em;
+}
+
+h1 {
+	font-size: var(--xl-heading-font);
+}
+h2 {
+	font-size: var(--lg-heading-font);
+}
+h3 {
+	font-size: var(--md-heading-font);
+}
+h4 {
+	font-size: var(--sm-heading-font);
+}
+h5, h6 {
+	font-size: var(--xs-heading-font);
+}

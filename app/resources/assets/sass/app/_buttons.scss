@@ -1,0 +1,144 @@
+html {
+	--button-border-radius: 5px;
+	--button-hover-up: 0px;
+	--button-font: var(--sans);
+	--button-transform: uppercase;
+	--button-padding: 10px 20px;
+	--button-color: var(--negative-space-base);
+	--button-bg-color: var(--brand-primary);
+	--button-border-color: transparent;
+	--button-font-size: 1.6rem;
+}
+
+
+.fab {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 0px;
+    border-radius: 100px;
+    border: 0px;
+    height: 48px;
+    width: 48px;
+    max-width: 48px;
+    max-width: 48px;
+    font-size: 32px;
+    text-align: center;
+    color: white;
+    background: var(--brand-primary);
+    box-shadow: 1px 1px 1px #999;
+}
+
+.btn {	
+
+	--btn-font-color: var(--light);
+	--btn-main-color: var(--primary);
+
+	--primary: var(--brand-primary);
+	--secondary: var(--brand-secondary);
+	--light: #fff;
+	--dark: #111;
+
+	/* Sizes */
+
+	padding: 4px 16px;
+	font-size: 16px;
+
+	&--xs {
+		padding: 4px 8px;
+		font-size: 12px;
+	}
+
+	&--sm {
+		padding: 4px 12px;
+		font-size: 16px;
+	}
+
+	&--md {
+		padding: 4px 16px;
+		font-size: 16px;
+	}
+
+	&--lg {
+		padding: 8px 20px;
+		font-size: 16px;
+	}
+
+	&--xl {
+		padding: 12px 24px;
+		font-size: 20px;
+	}
+
+
+
+	/* Color */
+
+	--btn-main-color: var(--primary);
+	color: var(--btn-font-color);
+	background-color: var(--btn-main-color);
+	border-color: var(--btn-main-color);
+	border-width: 2px;
+	border-style: solid;
+	&:hover {
+		opacity: .9;
+	}
+
+
+	&--primary {
+		--btn-font-color: var(--light);
+		--btn-main-color: var(--primary);
+	}
+	&--secondary {
+		--btn-font-color: var(--light);
+		--btn-main-color: var(--primary);
+	}
+	&--light {
+		--btn-font-color: var(--dark);
+		--btn-main-color: var(--light);
+	}
+	&--dark {
+		--btn-font-color: var(--light);
+		--btn-main-color: var(--dark);
+	}
+
+	&--ghost {
+		background-color: rgba(255,255,255,.2);
+		border-color: var(--btn-main-color);
+		color: var(--btn-main-color);
+		&:hover {
+			background-color: rgba(255,255,255,.4);
+		}
+	}
+
+	/* Style */
+
+
+
+
+
+
+
+
+
+	display: inline-grid;
+	place-items: center;
+
+	margin: 10px;
+
+	font-weight: 700;
+
+	font-family: var(--button-font);
+	text-transform: var(--button-transform);
+	border-radius: var(--button-border-radius);
+
+	top: 0;
+	left: 0;
+
+	position: relative;
+	transition: all .25s;
+
+	text-align: center;
+	text-decoration: none;
+
+
+}

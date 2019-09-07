@@ -1,0 +1,61 @@
+.essential-progress-bars {
+	height: 35px /*calc(100% - 10px)*/;
+	margin: 0px 5px;
+	background-color: #eee;
+	display: flex;
+	position: relative;
+	border-radius: 3px;
+	padding: 2px;
+	&:after {
+		left: 0px;
+		right: 0px;
+		position: absolute;
+		border: 1px solid #555;
+		top: calc(50% - 1px);
+		display: block;
+		content: '';
+	}
+}
+.essential-progress {
+	position: relative;
+	display: block;
+	height: 100%;
+	width: 5px;
+	margin-left: 2px;
+	&:before, &:after {
+		display: block;
+		content: '';
+		position: absolute;
+		top: calc(50% - 1px);
+		left: 0;
+		right: 0;
+		background-color: var(--good-color);
+		height: calc(var(--progress) * 50% - 1px);
+		transform-origin: 0 0;
+		border-bottom-left-radius: 2px;
+		border-bottom-right-radius: 2px;
+		transition: all .5s;
+	}
+	&:after {
+		height: calc(var(--progress) * 50% * -1 - 1px);
+		background-color: var(--bad-color);
+		top: calc(50% + 1px);
+	}
+	&:before {
+		transform: rotateX(180deg);
+	}	
+	transition: all .3s;
+	&--five {
+		--good-color: hsla(200, 70%, 50%,  calc(var(--progress) * .5 + .5));
+		--bad-color: hsla(0, 70%, 60%, calc(var(--progress) * -.5 + .5));
+		margin-left: 0px;
+	}
+	&--fifteen {
+		--good-color: hsla(200, 50%, 50%, calc(var(--progress) * .5 + .5));
+		--bad-color: hsla(0, 50%, 55%, calc(var(--progress) * -.5 + .5));
+	}
+	&--thirty {
+		--good-color: hsla(200, 30%, 50%,  calc(var(--progress) * .5 + .5));
+		--bad-color: hsla(0, 30%, 50%, calc(var(--progress) * -.5 + .5));
+	}
+}

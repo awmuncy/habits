@@ -1,0 +1,142 @@
+/*------------------------------------*\
+  Mixins
+\*------------------------------------*/
+
+/* 
+  Generally, we avoid mixins in the interest of keeping code 'local' for easy portability / readability
+  This is why we keep all mixins in a single file: if we need more, we're using too many
+
+  1. Admin Sticky Fix (For WordPress)
+  2. Color Variable
+  3. Bootstrap Media
+
+  That's it.
+
+*/
+
+
+@mixin color_variable($color_name, $h, $s, $l) {
+  $c: --#{$color_name};
+  #{$c}-h: #{$h};
+  #{$c}-s: #{$s};
+  #{$c}-l: #{$l}; 
+
+  $lum-levels: (
+    "" : "+ 0%",
+    -darkest : '- 30%',
+    -darker : '- 20%',
+    -dark : '- 10%',
+    -light : '+ 10%',
+    -lighter : '+ 20%',
+    -lightest : '+ 30%'
+  );
+  $sat-levels : (
+    "" : '+ 0%',
+    -hint : '- 30%',
+    -pastel : '- 20%',
+    -soft : '- 10%',
+    -vivid : '+ 10%',
+    -pop : '+ 20%',
+    -burn : '+ 30%'
+  );
+
+  @each $lum, $lum-level in $lum-levels {
+    @each $sat, $sat-level in $sat-levels {
+      #{$c}#{$lum}#{$sat}-root: var(#{$c}-h), calc(var(#{$c}-s) #{$sat-level}), calc(var(#{$c}-l) #{$lum-level});
+      #{$c}#{$lum}#{$sat}: unquote("hsl(var(#{$c}#{$lum}#{$sat}-root))");
+    }
+  }
+}
+
+
+/*------------------------------------*\
+	Bootstrap Media Queries
+\*------------------------------------*/
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+
+@function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+  $n: index($breakpoint-names, $name);
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+  $next: breakpoint-next($name, $breakpoints);
+  @return if($next, breakpoint-min($next, $breakpoints) - .02px, null);
+}
+
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  $max: breakpoint-max($name, $breakpoints);
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($lower, $breakpoints);
+  $max: breakpoint-max($upper, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-breakpoint-up($lower, $breakpoints) {
+      @content;
+    }
+  } @else if $min == null {
+    @include media-breakpoint-down($upper, $breakpoints) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  $max: breakpoint-max($name, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-breakpoint-up($name, $breakpoints) {
+      @content;
+    }
+  } @else if $min == null {
+    @include media-breakpoint-down($name, $breakpoints) {
+      @content;
+    }
+  }
+}

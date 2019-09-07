@@ -1,0 +1,73 @@
+* {
+	box-sizing: border-box;
+	list-style-type: none;
+}
+html, body {
+	margin: 0px;
+	// background-color: #777;
+}
+html {
+	// font-size: 62.5%;
+
+	--fastest: #007000;
+	--faster: #238823;
+	--fast: #65AC65;
+	--medium: #ccc;
+	--not-fast: #FFBF00;
+	--slow: #DB4E57;
+	--slower: #D2222D;
+	--slowest: #A81B24;
+
+	font-family: var(--sans);
+}
+
+.container {
+	max-width: 1080px;
+	margin: 10px auto;
+}
+
+.react-datepicker-popper {
+	font-size: initial;
+}
+
+.fastest {
+	border-top-color: var(--fastest);
+	color: var(--fastest);
+}
+.faster {
+	border-top-color: var(--faster);
+	//color: var(--faster);
+}
+.fast {
+	border-top-color: var(--fast);
+	//color: var(--fast);
+}
+.medium {
+	border-top-color: var(--medium);
+	//color: var(--medium);
+}
+.slow {
+	border-top-color: var(--slow);
+	//color: var(--slow);
+}
+.slower {
+	border-top-color: var(--slower);
+	//color: var(--slower);
+}
+.slowest {
+	border-top-color: var(--slowest);
+	//color: var(--slowest);
+}
+
+.habit-tracker {
+	min-height: 100vh;
+	display: grid;
+	width: 100%;
+	grid-template-columns: 100%;
+	grid-template-rows: max-content 1fr max-content;
+}
+
+h2 a {
+	color: #333;
+	text-decoration: none;
+}

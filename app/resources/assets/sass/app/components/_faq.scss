@@ -1,0 +1,17 @@
+.faq {
+	width: 100%;
+	max-width: 1080px;
+	margin: 20px auto;
+	.faq-item {
+		padding: 0px 10px;
+		.faq-q {
+			font-weight: 900;
+			font-size: var(--lg-font);
+			color: black;
+
+		}
+		.faq-a {
+			font-size: var(--md-font);
+		}
+	}
+}

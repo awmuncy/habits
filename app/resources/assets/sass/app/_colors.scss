@@ -1,0 +1,71 @@
+html {
+	// @include color_variable('brand-primary', 211, 100%, 18%);
+	@include color_variable('brand-secondary', 221, 49%, 54%);
+	@include color_variable('brand-primary', 217, 46%, 54%);
+
+	--light-grey: #eee;
+	--grey: #ccc;
+}
+
+
+/* Light or Dark */
+
+.light-base {
+
+}
+.dark-base {
+
+}
+
+/* Laid back or intense */
+
+
+
+/* Fun or professional */
+
+/* Hues */
+
+/* Color Mood */
+
+.pastel {
+
+}
+.childish {
+
+}
+.professional {
+
+}
+
+/* Color Scheme Modes */
+
+.monochrome {
+
+}
+.complemntary {
+
+}
+.analagous {
+
+}
+.triad {
+
+}
+.single-focus-otherwise-neutral {
+
+}
+
+
+
+
+
+
+html {
+	/* Specific colors */
+	--base: #333;
+	--negative-space-base: #fff;
+	--iconic-color: var(--brand-primary);;
+	--action-color: var(--brand-secondary);
+	--accent-color: white;
+
+}
