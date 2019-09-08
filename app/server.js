@@ -31,7 +31,7 @@ mongoose
         console.log("Mongo didn't connect");
     });
 
-const port = process.env.PORT || 443; 
+const port = process.env.PORT || 5000; 
 app.listen(port, () => console.log(`Server up and running on port ${port}`));
 
 // Passport middleware
