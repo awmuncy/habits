@@ -23,6 +23,10 @@ const urlsToCache = [
   '/fonts/fontAwesome/FontAwesome.otf'
 ];
 
+const home_urls = [
+  '/habits'
+];
+
 self.addEventListener('message', function(event){ 
   console.log(event.data);
 });
@@ -65,10 +69,24 @@ self.addEventListener('install', function(event) {
   );
 });
 
+function matchesPresetUrls(urlString, presetUrls) {
+  var urlObject = new URL(urlString);
+  if(presetUrls.includes(urlObject.pathname)) {
+    console.log("It's a match");
+    return true;
+  }
+
+  return false;
+}
+
 self.addEventListener('fetch', function(event) {
+
+  var request = event.request;
+  if(matchesPresetUrls(request.url, home_urls)) request = "/home";
+
   event.respondWith(
     caches.open(CACHE_NAME).then(function(cache) {
-      return cache.match(event.request, {ignoreSearch:true}).then(function (response) {
+      return cache.match(request, {ignoreSearch:true}).then(function (response) {
         return response || fetch(event.request).then(function(response) {
           // cache.put(event.request, response.clone());
           return response;
@@ -76,4 +94,20 @@ self.addEventListener('fetch', function(event) {
       });
     })
   );
+});
+
+
+
+
+self.addEventListener('push', ev => {
+  const data = ev.data.json();
+  console.log('Got push', data);
+  var close = self.registration.showNotification(data.title, {
+    body: data.body || 'Message from HabitApp',
+    icon: data.icon || '/images/logo.png',
+    image: data.image
+  });
+
+  ev.waitUntil(close);
+
 });

@@ -31,7 +31,7 @@ mongoose
         console.log("Mongo didn't connect");
     });
 
-const port = process.env.PORT || 5000; 
+const port = process.env.PORT || 443; 
 app.listen(port, () => console.log(`Server up and running on port ${port}`));
 
 // Passport middleware
@@ -99,6 +99,10 @@ function toHome(route) {
         res.end(App());
     });
 }
+
+import notifications from "./notifications";
+
+notifications(app);
 
 
 module.exports = app;
