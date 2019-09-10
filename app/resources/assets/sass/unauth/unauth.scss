@@ -86,6 +86,17 @@ html {
         align-items: center;
         justify-content: center;
       }
+      .logged-in-status {
+        display: none;
+      }
+      &.logged-in {
+        .guest-status {
+          display: none;
+        }  
+        .logged-in-status {
+          display: block;
+        }
+      }
     }
     ul.site-main-menu {
       display: flex;

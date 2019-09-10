@@ -3,7 +3,7 @@ var path = require('path');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var app = express();
-// var { renderToString } = require("react-dom/server");
+var env = require("dotenv").config({path: __dirname + '/../.env'}).parsed;
 const passport = require("passport");
 const users = require("./routes/api/users");
 
@@ -16,6 +16,7 @@ app.use(
 );
 
 app.use(bodyParser.json());
+
 
 
 const db = require("./config/keys").mongoURI;
@@ -31,7 +32,7 @@ mongoose
         console.log("Mongo didn't connect");
     });
 
-const port = process.env.PORT || 5000; 
+const port = env.PORT || 5000; 
 app.listen(port, () => console.log(`Server up and running on port ${port}`));
 
 // Passport middleware
