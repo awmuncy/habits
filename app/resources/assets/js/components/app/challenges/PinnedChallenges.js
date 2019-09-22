@@ -13,7 +13,7 @@ class PinnedChallenge extends Component {
     }
 
     render() {
-
+        if (this.props.id == null) return null;
         return (
             <div className="pinned-challenge single-habit">
                 <Link to={"habit/" + this.props.id}>

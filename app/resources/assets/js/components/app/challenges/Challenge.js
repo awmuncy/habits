@@ -17,7 +17,7 @@ class Challenge extends Component {
     render() {
         
         var hide = this.props.challenge.filtered_out || this.props.challenge.checkinSlots.length==0 || this.props.challenge.deleted;
-        var id = this.props.challenge.id;
+        var id = this.props.id;
 
         if(hide || this.props.pinned.includes(id.toString())){
             return <div></div>;

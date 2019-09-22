@@ -10,14 +10,14 @@ class AppNav extends Component {
 
     logout(e) {
         e.preventDefault();
-        localStorage.removeItem("state");
+        // Delete database
         localStorage.removeItem("user");
         localStorage.removeItem("mySecretToken");
         window.location.href = "/";
     }
 
     startSync() {
-        document.store.dispatch({type: 'SYNC_START'});
+        // document.store.dispatch({type: 'SYNC_START'});
     }
 
     render() {

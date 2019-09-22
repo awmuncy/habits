@@ -12,18 +12,8 @@ import core_values from './core_values.js';
 import { combineReducers } from 'redux';
 
 
-
-
-const initialState = {
-	navigationOpen : false,
-	challenges : [],
-	syncStatus: "complete",
-	pinned_habits: [null]
-};
-
-
-
 const rootReducer = combineReducers({
+	todos: ()=>{return []},
 	challenges: challenges,
 	navigationOpen: ui,
 	syncStatus: syncStatus,
@@ -31,8 +21,7 @@ const rootReducer = combineReducers({
 	filters: filters,
 	pinned_habits: pinned,
 	goals: goals,
-	core_values: core_values,
-	todos: []
+	core_values: core_values
 });
 
 export default rootReducer;
