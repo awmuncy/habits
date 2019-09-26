@@ -6,6 +6,8 @@ class AppNav extends Component {
 
     constructor(props) {
         super(props);
+
+        this.startSync = this.startSync.bind(this);
     }
 
     logout(e) {
@@ -17,7 +19,7 @@ class AppNav extends Component {
     }
 
     startSync() {
-        // document.store.dispatch({type: 'SYNC_START'});
+        this.props.startSync();
     }
 
     render() {
