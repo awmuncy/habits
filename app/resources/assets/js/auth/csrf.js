@@ -1,12 +1,14 @@
 // Auth and CSRF actons
 
+
+// import { syncReady } from 'actionCreators';
 // fetch("/csrf").then((response) => {
 // 	return response.text();
 // }).then(data=>{
 // 	data = JSON.parse(data);
 // 	document.csrf = data.csrf;
 	
-// 	store.dispatch({type: "SYNC_READY"});
+// 	store.dispatch(syncReady());
 // });	
 
 export default () => {
