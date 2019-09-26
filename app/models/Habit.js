@@ -22,6 +22,9 @@ const HabitSchema = new Schema({
   checkins: {
     type: [Checkin],
     default: []
+  },
+  profile: {
+    type: Object
   }
 });
 

@@ -97,6 +97,7 @@ UserSchema.methods.syncHabits = function(incomingHabits) {
     });
 
     if(!exists) {
+      incomingHabit._id = undefined;
       this.habits.push(incomingHabit);
     }
   });
