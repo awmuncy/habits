@@ -59,6 +59,7 @@ export default function challenges(state = 0, action) {
 			createdChallenge.id = action.challenge.id ? action.challenge.id : Math.floor(Math.random() * Math.floor(999999));
 			createdChallenge.position = 0;
 			createdChallenge.beginDate = action.challenge.beginDate;
+			createdChallenge._id = createdChallenge.id;
 
 
 			if(typeof action.challenge.profile === 'string' && action.challenge.profile.charAt(0)=="{") {
