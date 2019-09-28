@@ -1,3 +1,5 @@
+import { syncStart, toggleNav } from "./resources/actionCreators";
+
 export default {
     props: state => {
         return {
@@ -7,21 +9,14 @@ export default {
         }
     },
     dispatches: dispatch => {
-        var fireOff = function(arger) {
-            console.log("Thunk worked" + arger);
 
-            return (dispatch, getState) => {
-                dispatch({"type": "TOGGLE_NAV"});
-            }
-        }
 
         return {
             switchPage: page => {
-                window.history.pushState(null, page, page);
-                dispatch({type: "SWITCH_PAGE", page: page});
+                dispatch(switchPage(page));
             },
-            closeMenu: () => dispatch(fireOff("HELLO")),
-            startSync: () => dispatch({type: 'SYNC_START'})
+            closeMenu: () => dispatch(toggleNav()),
+            startSync: () => dispatch(syncStart())
         };
     }
 };

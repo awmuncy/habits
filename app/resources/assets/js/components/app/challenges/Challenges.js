@@ -11,7 +11,7 @@ const SortableChallenge = SortableElement(({challenge}) =>
 
 const SortableChallenges = SortableContainer(({challenges}) => {
 
-    if(!Array.isArray(challenges)) challenge = [];
+    if(!Array.isArray(challenges)) challenges = [];
 
 
     return (
@@ -49,6 +49,8 @@ class Challenges extends Component {
     static getDerivedStateFromProps(props, state) {
         
         props.view_date;
+
+        state.challenges = state.challenges ? state.challenges : [];
 
         state.challenges.map(function(item, key){
             item.filtered_out = false;

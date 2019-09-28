@@ -40,26 +40,10 @@ const saveChallengesToDatabase = (store) => {
 
 const getChallengesFromDatabase = async (store) => {
     var response = await saveChallengesToDatabase(store);
+    console.log(response);
 
-    store.dispatch({
-        type: "SYNC_GOALS",
-        goals: response.goals
-    });
-
-    store.dispatch({
-        type: "SYNC_HABITS",
-        habits: response.habits
-    });
-
-    store.dispatch({
-        type: "SYNC_CORE_VALUES",
-        core_values: response.corevalues
-    });
-
-    store.dispatch({
-        type: "SYNC_PINNED_HABITS",
-        pinned_habits: response.pinned_habits
-    });
+    var channel = new BroadcastChannel("saveStore");
+    channel.postMessage(response);
 
     store.dispatch({type: "SYNC_COMPLETE"});
     
@@ -78,7 +62,7 @@ const databaseSync = store => {
         });
 
     }
-    
+
     if(store.getState().syncStatus=="start" || store.getState().syncStatus=="ready") {
         doDatabaseSync();
     }

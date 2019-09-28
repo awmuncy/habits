@@ -1,3 +1,5 @@
+import { doCheckin } from './resources/actionCreators';
+
 export default {
     props: (state, props) => {
 
@@ -29,10 +31,7 @@ export default {
             checkIn: (habit_id, checkinFor, status) => {
                 let now = new Date();
                 now = now.getTime();
-                var data = {type: "DO_CHECKIN", habit_id : habit_id, checkinFor: checkinFor, status: status, at: now};
-                dispatch(data);
-                
-                dispatch({type: "SYNC_START"});           
+                dispatch(doCheckin(habit_id, checkinFor, status, now));       
             },
         };
     }

@@ -1,3 +1,14 @@
+import {
+    setViewDate, 
+    recalculateScores,
+    sortChallengesByStatus,
+    sortChallengesByScore,
+    clearFilters,
+    filterToOutstanding,
+    clearOutstandingFilters,
+
+} from './resources/actionCreators';
+
 export default {
     props: () => (state, props) => {
 
@@ -9,26 +20,26 @@ export default {
     dispatches: dispatch => {
         return {
             change_view_date: (view_date) => {
-                dispatch({type:"SET_VIEW_DATE", view_date});
-                dispatch({type:"RECALCULATE_SCORES", view_date: view_date});      
+                dispatch(setViewDate(view_date));
+                dispatch(recalculateScores(view_date));      
             },
             sort_by_score: () => {
-                dispatch({type:"SORT_CHALLENGES_BY_SCORE"});
+                dispatch(sortChallengesByScore());
             },
             sort_by_status: () => {
-                dispatch({type:"SORT_CHALLENGES_BY_STATUS"});
+                dispatch(sortChallengesByStatus());
             },
             clear_filters: () => {
-                dispatch({type:"CLEAR_FILTERS"});
+                dispatch(clearFilters());
             },
             filter_to_outstanding: () => {
-                dispatch({type:"FILTER_TO_OUTSTANDING"});
+                dispatch(filterToOutstanding());
             },
             toggle_outstanding: (filters) => {
                 if(filters.includes('outstanding')) {
-                    dispatch({type: "CLEAR_OUTSTANDING_FILTER"});
+                    dispatch(clearOutstandingFilters());
                 } else {
-                    dispatch({type: "FILTER_TO_OUTSTANDING"});
+                    dispatch(filterToOutstanding());
                 }
             }
         };

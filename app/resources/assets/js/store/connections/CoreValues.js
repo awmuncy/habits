@@ -7,10 +7,7 @@ export default {
     dispatches: dispatch => {
         return {
             sortCoreValues: core_values_sorted => {
-                dispatch({
-                    type: "SORT_CORE_VALUES",
-                    core_values: core_values_sorted
-                })
+                dispatch(sortCoreValues)
             }
         }
     }

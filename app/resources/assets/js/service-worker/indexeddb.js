@@ -1,9 +1,9 @@
 var dbV1 = function(event) {
 	var db = event.target.result;
-	db.createObjectStore("habits", {keyPath: "id"});
-	db.createObjectStore("goals", {keyPath: "id"});
-	db.createObjectStore("coreValues", {keyPath: "id"});
-	db.createObjectStore("toDos", {keyPath: "id"});
+	db.createObjectStore("habits", {keyPath: "_id"});
+	db.createObjectStore("goals", {keyPath: "_id"});
+	db.createObjectStore("coreValues", {keyPath: "_id"});
+	db.createObjectStore("toDos", {keyPath: "_id"});
 	db.createObjectStore("loginInfo", {keyPath: "property"});
 };
 
@@ -57,7 +57,7 @@ function accessDb(action) {
 
 var saveStore = function(store) {
 
-	var challenges = Array.isArray(store.challenges) ? store.challenges : [];
+	var habits = Array.isArray(store.habits) ? store.habits : [];
 	var goals = Array.isArray(store.goals) ? store.goals : [];
 	var coreValues = Array.isArray(store.core_values) ? store.core_values : [];
 	var todos = Array.isArray(store.todos) ? store.todos : [];
@@ -71,7 +71,7 @@ var saveStore = function(store) {
 			transaction.objectStore(database).put(item);
 		}
 		// Potential filter function = store only if item has changed
-		challenges	.forEach(habit 		=> placeItem("habits", habit));
+		habits		.forEach(habit 		=> placeItem("habits", habit));
 		goals		.forEach(goal 		=> placeItem("goals", goal));
 		coreValues	.forEach(coreValue 	=> placeItem("coreValues", coreValue));
 		todos		.forEach(todo 		=> placeItem("toDos", todo));

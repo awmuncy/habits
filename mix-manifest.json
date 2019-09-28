@@ -1,8 +1,8 @@
 {
     "/app/public/js/app.js": "/app/public/js/app.js",
     "/app/public/js/site.js": "/app/public/js/site.js",
-    "/app/public/service-worker-install.js": "/app/public/service-worker-install.js",
+    "/app/public/service-worker.js": "/app/public/service-worker.js",
     "/app/public/css/style.css": "/app/public/css/style.css",
     "/app/public/css/unauth.css": "/app/public/css/unauth.css",
-    "/app/public/service-worker.js": "/app/public/service-worker.js"
+    "/app/public/service-worker-install.js": "/app/public/service-worker-install.js"
 }

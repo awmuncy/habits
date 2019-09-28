@@ -8,7 +8,7 @@
 // 	data = JSON.parse(data);
 // 	document.csrf = data.csrf;
 	
-// 	store.dispatch(syncReady());
+// 	store.dispatc\h(syncReady());
 // });	
 
 export default () => {

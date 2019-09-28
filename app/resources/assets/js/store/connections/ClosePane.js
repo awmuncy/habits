@@ -1,3 +1,5 @@
+import { pinHabit, unpinHabit } from "./resources/actionCreators";
+
 export default {
     props: () => state => {
         return {
@@ -7,10 +9,10 @@ export default {
     dispatches: dispatch => {
         return {
             pin: id => {
-                dispatch({type: "PIN_HABIT", id:id});
+                dispatch(pinHabit(id));
             },
             unpin: id => {
-                dispatch({type: "UNPIN_HABIT", id:id});
+                dispatch(unpinHabit(id));
             }
         };
     }

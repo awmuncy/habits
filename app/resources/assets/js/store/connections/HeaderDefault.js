@@ -1,3 +1,5 @@
+import { toggleNav } from "./resources/actionCreators";
+
 export default {
     props: state => {
         return { navigation: state.navigation };
@@ -5,7 +7,7 @@ export default {
     dispatches: dispatch => {
    
         return {
-            toggleNav: toggle => dispatch({type: "TOGGLE_NAV"})
+            toggleNav: toggle => dispatch(toggleNav())
         };
     }
 };

@@ -1,3 +1,5 @@
+import { sortChallenges } from "../connections/resources/actionCreators";
+
 export default {
     props: () => state => {
         return {
@@ -9,7 +11,7 @@ export default {
     dispatches: dispatch => {
         return {
             sortChallenges: challenges => {
-                dispatch({type: "SORT_CHALLENGES", new_positions: challenges});
+                dispatch(sortChallenges(challenges));
             },
         };
     }

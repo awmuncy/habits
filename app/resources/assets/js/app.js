@@ -11,15 +11,12 @@ import tokenizedUser from './auth/tokenizedUser';
 csrf();
 tokenizedUser();
 
-store().then((loadedStore) => {
-	
-	ReactDOM.render(    	
-		<Provider store={loadedStore}>
-			<BrowserRouter>
-				<HabitTracker />
-			</BrowserRouter>
-		</Provider>
-	, 
-	document.getElementById('momentum-app'));
-
-});
+var storeInit = store();
+ReactDOM.render(    	
+	<Provider store={storeInit}>
+		<BrowserRouter>
+			<HabitTracker />
+		</BrowserRouter>
+	</Provider>
+, 
+document.getElementById('momentum-app'));

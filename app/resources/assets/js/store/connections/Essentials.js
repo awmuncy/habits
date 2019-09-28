@@ -25,9 +25,7 @@ export default {
             checkIn: (habit_id, date, status) => {
                 let now = new Date();
                 now = now.getTime();
-                var data = {type: "DO_CHECKIN", "habit_id" : habit_id, checkinFor: date, "status": status, at: now};
-                dispatch(data);
-                dispatch({type: "SYNC_START"});           
+                dispatch(doCheckin(habit_id, date, status, now));        
             }
         };
     

@@ -1,4 +1,8 @@
+import { saveStore } from './indexeddb';
+import station from './station';
 var v = "0.0.54";
+
+station();
 
 var CACHE_NAME = 'Habit'
 
@@ -110,4 +114,10 @@ self.addEventListener('push', ev => {
 
   ev.waitUntil(close);
 
+});
+
+const mainChannel = new BroadcastChannel("main");
+
+mainChannel.addEventListener("message", e => {
+  saveStore(e.data.storableData);
 });

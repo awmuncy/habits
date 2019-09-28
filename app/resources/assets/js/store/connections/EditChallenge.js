@@ -1,10 +1,12 @@
+import { removeChallenge } from "./resources/actionCreators";
+
 export default {
     props: () => {
         return {};
     },
     dispatches: dispatch => {
         return {
-            RemoveChallenge: id => dispatch({"type": "REMOVE_CHALLENGE", "habit_id": id})
+            RemoveChallenge: id => dispatch(removeChallenge())
         };
     }
 };

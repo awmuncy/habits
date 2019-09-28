@@ -1,46 +1,26 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import rootReducer from "../reducers/masterReducer";
-import { getStore, saveStore } from "./indexeddb";
-import syncDatabase from '../subscriptions/databaseSync.js';
+import thunk from 'redux-thunk';
+import { toggleNav } from "./connections/resources/actionCreators";
 
-// Store is run once on load.
-// It creates the local store from IndexedDB
 const store = () => {
-	return new Promise((resolve, reject) => {
-		var getDbState = async function() {
-			var dbcontents = await getStore();
-			const newStore = createStore(rootReducer, dbcontents, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-			newStore.dispatch({type: "RECALCULATE_SCORES"});
+	const newStore = createStore(rootReducer, {}, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() && applyMiddleware(thunk));
 
-			console.log(newStore.getState());
+	openChannels(newStore);
 
-			resolve(newStore);
+	return newStore;
 
-			
-			newStore.subscribe(() => {
+}
 
-				var state = newStore.getState();
-			
-				var savable = {
-					challenges: state.challenges,
-					syncStatus: state.syncStatus,
-					pinned_habits: state.pinned_habits,
-					goals: state.goals,
-					core_values: state.core_values,
-					todos: state.todos
-				}
-		
-				// oldSaveState(savable);
-				saveStore(savable);
-			
-				syncDatabase(newStore);
-			});
+function openChannels(store) {
+	var channel = new BroadcastChannel("store");
+	channel.postMessage("init");
 
-
-		}
-		getDbState();
+	channel.addEventListener("message", () => {
+		store.dispatch(toggleNav());
 	});
+
 }
 
 export default store;
