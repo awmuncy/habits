@@ -1,7 +1,7 @@
 import calculateScores from "./calculateScores.js";
 
 
-export default function challenges(state = 0, action) {
+export default function habits(state = 0, action) {
 
 
 	switch(action.type) {
@@ -12,21 +12,21 @@ export default function challenges(state = 0, action) {
 				state = [];
 			}
 
-			var calcedChallenges = state.map((challenge) => {
-				challenge.view_date = action.view_date;
-				challenge.checkinSlots = calculateScores(challenge, action.view_date);
-				return challenge;
+			var calcedHabits = state.map((habit) => {
+				habit.view_date = action.view_date;
+				habit.checkinSlots = calculateScores(habit, action.view_date);
+				return habit;
 			});		
 
-			return calcedChallenges;
-		case "SYNC_CHALLENGES": 
+			return calcedHabits;
+		case "SYNC_HABITS": 
 
-			var calcedChallenges = action.challenges.map((challenge) => {
-				challenge.checkinSlots = calculateScores(challenge);
-				return challenge;
+			var calcedHabits = action.habits.map((habit) => {
+				habit.checkinSlots = calculateScores(habit);
+				return habit;
 			});
 
-			return calcedChallenges;
+			return calcedHabits;
 		
 		case "SYNC_HABITS": 
 
@@ -45,55 +45,55 @@ export default function challenges(state = 0, action) {
 			return habits;
 
 		case "HABIT_ID_ISSUE":
-			var challenges = state.map(function(challenge){
-				if(challenge.id==action.old_id) {
-					challenge.id=action.new_id;
+			var habits = state.map(function(habit){
+				if(habit.id==action.old_id) {
+					habit.id=action.new_id;
 				}
-				return challenge;
+				return habit;
 			});
-			return challenges;
-		case "NEW_CHALLENGE":
-			var createdChallenge = {};
-			createdChallenge.title = action.challenge.title;
+			return habits;
+		case "NEW_HABIT":
+			var createdHabit = {};
+			createdHabit.title = action.habit.title;
 
-			createdChallenge.id = action.challenge.id ? action.challenge.id : Math.floor(Math.random() * Math.floor(999999));
-			createdChallenge.position = 0;
-			createdChallenge.beginDate = action.challenge.beginDate;
-			createdChallenge._id = createdChallenge.id;
+			createdHabit.id = action.habit.id ? action.habit.id : Math.floor(Math.random() * Math.floor(999999));
+			createdHabit.position = 0;
+			createdHabit.beginDate = action.habit.beginDate;
+			createdHabit._id = createdHabit.id;
 
 
-			if(typeof action.challenge.profile === 'string' && action.challenge.profile.charAt(0)=="{") {
-				action.challenge.profile = JSON.parse(action.challenge.profile);
+			if(typeof action.habit.profile === 'string' && action.habit.profile.charAt(0)=="{") {
+				action.habit.profile = JSON.parse(action.habit.profile);
 			}
 
-			createdChallenge.profile = action.challenge.profile;
+			createdHabit.profile = action.habit.profile;
 
 
-			createdChallenge.checkins = [];
-			createdChallenge.checkinSlots = calculateScores(createdChallenge);
+			createdHabit.checkins = [];
+			createdHabit.checkinSlots = calculateScores(createdHabit);
 			
-			var challenges = Array.isArray(state) ? state.slice(0) : [];
+			var habits = Array.isArray(state) ? state.slice(0) : [];
 			
 
-			challenges.push(createdChallenge);
+			habits.push(createdHabit);
 
-			return challenges;
+			return habits;
 
 		
 
 		case "CLEAR_FILTERS":
-			var cleared = [...state].map(function(challenge){
-				challenge.filtered_out = false;
-				return challenge;
+			var cleared = [...state].map(function(habit){
+				habit.filtered_out = false;
+				return habit;
 			});
 
 			return cleared;
 
-		case "SORT_CHALLENGES_BY_STATUS":
+		case "SORT_HABITS_BY_STATUS":
 
-			var myChallenges = Array.isArray(state) ? [...state] : [];
+			var myHabits = Array.isArray(state) ? [...state] : [];
 
-			myChallenges.sort((a, b) => {
+			myHabits.sort((a, b) => {
 		    if(!a.checkinSlots.length || !b.checkinSlots.length) {
 		        return 0;
 		    }
@@ -110,14 +110,14 @@ export default function challenges(state = 0, action) {
 		    return 0;
 			});
 
-			return myChallenges;
+			return myHabits;
 
 
-		case "SORT_CHALLENGES_BY_SCORE":
+		case "SORT_HABITS_BY_SCORE":
 
-			var myChallenges = Array.isArray(state) ? [...state] : [];
+			var myHabits = Array.isArray(state) ? [...state] : [];
 
-			myChallenges.sort((a, b) => {
+			myHabits.sort((a, b) => {
 		    if(!a.checkinSlots.length || !b.checkinSlots.length) {
 		        return 0;
 		    }
@@ -134,9 +134,9 @@ export default function challenges(state = 0, action) {
 		    return 0;
 			});
 
-			return myChallenges;
+			return myHabits;
 
-		case "SORT_CHALLENGES": 
+		case "SORT_HABITS": 
 
 
 
@@ -145,62 +145,62 @@ export default function challenges(state = 0, action) {
 	
 
 		case "CHECKIN_UPDATE_NOTE":
-			var challenges = state.slice(0);
+			var habits = state.slice(0);
 
-			updatedChallenges = challenges.map(function(challenge) {
-				if(challenge.id==action.habit_id) {
-					if(challenge.checkins.findIndex(checkin => checkin.checkinFor == action.checkinFor)<0) {
+			updatedHabits = habits.map(function(habit) {
+				if(habit.id==action.habit_id) {
+					if(habit.checkins.findIndex(checkin => checkin.checkinFor == action.checkinFor)<0) {
 						let checkin = {};
 						checkin.status = null;
 						checkin.checkinFor = action.checkinFor;
 						checkin.at = action.at;
 						checkin.note = action.note;
-						challenge.checkins.push(checkin);
+						habit.checkins.push(checkin);
 					}
 
-					var checkins = challenge.checkins.map(function(checkin){
+					var checkins = habit.checkins.map(function(checkin){
 						if(checkin.checkinFor==action.checkinFor) {
 							checkin.note = action.note;
 							checkin.at = action.at;
 						}
 						return checkin;
 					});
-					challenge.checkins = checkins;
-					challenge.checkinSlots = calculateScores(challenge);
+					habit.checkins = checkins;
+					habit.checkinSlots = calculateScores(habit);
 				}
-				return challenge;
+				return habit;
 			});
 
 
-			return updatedChallenges;
+			return updatedHabits;
 
 			case "STORE_CHECKINS":
 
-				var challenges = state.slice(0);
+				var habits = state.slice(0);
 	
 				var checkins = action.checkins;
 
 				checkins.forEach(function(newCheckin){
 
-					challenges = challenges.map(function(challenge) {
+					habits = habits.map(function(habit) {
 						var date = newCheckin.checkinFor;
 						var habit_id = newCheckin.habit_id;
 						var status = newCheckin.status;
 						var at = newCheckin.at;
 
 
-						if(challenge.id==habit_id) {
+						if(habit.id==habit_id) {
 		
 		
-							if(challenge.checkins.findIndex(checkin => checkin.checkinFor == date)<0) {
+							if(habit.checkins.findIndex(checkin => checkin.checkinFor == date)<0) {
 								let checkin = {};
 								checkin.status = status;
 								checkin.checkinFor = date;
 								checkin.at = at;
-								challenge.checkins.push(checkin);
+								habit.checkins.push(checkin);
 							}
 		
-							var checkins = challenge.checkins.map(function(checkin){
+							var checkins = habit.checkins.map(function(checkin){
 								if(checkin.checkinFor==date) {
 									if(status==true) {
 										checkin.status=true;
@@ -213,18 +213,18 @@ export default function challenges(state = 0, action) {
 								}
 								return checkin;
 							});
-							challenge.checkins = checkins;
+							habit.checkins = checkins;
 		
 						}
-						return challenge;
+						return habit;
 					});
 
 
 				});
 
-				var hello = challenges.map((challenge)=>{
-					challenge.checkinSlots = calculateScores(challenge);
-					return challenge;
+				var hello = habits.map((habit)=>{
+					habit.checkinSlots = calculateScores(habit);
+					return habit;
 				});
 
 
@@ -235,23 +235,23 @@ export default function challenges(state = 0, action) {
 
 			case "DO_CHECKIN":
 
-			var challenges = state.slice(0);
+			var habits = state.slice(0);
 
 
 
-			var hello = challenges.map(function(challenge) {
-				if(challenge.id==action.habit_id) {
+			var hello = habits.map(function(habit) {
+				if(habit.id==action.habit_id) {
 
 
-					if(challenge.checkins.findIndex(checkin => checkin.checkinFor == action.checkinFor)<0) {
+					if(habit.checkins.findIndex(checkin => checkin.checkinFor == action.checkinFor)<0) {
 						let checkin = {};
 						checkin.status = action.status;
 						checkin.checkinFor = action.checkinFor;
 						checkin.at = action.at;
-						challenge.checkins.push(checkin);
+						habit.checkins.push(checkin);
 					}
 
-					var checkins = challenge.checkins.map(function(checkin){
+					var checkins = habit.checkins.map(function(checkin){
 						if(checkin.checkinFor==action.checkinFor) {
 							checkin.checkinFor = action.checkinFor;
 							checkin.at = action.at;
@@ -260,16 +260,16 @@ export default function challenges(state = 0, action) {
 						}
 						return checkin;
 					});
-					challenge.checkins = checkins;
-					challenge.checkinSlots = calculateScores(challenge);
+					habit.checkins = checkins;
+					habit.checkinSlots = calculateScores(habit);
 
 				}
-				return challenge;
+				return habit;
 			});
 
 			return hello;
 
-		case "REMOVE_CHALLENGE":
+		case "REMOVE_HABIT":
 
       var data = state.slice(0);
 

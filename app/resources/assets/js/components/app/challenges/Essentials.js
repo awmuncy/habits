@@ -29,14 +29,14 @@ class Essentials extends Component {
             newStatus=false;
         }
 
-        this.props.checkIn(this.props.challenge.id, this.props.currentCheckin.checkinFor, newStatus);
+        this.props.checkIn(this.props.habit.id, this.props.currentCheckin.checkinFor, newStatus);
     }
 
     render() {
-        let interval = this.props.challenge.profile.frame;
-        if(this.props.challenge.profile.frame=="days") {
+        let interval = this.props.habit.profile.frame;
+        if(this.props.habit.profile.frame=="days") {
             interval = "";
-            this.props.challenge.profile.pattern.forEach(function(day, index, array){
+            this.props.habit.profile.pattern.forEach(function(day, index, array){
                 switch(day) {
                     case 0:
                         interval += "S";
@@ -71,7 +71,7 @@ class Essentials extends Component {
             <div className={"essentials status-" + this.props.currentCheckin.status } >
                 <BoolIcon action={this.doCheckin} status={this.props.currentCheckin.status} />
                 <div className="title-and-type">
-                    <h2>{this.props.challenge.title}</h2>
+                    <h2>{this.props.habit.title}</h2>
                     <span className="interval">{interval}</span> 
                 </div>
                 

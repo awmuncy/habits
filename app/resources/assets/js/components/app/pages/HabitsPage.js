@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Challenges, Sorting } from '../../../store/ConnectedComponents';
+import { Habits, Sorting } from '../../../store/ConnectedComponents';
 
 
 function HabitsPage() {
@@ -10,7 +10,7 @@ function HabitsPage() {
     return (	
         <div className="home-layout">
             <Sorting />
-            <Challenges />
+            <Habits />
         </div>
     );
 }

@@ -1,21 +1,21 @@
 export default {
     props: (state, props) => {
 
-        var challenge_position = state.challenges.findIndex(function(challenge) {
-            if(challenge.id==props.habit_id) {
+        var habit_position = state.habits.findIndex(function(habit) {
+            if(habit.id==props.habit_id) {
                 return true;
             }
             return false;
         });
     
-        var checkins = state.challenges[challenge_position].checkinSlots;
+        var checkins = state.habits[habit_position].checkinSlots;
     
     
         var currentCheckin = checkins[checkins.length - 1];
     
     
         return {
-            challenge: state.challenges[challenge_position],
+            habit: state.habits[habit_position],
             currentCheckin: currentCheckin
         }
     },

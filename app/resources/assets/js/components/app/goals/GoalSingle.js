@@ -1,5 +1,5 @@
 import React from 'react';
-import { GoalEssential, PinnedChallenges } from '../../../store/ConnectedComponents';
+import { GoalEssential, PinnedHabits } from '../../../store/ConnectedComponents';
 
 function GoalSingle(props) {
 

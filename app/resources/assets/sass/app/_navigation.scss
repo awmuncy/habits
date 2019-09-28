@@ -74,7 +74,7 @@ header.app-header {
 		}
 	}
 }
-.select-challenges-to-view {
+.select-habits-to-view {
 	margin: 0 auto 0px; 
 	max-width: 1080px;
 	border-bottom: 1px solid #eee;
@@ -217,7 +217,7 @@ main {
 				}
 				display: block;
 			}
-			&.new-challenge, &.friends-link, &.faq, &.account-page {
+			&.new-habit, &.friends-link, &.faq, &.account-page {
 				cursor: not-allowed;
 				&>a {
 					cursor: not-allowed;

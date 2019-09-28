@@ -12,18 +12,18 @@ Date.prototype.yyyymmdd = function() {
 };
 
 
-function calculateScores(challenge={},  view_date=null) {
+function calculateScores(habit={},  view_date=null) {
 
 
 	const createCheckinList = function() {
 
 		var checkinSlots = [];
 
-		var calc_date = new Date(Date.parse(challenge.beginDate));
+		var calc_date = new Date(Date.parse(habit.beginDate));
 		calc_date.setMinutes(calc_date.getMinutes() + calc_date.getTimezoneOffset());
 			
 
-		switch(challenge.profile.frame) {
+		switch(habit.profile.frame) {
 			case "weekly":
 			case "biweekly":
 					while(calc_date.getDay()!=0) {
@@ -62,7 +62,7 @@ function calculateScores(challenge={},  view_date=null) {
 
 		let skip = (date) => {
 
-			switch(challenge.profile.frame) {
+			switch(habit.profile.frame) {
 				case "weekly":
 					d.setDate(d.getDate() + 7);
 					break;
@@ -107,8 +107,8 @@ function calculateScores(challenge={},  view_date=null) {
 			}
 		}
 
-	    if(challenge.view_date) {
-		    var zone = moment(challenge.view_date, 'MM-DD-YYYY').toDate();
+	    if(habit.view_date) {
+		    var zone = moment(habit.view_date, 'MM-DD-YYYY').toDate();
 
 	  	} else {
 	  		var zone = new Date();
@@ -126,8 +126,8 @@ function calculateScores(challenge={},  view_date=null) {
 			checkinSlot.checkinFor = new Date(d).yyyymmdd();
 
 
-			if(challenge.profile.frame=="days" && !challenge.profile.pattern.includes(d.getDay())) {
-				if(!challenge.profile.bonus) {
+			if(habit.profile.frame=="days" && !habit.profile.pattern.includes(d.getDay())) {
+				if(!habit.profile.bonus) {
 					continue;
 				} else {
 					checkinSlot.bonus=true;
@@ -220,7 +220,7 @@ function calculateScores(challenge={},  view_date=null) {
 
 
 
-	return calculateScoreFromProfile(challenge.checkins, checkinSlots);
+	return calculateScoreFromProfile(habit.checkins, checkinSlots);
 }
 
 export default calculateScores;

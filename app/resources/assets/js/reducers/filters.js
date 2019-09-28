@@ -1,5 +1,5 @@
 
-export default function challenges(state = [], action) {
+export default function habits(state = [], action) {
   switch(action.type) {
     case "FILTER_TO_OUTSTANDING":
       var filters = [...state];

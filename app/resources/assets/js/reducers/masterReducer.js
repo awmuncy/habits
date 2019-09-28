@@ -1,6 +1,6 @@
 
 
-import challenges from './challenges.js';
+import habits from './habits.js';
 import ui from './ui.js';
 import syncStatus from './sync.js';
 import filters from './filters.js';
@@ -14,7 +14,7 @@ import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
 	todos: ()=>{return []},
-	challenges: challenges,
+	habits: habits,
 	navigationOpen: ui,
 	syncStatus: syncStatus,
   	view_date: view_date,

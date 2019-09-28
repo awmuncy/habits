@@ -1,4 +1,4 @@
-import { removeChallenge } from "./resources/actionCreators";
+import { removeHabit } from "./resources/actionCreators";
 
 export default {
     props: () => {
@@ -6,7 +6,7 @@ export default {
     },
     dispatches: dispatch => {
         return {
-            RemoveChallenge: id => dispatch(removeChallenge())
+            RemoveHabit: id => dispatch(removeHabit())
         };
     }
 };

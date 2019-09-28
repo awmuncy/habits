@@ -5,7 +5,7 @@ import { Essentials } from '../../../store/ConnectedComponents';
 
 
 
-class PinnedChallenge extends Component {
+class PinnedHabit extends Component {
 
     constructor(props) {
         super(props);
@@ -15,7 +15,7 @@ class PinnedChallenge extends Component {
     render() {
         if (this.props.id == null) return null;
         return (
-            <div className="pinned-challenge single-habit">
+            <div className="pinned-habit single-habit">
                 <Link to={"habit/" + this.props.id}>
                     <Essentials habit_id={this.props.id} />
                 </Link>
@@ -25,7 +25,7 @@ class PinnedChallenge extends Component {
 }
 
 
-class PinnedChallenges extends Component {
+class PinnedHabits extends Component {
 
     constructor(props) {
         super(props);
@@ -34,10 +34,10 @@ class PinnedChallenges extends Component {
 
     render() {
         return (
-            <div className="pinned-challenges">
+            <div className="pinned-habits">
                 {
                     this.props.pinned.map((pinned)=>{
-                        return <PinnedChallenge id={pinned} key={pinned} />
+                        return <PinnedHabit id={pinned} key={pinned} />
                     })
                 }
             </div>
@@ -45,8 +45,4 @@ class PinnedChallenges extends Component {
     }
 }
 
-export default PinnedChallenges;
-
-            // <div className="pinned-challenge">
-            //     Plus one. <i className="fa fa-thumb-tack"></i>
-            // </div>
+export default PinnedHabits;

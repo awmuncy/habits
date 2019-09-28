@@ -76,7 +76,7 @@ class Sorting extends Component {
                     />
                     <i className="fa fa-chevron-right" onClick={this.moveToTomorrow}></i>                   
                 </div>
-                <div className="select-challenges-to-view">
+                <div className="select-habits-to-view">
                     <ul>
 
                         <li onClick={()=>this.props.toggle_outstanding(filters)} className={filters.includes('outstanding')?'active-sort':''}>

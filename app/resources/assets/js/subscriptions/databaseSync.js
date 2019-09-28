@@ -1,4 +1,4 @@
-const saveChallengesToDatabase = (store) => {
+const saveHabitsToDatabase = (store) => {
 
     var storeContent = store.getState();
 
@@ -8,7 +8,7 @@ const saveChallengesToDatabase = (store) => {
     });
 
     var dataToSync = {
-        habits: storeContent.challenges,
+        habits: storeContent.habits,
         goals: storeContent.goals,
         corevalues: corevalues,
         pinned_habits: storeContent.pinned_habits
@@ -38,8 +38,8 @@ const saveChallengesToDatabase = (store) => {
     });
 }
 
-const getChallengesFromDatabase = async (store) => {
-    var response = await saveChallengesToDatabase(store);
+const getHabitsFromDatabase = async (store) => {
+    var response = await saveHabitsToDatabase(store);
     console.log(response);
 
     var channel = new BroadcastChannel("saveStore");
@@ -54,7 +54,7 @@ const databaseSync = store => {
 
     var doDatabaseSync = async () => {
         store.dispatch({type: "SYNC_UNDERWAY"});
-        var habits = await getChallengesFromDatabase(store).then((value)=>{
+        var habits = await getHabitsFromDatabase(store).then((value)=>{
             console.log("Sync complete");
         }).catch((err) => {
             console.log(err);

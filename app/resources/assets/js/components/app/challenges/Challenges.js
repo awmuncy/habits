@@ -1,82 +1,82 @@
 import React, { Component } from 'react';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
-import { PinnedChallenges, Challenge } from '../../../store/ConnectedComponents';
+import { PinnedHabits, Habit } from '../../../store/ConnectedComponents';
 
 
-const SortableChallenge = SortableElement(({challenge}) => 
-    <Challenge id={challenge.id} />
+const SortableHabit = SortableElement(({habit}) => 
+    <Habit id={habit.id} />
 );
 
 
-const SortableChallenges = SortableContainer(({challenges}) => {
+const SortableHabits = SortableContainer(({habits}) => {
 
-    if(!Array.isArray(challenges)) challenges = [];
+    if(!Array.isArray(habits)) habits = [];
 
 
     return (
-        <div className="challenge-list">
-            {challenges.map((challenge, index) => (
-                <SortableChallenge key={challenge.id} index={index} challenge={challenge} />
+        <div className="habit-list">
+            {habits.map((habit, index) => (
+                <SortableHabit key={habit.id} index={index} habit={habit} />
             ))}
         </div>
     );
 });
 
 
-class Challenges extends Component {
+class Habits extends Component {
 
     constructor(props) {
         super(props);
         this.onSortEnd = this.onSortEnd.bind(this);
         this.state = {
-            challenges: props.challenges
+            habits: props.habits
         };
     }
 
     onSortEnd({oldIndex, newIndex}) { 
-        var challengelist = arrayMove(this.props.challenges, oldIndex, newIndex); 
+        var habitlist = arrayMove(this.props.habits, oldIndex, newIndex); 
 
-        challengelist.map(function(item, key){
+        habitlist.map(function(item, key){
             item.filtered_out = false;
         	item.position = key;
         	return item;
         });
 
-        this.props.sortChallenges(challengelist);
+        this.props.sortHabits(habitlist);
     }
 
     static getDerivedStateFromProps(props, state) {
         
         props.view_date;
 
-        state.challenges = state.challenges ? state.challenges : [];
+        state.habits = state.habits ? state.habits : [];
 
-        state.challenges.map(function(item, key){
+        state.habits.map(function(item, key){
             item.filtered_out = false;
             item.position = key;
             return item;
         });
 
-        function filterChallenges() {
+        function filterHabits() {
 
-            var challenges = props.challenges;
+            var habits = props.habits;
 
             if(props.filters.includes("outstanding")) {
-                challenges = challenges.map(function(challenge){
-                    if(challenge.checkinSlots[challenge.checkinSlots.length - 1].status!==null) {
-                        challenge.filtered_out = true;                  
+                habits = habits.map(function(habit){
+                    if(habit.checkinSlots[habit.checkinSlots.length - 1].status!==null) {
+                        habit.filtered_out = true;                  
                     } 
-                    return challenge;
+                    return habit;
                 });
             }
 
-            return challenges;
+            return habits;
         }
 
 
         return {
-            challenges: filterChallenges()
+            habits: filterHabits()
         }        
     }
 
@@ -88,10 +88,10 @@ class Challenges extends Component {
 
 		return (
 
-			<div className="my-challenges">
-                <PinnedChallenges />
-                <SortableChallenges 
-                challenges={this.state.challenges} 
+			<div className="my-habits">
+                <PinnedHabits />
+                <SortableHabits 
+                habits={this.state.habits} 
                 helperClass="SortableHelper" 
                 lockAxis="y"
                 useDragHandle={true}
@@ -105,4 +105,4 @@ class Challenges extends Component {
 }
 
 
-export default Challenges;
+export default Habits;

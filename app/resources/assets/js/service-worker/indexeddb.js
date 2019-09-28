@@ -16,12 +16,12 @@ var getStore = function() {
 	return new Promise((resolve, reject) => {
 		accessDb(async function(event) {
 			var transaction = event.target.result.transaction(["habits", "goals", "coreValues", "toDos"], "readonly");
-			var challenges = transaction.objectStore("habits").getAll()
+			var habits = transaction.objectStore("habits").getAll()
 			var goals = transaction.objectStore("goals").getAll()
 			var coreValues = transaction.objectStore("coreValues").getAll()
 			var toDos = transaction.objectStore("toDos").getAll()
 			
-			var items = [challenges, goals, toDos, coreValues].map((item) => {
+			var items = [habits, goals, toDos, coreValues].map((item) => {
 				return new Promise((resolve, reject) => {
 					item.onsuccess = e => {
 						resolve(e.target.result);
@@ -29,15 +29,15 @@ var getStore = function() {
 				});
 			});
 
-			var [challenges, goals, toDos, coreValues] = await Promise.all(items);			
+			var [habits, goals, toDos, coreValues] = await Promise.all(items);			
 
-			challenges = challenges.map((challenge) => {
-				challenge.id = challenge._id;
-				return challenge;
+			habits = habits.map((habit) => {
+				habit.id = habit._id;
+				return habit;
 			});
 
 			var store = {
-				challenges: challenges,
+				habits: habits,
 				goals: goals,
 				core_values: coreValues,
 				todos: toDos

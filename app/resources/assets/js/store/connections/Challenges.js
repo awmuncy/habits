@@ -1,17 +1,17 @@
-import { sortChallenges } from "../connections/resources/actionCreators";
+import { sortHabits } from "../connections/resources/actionCreators";
 
 export default {
     props: () => state => {
         return {
-            challenges: state.challenges,
+            habits: state.habits,
             filters: state.filters || [],
             view_date: state.view_date
         }
     },
     dispatches: dispatch => {
         return {
-            sortChallenges: challenges => {
-                dispatch(sortChallenges(challenges));
+            sortHabits: habits => {
+                dispatch(sortHabits(habits));
             },
         };
     }

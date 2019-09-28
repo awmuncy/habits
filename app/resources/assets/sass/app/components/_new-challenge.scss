@@ -1,6 +1,6 @@
-.new-challenge {
+.new-habit {
 	margin: 0 auto;
-	.btn.new-challenge-button {
+	.btn.new-habit-button {
 		display: grid;
 		border: none;
 		text-align: center;
@@ -18,10 +18,10 @@
 			font-size: var(--xl-font);
 		}
 	}
-	.new-challenge-form {
+	.new-habit-form {
 		background-color: white;
 		border: 1px solid #f6f6f6;
-    margin-top: 10px;
+    	margin-top: 10px;
 		padding: 0px;
 		padding: 10px;
 		display: grid;

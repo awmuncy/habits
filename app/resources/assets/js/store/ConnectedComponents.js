@@ -62,44 +62,44 @@ import _NewGoal from '../components/app/goals/NewGoal';
     import NewGoalConnections from './connections/NewGoal';
     var NewGoal = connect(NewGoalConnections.props, NewGoalConnections.dispatches)(_NewGoal);
 
-// Challenges
+// Habits
 import HabitsPage from '../components/app/pages/HabitsPage';
 
-import _Challenge from '../components/app/challenges/Challenge';
-    import ChallengeConnections from './connections/Challenge';
-    var Challenge = connect(ChallengeConnections.props, ChallengeConnections.dispatches)(_Challenge);
+import _Habit from '../components/app/habits/Habit';
+    import HabitConnections from './connections/Habit';
+    var Habit = connect(HabitConnections.props, HabitConnections.dispatches)(_Habit);
 
-import _Challenges from '../components/app/challenges/Challenges';
-    import ChallengesConnections from './connections/Challenges';
-    var Challenges = connect(ChallengesConnections.props, ChallengesConnections.dispatches)(_Challenges);
-
-
-import _EditChallenge from '../components/app/challenges/EditChallenge';
-    import EditChallengeConnections from './connections/EditChallenge';
-    var EditChallenge = connect(EditChallengeConnections.props, EditChallengeConnections.dispatches)(_EditChallenge);
-
-import EssentialProgress from '../components/app/challenges/EssentialProgress';
+import _Habits from '../components/app/habits/Habits';
+    import HabitsConnections from './connections/Habits';
+    var Habits = connect(HabitsConnections.props, HabitsConnections.dispatches)(_Habits);
 
 
-import _Essentials from '../components/app/challenges/Essentials';
+import _EditHabit from '../components/app/habits/EditHabit';
+    import EditHabitConnections from './connections/EditHabit';
+    var EditHabit = connect(EditHabitConnections.props, EditHabitConnections.dispatches)(_EditHabit);
+
+import EssentialProgress from '../components/app/habits/EssentialProgress';
+
+
+import _Essentials from '../components/app/habits/Essentials';
     import EssentialsConnections from './connections/Essentials';
     var Essentials = connect(EssentialsConnections.props, EssentialsConnections.dispatches)(_Essentials);
 
-import IntervalSelect from '../components/app/challenges/IntervalSelect';
-import MomentumIndicator from '../components/app/challenges/MomentumIndicator';
-import _NewChallenge from '../components/app/challenges/NewChallenge';
-    import NewChallengeConnections from './connections/NewChallenge';
-    var NewChallenge = connect(NewChallengeConnections.props, NewChallengeConnections.dispatches)(_NewChallenge);
+import IntervalSelect from '../components/app/habits/IntervalSelect';
+import MomentumIndicator from '../components/app/habits/MomentumIndicator';
+import _NewHabit from '../components/app/habits/NewHabit';
+    import NewHabitConnections from './connections/NewHabit';
+    var NewHabit = connect(NewHabitConnections.props, NewHabitConnections.dispatches)(_NewHabit);
 
-import _PinnedChallenges from '../components/app/challenges/PinnedChallenges';
-    import PinnedChallengesConnections from './connections/PinnedChallenges';
-    var PinnedChallenges = connect(PinnedChallengesConnections.props, PinnedChallengesConnections.dispatches)(_PinnedChallenges);
+import _PinnedHabits from '../components/app/habits/PinnedHabits';
+    import PinnedHabitsConnections from './connections/PinnedHabits';
+    var PinnedHabits = connect(PinnedHabitsConnections.props, PinnedHabitsConnections.dispatches)(_PinnedHabits);
 
-import _SingleHabit from '../components/app/challenges/SingleHabit';
+import _SingleHabit from '../components/app/habits/SingleHabit';
     import SingleHabitConnections from './connections/SingleHabit';
     var SingleHabit = connect(SingleHabitConnections.props, SingleHabitConnections.dispatches)(_SingleHabit);
 
-import _Sorting from '../components/app/challenges/Sorting';
+import _Sorting from '../components/app/habits/Sorting';
     import SortingConnections from './connections/Sorting';
     var Sorting = connect(SortingConnections.props, SortingConnections.dispatches)(_Sorting);
 
@@ -153,15 +153,15 @@ export {
     Measurable,
     NewGoal,
     HabitsPage,
-    Challenge,
-    Challenges,
-    EditChallenge,
+    Habit,
+    Habits,
+    EditHabit,
     EssentialProgress,
     Essentials,
     IntervalSelect,
     MomentumIndicator,
-    NewChallenge,
-    PinnedChallenges,
+    NewHabit,
+    PinnedHabits,
     SingleHabit,
     Sorting,
     Checkins,

@@ -48,12 +48,12 @@ export const syncFailed = () => {
 
 /* /syncing */
 
-export const sortChallenges = challenges => {
-    dispatch({type: "SORT_CHALLENGES", new_positions: challenges});
+export const sortHabits = habits => {
+    dispatch({type: "SORT_HABITS", new_positions: habits});
 
     return (dispatch, store) => {
         var action = {
-            type: "SORT_CHALLENGES"
+            type: "SORT_HABITS"
         }
         dispatch(action);
     }
@@ -103,12 +103,12 @@ export const recalculateScores = view_date => {
     }
 };
 
-export const sortChallengesByStatus = () => {
+export const sortHabitsByStatus = () => {
 
     return (dispatch, store) => {
         
         var action = {
-            type: "SORT_CHALLENGES_BY_STATUS"
+            type: "SORT_HABITS_BY_STATUS"
         };
         
 
@@ -116,12 +116,12 @@ export const sortChallengesByStatus = () => {
     }
 }
 
-export const sortChallengesByScore = () => {
+export const sortHabitsByScore = () => {
 
     return (dispatch, store) => {
         
         var action = {
-            type: "SORT_CHALLENGES_BY_SCORE"
+            type: "SORT_HABITS_BY_SCORE"
         };
         
         dispatch(action);
@@ -164,11 +164,11 @@ export const clearOutstandingFilters = () => {
     }    
 }
 
-export const removeChallenge = id => {
+export const removeHabit = id => {
     return (dispatch, store) => {
 
         var action = {
-            type: "REMOVE_CHALLENGE", 
+            type: "REMOVE_HABIT", 
             habit_id: id
         }
 

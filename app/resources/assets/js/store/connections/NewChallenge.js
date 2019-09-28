@@ -4,8 +4,8 @@ export default {
     },
     dispatches: dispatch => {
         return {
-            createChallenge: (challenge) => {
-                var data = {type: "NEW_CHALLENGE", challenge: challenge};
+            createHabit: (habit) => {
+                var data = {type: "NEW_HABIT", habit: habit};
                 dispatch(data);
                 dispatch({type: "SYNC_START"});
             },

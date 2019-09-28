@@ -1,7 +1,7 @@
 export default {
     props: (state, props) => {
         return {
-            habits: state.challenges
+            habits: state.habits
         }
     },
     dispatches: dispatch => {

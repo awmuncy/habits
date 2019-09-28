@@ -1,8 +1,8 @@
 import {
     setViewDate, 
     recalculateScores,
-    sortChallengesByStatus,
-    sortChallengesByScore,
+    sortHabitsByStatus,
+    sortHabitsByScore,
     clearFilters,
     filterToOutstanding,
     clearOutstandingFilters,
@@ -24,10 +24,10 @@ export default {
                 dispatch(recalculateScores(view_date));      
             },
             sort_by_score: () => {
-                dispatch(sortChallengesByScore());
+                dispatch(sortHabitsByScore());
             },
             sort_by_status: () => {
-                dispatch(sortChallengesByStatus());
+                dispatch(sortHabitsByStatus());
             },
             clear_filters: () => {
                 dispatch(clearFilters());

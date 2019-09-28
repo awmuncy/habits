@@ -4,7 +4,7 @@ import {
   HomePage,
   FAQ, 
   Feedback,
-  NewChallenge,
+  NewHabit,
   NewGoal, 
   SingleHabit, 
   GoalsPage, 
@@ -44,7 +44,7 @@ class GrandCentral extends Component {
 
             <Route path="/habits" component={HabitsPage} />
             <Route path="/feedback" component={Feedback} />
-            <Route path="/new" component={NewChallenge} />
+            <Route path="/new" component={NewHabit} />
             <Route path="/new-goal" component={NewGoal} />
             <Route
               path='/habit/:id'

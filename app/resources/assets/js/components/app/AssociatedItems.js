@@ -26,7 +26,7 @@ class AssociatedItems extends Component {
 
         return (
             associated_items.map( id => {
-                <Challenge id={id} />
+                <Habit id={id} />
                 <Goal id={id} />
                 <ToDo id={id} />
                 <CoreValue id={id} />

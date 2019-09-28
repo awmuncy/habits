@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class EditChallenge extends Component {
+class EditHabit extends Component {
 
     constructor(props) {
         super(props);
@@ -34,7 +34,7 @@ class EditChallenge extends Component {
 
 
     confirmDelete(e) {
-        this.props.RemoveChallenge(this.props.habit_id);
+        this.props.RemoveHabit(this.props.habit_id);
 
         this.setState({
             open: "deleted"
@@ -66,7 +66,7 @@ class EditChallenge extends Component {
                         <div className="nevermind" onClick={this.resetToDefault.bind(this)}>
                             Nevermind
                         </div>
-                        <div className="delete-this-challenge" onClick={this.startDelete.bind(this)}>
+                        <div className="delete-this-habit" onClick={this.startDelete.bind(this)}>
                             Delete
                         </div>
                     </React.Fragment>
@@ -75,14 +75,14 @@ class EditChallenge extends Component {
             default: 
                 active = (
                     <div className="open-edit" onClick={this.startEdit.bind(this)}>
-                        Edit challenge
+                        Edit habit
                         <i className="fa fa-pencil" aria-hidden="true"></i>
                     </div>
                 );
         }
 
     	return (
-            <div className="edit-challenge">
+            <div className="edit-habit">
                 
             	{active}
 
@@ -91,4 +91,4 @@ class EditChallenge extends Component {
     }
 }
 
-export default EditChallenge;
+export default EditHabit;

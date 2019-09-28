@@ -12,7 +12,7 @@ import {
 const NewHabit = () => {
   return (
     <Link to="/new"> 
-      <button aria-label="Start a new challenge"className="new-challenge-button fab">
+      <button aria-label="Start a new habit"className="new-habit-button fab">
           +
       </button>
     </Link>
@@ -23,7 +23,7 @@ const NewHabit = () => {
 const NewGoal = () => {
   return (
     <Link to="/new-goal"> 
-      <button aria-label="Start a new challenge" className="new-challenge-button fab">
+      <button aria-label="Start a new habit" className="new-habit-button fab">
           +
       </button>
     </Link>

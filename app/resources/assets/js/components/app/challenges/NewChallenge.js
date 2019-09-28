@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 
 
-class NewChallenge extends Component {
+class NewHabit extends Component {
 
     constructor(props) {
         super(props);
@@ -18,12 +18,12 @@ class NewChallenge extends Component {
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
-        this.submitNewChallenge = this.submitNewChallenge.bind(this);
+        this.submitNewHabit = this.submitNewHabit.bind(this);
     }
 
     componentDidUpdate(prevProps, prevState) {
         if(this.state.opening) {
-            document.querySelector('#new_challenge').scrollIntoView({ 
+            document.querySelector('#new_habit').scrollIntoView({ 
                 behavior: 'smooth' 
             });
             this.setState({opening: false});
@@ -50,12 +50,12 @@ class NewChallenge extends Component {
         this.setState({startDate: e});
     }
 
-    submitNewChallenge(e) {
+    submitNewHabit(e) {
         e.preventDefault();
 
         
 
-        var myForm = document.getElementById('new_challenge');
+        var myForm = document.getElementById('new_habit');
 
         var formData;
 
@@ -72,34 +72,34 @@ class NewChallenge extends Component {
         });
 
 
-        var challenge = {};
+        var habit = {};
 
-        challenge.profile = {};
+        habit.profile = {};
 
-        challenge.profile.frame = object.timeframe;
+        habit.profile.frame = object.timeframe;
         
         switch(object.timeframe) {
             case "annually":
                 if(object.quarterly=="on") {
-                    challenge.profile.frame = "quarterly";
+                    habit.profile.frame = "quarterly";
                     break;
                 }         
                 if(object.twiceannually=="on") {
-                    challenge.profile.frame = "twiceannually";
+                    habit.profile.frame = "twiceannually";
                     break;
                 }       
                 break;
             case "weekly":
                 if(object.biweekly=="on") {
-                    challenge.profile.frame = "biweekly";
+                    habit.profile.frame = "biweekly";
                 }
                 break;
             case "monthly":
                 if(object.twicemonthly=="on") {
-                    challenge.profile.frame = "twicemonthly";
+                    habit.profile.frame = "twicemonthly";
                 }
                 if(object.bimonthly=="on") {
-                    challenge.profile.frame = "bimonthly";
+                    habit.profile.frame = "bimonthly";
                 }
                 break;
 
@@ -107,11 +107,11 @@ class NewChallenge extends Component {
                 
         } 
 
-        challenge.profile.pattern = [];
-        challenge.title = object.title;
+        habit.profile.pattern = [];
+        habit.title = object.title;
         
         // !!!
-        challenge.profile = {
+        habit.profile = {
             frame: "days",
             pattern: [0, 1, 2, 3, 4, 5, 6]
         };
@@ -121,33 +121,33 @@ class NewChallenge extends Component {
         var mm = dddd.getMonth() + 1; 
         var dd = dddd.getDate();
 
-        challenge.beginDate = [dddd.getFullYear(),
+        habit.beginDate = [dddd.getFullYear(),
           (mm>9 ? '' : '0') + mm,
           (dd>9 ? '' : '0') + dd
          ].join('-');
 
 
         if(object.timeframe=="days") {
-            if(object.sunday=="on") challenge.profile.pattern.push(0);
-            if(object.monday=="on") challenge.profile.pattern.push(1);
-            if(object.tuesday=="on") challenge.profile.pattern.push(2);
-            if(object.wednesday=="on") challenge.profile.pattern.push(3);
-            if(object.thursday=="on") challenge.profile.pattern.push(4);
-            if(object.friday=="on") challenge.profile.pattern.push(5);
-            if(object.saturday=="on") challenge.profile.pattern.push(6);
+            if(object.sunday=="on") habit.profile.pattern.push(0);
+            if(object.monday=="on") habit.profile.pattern.push(1);
+            if(object.tuesday=="on") habit.profile.pattern.push(2);
+            if(object.wednesday=="on") habit.profile.pattern.push(3);
+            if(object.thursday=="on") habit.profile.pattern.push(4);
+            if(object.friday=="on") habit.profile.pattern.push(5);
+            if(object.saturday=="on") habit.profile.pattern.push(6);
         }
 
 
 
         if(object.bonus=="on") {
-            challenge.profile.bonus = true;
+            habit.profile.bonus = true;
         } else {
-            challenge.profile.bonus = false;
+            habit.profile.bonus = false;
         }
 
         this.setState({closed: true});
 
-        this.props.createChallenge(challenge);
+        this.props.createHabit(habit);
     }
 
     render() {
@@ -157,11 +157,11 @@ class NewChallenge extends Component {
 
 
         return(
-            <div className="new-challenge">
+            <div className="new-habit">
                 
-                <form id="new_challenge" className="new-challenge-form"  onSubmit={this.submitNewChallenge}>
+                <form id="new_habit" className="new-habit-form"  onSubmit={this.submitNewHabit}>
                     
-                    <h3>New Challenge</h3>            
+                    <h3>New Habit</h3>            
                     <span className="nevermind" onClick={this.nevermind.bind(this)}>Cancel</span>        
                     <input type="hidden" value={this.state.startDate} placeholder="Begin Date" name="begin_date" />
                     <DatePicker selected={this.state.startDate} timeFormat="Y-m-d" onChange={this.handleStartDateChange} />
@@ -176,4 +176,4 @@ class NewChallenge extends Component {
 }
 
 
-export default NewChallenge;
+export default NewHabit;

@@ -7,7 +7,7 @@ import { Essentials } from '../../../store/ConnectedComponents';
 
 
 
-class Challenge extends Component {
+class Habit extends Component {
 
     constructor(props) {
         super(props);
@@ -16,14 +16,14 @@ class Challenge extends Component {
 
     render() {
         
-        var hide = this.props.challenge.filtered_out || this.props.challenge.checkinSlots.length==0 || this.props.challenge.deleted;
+        var hide = this.props.habit.filtered_out || this.props.habit.checkinSlots.length==0 || this.props.habit.deleted;
         var id = this.props.id;
 
         if(hide || this.props.pinned.includes(id.toString())){
             return <div></div>;
         }
 
-        if(!this.props.challenge) return null;
+        if(!this.props.habit) return null;
 
 
         const SortHandle = SortableHandle(() => (
@@ -41,4 +41,4 @@ class Challenge extends Component {
 }
 
 
-export default Challenge;
+export default Habit;
