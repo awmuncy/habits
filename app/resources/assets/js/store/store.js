@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "../reducers/masterReducer";
 import thunk from 'redux-thunk';
-import { toggleNav } from "./connections/resources/actionCreators";
+import { toggleNav } from "./connections/resources/pageActions";
 
 const store = () => {
 

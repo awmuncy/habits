@@ -1,4 +1,6 @@
-import { syncStart, toggleNav } from "./resources/actionCreators";
+import { syncStart } from "./resources/applicationActions";
+import { toggleNav } from "./resources/pageActions";
+
 
 export default {
     props: state => {

@@ -7,7 +7,7 @@ import {
     filterToOutstanding,
     clearOutstandingFilters,
 
-} from './resources/actionCreators';
+} from './resources/pageActions';
 
 export default {
     props: () => (state, props) => {

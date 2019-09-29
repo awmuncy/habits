@@ -1,4 +1,4 @@
-import { sortHabits } from "../connections/resources/actionCreators";
+import { sortHabits } from "../connections/resources/pageActions";
 
 export default {
     props: () => state => {

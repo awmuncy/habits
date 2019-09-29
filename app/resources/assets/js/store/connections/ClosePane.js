@@ -1,4 +1,4 @@
-import { pinHabit, unpinHabit } from "./resources/actionCreators";
+import { pinHabit, unpinHabit } from "./resources/applicationActions";
 
 export default {
     props: () => state => {

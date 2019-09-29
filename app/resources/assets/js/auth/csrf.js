@@ -1,7 +1,7 @@
 // Auth and CSRF actons
 
 
-// import { syncReady } from 'actionCreators';
+// import { syncReady } from 'pageActions';
 // fetch("/csrf").then((response) => {
 // 	return response.text();
 // }).then(data=>{

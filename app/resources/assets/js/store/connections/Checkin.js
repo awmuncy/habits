@@ -1,4 +1,4 @@
-import { doCheckin } from './resources/actionCreators';
+import { doCheckin } from './resources/applicationActions';
 
 export default {
     props: (state, props) => {

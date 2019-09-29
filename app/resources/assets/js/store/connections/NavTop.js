@@ -1,4 +1,4 @@
-import { toggleNav } from "./resources/actionCreators";
+import { toggleNav } from "./resources/pageActions";
 
 export default {
     props: state => {
