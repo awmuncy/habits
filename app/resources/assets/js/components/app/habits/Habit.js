@@ -19,7 +19,7 @@ class Habit extends Component {
         var hide = this.props.habit.filtered_out || this.props.habit.checkinSlots.length==0 || this.props.habit.deleted;
         var id = this.props.id;
 
-        if(hide || this.props.pinned.includes(id.toString())){
+        if(hide || this.props.pinned_habits.includes(id.toString())){
             return <div></div>;
         }
 

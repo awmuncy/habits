@@ -1,9 +1,9 @@
 var dbV1 = function(event) {
 	var db = event.target.result;
-	db.createObjectStore("habits", {keyPath: "_id"});
-	db.createObjectStore("goals", {keyPath: "_id"});
-	db.createObjectStore("coreValues", {keyPath: "_id"});
-	db.createObjectStore("toDos", {keyPath: "_id"});
+	db.createObjectStore("habits", {keyPath: "id"});
+	db.createObjectStore("goals", {keyPath: "id"});
+	db.createObjectStore("coreValues", {keyPath: "id"});
+	db.createObjectStore("toDos", {keyPath: "id"});
 	db.createObjectStore("loginInfo", {keyPath: "property"});
 };
 
@@ -32,7 +32,6 @@ var getStore = function() {
 			var [habits, goals, toDos, coreValues] = await Promise.all(items);			
 
 			habits = habits.map((habit) => {
-				habit.id = habit._id;
 				return habit;
 			});
 
@@ -68,7 +67,14 @@ var saveStore = function(store) {
 		var db = event.target.result;
 		var transaction = db.transaction(["habits", "goals", "coreValues", "toDos"], "readwrite");
 		var placeItem = (database, item) => {
-			transaction.objectStore(database).put(item);
+			console.log(item.id);
+			var existing = transaction.objectStore(database).get(item.id);
+
+			existing.onsuccess = e => {
+				var fullItem = Object.assign(e.target.result || {}, item);
+				transaction.objectStore(database).put(fullItem);
+			}
+			
 		}
 		// Potential filter function = store only if item has changed
 		habits		.forEach(habit 		=> placeItem("habits", habit));
@@ -81,7 +87,32 @@ var saveStore = function(store) {
 	accessDb(save);
 }
 
+var saveCheckin = function(checkin) {
+
+	accessDb(function(event){
+		var db = event.target.result;
+		var transaction = db.transaction("habits", "readwrite");
+		var habit = transaction.objectStore("habits").get(checkin.habit_id);
+		habit.onsuccess = function(e) {
+			var habit = e.target.result;
+
+			if(!Array.isArray(habit.checkins)) habit.checkins = [];
+			var checkinIndex = habit.checkins.findIndex(storedCheckin => {
+				return (checkin.checkinFor==storedCheckin.checkinFor);
+			});
+			if(checkinIndex==-1) {
+				habit.checkins.push(checkin);
+			} else {
+				habit.checkins[checkinIndex] = checkin;
+			}
+
+			transaction.objectStore("habits").put(habit);
+		}
+	});
+}
+
 export {
 	getStore,
-	saveStore
+	saveStore,
+	saveCheckin
 };

@@ -1,3 +1,5 @@
+import { newGoal } from "./resources/applicationActions"
+
 export default {
     props: (state, props) => {
         return {
@@ -7,17 +9,7 @@ export default {
     dispatches: dispatch => {
         
         return {
-            newGoal: goal => {
-
-
-
-                var action = {
-                    type: "NEW_GOAL",
-                    goal: goal
-                }
-                dispatch(action);
-
-            }
+            newGoal: goal => dispatch(newGoal(goal))
         }
     }
 }

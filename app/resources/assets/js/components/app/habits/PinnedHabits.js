@@ -33,10 +33,12 @@ class PinnedHabits extends Component {
     }
 
     render() {
+
+
         return (
             <div className="pinned-habits">
                 {
-                    this.props.pinned.map((pinned)=>{
+                    this.props.pinned_habits.map((pinned)=>{
                         return <PinnedHabit id={pinned} key={pinned} />
                     })
                 }

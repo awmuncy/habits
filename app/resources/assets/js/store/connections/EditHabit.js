@@ -6,7 +6,7 @@ export default {
     },
     dispatches: dispatch => {
         return {
-            RemoveHabit: id => dispatch(removeHabit())
+            RemoveHabit: id => dispatch(removeHabit(id))
         };
     }
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import { SelectAssociated } from '../../../store/ConnectedComponents';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -10,7 +11,8 @@ class NewGoal extends Component {
         super(props);
         
         this.state = {
-            endDate: null
+            endDate: null,
+            submitted: false
         }
 
         this.handleEndDateChange = this.handleEndDateChange.bind(this);
@@ -48,10 +50,15 @@ class NewGoal extends Component {
 
 
         this.props.newGoal(goal);
+        this.setState({
+            submitted: true
+        });
         
     }
 
     render() {
+
+        if(this.state.submitted) return <Redirect to="/goals" />;
 
         var cv = [
             {

@@ -1,5 +1,10 @@
 export default (state = [], action) => {
     switch(action.type) {
+
+        case "HYDRATE":
+
+            return action.payload.core_values;
+
         case "SORT_CORE_VALUES": 
 
 
@@ -10,13 +15,8 @@ export default (state = [], action) => {
         
             var core_values = state.slice(0);
 
-            var new_core_value = {
-                title: action.title,
-                content: action.content,
-                id: Math.floor(100000 + Math.random() * 900000)
-            }
-            
-            core_values.push(new_core_value);
+
+            core_values.push(action.core_value);
 
             return core_values;
 

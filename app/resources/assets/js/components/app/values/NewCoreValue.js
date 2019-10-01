@@ -8,7 +8,7 @@ function NewCoreValue(props) {
         e.preventDefault();
         e.stopPropagation();
 
-        props.newCoreValue(title, content);
+        props.newCoreValue({title: title, content:content});
     }
 
     return (

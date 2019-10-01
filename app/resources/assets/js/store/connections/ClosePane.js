@@ -3,7 +3,7 @@ import { pinHabit, unpinHabit } from "./resources/applicationActions";
 export default {
     props: () => state => {
         return {
-            pinned: state.pinned_habits
+            pinned_habits: state.pinned_habits
         }
     },
     dispatches: dispatch => {

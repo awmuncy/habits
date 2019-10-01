@@ -110,19 +110,6 @@ export const toggleNav = () => {
     }   
 }
 
-export const switchPage = () => {
-    return (dispatch, store) => {
-
-        window.history.pushState(null, page, page);
-
-        var action = {
-            type: "SWITCH_PAGE"
-        }
-
-        dispatch(action);
-
-    }   
-}
 
 export const sortCoreValues = core_values_sorted => {
     return (dispatch, store) => {

@@ -113,7 +113,7 @@ router.post("/login", (req, res) => {
       user.syncHabits(incomingHabits);
       user.syncGoals(incomingGoals);
       user.syncCoreValues(incomingCoreValues);
-      user.pinned_habits = req.body.pinned_habits[0]===null ? user.pinned_habits : req.body.pinned_habits;
+      user.pinned_habits = req.body.pinned_habits[0]===undefined ? user.pinned_habits : req.body.pinned_habits;
 
       user.save();
 

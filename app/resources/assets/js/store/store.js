@@ -1,11 +1,18 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../reducers/masterReducer";
 import thunk from 'redux-thunk';
-import { toggleNav } from "./connections/resources/pageActions";
+import { dispatchChannel, hydrate } from "./connections/resources/applicationActions";
 
 const store = () => {
 
-	const newStore = createStore(rootReducer, {}, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() && applyMiddleware(thunk));
+	const newStore = createStore(rootReducer, {
+		habits: []
+	}, 
+		compose(
+			applyMiddleware(thunk),
+			window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+		)
+	);
 
 	openChannels(newStore);
 
@@ -13,12 +20,22 @@ const store = () => {
 
 }
 
-function openChannels(store) {
-	var channel = new BroadcastChannel("store");
-	channel.postMessage("init");
 
-	channel.addEventListener("message", () => {
-		store.dispatch(toggleNav());
+function openChannels(store) {
+	var channel = dispatchChannel;
+
+	navigator.serviceWorker.ready.then((sw) => {
+		channel.postMessage("init");
+	});
+
+	channel.addEventListener("message", e => {
+		var message = e.data;
+		if(message.type=="HYDRATE") {
+			store.dispatch(hydrate(message));
+		}
+		if(message.type=="dispatch") {
+			store.dispatch(message.payload);
+		}
 	});
 
 }

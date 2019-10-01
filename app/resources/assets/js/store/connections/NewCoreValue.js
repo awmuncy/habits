@@ -1,12 +1,10 @@
+import { newCoreValue } from "./resources/applicationActions"
+
 export default {
     props: ()=>{return {}},
     dispatches: dispatch => {
         return {
-            newCoreValue: (title, content) => dispatch({
-                type: "NEW_CORE_VALUE",
-                title: title,
-                content: content
-            })
+            newCoreValue: core_value => dispatch(newCoreValue(core_value))
         }
     }
 }

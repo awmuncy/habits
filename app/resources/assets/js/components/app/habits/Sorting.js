@@ -54,11 +54,11 @@ class Sorting extends Component {
     
 
         if(today.isBefore(this.state.startDate, 'd')) {
-            console.log("It's after today");
+            // console.log("It's after today");
         } else if(today.isAfter(this.state.startDate, 'd')) {
-            console.log("It's before today");
+            // console.log("It's before today");
         } else {
-            console.log("It's today");
+            // console.log("It's today");
         }
 
         return (

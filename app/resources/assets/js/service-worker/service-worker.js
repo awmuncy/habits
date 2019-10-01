@@ -7,6 +7,7 @@ station();
 var CACHE_NAME = 'Habit'
 
 const urlsToCache = [
+  '/favicon.ico',
   '/manifest.json',
   '/icons/icon-192.png',
   '/icons/icon-256.png',
@@ -24,7 +25,8 @@ const urlsToCache = [
   '/fonts/fontAwesome/fontawesome-webfont.ttf',
   '/fonts/fontAwesome/fontawesome-webfont.woff',
   '/fonts/fontAwesome/fontawesome-webfont.woff2',
-  '/fonts/fontAwesome/FontAwesome.otf'
+  '/fonts/fontAwesome/FontAwesome.otf',
+  '/service-worker-install.js'
 ];
 
 const home_urls = [
@@ -37,7 +39,7 @@ self.addEventListener('message', function(event){
 
 
 
-// Delete old caches, also updated
+
 self.addEventListener('activate', event => {
   console.log("[SW] Actived");
   const currentCachelist = [CACHE_NAME];
@@ -83,24 +85,6 @@ function matchesPresetUrls(urlString, presetUrls) {
   return false;
 }
 
-self.addEventListener('fetch', function(event) {
-
-  var request = event.request;
-  if(matchesPresetUrls(request.url, home_urls)) request = "/home";
-
-  event.respondWith(
-    caches.open(CACHE_NAME).then(function(cache) {
-      return cache.match(request, {ignoreSearch:true}).then(function (response) {
-        return response || fetch(event.request).then(function(response) {
-          // cache.put(event.request, response.clone());
-          return response;
-        });
-      });
-    })
-  );
-});
-
-
 
 
 self.addEventListener('push', ev => {
@@ -116,8 +100,19 @@ self.addEventListener('push', ev => {
 
 });
 
-const mainChannel = new BroadcastChannel("main");
+self.addEventListener('fetch', function(event) {
 
-mainChannel.addEventListener("message", e => {
-  saveStore(e.data.storableData);
+  var request = event.request;
+  if(matchesPresetUrls(request.url, home_urls)) request = "/home";
+
+  event.respondWith(
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.match(request, {ignoreSearch:true}).then(function (response) {
+        return response || fetch(event.request).then(function(response) {
+          // cache.put(event.request, response.clone());
+          return response;
+        });
+      });
+    })
+  );
 });

@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 
-import { Goals, CoreValues, PinnedHabits } from '../../store/ConnectedComponents';
+import { Goals, CoreValues, PinnedHabits, Habits } from '../../store/ConnectedComponents';
 
 
 function HomePage(props) {
 
   document.title = "Home | HabitsApp";
 
+
   return (	
     <div className="home-layout">
       <div className="home-main">
-        <h2>Pinned Habits</h2>
-        <PinnedHabits />
+        <h2>Habits</h2>
+        <Habits />
       </div>
       <div className="home-main">
         <h2>Goals</h2>

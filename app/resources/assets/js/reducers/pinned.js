@@ -1,4 +1,4 @@
-const pinned = (state = [null], action) => {
+const pinned = (state = [], action) => {
     var new_state;
 
     if(state == 1) return []; // Removable

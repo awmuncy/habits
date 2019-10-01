@@ -13,9 +13,9 @@ class ClosePane extends Component {
     render() {
         var habit = this.props.match.params.id;
         var pin_icon;
-        if(this.props.pinned.includes(habit)) {
+        if(this.props.pinned_habits.includes(habit)) {
             pin_icon = <div onClick={()=>this.props.unpin(habit)}>Unpin</div>;
-        } else if(this.props.pinned.length==3) {
+        } else if(this.props.pinned_habits.length==3) {
             pin_icon = '';
         } else {
             pin_icon = <i className="fa fa-thumb-tack" onClick={()=>this.props.pin(habit)}></i>

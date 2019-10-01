@@ -10,6 +10,7 @@ async function run() {
     register('/service-worker.js');
 
 
+
   const subscription = await registration.pushManager.
     subscribe({
       userVisibleOnly: true,

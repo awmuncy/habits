@@ -40,6 +40,8 @@ class AppNav extends Component {
             case "start":
                 syncStatusMessage = "Starting Sync";
                 break;
+            default: 
+                syncStatusMessage = "Sync";
         }
 
         return (

@@ -12,7 +12,7 @@ export default {
             habit: state.habits[habit_position],
             view_date: state.habits[habit_position].view_date,
             filters: state.filters,
-            pinned: state.pinned_habits
+            pinned_habits: state.pinned_habits
         }
     },
     dispatches: () => {

@@ -1,10 +1,31 @@
-var channel = new BroadcastChannel("dispatches");
+import calculateScores from "../../../reducers/calculateScores";
+
+
+var channel = new BroadcastChannel("store");
+
+export var dispatchChannel = channel;
 
 export const sw_dispatch = action => {
-    channel.postMessage(action);
+    var message = {
+        type: "dispatch",
+        payload: action
+    };
+    channel.postMessage(message);
 };
 
+export const hydrate = action => {
 
+
+
+    return (dispatch, store) => {
+        action.payload.habits = action.payload.habits.map(habit => {
+            habit.checkinSlots = calculateScores(habit);
+
+            return habit;
+        });
+        dispatch(action);
+    }
+}
 
 export const doCheckin = (habit_id, checkinFor, status, at) => {
 
@@ -31,6 +52,7 @@ export const removeHabit = id => {
             habit_id: id
         }
 
+        sw_dispatch(action);
         dispatch(action);
 
     }
@@ -44,6 +66,7 @@ export const pinHabit = id => {
             id: id
         }
 
+        sw_dispatch(action);
         dispatch(action);
 
     }  
@@ -58,6 +81,7 @@ export const unpinHabit = id => {
             id: id
         }
 
+        sw_dispatch(action);
         dispatch(action);
 
     }  
@@ -68,9 +92,50 @@ export const syncStart = () => {
 
         var action = {
             type: "SYNC_START"
-        }
+        };
 
+        sw_dispatch(action);
         dispatch(action);
 
     }
+}
+
+export const newHabit = habit => {
+    return (dispatch, store) => {
+        var action = {
+            type: "NEW_HABIT",
+            habit: habit
+        };
+
+        sw_dispatch(action);
+        dispatch(action);
+    }
+}
+
+export const newGoal = goal => {
+    return (dispatch, store) => {
+        goal.id = Math.floor(Math.random() * Math.floor(99999999));
+
+        var action = {
+            type: "NEW_GOAL",
+            goal: goal
+        };
+
+        sw_dispatch(action);
+        dispatch(action);
+    }
+}
+
+export const newCoreValue = core_value => {
+    return (dispatch, store) => {
+        core_value.id = Math.floor(Math.random() * Math.floor(99999999));
+
+        var action = {
+            type: "NEW_CORE_VALUE",
+            core_value: core_value
+        };
+
+        sw_dispatch(action);
+        dispatch(action);
+    }    
 }

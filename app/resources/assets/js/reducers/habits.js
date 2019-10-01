@@ -6,6 +6,10 @@ export default function habits(state = 0, action) {
 
 	switch(action.type) {
 
+		case "HYDRATE":
+
+			return action.payload.habits;
+
 		case "RECALCULATE_SCORES":
 
 			if(!Array.isArray(state)) {
@@ -56,7 +60,7 @@ export default function habits(state = 0, action) {
 			var createdHabit = {};
 			createdHabit.title = action.habit.title;
 
-			createdHabit.id = action.habit.id ? action.habit.id : Math.floor(Math.random() * Math.floor(999999));
+			createdHabit.id = action.habit.id;
 			createdHabit.position = 0;
 			createdHabit.beginDate = action.habit.beginDate;
 			createdHabit._id = createdHabit.id;
@@ -271,17 +275,14 @@ export default function habits(state = 0, action) {
 
 		case "REMOVE_HABIT":
 
-      var data = state.slice(0);
+      		var data = state.slice(0);
 
-      for(var i = 0; i < data.length; i++) {
-          if(data[i].id == action.habit_id) {
-              //data.splice(i, 1);
-              data[i].deleted = true;
-              break;
-          }
-      }
+			var index = data.findIndex(habit => habit.id==action.habit_id);
 
-      return data;
+			data[index].deleted = true;
+
+
+      		return data;
 
 
 		default: 

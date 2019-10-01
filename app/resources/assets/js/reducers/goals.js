@@ -1,11 +1,13 @@
 export default (state = [], action) => {
     switch(action.type) {
+        case "HYDRATE": 
+
+            return action.payload.goals;
         case 'NEW_GOAL':
 
             var goals = state.slice(0);
             
             var new_goal = action.goal;
-            action.goal.id = action.goal.id ? action.goal.id : Math.floor(Math.random() * Math.floor(99999999));
 
             goals.push(new_goal);
 

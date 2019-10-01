@@ -14,9 +14,6 @@ export default {
 
 
         return {
-            switchPage: page => {
-                dispatch(switchPage(page));
-            },
             closeMenu: () => dispatch(toggleNav()),
             startSync: () => dispatch(syncStart())
         };

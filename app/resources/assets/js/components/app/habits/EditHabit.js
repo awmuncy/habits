@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 class EditHabit extends Component {
 
@@ -43,7 +44,9 @@ class EditHabit extends Component {
 
     render() {
 
-    	let active;
+        let active;
+        
+        if(this.state.open=="deleted") return <Redirect to='/habits' />;
 
 
         switch(this.state.open) {

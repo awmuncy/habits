@@ -84,7 +84,9 @@ class Habits extends Component {
 
 	render () {     
 
-        
+        if(this.state.habits.length==0) {
+            return <div>Make a new habit!</div>
+        }
 
 		return (
 
