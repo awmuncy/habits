@@ -1,4 +1,4 @@
-import calculateScores from "./calculateScores.js";
+import { calculateScores, hydrateScores } from "./calculateScores.js";
 
 
 export default function habits(state = 0, action) {
@@ -12,50 +12,17 @@ export default function habits(state = 0, action) {
 
 		case "RECALCULATE_SCORES":
 
-			if(!Array.isArray(state)) {
-				state = [];
-			}
+			var habits = state.slice(0);
 
-			var calcedHabits = state.map((habit) => {
+			var calcedHabits = habits.map((habit) => {
 				habit.view_date = action.view_date;
-				habit.checkinSlots = calculateScores(habit, action.view_date);
+				habit.checkinSlots = hydrateScores(habit);
+				habit.view_date = undefined;
 				return habit;
 			});		
 
 			return calcedHabits;
-		case "SYNC_HABITS": 
 
-			var calcedHabits = action.habits.map((habit) => {
-				habit.checkinSlots = calculateScores(habit);
-				return habit;
-			});
-
-			return calcedHabits;
-		
-		case "SYNC_HABITS": 
-
-			var habits = action.habits.map((habit) => {
-				habit.profile = {
-					frame: "days",
-					pattern: [0, 1, 2, 3, 4, 5, 6]
-				};
-				habit.view_date = new Date();
-				habit.id = habit._id;
-				habit.beginDate = habit.beginDate;
-				habit.checkinSlots = calculateScores(habit);
-				return habit;
-			});
-
-			return habits;
-
-		case "HABIT_ID_ISSUE":
-			var habits = state.map(function(habit){
-				if(habit.id==action.old_id) {
-					habit.id=action.new_id;
-				}
-				return habit;
-			});
-			return habits;
 		case "NEW_HABIT":
 			var createdHabit = {};
 			createdHabit.title = action.habit.title;
@@ -146,98 +113,9 @@ export default function habits(state = 0, action) {
 
 			return action.new_positions;
 
-	
-
-		case "CHECKIN_UPDATE_NOTE":
-			var habits = state.slice(0);
-
-			updatedHabits = habits.map(function(habit) {
-				if(habit.id==action.habit_id) {
-					if(habit.checkins.findIndex(checkin => checkin.checkinFor == action.checkinFor)<0) {
-						let checkin = {};
-						checkin.status = null;
-						checkin.checkinFor = action.checkinFor;
-						checkin.at = action.at;
-						checkin.note = action.note;
-						habit.checkins.push(checkin);
-					}
-
-					var checkins = habit.checkins.map(function(checkin){
-						if(checkin.checkinFor==action.checkinFor) {
-							checkin.note = action.note;
-							checkin.at = action.at;
-						}
-						return checkin;
-					});
-					habit.checkins = checkins;
-					habit.checkinSlots = calculateScores(habit);
-				}
-				return habit;
-			});
 
 
-			return updatedHabits;
-
-			case "STORE_CHECKINS":
-
-				var habits = state.slice(0);
-	
-				var checkins = action.checkins;
-
-				checkins.forEach(function(newCheckin){
-
-					habits = habits.map(function(habit) {
-						var date = newCheckin.checkinFor;
-						var habit_id = newCheckin.habit_id;
-						var status = newCheckin.status;
-						var at = newCheckin.at;
-
-
-						if(habit.id==habit_id) {
-		
-		
-							if(habit.checkins.findIndex(checkin => checkin.checkinFor == date)<0) {
-								let checkin = {};
-								checkin.status = status;
-								checkin.checkinFor = date;
-								checkin.at = at;
-								habit.checkins.push(checkin);
-							}
-		
-							var checkins = habit.checkins.map(function(checkin){
-								if(checkin.checkinFor==date) {
-									if(status==true) {
-										checkin.status=true;
-									} else {
-										checkin.status=false;
-									}
-									checkin.at = at;
-									checkin.status = status;
-									return checkin;
-								}
-								return checkin;
-							});
-							habit.checkins = checkins;
-		
-						}
-						return habit;
-					});
-
-
-				});
-
-				var hello = habits.map((habit)=>{
-					habit.checkinSlots = calculateScores(habit);
-					return habit;
-				});
-
-
-	
-				return hello;
-
-
-
-			case "DO_CHECKIN":
+		case "DO_CHECKIN":
 
 			var habits = state.slice(0);
 
@@ -265,6 +143,7 @@ export default function habits(state = 0, action) {
 						return checkin;
 					});
 					habit.checkins = checkins;
+
 					habit.checkinSlots = calculateScores(habit);
 
 				}

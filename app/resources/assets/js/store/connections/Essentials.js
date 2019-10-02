@@ -18,7 +18,8 @@ export default {
     
         return {
             habit: state.habits[habit_position],
-            currentCheckin: currentCheckin
+            currentCheckin: currentCheckin,
+            currentCheckinStatus: currentCheckin.status
         }
     },
     dispatches: dispatch => {

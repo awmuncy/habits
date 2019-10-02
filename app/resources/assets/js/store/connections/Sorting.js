@@ -1,6 +1,5 @@
 import {
     setViewDate, 
-    recalculateScores,
     sortHabitsByStatus,
     sortHabitsByScore,
     clearFilters,
@@ -21,7 +20,7 @@ export default {
         return {
             change_view_date: (view_date) => {
                 dispatch(setViewDate(view_date));
-                dispatch(recalculateScores(view_date));      
+                dispatch({type: "RECALCULATE_SCORES", view_date});
             },
             sort_by_score: () => {
                 dispatch(sortHabitsByScore());

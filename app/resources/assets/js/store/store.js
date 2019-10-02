@@ -6,8 +6,8 @@ import { dispatchChannel, hydrate } from "./connections/resources/applicationAct
 const store = () => {
 
 	const newStore = createStore(rootReducer, {
-		habits: []
-	}, 
+			habits: []
+		}, 
 		compose(
 			applyMiddleware(thunk),
 			window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

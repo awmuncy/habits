@@ -30,17 +30,7 @@ export default (state = [], action) => {
                 return goal;
             })
 
-            return goals;
-
-        case "SYNC_GOALS":
-            var goals = action.goals.map(goal => {
-                goal.id = goal._id;
-                goal.status = goal.hasOwnProperty("status") ? goal.status : null;
-                goal.endDate = Date.parse(goal.endDate);
-                return goal;
-            });
-
-            return goals;            
+            return goals;          
 
         default: 
             return state;

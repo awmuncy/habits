@@ -69,7 +69,7 @@ class Essentials extends Component {
 
         return (
             <div className={"essentials status-" + this.props.currentCheckin.status } >
-                <BoolIcon action={this.doCheckin} status={this.props.currentCheckin.status} />
+                <BoolIcon action={this.doCheckin} status={this.props.currentCheckinStatus} />
                 <div className="title-and-type">
                     <h2>{this.props.habit.title}</h2>
                     <span className="interval">{interval}</span> 

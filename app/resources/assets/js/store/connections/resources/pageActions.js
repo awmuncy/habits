@@ -23,18 +23,7 @@ export const setViewDate = view_date => {
     }
 }
 
-export const recalculateScores = view_date => {
-    
-    return (dispatch, store) => {
 
-        var action = {
-            type: "RECALCULATE_SCORES",
-            view_date: view_date
-        };
-
-        dispatch(action);
-    }
-};
 
 export const sortHabitsByStatus = () => {
 

@@ -1,4 +1,4 @@
-import calculateScores from "../../../reducers/calculateScores";
+import { hydrateScores } from "../../../reducers/calculateScores";
 
 
 var channel = new BroadcastChannel("store");
@@ -19,7 +19,7 @@ export const hydrate = action => {
 
     return (dispatch, store) => {
         action.payload.habits = action.payload.habits.map(habit => {
-            habit.checkinSlots = calculateScores(habit);
+            habit.checkinSlots = hydrateScores(habit);
 
             return habit;
         });
