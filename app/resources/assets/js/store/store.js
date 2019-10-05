@@ -25,7 +25,7 @@ function openChannels(store) {
 	var channel = dispatchChannel;
 
 	navigator.serviceWorker.ready.then((sw) => {
-		channel.postMessage("init");
+		channel.postMessage({type:"init"});
 	});
 
 	channel.addEventListener("message", e => {

@@ -4,7 +4,7 @@ var dbV1 = function(event) {
 	db.createObjectStore("goals", {keyPath: "id"});
 	db.createObjectStore("coreValues", {keyPath: "id"});
 	db.createObjectStore("toDos", {keyPath: "id"});
-	db.createObjectStore("loginInfo", {keyPath: "property"});
+	db.createObjectStore("appGeneral", {keyPath: "key"});
 };
 
 var dbError = function(error) {
@@ -111,8 +111,33 @@ var saveCheckin = function(checkin) {
 	});
 }
 
+var appInfoSet = function(key, value) {
+	accessDb(function(e){
+		var db = e.target.result;
+		var transaction = db.transaction(["appGeneral"], "readwrite");
+		transaction.objectStore("appGeneral").put({key: key, value});
+	});
+}
+
+var appInfoGet = function(key) {
+
+	return new Promise((resolve, reject) => {
+		accessDb(function(e) {
+			var db = e.target.result;
+			var transaction = db.transaction("appGeneral", "readwrite");
+			var retreivePair = transaction.objectStore("appGeneral").get(key);
+			retreivePair.onsuccess = function(e) {
+				resolve(e.target.result);
+			}
+		});
+	});
+
+}
+
 export {
 	getStore,
 	saveStore,
-	saveCheckin
+	saveCheckin,
+	appInfoSet,
+	appInfoGet
 };

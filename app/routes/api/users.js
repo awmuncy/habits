@@ -101,29 +101,37 @@ router.post("/login", (req, res) => {
   router.post("/sync", (req, res) => {
 
 
-    var incomingHabits = req.body.habits;
-    var incomingGoals = req.body.goals;
-    var incomingCoreValues = req.body.corevalues;
-    if(!Array.isArray( incomingHabits )) incomingHabits = [];
-
-    var currentUser = "5cf4367811fa1106b007c826";
-
-    User.findById(currentUser).then((user) => {
-
-      user.syncHabits(incomingHabits);
-      user.syncGoals(incomingGoals);
-      user.syncCoreValues(incomingCoreValues);
-      user.pinned_habits = req.body.pinned_habits[0]===undefined ? user.pinned_habits : req.body.pinned_habits;
-
-      user.save();
-
-      res.json({
-        habits: user.habits, 
-        goals: user.goals, 
-        corevalues: user.corevalues,
-        pinned_habits: user.pinned_habits
-      });
+    res.json({
+      message: "HELLO FROM THE OTHER SIDE",
+      timestamp: new Date().getTime(),
+      dispatches: [{
+        type: "TOGGLE_NAV"
+      }]
     });
+
+    // var incomingHabits = req.body.habits;
+    // var incomingGoals = req.body.goals;
+    // var incomingCoreValues = req.body.corevalues;
+    // if(!Array.isArray( incomingHabits )) incomingHabits = [];
+
+    // var currentUser = "5cf4367811fa1106b007c826";
+
+    // User.findById(currentUser).then((user) => {
+
+    //   user.syncHabits(incomingHabits);
+    //   user.syncGoals(incomingGoals);
+    //   user.syncCoreValues(incomingCoreValues);
+    //   user.pinned_habits = req.body.pinned_habits[0]===undefined ? user.pinned_habits : req.body.pinned_habits;
+
+    //   user.save();
+
+    //   res.json({
+    //     habits: user.habits, 
+    //     goals: user.goals, 
+    //     corevalues: user.corevalues,
+    //     pinned_habits: user.pinned_habits
+    //   });
+    // });
 
   });
 

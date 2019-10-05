@@ -66,11 +66,6 @@ const databaseSync = store => {
     if(store.getState().syncStatus=="start" || store.getState().syncStatus=="ready") {
         doDatabaseSync();
     }
-    // Ask for habits in database
-    // Compare to habits in store
-    // If different, do diffing function
-    // Save new habits from store
-    // Send new habits from app
 
 
 };
