@@ -47,11 +47,47 @@ function hydrateApp() {
 async function getDispatchesNewerThan(moment) {
     var store = await getStore();
 
+    var checkins = [];
+
+
+    store.habits.forEach(habit=>{
+        habit.checkins.forEach(checkin=>{
+            if(checkin.at > moment) {
+                checkin.habit_id = habit.id;
+                checkins.push(checkin);
+            }
+        });
+    });
+
+    var checkinDispatches = checkins.map(checkin => {
+        var habit_id = checkin.habit_id;
+        delete checkin.habit_id;
+        return {
+            type: 'SAVE_CHECKIN',
+            checkin: checkin,
+            habit_id: habit_id
+        };
+    });
+
+    console.log("Checkin dispatches to server:");
+    console.log(checkinDispatches);
+
     var modified_habits = store.habits.filter(habit => {
+        console.log("Mod:" + habit.modified_at);
+        console.log(habit.modified_at - moment);
         return habit.modified_at > moment;
     });
 
-    console.log(modified_habits);
+    var dispatchesFromModifiedHabits = modified_habits.map(habit => {
+        return {
+            type: "SAVE_HABIT",
+            habit: habit
+        };
+    });
+
+    console.log("Dispatches from modified habits:");
+    console.log(dispatchesFromModifiedHabits);
+    return [...dispatchesFromModifiedHabits, ...checkinDispatches];
 }
 
 async function syncDb() {
@@ -60,20 +96,24 @@ async function syncDb() {
     
     console.log("Someday, I'll send data nodes that have been updated since the last -successful- sync, and receive back relevant updates");
     
-    // Get every new checkin, goal, habit, cv
-    var lastSync = await appInfoGet("lastSyncAttempt");
+
+    var lastSync = await appInfoGet("lastSyncSuccess");
+    if(lastSync===undefined) lastSync = {value: 0};
 
     console.log(now - lastSync.value);
 
-    await getDispatchesNewerThan(lastSync.value);
+    var dispatches = await getDispatchesNewerThan(lastSync.value);
 
-    
-    
+    var userToken = await appInfoGet("userToken");    
 
     fetch("/api/users/sync", {  
         method: 'POST',  
         credentials: "same-origin",
-        body: JSON.stringify({}),
+        body: JSON.stringify({
+            userToken: userToken,
+            dispatches: [...dispatches],
+            lastSync: lastSync
+        }),
         headers: {
             'Content-Type': 'application/json',
             "Accept": "application/json",
@@ -81,9 +121,12 @@ async function syncDb() {
             'X-CSRF-TOKEN': "DADD"//document.csrf
         }
     }).then((body)=>{
-        appInfoSet("lastSyncSuccess", now);
+        
         return body.json();
     }).then((message)=> {
+        appInfoSet("lastSyncSuccess", message.timestamp);
+        console.log("Received dispatches from server:");
+        console.log(message.dispatches);
 
         var serverFauxChannel = new BroadcastChannel("store");
         message.dispatches.forEach(action=>{
@@ -145,8 +188,8 @@ function reduceToDB(payload) {
             syncDb();
             break;
 
-        case "SAVE_VALUE":
-
+        case "SAVE_USER":
+            appInfoSet("userToken", payload.token);
             break;
             
     }

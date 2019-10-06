@@ -11,6 +11,7 @@ export default () => {
 		
 		var detokenizedUser = jwt_decode(localToken);
 		localStorage.setItem("user", detokenizedUser.name);
+		localStorage.setItem("id", detokenizedUser.id);
 	}
 
 };

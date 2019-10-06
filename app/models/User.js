@@ -4,7 +4,7 @@ const {Goal} = require("./Goal");
 const {CoreValue} = require("./CoreValue");
 const Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
-
+var toObjectId = mongoose.Types.ObjectId;
 var User;
 // Create Schema
 const UserSchema = new Schema({
@@ -83,25 +83,26 @@ UserSchema.methods.syncHabits = function(incomingHabits) {
 
   
   incomingHabits.forEach(incomingHabit => {
-    var exists = false;
-    this.habits.forEach((storedHabit, index) => {
-
-      if(incomingHabit._id == storedHabit._id) {
-        incomingHabit.at = Date.parse(incomingHabit.at);
-        exists = true;
-        storedHabit.deleted = incomingHabit.deleted;
-        storedHabit.syncCheckins(incomingHabit.checkins);
-        this.habits[index] = storedHabit;
-      }
-
+    var habitIndex = this.habits.findIndex(storedHabit=>{
+      return storedHabit._id == incomingHabit.id;
     });
 
-    if(!exists) {
-      incomingHabit._id = undefined;
+    incomingHabit._id = toObjectId(incomingHabit.id); 
+
+    delete incomingHabit.id;
+    
+    
+    if(habitIndex==-1) {
+      console.log("No match");
       this.habits.push(incomingHabit);
+    } else {
+      delete incomingHabit.checkins;
+      this.habits[habitIndex] = Object.assign(this.habits[habitIndex], incomingHabit);
     }
+    
   });
 
+  
 };
 
 module.exports = User = mongoose.model("users", UserSchema);

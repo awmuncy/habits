@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 
+
 class Login extends Component {
 
     constructor(props) {
@@ -35,7 +36,7 @@ class Login extends Component {
                 localStorage.setItem("mySecretToken", token);
                 var detokenizedUser = jwt_decode(token);
                 localStorage.setItem("user", detokenizedUser.name);
-
+                this.props.saveUser(token);
                 this.props.history.push('/');
             } else {
                 console.log("Failure");

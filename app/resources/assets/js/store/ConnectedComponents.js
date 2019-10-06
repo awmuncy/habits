@@ -118,7 +118,10 @@ import IntervalFor from '../components/app/checkins/IntervalFor';
 // Misc
 import BoolIcon from '../components/app/BoolIcon';
 import TimeLeft from '../components/app/TimeLeft';
-import Login from '../components/navigation/Login';
+import _Login from '../components/navigation/Login';
+    import LoginConnections from './connections/Login';
+    var Login = connect(LoginConnections.props, LoginConnections.dispatches)(_Login);
+    
 import SortablePlanks from '../components/app/blocks/SortablePlanks';
 
 // Connectors

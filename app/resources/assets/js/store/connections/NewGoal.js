@@ -13,7 +13,6 @@ export default {
                 let now = new Date();
                 now = now.getTime();
                 goal.modified_at = now;
-                goal.id = Math.floor(Math.random() * Math.floor(999999));
                 dispatch(newGoal(goal))
             }
         }

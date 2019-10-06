@@ -1,4 +1,5 @@
 import { hydrateScores } from "../../../reducers/calculateScores";
+import { ObjectID } from 'bson';
 
 
 var channel = new BroadcastChannel("store");
@@ -102,6 +103,10 @@ export const syncStart = () => {
 
 export const newHabit = habit => {
     return (dispatch, store) => {
+        habit.id = new ObjectID().toHexString();
+        console.log(habit.id);
+        habit.modified_at = new Date().getTime();
+
         var action = {
             type: "NEW_HABIT",
             habit: habit
@@ -114,7 +119,8 @@ export const newHabit = habit => {
 
 export const newGoal = goal => {
     return (dispatch, store) => {
-        goal.id = Math.floor(Math.random() * Math.floor(99999999));
+        goal.id = new ObjectID().toHexString();
+        mod
 
         var action = {
             type: "NEW_GOAL",
@@ -128,7 +134,7 @@ export const newGoal = goal => {
 
 export const newCoreValue = core_value => {
     return (dispatch, store) => {
-        core_value.id = Math.floor(Math.random() * Math.floor(99999999));
+        core_value.id = new ObjectID().toHexString();
 
         var action = {
             type: "NEW_CORE_VALUE",
@@ -138,4 +144,19 @@ export const newCoreValue = core_value => {
         sw_dispatch(action);
         dispatch(action);
     }    
+}
+
+export const saveUser = token => {
+
+
+    return (dispatch, store) => {
+        var action = {
+            type: "SAVE_USER",
+            token: token
+        };
+
+        
+        dispatch(action);
+        sw_dispatch(action);
+    }
 }

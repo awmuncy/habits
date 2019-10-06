@@ -9,6 +9,9 @@ const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
 
+import jwt_decode from 'jwt-decode';
+
+
 // @route POST api/users/register
 // @desc Register user
 // @access Public
@@ -96,43 +99,89 @@ router.post("/login", (req, res) => {
   });
 
 
+var findStored = function(user, lastSync) {
 
+  var dispatches = [];
 
-  router.post("/sync", (req, res) => {
+  var checkins = [];
 
-
-    res.json({
-      message: "HELLO FROM THE OTHER SIDE",
-      timestamp: new Date().getTime(),
-      dispatches: [{
-        type: "TOGGLE_NAV"
-      }]
+  user.habits.forEach(habit => {
+    habit.checkins.forEach(checkin=>{
+      if(checkin.at>lastSync) {
+        checkins.push(checkin);
+      }
     });
-
-    // var incomingHabits = req.body.habits;
-    // var incomingGoals = req.body.goals;
-    // var incomingCoreValues = req.body.corevalues;
-    // if(!Array.isArray( incomingHabits )) incomingHabits = [];
-
-    // var currentUser = "5cf4367811fa1106b007c826";
-
-    // User.findById(currentUser).then((user) => {
-
-    //   user.syncHabits(incomingHabits);
-    //   user.syncGoals(incomingGoals);
-    //   user.syncCoreValues(incomingCoreValues);
-    //   user.pinned_habits = req.body.pinned_habits[0]===undefined ? user.pinned_habits : req.body.pinned_habits;
-
-    //   user.save();
-
-    //   res.json({
-    //     habits: user.habits, 
-    //     goals: user.goals, 
-    //     corevalues: user.corevalues,
-    //     pinned_habits: user.pinned_habits
-    //   });
-    // });
-
   });
 
-  module.exports = router;
+  var checkinDispatches = checkins.map(checkin=>{
+    return {
+      type: "DO_CHECKIN",
+      checkin: checkin
+    };
+  });
+
+  console.log(checkinDispatches);
+
+  return dispatches;
+}
+
+var saveNewer = function(user, incoming) {
+  
+  // Why two switch statements?
+  // Because a habit needs to be
+  // saved before it's checkins
+  incoming.forEach(dispatch => {
+    switch(dispatch.type) {
+      case "SAVE_HABIT":
+        user.syncHabits([dispatch.habit]);
+        break;
+  
+    }
+  });
+
+  incoming.forEach(dispatch => {
+    switch(dispatch.type) {
+  
+      case "SAVE_CHECKIN":
+        var habIndex = user.habits.findIndex(habit=>{
+          return dispatch.habit_id==habit._id;
+        });
+        user.habits[habIndex].syncCheckins([dispatch.checkin]);
+        break;
+    }
+  });
+
+  user.save();
+  
+
+}
+
+router.post("/sync", (req, res) => {
+
+  var incomingDispatches, currentUser, lastSync;
+  
+  incomingDispatches = req.body.dispatches;
+  currentUser = jwt_decode(req.body.userToken.value).id;
+  lastSync = req.body.lastSync.value;
+
+  User.findById(currentUser).then((user) => {
+
+    var dispatchesFromNewer = saveNewer(user, incomingDispatches);
+    var dispatches = findStored(user, lastSync);
+    
+    res.json({
+      timestamp: new Date().getTime(),
+      dispatches: [...dispatches]
+    });
+  });
+
+});
+
+module.exports = router;
+
+
+
+      //user.syncHabits(incomingHabits);
+      // user.syncGoals(incomingGoals);
+      // user.syncCoreValues(incomingCoreValues);
+      // user.pinned_habits = req.body.pinned_habits[0]===undefined ? user.pinned_habits : req.body.pinned_habits;

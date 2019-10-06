@@ -34,7 +34,7 @@ HabitSchema.methods.syncCheckins = function(newCheckins) {
     var exists = false;
 
     this.checkins.forEach((storedCheckin, index) => {
-      if(storedCheckin._id == newCheckin._id) {
+      if(storedCheckin.checkinFor == newCheckin.checkinFor) {
         if(storedCheckin.isNewerThan(newCheckin)){
           this.checkins[index] = newCheckin;
           

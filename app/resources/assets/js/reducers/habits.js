@@ -143,8 +143,9 @@ export default function habits(state = 0, action) {
 						return checkin;
 					});
 					habit.checkins = checkins;
-
+					
 					habit.checkinSlots = calculateScores(habit);
+					habit.modified_at = new Date().getTime();
 
 				}
 				return habit;
@@ -159,6 +160,7 @@ export default function habits(state = 0, action) {
 			var index = data.findIndex(habit => habit.id==action.habit_id);
 
 			data[index].deleted = true;
+			data[index].modified_at = new Date().getTime();
 
 
       		return data;

@@ -100,11 +100,14 @@ var saveCheckin = function(checkin) {
 			var checkinIndex = habit.checkins.findIndex(storedCheckin => {
 				return (checkin.checkinFor==storedCheckin.checkinFor);
 			});
+			delete checkin.habit_id;
+
 			if(checkinIndex==-1) {
 				habit.checkins.push(checkin);
 			} else {
 				habit.checkins[checkinIndex] = checkin;
 			}
+			
 
 			transaction.objectStore("habits").put(habit);
 		}
