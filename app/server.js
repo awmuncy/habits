@@ -7,6 +7,11 @@ var env = require("dotenv").config({path: __dirname + '/../.env'}).parsed;
 const passport = require("passport");
 const users = require("./routes/api/users");
 
+console. devLog = (message) => {
+	console.log("DEVELOPEMENT LOG:");
+	console.log(message);
+}
+
 import { App, Unauth } from "./resources/templates/index";
 
 app.use(

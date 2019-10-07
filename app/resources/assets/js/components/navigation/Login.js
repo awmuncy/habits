@@ -39,7 +39,7 @@ class Login extends Component {
                 this.props.saveUser(token);
                 this.props.history.push('/');
             } else {
-                console.log("Failure");
+                console.log("Login failed");
             }
         });
     }

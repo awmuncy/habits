@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../reducers/masterReducer";
 import thunk from 'redux-thunk';
 import { dispatchChannel, hydrate } from "./connections/resources/applicationActions";
+import { HYDRATE_PAGE } from "../actions";
 var middleware;
 
 if(window.hasOwnProperty("__REDUX_DEVTOOLS_EXTENSION__")) {
@@ -37,7 +38,7 @@ function openChannels(store) {
 
 	channel.addEventListener("message", e => {
 		var message = e.data;
-		if(message.type=="HYDRATE") {
+		if(message.type==HYDRATE_PAGE) {
 			store.dispatch(hydrate(message));
 		}
 		if(message.type=="dispatch") {

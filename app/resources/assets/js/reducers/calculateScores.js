@@ -218,6 +218,7 @@ function calculateScores(habit) {
 		}
 
 
+		if(!Array.isArray(checkinSlots)) checkinSlots = []; 
 		var latestSlots = checkinSlots.map(checkinSlotCalc);
 
 		return latestSlots;

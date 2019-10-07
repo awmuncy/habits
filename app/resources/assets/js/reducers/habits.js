@@ -1,16 +1,16 @@
 import { calculateScores, hydrateScores } from "./calculateScores.js";
-
+import { NEW_HABIT, REMOVE_HABIT, HYDRATE_PAGE, RECALCULATE_SCORES, CLEAR_FILTERS, SORT_HABITS_BY_STATUS, SORT_HABITS_BY_SCORE, SORT_HABITS, DO_CHECKIN } from '../actions';
 
 export default function habits(state = 0, action) {
 
 
 	switch(action.type) {
 
-		case "HYDRATE":
+		case HYDRATE_PAGE:
 
 			return action.payload.habits;
 
-		case "RECALCULATE_SCORES":
+		case RECALCULATE_SCORES:
 
 			var habits = state.slice(0);
 
@@ -23,7 +23,7 @@ export default function habits(state = 0, action) {
 
 			return calcedHabits;
 
-		case "NEW_HABIT":
+		case NEW_HABIT:
 			var createdHabit = {};
 			createdHabit.title = action.habit.title;
 
@@ -52,7 +52,7 @@ export default function habits(state = 0, action) {
 
 		
 
-		case "CLEAR_FILTERS":
+		case CLEAR_FILTERS:
 			var cleared = [...state].map(function(habit){
 				habit.filtered_out = false;
 				return habit;
@@ -60,7 +60,7 @@ export default function habits(state = 0, action) {
 
 			return cleared;
 
-		case "SORT_HABITS_BY_STATUS":
+		case SORT_HABITS_BY_STATUS:
 
 			var myHabits = Array.isArray(state) ? [...state] : [];
 
@@ -84,7 +84,7 @@ export default function habits(state = 0, action) {
 			return myHabits;
 
 
-		case "SORT_HABITS_BY_SCORE":
+		case SORT_HABITS_BY_SCORE:
 
 			var myHabits = Array.isArray(state) ? [...state] : [];
 
@@ -107,7 +107,7 @@ export default function habits(state = 0, action) {
 
 			return myHabits;
 
-		case "SORT_HABITS": 
+		case SORT_HABITS: 
 
 
 
@@ -115,13 +115,13 @@ export default function habits(state = 0, action) {
 
 
 
-		case "DO_CHECKIN":
+		case DO_CHECKIN:
 
 			var habits = state.slice(0);
 
 
 
-			var hello = habits.map(function(habit) {
+			var updatedHabits = habits.map(function(habit) {
 				if(habit.id==action.habit_id) {
 
 
@@ -151,9 +151,9 @@ export default function habits(state = 0, action) {
 				return habit;
 			});
 
-			return hello;
+			return updatedHabits;
 
-		case "REMOVE_HABIT":
+		case REMOVE_HABIT:
 
       		var data = state.slice(0);
 

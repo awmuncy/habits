@@ -93,7 +93,7 @@ UserSchema.methods.syncHabits = function(incomingHabits) {
     
     
     if(habitIndex==-1) {
-      console.log("No match");
+
       this.habits.push(incomingHabit);
     } else {
       delete incomingHabit.checkins;

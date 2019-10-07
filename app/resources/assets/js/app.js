@@ -8,6 +8,11 @@ import store from "./store/store";
 import csrf from './auth/csrf';
 import tokenizedUser from './auth/tokenizedUser';
 
+console. devLog = function(message) {
+	console.log("DEVELOPEMENT LOG:");
+	console.log(message);
+}
+
 csrf();
 tokenizedUser();
 

@@ -10,6 +10,7 @@ const validateLoginInput = require("../../validation/login");
 const User = require("../../models/User");
 
 import jwt_decode from 'jwt-decode';
+import { DO_CHECKIN, SAVE_HABIT, NEW_HABIT, SAVE_CHECKIN } from '../../resources/assets/js/actions';
 
 
 // @route POST api/users/register
@@ -105,22 +106,45 @@ var findStored = function(user, lastSync) {
 
   var checkins = [];
 
+
   user.habits.forEach(habit => {
+
+    if(habit.modified_at>lastSync) {
+      var sendHabit = {id: habit.id};
+      sendHabit = Object.assign(sendHabit, habit._doc);
+      sendHabit.id = habit._id;
+      delete sendHabit._id;
+
+      dispatches.push({
+        type: NEW_HABIT,
+        habit: sendHabit
+      });
+    }
+
     habit.checkins.forEach(checkin=>{
-      if(checkin.at>lastSync) {
+      var modified_at = new Date(checkin.at).getTime()
+      console.devLog(lastSync);
+      if(modified_at>lastSync) {
+        checkin.habit_id = habit._id;
+        console.log(checkin);
         checkins.push(checkin);
       }
     });
   });
 
   var checkinDispatches = checkins.map(checkin=>{
+    var habit_id = checkin.habit_id;
+    delete checkin.habit_id;
     return {
-      type: "DO_CHECKIN",
-      checkin: checkin
+      type: DO_CHECKIN,
+      checkin: checkin,
+      habit_id: habit_id
     };
   });
 
-  console.log(checkinDispatches);
+  console.devLog(checkinDispatches);
+
+  dispatches = [...dispatches, ...checkinDispatches];
 
   return dispatches;
 }
@@ -132,7 +156,7 @@ var saveNewer = function(user, incoming) {
   // saved before it's checkins
   incoming.forEach(dispatch => {
     switch(dispatch.type) {
-      case "SAVE_HABIT":
+      case SAVE_HABIT:
         user.syncHabits([dispatch.habit]);
         break;
   
@@ -142,7 +166,7 @@ var saveNewer = function(user, incoming) {
   incoming.forEach(dispatch => {
     switch(dispatch.type) {
   
-      case "SAVE_CHECKIN":
+      case SAVE_CHECKIN:
         var habIndex = user.habits.findIndex(habit=>{
           return dispatch.habit_id==habit._id;
         });

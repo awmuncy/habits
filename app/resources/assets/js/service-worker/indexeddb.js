@@ -67,7 +67,7 @@ var saveStore = function(store) {
 		var db = event.target.result;
 		var transaction = db.transaction(["habits", "goals", "coreValues", "toDos"], "readwrite");
 		var placeItem = (database, item) => {
-			console.log(item.id);
+
 			var existing = transaction.objectStore(database).get(item.id);
 
 			existing.onsuccess = e => {

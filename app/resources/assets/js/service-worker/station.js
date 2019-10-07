@@ -1,4 +1,5 @@
 import { saveStore, saveCheckin, getStore, appInfoSet, appInfoGet } from './indexeddb';
+import { NEW_HABIT, DO_CHECKIN, REMOVE_HABIT, NEW_CORE_VALUE, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, NEW_GOAL } from '../actions';
 
 var storeStation = new BroadcastChannel("store");
 
@@ -38,7 +39,7 @@ function hydrateApp() {
 
 
         storeStation.postMessage({
-            type: "HYDRATE",
+            type: HYDRATE_PAGE,
             payload: content
         });
     });
@@ -63,44 +64,36 @@ async function getDispatchesNewerThan(moment) {
         var habit_id = checkin.habit_id;
         delete checkin.habit_id;
         return {
-            type: 'SAVE_CHECKIN',
+            type: SAVE_CHECKIN,
             checkin: checkin,
             habit_id: habit_id
         };
     });
 
-    console.log("Checkin dispatches to server:");
-    console.log(checkinDispatches);
+
 
     var modified_habits = store.habits.filter(habit => {
-        console.log("Mod:" + habit.modified_at);
-        console.log(habit.modified_at - moment);
+
         return habit.modified_at > moment;
     });
 
     var dispatchesFromModifiedHabits = modified_habits.map(habit => {
         return {
-            type: "SAVE_HABIT",
+            type: SAVE_HABIT,
             habit: habit
         };
     });
 
-    console.log("Dispatches from modified habits:");
-    console.log(dispatchesFromModifiedHabits);
     return [...dispatchesFromModifiedHabits, ...checkinDispatches];
 }
 
 async function syncDb() {
     let now = new Date();
     now = now.getTime();
-    
-    console.log("Someday, I'll send data nodes that have been updated since the last -successful- sync, and receive back relevant updates");
-    
 
     var lastSync = await appInfoGet("lastSyncSuccess");
     if(lastSync===undefined) lastSync = {value: 0};
 
-    console.log(now - lastSync.value);
 
     var dispatches = await getDispatchesNewerThan(lastSync.value);
 
@@ -125,9 +118,7 @@ async function syncDb() {
         return body.json();
     }).then((message)=> {
         appInfoSet("lastSyncSuccess", message.timestamp);
-        console.log("Received dispatches from server:");
-        console.log(message.dispatches);
-
+        console.devLog(message);
         var serverFauxChannel = new BroadcastChannel("store");
         message.dispatches.forEach(action=>{
             var dispatch = {
@@ -146,13 +137,14 @@ function reduceToDB(payload) {
 
 
     switch(payload.type) {
-        case "NEW_HABIT":
+        case NEW_HABIT:
+
             saveStore({
                 habits: [payload.habit]
             });
             break;
 
-        case "DO_CHECKIN": 
+        case DO_CHECKIN: 
 
             saveCheckin({
                 habit_id : payload.habit_id, 
@@ -163,7 +155,7 @@ function reduceToDB(payload) {
 
             break;
         
-        case "REMOVE_HABIT":
+        case REMOVE_HABIT:
             saveStore({
                 habits: [{
                     id: payload.habit_id,
@@ -172,23 +164,23 @@ function reduceToDB(payload) {
             });
             break;
 
-        case "NEW_GOAL": 
+        case NEW_GOAL: 
             saveStore({
                 goals: [payload.goal]
             });
             break;
 
-        case "NEW_CORE_VALUE":
+        case NEW_CORE_VALUE:
             saveStore({
                 core_values: [payload.core_value]
             });
             break;
 
-        case "SYNC_START":
+        case SYNC_START:
             syncDb();
             break;
 
-        case "SAVE_USER":
+        case SAVE_USER:
             appInfoSet("userToken", payload.token);
             break;
             

@@ -1,5 +1,6 @@
 import { hydrateScores } from "../../../reducers/calculateScores";
 import { ObjectID } from 'bson';
+import { DO_CHECKIN, REMOVE_HABIT, NEW_CORE_VALUE, NEW_GOAL, SAVE_USER, SYNC_START, NEW_HABIT, UNPIN_HABIT, PIN_HABIT } from "../../../actions";
 
 
 var channel = new BroadcastChannel("store");
@@ -33,7 +34,7 @@ export const doCheckin = (habit_id, checkinFor, status, at) => {
     return (dispatch, store) => {
 
         var action = {
-            type: "DO_CHECKIN", 
+            type: DO_CHECKIN, 
             habit_id : habit_id, 
             checkinFor: checkinFor, 
             status: status, 
@@ -49,7 +50,7 @@ export const removeHabit = id => {
     return (dispatch, store) => {
 
         var action = {
-            type: "REMOVE_HABIT", 
+            type: REMOVE_HABIT, 
             habit_id: id
         }
 
@@ -63,7 +64,7 @@ export const pinHabit = id => {
     return (dispatch, store) => {
 
         var action = {
-            type: "PIN_HABIT",
+            type: PIN_HABIT,
             id: id
         }
 
@@ -78,7 +79,7 @@ export const unpinHabit = id => {
     return (dispatch, store) => {
 
         var action = {
-            type: "UNPIN_HABIT",
+            type: UNPIN_HABIT,
             id: id
         }
 
@@ -92,7 +93,7 @@ export const syncStart = () => {
     return (dispatch, store) => {
 
         var action = {
-            type: "SYNC_START"
+            type: SYNC_START
         };
 
         sw_dispatch(action);
@@ -104,11 +105,11 @@ export const syncStart = () => {
 export const newHabit = habit => {
     return (dispatch, store) => {
         habit.id = new ObjectID().toHexString();
-        console.log(habit.id);
+
         habit.modified_at = new Date().getTime();
 
         var action = {
-            type: "NEW_HABIT",
+            type: NEW_HABIT,
             habit: habit
         };
 
@@ -123,7 +124,7 @@ export const newGoal = goal => {
         mod
 
         var action = {
-            type: "NEW_GOAL",
+            type: NEW_GOAL,
             goal: goal
         };
 
@@ -137,7 +138,7 @@ export const newCoreValue = core_value => {
         core_value.id = new ObjectID().toHexString();
 
         var action = {
-            type: "NEW_CORE_VALUE",
+            type: NEW_CORE_VALUE,
             core_value: core_value
         };
 
@@ -151,7 +152,7 @@ export const saveUser = token => {
 
     return (dispatch, store) => {
         var action = {
-            type: "SAVE_USER",
+            type: SAVE_USER,
             token: token
         };
 

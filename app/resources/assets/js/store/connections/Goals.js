@@ -1,3 +1,5 @@
+import { SORT_GOALS } from "../../actions";
+
 export default {
     props: state => {
         
@@ -10,7 +12,7 @@ export default {
         return {
             sortGoals: (goals) => {
                 var action = {
-                    type: "SORT_GOALS",
+                    type: SORT_GOALS,
                     goals: goals
                 }
                 dispatch(action);

@@ -25,6 +25,9 @@ const HabitSchema = new Schema({
   },
   profile: {
     type: Object
+  },
+  modified_at: {
+    type: Number
   }
 });
 

@@ -1,9 +1,11 @@
+import { HYDRATE_PAGE, NEW_GOAL, SORT_GOALS, DO_GOAL } from "../actions";
+
 export default (state = [], action) => {
     switch(action.type) {
-        case "HYDRATE": 
+        case HYDRATE_PAGE: 
 
             return action.payload.goals;
-        case 'NEW_GOAL':
+        case NEW_GOAL:
 
             var goals = state.slice(0);
             
@@ -14,12 +16,12 @@ export default (state = [], action) => {
 
             return goals;
         
-        case 'SORT_GOALS':
+        case SORT_GOALS:
 
 
             return action.goals;
 
-        case 'DO_GOAL': 
+        case DO_GOAL: 
 
             var goals = state.slice(0);
 
