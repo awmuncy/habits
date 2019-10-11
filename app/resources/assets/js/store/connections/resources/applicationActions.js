@@ -35,10 +35,12 @@ export const doCheckin = (habit_id, checkinFor, status, at) => {
 
         var action = {
             type: DO_CHECKIN, 
-            habit_id : habit_id, 
-            checkinFor: checkinFor, 
-            status: status, 
-            at: at
+            habit_id : habit_id,
+            checkin: {
+                checkinFor: checkinFor, 
+                status: status, 
+                at: at
+            } 
         }
 
         sw_dispatch(action);
@@ -105,7 +107,9 @@ export const syncStart = () => {
 export const newHabit = habit => {
     return (dispatch, store) => {
         habit.id = new ObjectID().toHexString();
-
+        let now = new Date();
+        now = now.getTime();
+        habit.checkins = [];
         habit.modified_at = new Date().getTime();
 
         var action = {

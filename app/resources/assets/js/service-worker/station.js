@@ -148,9 +148,7 @@ function reduceToDB(payload) {
 
             saveCheckin({
                 habit_id : payload.habit_id, 
-                checkinFor: payload.checkinFor, 
-                status: payload.status, 
-                at: payload.at
+                checkin: payload.checkin
             });
 
             break;

@@ -28,7 +28,6 @@ export default function habits(state = 0, action) {
 			createdHabit.title = action.habit.title;
 
 			createdHabit.id = action.habit.id;
-			createdHabit.position = 0;
 			createdHabit.beginDate = action.habit.beginDate;
 			createdHabit._id = createdHabit.id;
 
@@ -40,8 +39,10 @@ export default function habits(state = 0, action) {
 			createdHabit.profile = action.habit.profile;
 
 
-			createdHabit.checkins = [];
-			createdHabit.checkinSlots = calculateScores(createdHabit);
+			createdHabit.checkins = action.habit.checkins;
+			
+			
+			createdHabit.checkinSlots = hydrateScores(createdHabit);
 			
 			var habits = Array.isArray(state) ? state.slice(0) : [];
 			
@@ -119,25 +120,27 @@ export default function habits(state = 0, action) {
 
 			var habits = state.slice(0);
 
-
+			
 
 			var updatedHabits = habits.map(function(habit) {
 				if(habit.id==action.habit_id) {
 
 
-					if(habit.checkins.findIndex(checkin => checkin.checkinFor == action.checkinFor)<0) {
+					if(habit.checkins.findIndex(checkin => checkin.checkinFor == action.checkin.checkinFor)<0) {
 						let checkin = {};
-						checkin.status = action.status;
-						checkin.checkinFor = action.checkinFor;
-						checkin.at = action.at;
+						checkin.status = action.checkin.status;
+						checkin.checkinFor = action.checkin.checkinFor;
+						checkin.at = action.checkin.at;
 						habit.checkins.push(checkin);
 					}
 
+					
+
 					var checkins = habit.checkins.map(function(checkin){
-						if(checkin.checkinFor==action.checkinFor) {
-							checkin.checkinFor = action.checkinFor;
-							checkin.at = action.at;
-							checkin.status = action.status;
+						if(checkin.checkinFor==action.checkin.checkinFor) {
+							checkin.checkinFor = action.checkin.checkinFor;
+							checkin.at = action.checkin.at;
+							checkin.status = action.checkin.status;
 							return checkin;
 						}
 						return checkin;
@@ -145,7 +148,6 @@ export default function habits(state = 0, action) {
 					habit.checkins = checkins;
 					
 					habit.checkinSlots = calculateScores(habit);
-					habit.modified_at = new Date().getTime();
 
 				}
 				return habit;

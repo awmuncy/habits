@@ -87,12 +87,14 @@ var saveStore = function(store) {
 	accessDb(save);
 }
 
-var saveCheckin = function(checkin) {
+var saveCheckin = function(payload) {
+
+	var checkin = payload.checkin;
 
 	accessDb(function(event){
 		var db = event.target.result;
 		var transaction = db.transaction("habits", "readwrite");
-		var habit = transaction.objectStore("habits").get(checkin.habit_id);
+		var habit = transaction.objectStore("habits").get(payload.habit_id);
 		habit.onsuccess = function(e) {
 			var habit = e.target.result;
 
@@ -100,7 +102,6 @@ var saveCheckin = function(checkin) {
 			var checkinIndex = habit.checkins.findIndex(storedCheckin => {
 				return (checkin.checkinFor==storedCheckin.checkinFor);
 			});
-			delete checkin.habit_id;
 
 			if(checkinIndex==-1) {
 				habit.checkins.push(checkin);
