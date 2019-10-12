@@ -118,7 +118,7 @@ async function syncDb() {
         return body.json();
     }).then((message)=> {
         appInfoSet("lastSyncSuccess", message.timestamp);
-        console.devLog(message);
+
         var serverFauxChannel = new BroadcastChannel("store");
         message.dispatches.forEach(action=>{
             var dispatch = {

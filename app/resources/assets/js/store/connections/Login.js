@@ -1,4 +1,4 @@
-import { saveUser } from "./resources/applicationActions";
+import { saveUser, syncStart } from "./resources/applicationActions";
 
 export default {
     props: () => {
@@ -7,6 +7,7 @@ export default {
     dispatches: dispatch => {
         return {
             saveUser: token => dispatch(saveUser(token)),
+            syncStart: () => dispatch(syncStart())
         };
     }
 };

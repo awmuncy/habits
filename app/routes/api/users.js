@@ -123,7 +123,7 @@ var findStored = function(user, lastSync) {
 
     habit.checkins.forEach(checkin=>{
       var modified_at = new Date(checkin.at).getTime()
-      console.devLog(lastSync);
+
       if(modified_at>lastSync) {
         checkin.habit_id = habit._id;
         console.log(checkin);
@@ -142,7 +142,6 @@ var findStored = function(user, lastSync) {
     };
   });
 
-  console.devLog(checkinDispatches);
 
   dispatches = [...dispatches, ...checkinDispatches];
 

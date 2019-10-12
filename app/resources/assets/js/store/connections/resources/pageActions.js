@@ -1,4 +1,4 @@
-import { SORT_HABITS, SORT_HABITS_BY_SCORE, SET_VIEW_DATE, SORT_HABITS_BY_STATUS, CLEAR_FILTERS, TOGGLE_NAV } from "../../../actions";
+import { SORT_HABITS, SORT_HABITS_BY_SCORE, SET_VIEW_DATE, SORT_HABITS_BY_STATUS, CLEAR_FILTERS, TOGGLE_NAV, FILTER_TO_OUTSTANDING, CLEAR_OUTSTANDING_FILTER } from "../../../actions";
 
 export const sortHabits = habits => {
     dispatch({type: SORT_HABITS_BY_SCORE, new_positions: habits});

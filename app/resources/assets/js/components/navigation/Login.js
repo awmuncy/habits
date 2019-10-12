@@ -38,6 +38,7 @@ class Login extends Component {
                 localStorage.setItem("user", detokenizedUser.name);
                 this.props.saveUser(token);
                 this.props.history.push('/');
+                this.props.syncStart();
             } else {
                 console.log("Login failed");
             }

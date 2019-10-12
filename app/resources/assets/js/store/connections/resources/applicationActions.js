@@ -17,8 +17,6 @@ export const sw_dispatch = action => {
 
 export const hydrate = action => {
 
-
-
     return (dispatch, store) => {
         action.payload.habits = action.payload.habits.map(habit => {
             habit.checkinSlots = hydrateScores(habit);
