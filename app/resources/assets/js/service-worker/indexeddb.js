@@ -11,6 +11,20 @@ var dbError = function(error) {
 	console.log(error);
 };
 
+var logout = function() {
+
+	var clear = function(event) {
+		var db = event.target.result;
+		var transaction = db.transaction(["habits", "goals", "coreValues", "toDos", "appGeneral"], "readwrite");
+		transaction.objectStore("habits").clear();
+		transaction.objectStore("goals").clear();
+		transaction.objectStore("coreValues").clear();
+		transaction.objectStore("toDos").clear();
+		transaction.objectStore("appGeneral").clear();
+	}
+
+	accessDb(clear);
+}
 
 var getStore = function() {
 	return new Promise((resolve, reject) => {
@@ -143,5 +157,6 @@ export {
 	saveStore,
 	saveCheckin,
 	appInfoSet,
-	appInfoGet
+	appInfoGet,
+	logout
 };

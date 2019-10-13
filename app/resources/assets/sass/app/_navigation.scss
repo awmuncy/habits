@@ -181,7 +181,7 @@ main {
 	padding: 1em 0px;
 	&> h2 {
 		text-align: center;
-		background-color: #558;
+		background-color: var(--brand-primary);
 		padding: 10px;
 		margin: 0px;
 		border-top-left-radius: 5px;

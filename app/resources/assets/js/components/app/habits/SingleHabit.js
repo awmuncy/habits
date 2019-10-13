@@ -12,9 +12,11 @@ class SingleHabit extends Component {
 
 
     render() {
+
+        if(!this.props.habit) return null;
         let checkins;
 
-            checkins = <Checkins checkins={this.props.habit.checkinSlots} habit_id={this.props.habit.id} />;
+        checkins = <Checkins checkins={this.props.habit.checkinSlots} habit_id={this.props.habit.id} />;
 
         return (
             <div className="single-habit" id={"habit-" + this.props.habit.id}>   

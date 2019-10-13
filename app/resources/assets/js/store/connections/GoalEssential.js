@@ -1,4 +1,4 @@
-import { DO_GOAL } from "../../actions";
+import { doGoal } from '../../store/connections/resources/applicationActions';
 
 export default {
     props: (state, props) => {
@@ -19,7 +19,7 @@ export default {
     dispatches: dispatch => {
         return {
             changeGoalStatus: (status, id) => {
-                dispatch({type: DO_GOAL, id: id, status: status});
+                dispatch(doGoal(id, status));
             }
         };
     }

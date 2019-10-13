@@ -10,11 +10,13 @@ export const SAVE_CHECKIN = "SAVE_CHECKIN";
 // Goals
 export const DO_GOAL = "DO_GOAL";
 export const NEW_GOAL = "NEW_GOAL";
+export const SAVE_GOAL = "SAVE_GOAL";
 
 export const HYDRATE_PAGE = "HYDRATE_PAGE";
 export const NEW_CORE_VALUE = "NEW_CORE_VALUE";
 export const SYNC_START = "SYNC_START";
 export const SAVE_USER = "SAVE_USER";
+export const LOGOUT = "LOGOUT";
 
 // New, do, save, sync
 

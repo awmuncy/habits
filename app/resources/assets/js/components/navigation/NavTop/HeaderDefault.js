@@ -29,7 +29,7 @@ class HeaderDefault extends Component {
             <nav className="site-nav">
                 <div className="header-nav">
                     <i className="fa fa-bars" aria-hidden="true" onClick={this.toggleNav}></i>
-                    <h1 className="app-title">HabitCheck</h1>
+                    <h1 className="app-title">HabCheck</h1>
                     <i className="fa fa-bell-o disabled" aria-hidden="true" ></i>
                 </div>
                 <NavSide />

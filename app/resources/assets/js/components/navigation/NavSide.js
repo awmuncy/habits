@@ -16,6 +16,7 @@ class AppNav extends Component {
         localStorage.removeItem("user");
         localStorage.removeItem("mySecretToken");
         window.location.href = "/";
+        this.props.logout();
     }
 
     startSync() {
@@ -81,7 +82,7 @@ class AppNav extends Component {
                         	Core Values
                         </Link>
                     </li>
-                    <li>
+                    <li className="disabled">
                     	<Link to="to-do" onClick={this.props.closeMenu}>
                             <i className="fa fa-check-square-o" aria-hidden="true"></i>
                         	To-dos

@@ -1,6 +1,6 @@
 import { hydrateScores } from "../../../reducers/calculateScores";
 import { ObjectID } from 'bson';
-import { DO_CHECKIN, REMOVE_HABIT, NEW_CORE_VALUE, NEW_GOAL, SAVE_USER, SYNC_START, NEW_HABIT, UNPIN_HABIT, PIN_HABIT } from "../../../actions";
+import { DO_CHECKIN, DO_GOAL, REMOVE_HABIT, NEW_CORE_VALUE, NEW_GOAL, SAVE_USER, SYNC_START, NEW_HABIT, UNPIN_HABIT, PIN_HABIT, LOGOUT } from "../../../actions";
 
 
 var channel = new BroadcastChannel("store");
@@ -123,8 +123,7 @@ export const newHabit = habit => {
 export const newGoal = goal => {
     return (dispatch, store) => {
         goal.id = new ObjectID().toHexString();
-        mod
-
+        
         var action = {
             type: NEW_GOAL,
             goal: goal
@@ -134,6 +133,25 @@ export const newGoal = goal => {
         dispatch(action);
     }
 }
+
+export const doGoal = (id, status) => {
+    return (dispatch, store) => {
+        var goal = {
+            id: id,
+            status: status,
+            modified_at: new Date().getTime()
+        };
+        
+        var action = {
+            type: DO_GOAL,
+            goal: goal
+        };
+
+        sw_dispatch(action);
+        dispatch(action);
+    }
+}
+
 
 export const newCoreValue = core_value => {
     return (dispatch, store) => {
@@ -156,6 +174,20 @@ export const saveUser = token => {
         var action = {
             type: SAVE_USER,
             token: token
+        };
+
+        
+        dispatch(action);
+        sw_dispatch(action);
+    }
+}
+
+export const logout = () => {
+
+
+    return (dispatch, store) => {
+        var action = {
+            type: LOGOUT
         };
 
         

@@ -110,11 +110,7 @@ class NewHabit extends Component {
         habit.profile.pattern = [];
         habit.title = object.title;
         
-        // !!!
-        habit.profile = {
-            frame: "days",
-            pattern: [0, 1, 2, 3, 4, 5, 6]
-        };
+
 
         var dddd = new Date(parseInt(object.begin_date));
 

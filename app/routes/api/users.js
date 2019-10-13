@@ -10,7 +10,7 @@ const validateLoginInput = require("../../validation/login");
 const User = require("../../models/User");
 
 import jwt_decode from 'jwt-decode';
-import { DO_CHECKIN, SAVE_HABIT, NEW_HABIT, SAVE_CHECKIN } from '../../resources/assets/js/actions';
+import { DO_CHECKIN, SAVE_HABIT, NEW_HABIT, SAVE_CHECKIN, SAVE_GOAL, NEW_GOAL } from '../../resources/assets/js/actions';
 
 
 // @route POST api/users/register
@@ -104,8 +104,20 @@ var findStored = function(user, lastSync) {
 
   var dispatches = [];
 
-  var checkins = [];
+  user.goals.forEach(goal => {
+    if(goal.modified_at>lastSync) {
+      var sendGoal = {id: goal.id};
+      sendGoal = Object.assign(sendGoal, goal._doc);
+      sendGoal.id = goal._id;
+      sendGoal.endDate = new Date(sendGoal.endDate).getTime();
+      delete sendGoal._id;
 
+      dispatches.push({
+        type: NEW_GOAL,
+        goal: sendGoal
+      });
+    }
+  });
 
   user.habits.forEach(habit => {
 
@@ -121,29 +133,19 @@ var findStored = function(user, lastSync) {
       });
     }
 
+
     habit.checkins.forEach(checkin=>{
       var modified_at = new Date(checkin.at).getTime()
 
       if(modified_at>lastSync) {
-        checkin.habit_id = habit._id;
-        console.log(checkin);
-        checkins.push(checkin);
+        dispatches.push({
+          type: DO_CHECKIN,
+          habit_id: habit._id,
+          checkin: checkin
+        });
       }
     });
   });
-
-  var checkinDispatches = checkins.map(checkin=>{
-    var habit_id = checkin.habit_id;
-    delete checkin.habit_id;
-    return {
-      type: DO_CHECKIN,
-      checkin: checkin,
-      habit_id: habit_id
-    };
-  });
-
-
-  dispatches = [...dispatches, ...checkinDispatches];
 
   return dispatches;
 }
@@ -153,14 +155,7 @@ var saveNewer = function(user, incoming) {
   // Why two switch statements?
   // Because a habit needs to be
   // saved before it's checkins
-  incoming.forEach(dispatch => {
-    switch(dispatch.type) {
-      case SAVE_HABIT:
-        user.syncHabits([dispatch.habit]);
-        break;
-  
-    }
-  });
+  user.syncTopLevelItems(incoming);
 
   incoming.forEach(dispatch => {
     switch(dispatch.type) {
@@ -173,6 +168,7 @@ var saveNewer = function(user, incoming) {
         break;
     }
   });
+  
 
   user.save();
   
@@ -185,7 +181,7 @@ router.post("/sync", (req, res) => {
   
   incomingDispatches = req.body.dispatches;
   currentUser = jwt_decode(req.body.userToken.value).id;
-  lastSync = req.body.lastSync.value;
+  lastSync = req.body.lastSync ? req.body.lastSync.value : 0;
 
   User.findById(currentUser).then((user) => {
 

@@ -1,5 +1,5 @@
-import { saveStore, saveCheckin, getStore, appInfoSet, appInfoGet } from './indexeddb';
-import { NEW_HABIT, DO_CHECKIN, REMOVE_HABIT, NEW_CORE_VALUE, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, NEW_GOAL } from '../actions';
+import { saveStore, saveCheckin, getStore, appInfoSet, appInfoGet, logout } from './indexeddb';
+import { NEW_HABIT, DO_CHECKIN, DO_GOAL, REMOVE_HABIT, NEW_CORE_VALUE, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, NEW_GOAL, SAVE_GOAL, LOGOUT } from '../actions';
 
 var storeStation = new BroadcastChannel("store");
 
@@ -50,6 +50,12 @@ async function getDispatchesNewerThan(moment) {
 
     var checkins = [];
 
+    var goalDispatches = store.goals.map(goal=>{
+        return {
+            type: SAVE_GOAL,
+            payload: goal
+        };
+    });
 
     store.habits.forEach(habit=>{
         habit.checkins.forEach(checkin=>{
@@ -78,13 +84,14 @@ async function getDispatchesNewerThan(moment) {
     });
 
     var dispatchesFromModifiedHabits = modified_habits.map(habit => {
+        delete habit.checkins;
         return {
             type: SAVE_HABIT,
-            habit: habit
+            payload: habit
         };
     });
 
-    return [...dispatchesFromModifiedHabits, ...checkinDispatches];
+    return [...dispatchesFromModifiedHabits, ...checkinDispatches, ...goalDispatches];
 }
 
 async function syncDb() {
@@ -168,6 +175,12 @@ function reduceToDB(payload) {
             });
             break;
 
+        case DO_GOAL: 
+            saveStore({
+                goals: [payload.goal]
+            });
+            break;
+
         case NEW_CORE_VALUE:
             saveStore({
                 core_values: [payload.core_value]
@@ -180,6 +193,10 @@ function reduceToDB(payload) {
 
         case SAVE_USER:
             appInfoSet("userToken", payload.token);
+            break;
+        
+        case LOGOUT:
+            logout();
             break;
             
     }

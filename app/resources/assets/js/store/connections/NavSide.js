@@ -1,4 +1,4 @@
-import { syncStart } from "./resources/applicationActions";
+import { syncStart, logout } from "./resources/applicationActions";
 import { toggleNav } from "./resources/pageActions";
 
 
@@ -15,7 +15,8 @@ export default {
 
         return {
             closeMenu: () => dispatch(toggleNav()),
-            startSync: () => dispatch(syncStart())
+            startSync: () => dispatch(syncStart()),
+            logout: () => dispatch(logout())
         };
     }
 };
