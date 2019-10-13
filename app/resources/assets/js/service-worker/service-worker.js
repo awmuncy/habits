@@ -109,7 +109,7 @@ self.addEventListener('fetch', function(event) {
     caches.open(CACHE_NAME).then(function(cache) {
       return cache.match(request, {ignoreSearch:true}).then(function (response) {
         return response || fetch(event.request).then(function(response) {
-          // cache.put(event.request, response.clone());
+          cache.put(event.request, response.clone());
           return response;
         });
       });
