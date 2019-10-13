@@ -10,7 +10,7 @@ const validateLoginInput = require("../../validation/login");
 const User = require("../../models/User");
 
 import jwt_decode from 'jwt-decode';
-import { DO_CHECKIN, NEW_HABIT, SAVE_CHECKIN, DECLARE_GOAL } from '../../resources/assets/js/actions';
+import { DO_CHECKIN, NEW_HABIT, SAVE_CHECKIN, DECLARE_GOAL, DECLARE_CORE_VALUE } from '../../resources/assets/js/actions';
 
 
 // @route POST api/users/register
@@ -111,10 +111,23 @@ var findStored = function(user, lastSync) {
       sendGoal.id = goal._id;
       sendGoal.endDate = new Date(sendGoal.endDate).getTime();
       delete sendGoal._id;
-      console.log("HERE");
       dispatches.push({
         type: DECLARE_GOAL,
         goal: sendGoal
+      });
+    }
+  });
+
+  user.corevalues.forEach(goal => {
+    if(goal.modified_at>lastSync) {
+      var sendGoal = {id: goal.id};
+      sendGoal = Object.assign(sendGoal, goal._doc);
+      sendGoal.id = goal._id;
+      sendGoal.endDate = new Date(sendGoal.endDate).getTime();
+      delete sendGoal._id;
+      dispatches.push({
+        type: DECLARE_CORE_VALUE,
+        core_value: sendGoal
       });
     }
   });

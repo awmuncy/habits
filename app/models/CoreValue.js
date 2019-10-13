@@ -16,6 +16,9 @@ const CoreValue = new Schema({
   },
   deleted: {
     type: Boolean
+  },
+  modified_at: {
+    type: Number
   }
 });
 

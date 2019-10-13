@@ -1,5 +1,5 @@
 .my-goals, .core-values {
-    @extend %main-content;
+    grid-column: main-start / main-end;
 }
 
 .goal {
