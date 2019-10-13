@@ -12,7 +12,7 @@ const CoreValue = new Schema({
   },
   position: {
     type: Number,
-    required: true
+    required: false
   },
   deleted: {
     type: Boolean

@@ -197,10 +197,3 @@ router.post("/sync", (req, res) => {
 });
 
 module.exports = router;
-
-
-
-      //user.syncHabits(incomingHabits);
-      // user.syncGoals(incomingGoals);
-      // user.syncCoreValues(incomingCoreValues);
-      // user.pinned_habits = req.body.pinned_habits[0]===undefined ? user.pinned_habits : req.body.pinned_habits;

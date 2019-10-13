@@ -1,7 +1,8 @@
-import { HYDRATE_PAGE, SORT_CORE_VALUES, NEW_CORE_VALUE } from "../actions";
-
+import { HYDRATE_PAGE, SORT_CORE_VALUES, DECLARE_CORE_VALUE } from "../actions";
+import { mergeByIdOrAdd } from "../helper";
 
 export default (state = [], action) => {
+    var core_values = state.slice(0);
     switch(action.type) {
 
         case HYDRATE_PAGE:
@@ -12,13 +13,10 @@ export default (state = [], action) => {
 
             return action.core_values;
         
-        case NEW_CORE_VALUE:
-        
-            var core_values = state.slice(0);
+        case DECLARE_CORE_VALUE:
 
-            core_values.push(action.core_value);
+            return mergeByIdOrAdd(core_values, action.core_value);
 
-            return core_values;
 
     }
     return state;

@@ -12,7 +12,7 @@ export const DECLARE_GOAL = "DECLARE_GOAL";
 
 
 export const HYDRATE_PAGE = "HYDRATE_PAGE";
-export const NEW_CORE_VALUE = "NEW_CORE_VALUE";
+export const DECLARE_CORE_VALUE = "DECLARE_CORE_VALUE";
 export const SYNC_START = "SYNC_START";
 export const SAVE_USER = "SAVE_USER";
 export const LOGOUT = "LOGOUT";

@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var toObjectId = mongoose.Types.ObjectId;
 var User;
-import { DO_CHECKIN, SAVE_HABIT, NEW_HABIT, SAVE_CHECKIN, DECLARE_GOAL } from '../resources/assets/js/actions';
+import { SAVE_HABIT, DECLARE_GOAL, DECLARE_CORE_VALUE } from '../resources/assets/js/actions';
 
 // Create Schema
 const UserSchema = new Schema({
@@ -51,9 +51,9 @@ UserSchema.methods.syncTopLevelItems = function(incomingDispatches) {
       case SAVE_HABIT: 
         storeType = "habits";
         break;
-      // case SAVE_CORE_VALUE:
-      //   storeType = "corevalues";
-      //   break;
+      case DECLARE_CORE_VALUE:
+        storeType = "corevalues";
+        break;
       default: 
         return;
     }

@@ -1,5 +1,5 @@
 import { saveStore, saveCheckin, getStore, appInfoSet, appInfoGet, logout } from './indexeddb';
-import { NEW_HABIT, DO_CHECKIN, REMOVE_HABIT, NEW_CORE_VALUE, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, DECLARE_GOAL, LOGOUT } from '../actions';
+import { NEW_HABIT, DO_CHECKIN, REMOVE_HABIT, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, DECLARE_GOAL, LOGOUT, DECLARE_CORE_VALUE } from '../actions';
 
 var storeStation = new BroadcastChannel("store");
 
@@ -49,7 +49,14 @@ async function getDispatchesNewerThan(moment) {
     var dispatches = [];
     var store = await getStore();
 
-    var checkins = [];
+    store.core_values.forEach(core_value=>{
+        if(core_value.modified_at > moment) {
+            dispatches.push({
+                type: DECLARE_CORE_VALUE,
+                payload: core_value
+            });
+        }
+    });
 
     store.goals.forEach(goal=>{
         if(goal.modified_at > moment) {
@@ -60,6 +67,7 @@ async function getDispatchesNewerThan(moment) {
         }
     });
 
+    // Checkins
     store.habits.forEach(habit=>{
         habit.checkins.forEach(checkin=>{
             if(checkin.at > moment) {
@@ -166,7 +174,7 @@ function reduceToDB(payload) {
             });
             break;
 
-        case NEW_CORE_VALUE:
+        case DECLARE_CORE_VALUE:
             saveStore({
                 core_values: [payload.core_value]
             });

@@ -1,4 +1,5 @@
 import { HYDRATE_PAGE, SORT_GOALS, DECLARE_GOAL } from "../actions";
+import { mergeByIdOrAdd } from '../helper';
 
 export default (state = [], action) => {
     var goals = state.slice(0);
@@ -9,19 +10,7 @@ export default (state = [], action) => {
 
         case DECLARE_GOAL:
 
-            var goalIndex = goals.findIndex(goal => {
-                return (goal.id==action.goal.id);
-            });
-
-            action.goal.modified_at = new Date().getTime();
-
-            if(goalIndex===-1) {
-                goals.push(action.goal);
-            } else {
-                goals[goalIndex] = Object.assign(goals[goalIndex], action.goal);
-            }
-
-            return goals;
+            return mergeByIdOrAdd(goals, action.goal);
         
         case SORT_GOALS:
 
