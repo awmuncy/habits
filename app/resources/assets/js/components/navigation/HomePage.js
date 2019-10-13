@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Goals, CoreValues, PinnedHabits, Habits } from '../../store/ConnectedComponents';
+import { Goals, CoreValues, PinnedHabits, Habits, Sorting } from '../../store/ConnectedComponents';
 
 
 function HomePage(props) {
@@ -10,6 +10,7 @@ function HomePage(props) {
 
   return (	
     <div className="home-layout">
+      <Sorting />
       <div className="home-main">
         <h2>Habits</h2>
         <Habits />
