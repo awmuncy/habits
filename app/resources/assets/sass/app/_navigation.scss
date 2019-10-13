@@ -178,6 +178,11 @@ main {
 
 %main-content {
 	grid-column: main-start / main-end;
+	padding: 1em 0px;
+	h2 {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
 }
 
 .app-nav {

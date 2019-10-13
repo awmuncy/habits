@@ -34,6 +34,7 @@ class PinnedHabits extends Component {
 
     render() {
 
+        if(this.props.pinned_habits.length===0) return null;
 
         return (
             <div className="pinned-habits">
