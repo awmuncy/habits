@@ -1,6 +1,6 @@
 import { hydrateScores } from "../../../reducers/calculateScores";
 import { ObjectID } from 'bson';
-import { DO_CHECKIN, DO_GOAL, REMOVE_HABIT, NEW_CORE_VALUE, NEW_GOAL, SAVE_USER, SYNC_START, NEW_HABIT, UNPIN_HABIT, PIN_HABIT, LOGOUT } from "../../../actions";
+import { DO_CHECKIN, REMOVE_HABIT, NEW_CORE_VALUE,  SAVE_USER, SYNC_START, NEW_HABIT, UNPIN_HABIT, PIN_HABIT, LOGOUT, DECLARE_GOAL } from "../../../actions";
 
 
 var channel = new BroadcastChannel("store");
@@ -120,12 +120,12 @@ export const newHabit = habit => {
     }
 }
 
-export const newGoal = goal => {
+export const declareGoal = goal => {
     return (dispatch, store) => {
-        goal.id = new ObjectID().toHexString();
+        goal.id = goal.id || new ObjectID().toHexString();
         
         var action = {
-            type: NEW_GOAL,
+            type: DECLARE_GOAL,
             goal: goal
         };
 
@@ -143,7 +143,7 @@ export const doGoal = (id, status) => {
         };
         
         var action = {
-            type: DO_GOAL,
+            type: DECLARE_GOAL,
             goal: goal
         };
 

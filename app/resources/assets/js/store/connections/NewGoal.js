@@ -1,4 +1,4 @@
-import { newGoal } from "./resources/applicationActions"
+import { declareGoal } from "./resources/applicationActions"
 
 export default {
     props: (state, props) => {
@@ -9,11 +9,11 @@ export default {
     dispatches: dispatch => {
         
         return {
-            newGoal: goal => {
+            declareGoal: goal => {
                 let now = new Date();
                 now = now.getTime();
                 goal.modified_at = now;
-                dispatch(newGoal(goal))
+                dispatch(declareGoal(goal))
             }
         }
     }

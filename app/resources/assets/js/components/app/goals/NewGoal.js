@@ -49,7 +49,7 @@ class NewGoal extends Component {
         };
 
 
-        this.props.newGoal(goal);
+        this.props.declareGoal(goal);
         this.setState({
             submitted: true
         });

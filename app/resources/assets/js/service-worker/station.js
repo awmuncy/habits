@@ -1,5 +1,5 @@
 import { saveStore, saveCheckin, getStore, appInfoSet, appInfoGet, logout } from './indexeddb';
-import { NEW_HABIT, DO_CHECKIN, DO_GOAL, REMOVE_HABIT, NEW_CORE_VALUE, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, NEW_GOAL, SAVE_GOAL, LOGOUT } from '../actions';
+import { NEW_HABIT, DO_CHECKIN, REMOVE_HABIT, NEW_CORE_VALUE, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, DECLARE_GOAL, LOGOUT } from '../actions';
 
 var storeStation = new BroadcastChannel("store");
 
@@ -46,36 +46,31 @@ function hydrateApp() {
 }
 
 async function getDispatchesNewerThan(moment) {
+    var dispatches = [];
     var store = await getStore();
 
     var checkins = [];
 
-    var goalDispatches = store.goals.map(goal=>{
-        return {
-            type: SAVE_GOAL,
-            payload: goal
-        };
+    store.goals.forEach(goal=>{
+        if(goal.modified_at > moment) {
+            dispatches.push({
+                type: DECLARE_GOAL,
+                payload: goal
+            });
+        }
     });
 
     store.habits.forEach(habit=>{
         habit.checkins.forEach(checkin=>{
             if(checkin.at > moment) {
-                checkin.habit_id = habit.id;
-                checkins.push(checkin);
+                dispatches.push({
+                    type: SAVE_CHECKIN,
+                    checkin: checkin,
+                    habit_id: habit.id
+                });
             }
         });
     });
-
-    var checkinDispatches = checkins.map(checkin => {
-        var habit_id = checkin.habit_id;
-        delete checkin.habit_id;
-        return {
-            type: SAVE_CHECKIN,
-            checkin: checkin,
-            habit_id: habit_id
-        };
-    });
-
 
 
     var modified_habits = store.habits.filter(habit => {
@@ -91,16 +86,13 @@ async function getDispatchesNewerThan(moment) {
         };
     });
 
-    return [...dispatchesFromModifiedHabits, ...checkinDispatches, ...goalDispatches];
+    return [...dispatches, ...dispatchesFromModifiedHabits];
 }
 
 async function syncDb() {
-    let now = new Date();
-    now = now.getTime();
 
     var lastSync = await appInfoGet("lastSyncSuccess");
     if(lastSync===undefined) lastSync = {value: 0};
-
 
     var dispatches = await getDispatchesNewerThan(lastSync.value);
 
@@ -125,7 +117,6 @@ async function syncDb() {
         return body.json();
     }).then((message)=> {
         appInfoSet("lastSyncSuccess", message.timestamp);
-
         var serverFauxChannel = new BroadcastChannel("store");
         message.dispatches.forEach(action=>{
             var dispatch = {
@@ -169,13 +160,7 @@ function reduceToDB(payload) {
             });
             break;
 
-        case NEW_GOAL: 
-            saveStore({
-                goals: [payload.goal]
-            });
-            break;
-
-        case DO_GOAL: 
+        case DECLARE_GOAL: 
             saveStore({
                 goals: [payload.goal]
             });
