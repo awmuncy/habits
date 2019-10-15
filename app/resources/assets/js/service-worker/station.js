@@ -5,7 +5,7 @@ var storeStation = new BroadcastChannel("store");
 
 const station = () => {
     
-    storeStation.addEventListener("message", e => {
+    addEventListener("message", e => {
         var message = e.data;
         switch(message.type) {
             case "dispatch":
@@ -132,7 +132,9 @@ async function syncDb() {
                 payload: action
             };
             serverFauxChannel.postMessage(dispatch);
+            self.registration.active.postMessage(dispatch);
         });
+        
         serverFauxChannel.close();
     });
 

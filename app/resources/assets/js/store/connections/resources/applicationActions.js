@@ -13,6 +13,9 @@ export const sw_dispatch = action => {
         payload: action
     };
     channel.postMessage(message);
+    navigator.serviceWorker.ready.then(sw => {
+        sw.active.postMessage(message);
+    });
 };
 
 export const hydrate = action => {
