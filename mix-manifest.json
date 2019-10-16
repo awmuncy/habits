@@ -1,8 +1,9 @@
 {
-    "/app/public/js/app.js": "/app/public/js/app.js",
-    "/app/public/js/site.js": "/app/public/js/site.js",
-    "/app/public/service-worker.js": "/app/public/service-worker.js",
-    "/app/public/css/style.css": "/app/public/css/style.css",
-    "/app/public/css/unauth.css": "/app/public/css/unauth.css",
-    "/app/public/service-worker-install.js": "/app/public/service-worker-install.js"
+    "/dist/public/js/app.js": "/dist/public/js/app.js",
+    "/dist/public/js/service-worker-install.js": "/dist/public/js/service-worker-install.js",
+    "/dist/public/js/site.js": "/dist/public/js/site.js",
+    "/dist/public/service-worker.js": "/dist/public/service-worker.js",
+    "/dist/public/css/style.css": "/dist/public/css/style.css",
+    "/dist/public/css/unauth.css": "/dist/public/css/unauth.css",
+    "/dist/public/manifest.json": "/dist/public/manifest.json"
 }

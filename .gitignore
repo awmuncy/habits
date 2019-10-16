@@ -3,4 +3,5 @@ app/public/js/
 app/public/css/
 app/public/service-worker.js
 app/public/service-worker-install.js
+/dist/
 .env

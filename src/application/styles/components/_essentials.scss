@@ -1,0 +1,75 @@
+.essentials {
+	background-color: white;
+	display: grid;
+	grid-template-columns: 70px 1fr 120px;
+	min-height: 56px;
+	border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    h2 {
+    	margin: 0px;
+    	padding: 10px 0px 0px;
+    	place-self: center left;
+    	color: #000;
+    	font-size: var(--md-font);
+        font-weight: 400;
+    }
+    &.status-null {
+        h2 {
+            font-weight: 700;
+        }
+    }
+    .interval {
+        font-size: 12px;
+        font-style: italic;
+        color: #999;
+        display: inline-block;
+        text-transform: capitalize;
+    }
+    .meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        i {
+            color: #ccc;
+            transition: transform .4s;
+            .active & {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .score {
+    	color: white;
+        margin-right: 10px;
+    	font-size: 20px;    	
+    	display: block;
+        text-align: right; 	
+    	place-content: center;
+		color: #666;
+        width: 60px;
+    }
+
+    .missed-checkins {
+        color: var(--slow);
+        font-size: 14px;
+        margin-left: 16px;
+        font-weight: 900;
+    }
+
+   	&.status-true,
+   	&.status-1,
+   	&.status-0, 
+   	&.status-false {
+   		h2 {
+	   		color: #444;
+    	}
+    }
+
+    .more-options {
+    	width: 60px;
+    	place-self: center;
+    	font-size: var(--xs-heading-font);
+    	text-align: center;
+    	color: #333;
+    }
+}
