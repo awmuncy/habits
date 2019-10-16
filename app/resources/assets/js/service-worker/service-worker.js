@@ -1,5 +1,5 @@
 import station from './station';
-var v = "0.0.59";
+var v = "0.0.60";
 
 console. devLog = function(message) {
 	console.log("DEVELOPEMENT LOG:");
