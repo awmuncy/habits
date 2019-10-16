@@ -107,14 +107,11 @@ const createCheckinList = function(habit) {
 
 	if(habit.view_date) {
 		var zone = moment(habit.view_date, 'MM-DD-YYYY').toDate();
-
-	  } else {
-		  var zone = new Date();
-	  }
+	} else {
+		var zone = moment(moment().format('MM-DD-YYYY'), 'MM-DD-YYYY').toDate();
+	}
 
 	var my_zone_offset = zone.getTimezoneOffset();  
-
-	var td = zone.setTime(zone.getTime() + (my_zone_offset * 60 * 1000));
 
 	var base_date = new Date(zone);
 
