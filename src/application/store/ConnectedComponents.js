@@ -36,10 +36,17 @@ import _CoreValues from '../components/main/values/CoreValues';
     import C_CoreValues from './connections/CoreValues';
     var CoreValues = connect(C_CoreValues.props, C_CoreValues.dispatches)(_CoreValues);
 
-import CoreValue from '../components/main/values/CoreValue';
-import _NewCoreValue from '../components/main/values/NewCoreValue';
-    import C_NewCoreValue from './connections/NewCoreValue';
-    var NewCoreValue = connect(C_NewCoreValue.props, C_NewCoreValue.dispatches)(_NewCoreValue);
+import _CoreValue from '../components/main/values/CoreValue';
+    import C_CoreValue from './connections/CoreValue';
+    var CoreValue = connect(C_CoreValue.props, C_CoreValue.dispatches)(_CoreValue);
+
+import _DefineCoreValue from '../components/main/values/DefineCoreValue';
+    import C_DefineCoreValue from './connections/DefineCoreValue';
+    var DefineCoreValue = connect(C_DefineCoreValue.props, C_DefineCoreValue.dispatches)(_DefineCoreValue);
+
+import _SingleCoreValue from '../components/main/values/SingleCoreValue';
+    import C_SingleCoreValue from './connections/DefineCoreValue';
+    var SingleCoreValue = connect(C_SingleCoreValue.props, C_SingleCoreValue.dispatches)(_SingleCoreValue);
 
 // Goals
 import _SelectAssociated from '../components/main/goals/SelectAssociated';
@@ -147,7 +154,7 @@ export {
     CoreValuesPage,
     CoreValues,
     CoreValue,
-    NewCoreValue,
+    DefineCoreValue,
     SelectAssociated,
     GoalsPage,
     Goals,
@@ -174,5 +181,6 @@ export {
     BoolIcon,
     TimeLeft,
     Login,
-    SortablePlanks
+    SortablePlanks,
+    SingleCoreValue
 }

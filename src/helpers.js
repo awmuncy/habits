@@ -1,5 +1,5 @@
 export const mergeByIdOrAdd = (list, item) => {
-    var itemIndex = list.findIndex(listItems => {
+    var itemIndex = list.findIndex(listItem => {
         return (listItem.id==item.id);
     });
 

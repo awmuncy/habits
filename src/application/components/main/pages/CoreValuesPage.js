@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {CoreValues} from '../../../store/ConnectedComponents';
-import {NewCoreValue} from '../../../store/ConnectedComponents';
+import {DefineCoreValue} from '../../../store/ConnectedComponents';
 
 const CoreValuesPage = function(props) {
     document.title = "Core Values | HabitsApp";
@@ -9,7 +9,7 @@ const CoreValuesPage = function(props) {
     return (
         <div className="home-layout">
             <CoreValues />
-            <NewCoreValue />
+            <DefineCoreValue />
         </div>
     );
 }

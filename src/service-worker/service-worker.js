@@ -30,7 +30,7 @@ const urlsToCache = [
   '/fonts/fontAwesome/fontawesome-webfont.woff',
   '/fonts/fontAwesome/fontawesome-webfont.woff2',
   '/fonts/fontAwesome/FontAwesome.otf',
-  '/service-worker-install.js'
+  '/js/service-worker-install.js'
 ];
 
 const home_urls = [

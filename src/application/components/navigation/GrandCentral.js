@@ -11,7 +11,8 @@ import {
   GoalSingle,
   HabitsPage,
   Login,
-  CoreValuesPage
+  CoreValuesPage,
+  SingleCoreValue
 } from '../../store/ConnectedComponents';
 
 import {
@@ -53,6 +54,10 @@ class GrandCentral extends Component {
             <Route 
                 path='/goal/:id'
                 component={GoalSingle}
+            />
+            <Route 
+                path='/core-value/:id'
+                component={SingleCoreValue}
             />
             <Route 
                 path='/goals'

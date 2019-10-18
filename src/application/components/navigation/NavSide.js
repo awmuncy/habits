@@ -71,31 +71,31 @@ class AppNav extends Component {
                         </Link>
                     </li>
                     <li>
-                    	<Link to="goals" onClick={this.props.closeMenu}>
+                    	<Link to="/goals" onClick={this.props.closeMenu}>
                             <i className="fa fa-bullseye" aria-hidden="true"></i>
                         	Goals
                         </Link>
                     </li>                    
                     <li>
-                    	<Link to="core-values" onClick={this.props.closeMenu}>
+                    	<Link to="/core-values" onClick={this.props.closeMenu}>
                             <i className="fa fa-sun-o" aria-hidden="true"></i>
                         	Core Values
                         </Link>
                     </li>
                     <li className="disabled">
-                    	<Link to="to-do" onClick={this.props.closeMenu}>
+                    	<Link to="/to-do" onClick={this.props.closeMenu}>
                             <i className="fa fa-check-square-o" aria-hidden="true"></i>
                         	To-dos
                         </Link>
                     </li>
                     <li>
-                    	<Link to="FAQ" onClick={this.props.closeMenu}>
+                    	<Link to="/FAQ" onClick={this.props.closeMenu}>
                             <i className="fa fa-question-circle" aria-hidden="true"></i>
                         	Help
                         </Link>
                     </li>
                     <li>
-                        <Link to="feedback" onClick={this.props.closeMenu}>
+                        <Link to="/feedback" onClick={this.props.closeMenu}>
                             <i className="fa fa-commenting" aria-hidden="true"></i>
                             Feedback
                         </Link>

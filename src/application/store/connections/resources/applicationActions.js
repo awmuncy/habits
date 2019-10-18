@@ -155,9 +155,9 @@ export const doGoal = (id, status) => {
 }
 
 
-export const newCoreValue = core_value => {
+export const defineCoreValue = core_value => {
     return (dispatch, store) => {
-        core_value.id = new ObjectID().toHexString();
+        core_value.id = core_value.id || new ObjectID().toHexString();
 
         var action = {
             type: DECLARE_CORE_VALUE,

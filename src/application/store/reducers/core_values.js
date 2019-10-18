@@ -16,8 +16,6 @@ export default (state = [], action) => {
         case DECLARE_CORE_VALUE:
 
             return mergeByIdOrAdd(core_values, action.core_value);
-
-
     }
     return state;
 };
