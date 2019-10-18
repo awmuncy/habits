@@ -12,16 +12,16 @@ function HomePage(props) {
     <div className="home-layout">
       <Sorting />
       <div className="home-main">
-        <h2>Habits</h2>
-        <Habits />
+        <h2>CoreValues</h2>
+        <CoreValues />
       </div>
       <div className="home-main">
         <h2>Goals</h2>
         <Goals />
       </div>
       <div className="home-main">
-        <h2>CoreValues</h2>
-        <CoreValues />
+        <h2>Habits</h2>
+        <Habits />
       </div>
     </div>
   );
