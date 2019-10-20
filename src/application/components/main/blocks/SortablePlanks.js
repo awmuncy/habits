@@ -30,6 +30,8 @@ const SortablePlankContainer = SortableContainer(({planks, component}) => {
 
 function SortablePlanks(props) {
 
+    var onSortEnd = props.onSortEnd ? props.onSortEnd : () => {};
+
     return (
 
         <div className={"planks " + props.wrapperClass }>
@@ -40,7 +42,7 @@ function SortablePlanks(props) {
                 pressDelay={200}
                 
                 planks={props.items}
-                onSortEnd={props.onSortEnd}
+                onSortEnd={onSortEnd}
                 component={props.component}
             />
         </div>
