@@ -33,7 +33,7 @@ class GoalEssential extends Component {
         var date = moment.unix(parseInt(goal.endDate) / 1000).format('MMMM Do');
         var date_formatted = moment.unix(parseInt(goal.endDate) / 1000).format('MM/DD/YYYY');
 
-
+        if(goal.hidden) return <div></div>;
 
         return (
             <Link to={"/goal/" + id} className="goal">

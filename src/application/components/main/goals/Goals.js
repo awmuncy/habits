@@ -1,6 +1,7 @@
 import React from 'react';
 import { arrayMove } from 'react-sortable-hoc';
 import { GoalEssential, SortablePlanks } from '../../../store/ConnectedComponents';
+import moment from 'moment';
 
 
 function Goals(props) {
@@ -10,9 +11,22 @@ function Goals(props) {
         props.sortGoals(list);
     }
 
-    
+    var goals = props.goals;
 
-    return <SortablePlanks wrapperClass="my-goals" onSortEnd={onSortEnd} items={props.goals} component={GoalEssential} />
+    
+    var now = new Date().getTime();
+
+    if(props.hide && props.hide.includes("past_completed")) {
+        goals.map(goal=>{
+            var date = parseInt(goal.endDate);
+            if(goal.status!==null && date < now) {
+                goal.hidden = true;
+            }
+            return goal;
+        }); 
+    }
+
+    return <SortablePlanks wrapperClass="my-goals" onSortEnd={onSortEnd} items={goals} component={GoalEssential} />
 }
 
 export default Goals;

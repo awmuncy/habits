@@ -17,7 +17,7 @@ function HomePage(props) {
       </div>
       <div className="home-main">
         <h2>Goals</h2>
-        <Goals />
+        <Goals hide={["past_completed"]} />
       </div>
       <div className="home-main">
         <h2>Habits</h2>

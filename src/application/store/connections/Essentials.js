@@ -12,7 +12,7 @@ export default {
     
         var checkins = state.habits[habit_position].checkinSlots;
     
-        var outstanding = checkins.filter(checkin => checkin.status==null).length - 1;
+        var outstanding = checkins.filter(checkin => checkin.status==null).length;
 
         var currentCheckin = checkins[checkins.length - 1];
     

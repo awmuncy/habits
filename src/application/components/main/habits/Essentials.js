@@ -67,7 +67,9 @@ class Essentials extends Component {
             });
         } 
 
-        var notedOutstanding = this.props.outstanding > 0 ? "Missed checkins" : null;
+        var todayCounts = this.props.currentCheckin.status===null ? 1 : 0;
+
+        var notedOutstanding = this.props.outstanding > todayCounts ? "Missed checkins" : null;
 
         return (
             <div className={"essentials status-" + this.props.currentCheckin.status } >
