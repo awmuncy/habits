@@ -93,12 +93,18 @@ self.addEventListener('push', ev => {
   var close = self.registration.showNotification(data.title, {
     body: data.body || 'Message from HabitApp',
     icon: data.icon || '/images/logo.png',
-    image: data.image
+    image: data.image,
+    action: 'open'
   });
-
   ev.waitUntil(close);
 
 });
+
+self.addEventListener('notificationclick', function(event) {
+  event.notification.close();
+
+  clients.openWindow("/habits");
+}, false);
 
 self.addEventListener('fetch', function(event) {
 
