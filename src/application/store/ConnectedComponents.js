@@ -122,6 +122,10 @@ import _Checkin from '../components/main/checkins/Checkin';
 
 import IntervalFor from '../components/main/checkins/IntervalFor';
 
+
+// Tics
+
+
 // Misc
 import BoolIcon from '../components/main/BoolIcon';
 import TimeLeft from '../components/main/TimeLeft';
@@ -131,7 +135,7 @@ import _Login from '../components/navigation/Login';
     
 import SortablePlanks from '../components/main/blocks/SortablePlanks';
 
-// Connectors
+
 
 
 

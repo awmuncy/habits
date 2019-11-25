@@ -8,7 +8,7 @@ function CoreValues(props) {
 
     function onSortEnd({oldIndex, newIndex}) { 
         var list = arrayMove(props.core_values, oldIndex, newIndex); 
-        props.sortCoreValues(list);
+        // props.sortCoreValues(list);
     }
 
     return (

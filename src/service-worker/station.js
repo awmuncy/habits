@@ -23,7 +23,6 @@ const station = () => {
 function hydrateApp() {
     getStore().then(content=>{
                 
-
         content.habits = content.habits.filter((habit)=>{
             if(habit.deleted) return false;
             return true;
@@ -162,10 +161,12 @@ function reduceToDB(payload) {
             break;
         
         case REMOVE_HABIT:
+            var now = new Date().getTime();
             saveStore({
                 habits: [{
                     id: payload.habit_id,
-                    deleted: true
+                    deleted: true,
+                    modified_at: now
                 }]
             });
             break;

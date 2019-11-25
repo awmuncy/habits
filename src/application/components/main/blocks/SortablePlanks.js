@@ -4,12 +4,9 @@ import {SortableContainer, SortableElement, arrayMove, SortableHandle} from 'rea
 
 
 const SortablePlank = SortableElement(({plank, component}) => {
-    const SortHandle = SortableHandle(() => {
-        var Component = component;
-        return (<Component id={plank.id} {...plank} />)
-    }); 
-    
-    return <div><SortHandle /></div>;
+
+    var Component = component;
+    return (<Component id={plank.id} {...plank} />)
 });
 
 
@@ -38,7 +35,6 @@ function SortablePlanks(props) {
             <SortablePlankContainer
                 helperClass="SortableHelper" 
                 lockAxis="y"
-                useDragHandle={true}
                 pressDelay={200}
                 
                 planks={props.items}

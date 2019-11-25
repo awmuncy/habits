@@ -206,7 +206,7 @@ html {
     background-color: #222;
     color: white;
     text-align: center;
-    padding: 50px 20px;
+    padding: 30px 20px 50px;
     position: relative;
     h2 {
       font-size: 32px;
@@ -294,20 +294,17 @@ html {
       color: black;
       z-index: 5;
       position: relative;
-      margin: 10px;
-      .register-side, .login-side {
-        display: none;
+      margin: 10px 80px;
+
+      @include media-breakpoint-down(md) {
+        padding: 20px;
+        margin: 10px 30px;
       }
-      &.login-selected {
-        .login-side {
-          display: block;
-        }
+
+      .form-error {
+        color: var(--slower);
       }
-      &.register-selected {
-        .register-side {
-          display: block;
-        }
-      }
+
       .form-group {
         margin-top: 10px;
       }

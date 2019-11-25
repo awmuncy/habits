@@ -37,7 +37,7 @@ header.app-header {
 .sorting {
 	position: sticky;
 	top: 42px;
-	z-index: 1;
+	z-index: 10;
 }
 .nav-between-days {
 	border-bottom: 1px solid #eee;
@@ -180,13 +180,13 @@ main {
 	grid-column: main-start / main-end;
 	padding: 1em 0px;
 	&> h2 {
-		text-align: center;
-		background-color: var(--brand-primary);
+		text-align: left;
 		padding: 10px;
 		margin: 0px;
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-		color: white;
+		border-top-left-radius: 2px;
+		border-top-right-radius: 2px;
+		background-color: #f6f6f6;
+		border-top: 1px solid #ccc;
 	}
 }
 

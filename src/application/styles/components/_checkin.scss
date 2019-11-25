@@ -2,7 +2,6 @@
 	overflow: hidden;
     background-color: white;
 	width: 100px;
-	// position: relative;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	margin: 0px 5px;
@@ -17,16 +16,8 @@
 	border-top-width: 5px;
 	scroll-snap-align: start;
 	scroll-margin: 10px;
-	// &:nth-last-child(-n+7) {
-	// 	.weekday {
-	// 		font-size: var(--md-font);
-	// 	}
-	// }
-	// &:nth-last-child(-n+7) {
-	// 	.day, .month, .year {
-	// 		font-size: var(--sm-font);
-	// 	}
-	// }
+
+	
 	&:last-of-type {
     	.score {
     		.status-null & {

@@ -23,7 +23,7 @@ router.post("/register", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-  var user = User.findOne({ email: req.body.email }).then(user => {
+  var user = User.findOne({ email: new RegExp(`^${req.body.email}$`, 'i') }).then(user => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
     } else {
@@ -32,7 +32,7 @@ router.post("/register", (req, res) => {
         email: req.body.email,
         password: req.body.password
       });
-      newUser.logToConsole("hi!");
+
 
       // Hash password before saving in database
       bcrypt.genSalt(10, (err, salt) => {

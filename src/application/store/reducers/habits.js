@@ -2,7 +2,7 @@ import { calculateScores, hydrateScores } from "./calculateScores.js";
 import { NEW_HABIT, REMOVE_HABIT, HYDRATE_PAGE, RECALCULATE_SCORES, CLEAR_FILTERS, SORT_HABITS_BY_STATUS, SORT_HABITS_BY_SCORE, SORT_HABITS, DO_CHECKIN } from '../../../actions';
 
 export default function habits(state = 0, action) {
-
+	var habits = Array.isArray(state) ? state.slice(0) : [];
 
 	switch(action.type) {
 
@@ -12,7 +12,6 @@ export default function habits(state = 0, action) {
 
 		case RECALCULATE_SCORES:
 
-			var habits = state.slice(0);
 
 			var calcedHabits = habits.map((habit) => {
 				habit.view_date = action.view_date;
@@ -24,6 +23,7 @@ export default function habits(state = 0, action) {
 			return calcedHabits;
 
 		case NEW_HABIT:
+			if(action.habit.deleted===true) return habits;
 			var createdHabit = {};
 			createdHabit.title = action.habit.title;
 

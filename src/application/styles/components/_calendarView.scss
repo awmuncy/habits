@@ -1,0 +1,24 @@
+.habit-month-view {
+	display: flex;
+	align-content: center;
+}
+
+.successful-day {
+	background-color: lightseagreen;
+	color: white;
+	border-radius: 3px;
+	position: relative;
+}
+
+.successful-day + .successful-day {
+	&:before {
+		content: '';
+		display: block;
+		background-color: lightseagreen;
+		width: calc(.166rem * 2);
+		position: absolute;
+		right: 100%;
+		height: 4px;
+		top: calc(50% - 2px);
+	}
+}

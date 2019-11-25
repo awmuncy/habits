@@ -37,7 +37,7 @@ class Login extends Component {
                 var detokenizedUser = jwt_decode(token);
                 localStorage.setItem("user", detokenizedUser.name);
                 this.props.saveUser(token);
-                this.props.history.push('/');
+                this.props.history.push('/home');
                 this.props.syncStart();
             } else {
                 console.log("Login failed");
