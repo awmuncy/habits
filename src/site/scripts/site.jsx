@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Register from './Register';
+import Register from './Register.jsx';
 
 document.querySelector(".mobile-nav").addEventListener('click', function() {
 	document.querySelector(".mobile-nav").classList.toggle("active");
