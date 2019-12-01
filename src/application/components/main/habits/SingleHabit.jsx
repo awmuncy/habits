@@ -43,6 +43,7 @@ class SingleHabit extends Component {
                             highlightDates={[{"successful-day": highlightWithRanges}]}
                         />
                     </div>
+                    <DormantHabit />
                 </div>            
             </div>
         );

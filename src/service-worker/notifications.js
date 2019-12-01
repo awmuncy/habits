@@ -3,7 +3,9 @@ Notification.requestPermission(function(status) {
 });
 
 function displayNotification() {
+  
   if (Notification.permission == 'granted') {
+    
     navigator.serviceWorker.getRegistration().then(function(reg) {
       var options = {
         body: 'Here is a notification body!',

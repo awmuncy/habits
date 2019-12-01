@@ -1,8 +1,13 @@
 import { hydrateScores } from '../../reducers/calculateScores';
 import { ObjectID } from 'bson';
 import { DO_CHECKIN, REMOVE_HABIT, SAVE_USER, SYNC_START, NEW_HABIT, UNPIN_HABIT, PIN_HABIT, LOGOUT, DECLARE_GOAL, DECLARE_CORE_VALUE } from "../../../../actions";
+import {BroadcastChannel as broadcastChannel } from 'broadcast-channel';
 
-var channel = new BroadcastChannel("store");
+if(window.BroadcastChannel) {
+    var channel = new BroadcastChannel("store");
+} else {
+    var channel = new broadcastChannel("store");
+}
 
 export var dispatchChannel = channel;
 
@@ -12,6 +17,7 @@ export const sw_dispatch = action => {
         payload: action
     };
     channel.postMessage(message);
+    
     navigator.serviceWorker.ready.then(sw => {
         sw.active.postMessage(message);
     });

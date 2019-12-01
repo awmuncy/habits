@@ -1,7 +1,14 @@
 import { saveStore, saveCheckin, getStore, appInfoSet, appInfoGet, logout } from './indexeddb';
 import { NEW_HABIT, DO_CHECKIN, REMOVE_HABIT, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, DECLARE_GOAL, LOGOUT, DECLARE_CORE_VALUE } from '../actions';
+import {BroadcastChannel as broadcastChannel } from 'broadcast-channel';
 
-var storeStation = new BroadcastChannel("store");
+
+
+if(window.BroadcastChannel) {
+    var storeStation = new BroadcastChannel("store");
+} else {
+    var storeStation = new broadcastChannel("store");
+}
 
 const station = () => {
     

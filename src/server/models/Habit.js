@@ -28,6 +28,9 @@ const HabitSchema = new Schema({
   },
   modified_at: {
     type: Number
+  },
+  dormant: {
+    type: Object
   }
 });
 

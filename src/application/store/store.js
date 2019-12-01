@@ -31,7 +31,7 @@ const store = () => {
 
 function openChannels(store) {
 	var channel = dispatchChannel;
-
+	
 	navigator.serviceWorker.ready.then((sw) => {
 		channel		.postMessage({type:"init"});
 		sw.active	.postMessage({type:"init"});
