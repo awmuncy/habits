@@ -1,13 +1,10 @@
 import { hydrateScores } from '../../reducers/calculateScores';
 import { ObjectID } from 'bson';
-import { DO_CHECKIN, REMOVE_HABIT, SAVE_USER, SYNC_START, NEW_HABIT, UNPIN_HABIT, PIN_HABIT, LOGOUT, DECLARE_GOAL, DECLARE_CORE_VALUE } from "../../../../actions";
+import { DO_CHECKIN, REMOVE_HABIT, SAVE_USER, SYNC_START, NEW_HABIT, UNPIN_HABIT, PIN_HABIT, LOGOUT, DECLARE_GOAL, DECLARE_CORE_VALUE, TOGGLE_DORMANCY } from "../../../../actions";
 import {BroadcastChannel as broadcastChannel } from 'broadcast-channel';
 
-if(window.BroadcastChannel) {
-    var channel = new BroadcastChannel("store");
-} else {
-    var channel = new broadcastChannel("store");
-}
+var channel = new BroadcastChannel("store");
+
 
 export var dispatchChannel = channel;
 
@@ -199,6 +196,20 @@ export const logout = () => {
         };
 
         
+        dispatch(action);
+        sw_dispatch(action);
+    }
+}
+
+export const toggleDormancy = id => {
+    return (dispatch, store) => {
+        var action = {
+            type: TOGGLE_DORMANCY,
+            habit: id
+        };
+
+        console.log(action);
+
         dispatch(action);
         sw_dispatch(action);
     }

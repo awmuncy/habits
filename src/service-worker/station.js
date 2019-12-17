@@ -4,11 +4,8 @@ import {BroadcastChannel as broadcastChannel } from 'broadcast-channel';
 
 
 
-if(window.BroadcastChannel) {
-    var storeStation = new BroadcastChannel("store");
-} else {
-    var storeStation = new broadcastChannel("store");
-}
+var storeStation = new BroadcastChannel("store");
+
 
 const station = () => {
     

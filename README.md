@@ -6,3 +6,4 @@ A few useful commands on digital oceans
 -   `tail nohup.out` reads the latest logs from serve.
 -   `sudo systemctl restart nginx` restarts server.
 -   `ssh root@134.209.64.102` Get into server from laptop
+-   `sudo certbox`
