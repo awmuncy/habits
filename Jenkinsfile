@@ -38,7 +38,7 @@ node {
     stage ('Deploy') {
         withCredentials([sshUserPrivateKey(credentialsId: 'this-is-a-thing', keyFileVariable: 'KEY_FILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USER')]) {
             sh '''
-                ssh -i $KEY_FILE $USER@142.93.187.75
+                ssh -i -T $KEY_FILE $USER@142.93.187.75
                 echo "Good, you do it."
             '''
         }
