@@ -38,7 +38,7 @@ node {
     stage ('Deploy') {
         withCredentials([sshUserPrivateKey(credentialsId: 'this-is-a-thing', keyFileVariable: 'KEY_FILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USER')]) {
             sh '''
-                ssh -oStrictHostKeyChecking=no host
+                ssh -T -oStrictHostKeyChecking=no host
                 ssh -i  $KEY_FILE -T $USER@142.93.187.75
                 echo "Good, you do it."
             '''
