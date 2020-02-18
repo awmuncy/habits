@@ -36,7 +36,7 @@ node {
     // }
 
     stage ('Deploy') {
-        withCredentials([sshUserPrivateKey(credentialsId: 'this-is-a-thing', keyFileVariable: 'KEY_FILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USER')]) {
+        withCredentials([sshUserPrivateKey(credentialsId: 'my-jenkins-ssh', keyFileVariable: 'KEY_FILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USER')]) {
             sh '''
                 ssh -T -oStrictHostKeyChecking=no root@142.93.187.75
                 ssh -i  $KEY_FILE -T $USER@142.93.187.75
