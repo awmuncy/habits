@@ -30,10 +30,10 @@ node {
 
     stage ('Deploy') {
         withCredentials([sshUserPrivateKey(credentialsId: 'my-jenkins-ssh', keyFileVariable: 'KEY_FILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USER')]) {
-            sh "
+            sh """ /n
                 ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@142.93.187.75
                 docker run -d -p 5000:5000 awmuncy/habits:latest
-            "
+            """
         }
     }
 }
