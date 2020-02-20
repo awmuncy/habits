@@ -29,9 +29,14 @@ node {
     }
 
     stage ('Deploy') {
-        withCredentials([sshUserPrivateKey(credentialsId: 'my-jenkins-ssh', keyFileVariable: 'KEY_FILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USER')]) {
+
+        withCredentials([
+            sshUserPrivateKey(credentialsId: 'my-jenkins-ssh', keyFileVariable: 'KEY_FILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USER'),
+            usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_PASSWORD')
+            ]) {
             sh """
                 ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@142.93.187.75
+                docker login -p ${HUB_PASSWORD} -u ${HUB_USER} hub.docker.com
                 docker run -d -p 5000:5000 awmuncy/habits:${env.BUILD_NUMBER}
             """
         }
