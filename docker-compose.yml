@@ -1,6 +1,6 @@
 version: '3'
 services:
   web:
-    build: awmuncy/habits:latest
+    image: awmuncy/habits:latest
     ports:
       - "5000:5000"
