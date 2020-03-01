@@ -1,6 +1,17 @@
 version: '3'
+
 services:
-  web:
-    image: awmuncy/habits:latest
-    ports:
-      - "5000:5000"
+  habits:
+    image: "awmuncy/habits"
+    ports: 
+      - "5000"
+    labels: 
+      # Could we cut this down? Probably not. But maybe.
+      - traefik.http.middlewares.habit-non-secure-to-habit-secure.redirectscheme.scheme=https
+      - traefik.http.routers.habit-non-secure.middlewares=habit-non-secure-to-habit-secure
+      - traefik.http.routers.habit-non-secure.rule=Host(`${branch}.dev.checkyourhabit.com`)
+      - traefik.http.routers.habit-non-secure.entrypoints=web
+      - traefik.http.routers.habits.rule=Host(`${branch}.dev.checkyourhabit.com`)  
+      - traefik.http.services.habits.loadbalancer.server.port=5000
+      - traefik.http.routers.habits.tls=true
+      - traefik.http.routers.habits.tls.certresolver=myresolver
