@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 import { EssentialProgress,  BoolIcon } from "../../../store/ConnectedComponents";
 
-
-
+import ProgressRings from "../blocks/ProgressRings"; // Route through central?
 
 class Essentials extends Component {
 
@@ -80,11 +79,19 @@ class Essentials extends Component {
                     <span className="missed-checkins">
                         {notedOutstanding}
                     </span>
+                    
                 </div>
                 
                 <div className="meta">
                     <span className="score">{this.props.currentCheckin.score}</span>
-                    <EssentialProgress checkin={this.props.currentCheckin} />
+                    {
+                        this.props.habit.profile.goal1 ? <ProgressRings
+                        outer={this.props.currentCheckin.score / this.props.habit.profile.goal3} 
+                        middle={this.props.currentCheckin.score / this.props.habit.profile.goal2} 
+                        inner={this.props.currentCheckin.score / this.props.habit.profile.goal1} />  : 
+                        <EssentialProgress checkin={this.props.currentCheckin} />
+                    }
+                    
                 </div>
             </div>
         );

@@ -110,7 +110,7 @@ class NewHabit extends Component {
         habit.profile.pattern = [];
         habit.title = object.title;
         
-
+        
 
         var dddd = new Date(parseInt(object.begin_date));
 
@@ -141,6 +141,10 @@ class NewHabit extends Component {
             habit.profile.bonus = false;
         }
 
+        habit.profile.goal1 = object.goal1;
+        habit.profile.goal2 = object.goal2;
+        habit.profile.goal3 = object.goal3;
+
         this.setState({closed: true});
 
         this.props.createHabit(habit);
@@ -163,6 +167,11 @@ class NewHabit extends Component {
                     <DatePicker selected={this.state.startDate} timeFormat="Y-m-d" onChange={this.handleStartDateChange} />
                     <input type="text" placeholder="Title" name="title" />
                     <IntervalSelect />
+                    <div className="goals">
+                        <label>Short term: <input name="goal1" type="number" /></label>
+                        <label>Mid term: <input name="goal2" type="number" /></label>
+                        <label>Ultimate: <input name="goal3" type="number" /></label>
+                    </div>
                     <input type="submit" value="Submit" className="btn primary" />
                 </form>
             

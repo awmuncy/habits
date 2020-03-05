@@ -1,0 +1,110 @@
+.dials {
+    position: relative; 
+    font-size: 5px;
+    width: 40px;
+    height: 40px;
+    .dial.large  {   
+      --disc-width: 8em;
+      --bar-width: 2em;
+      --bar-full-color: hsla(220, 50%, 50%, 1);
+      --bar-empty-color: hsla(220, 30%, 50%, .5);
+    }
+    .dial.medium  {   
+      --disc-width: 6em;
+      --bar-width: 2em;
+      --bar-full-color: hsla(160, 55%, 50%, 1);
+      --bar-empty-color: hsla(160, 30%, 50%, .5);
+      top: 1em;
+      left: 1em;
+    }  
+    .dial.small {   
+      --disc-width: 4em;
+      --bar-width: 2em;
+      --bar-full-color: hsla(200, 90%, 50%, 1);
+      --bar-empty-color: hsla(200, 30%, 50%, .5);
+      top: 2em;
+      left: 2em;
+    }
+    .dial {
+      border-radius: 50%;
+      position: absolute;
+      width: var(--disc-width);
+      height: var(--disc-width);
+      &::after {
+        content: "";
+        background: #fff;
+        border-radius: 50%;
+        width: calc(var(--disc-width) - var(--bar-width));
+        height: calc(var(--disc-width) - var(--bar-width));
+        position: absolute;
+        top: calc(var(--bar-width) / 2);
+        left: calc(var(--bar-width) / 2);
+      }
+      .dial-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: calc(var(--disc-width) / 2);
+        overflow: hidden;
+      }
+      .wedge {
+        width: calc(var(--disc-width) / 2);
+        height: var(--disc-width);
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .container1 {
+        left: calc(var(--disc-width) / 2);
+      }
+      .container1 .wedge {
+        border-radius: var(--disc-width) 0 0 var(--disc-width);
+        background: var(--bar-full-color);
+        left: calc(var(--disc-width) / -2);
+        transform-origin: 100% 50%;
+        transform: rotateZ(calc(360deg * var(--circle-1)));
+        transition: transform calc(1s * var(--circle-1));
+        transition-timing-function: linear;  
+      }
+  
+      .container2 {
+        left: 0;
+      }
+      .container2 .wedge {
+        transform: rotateZ(calc(360deg * var(--circle-2))); 
+        background: var(--bar-full-color);
+        border-radius: 0 var(--disc-width) var(--disc-width) 0;
+        transform-origin: 0 50%;
+        left: calc(var(--disc-width) / 2);
+        transition: transform calc(1s);
+        // transition-delay: calc(1s / var(--circle-2));
+        transition-timing-function: linear;  
+      }
+  
+      .marker {
+        width: calc(var(--bar-width) / 2);
+        height: calc(var(--bar-width) / 2);
+        background: var(--bar-full-color);
+        border-radius: 50%;
+        position: absolute; 
+        top: 0;
+        left: calc(50% - calc(var(--bar-width) / 4)); 
+        transition: calc(1s * var(--circle-full));
+        transition-timing-function: linear;   
+      }
+      .end { 
+        transform-origin: 50% calc(var(--disc-width) / 2);   
+        transform: rotateZ(calc(360deg * var(--circle-full)));      
+      }   
+    }
+  
+    .dial-background {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border-radius: 50%;
+      background: var(--bar-empty-color);
+    }
+  }

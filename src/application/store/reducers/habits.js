@@ -38,7 +38,6 @@ export default function habits(state = 0, action) {
 
 			createdHabit.profile = action.habit.profile;
 
-
 			createdHabit.checkins = action.habit.checkins;
 			
 			
