@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  habits-${branch}:
+  habits:
     image: "awmuncy/habits"
     ports: 
       - "5000"
