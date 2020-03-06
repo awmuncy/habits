@@ -35,7 +35,7 @@ node {
             usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_PASSWORD')
             ]) {
             sh """
-                ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@142.93.187.75 "make composed-service -e IMAGE=awmuncy/habits:${env.BUILD_NUMBER} -e BRANCH=${env.BRANCH_NAME} COMMIT=${env.COMMIT} -e HUB_USER=${HUB_USER} -e HUB_PASSWORD='${HUB_PASSWORD}'"
+                ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@142.93.187.75 "make composed-service -e IMAGE=awmuncy/habits:${env.BUILD_NUMBER} -e BRANCH=${env.BRANCH_NAME} COMMIT=${env.GIT_COMMIT} -e HUB_USER=${HUB_USER} -e HUB_PASSWORD='${HUB_PASSWORD}'"
             """
         }
     }
