@@ -36,7 +36,7 @@ node {
             ]) {
             def commitId = sh(returnStdout: true, script: 'git rev-parse HEAD')
             sh """
-                ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@142.93.187.75 "make composed-service -e IMAGE=awmuncy/habits:${env.BUILD_NUMBER} -e BRANCH=${env.BRANCH_NAME} -e COMMIT=${commitId} -e HUB_USER=${HUB_USER} -e HUB_PASSWORD='${HUB_PASSWORD}'"
+                ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@142.93.187.75 "make composed-service -e IMAGE=awmuncy/habits:${env.BUILD_NUMBER} -e BRANCH=${env.BRANCH_NAME} -e COMMIT='${commitId}' -e HUB_USER=${HUB_USER} -e HUB_PASSWORD='${HUB_PASSWORD}'"
             """
         }
     }
