@@ -2,7 +2,7 @@ version: '3'
 
 services:
   habits:
-    image: "awmuncy/habits"
+    image: "awmuncy/habits:latest"
     ports: 
       - "5000"
     labels: 
