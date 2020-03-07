@@ -39,7 +39,7 @@ node {
             ]) {
 
             sh """
-                ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@142.93.187.75 "make composed-service  -e TAG=${commit} -e BRANCH=${env.BRANCH_NAME} -e COMMIT='${commit}' -e HUB_USER=${HUB_USER} -e HUB_PASSWORD='${HUB_PASSWORD}'"
+                ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@142.93.187.75 "make composed-service -e IMAGE=awmuncy/habits:${commit} -e TAG=${commit} -e BRANCH=${env.BRANCH_NAME} -e COMMIT='${commit}' -e HUB_USER=${HUB_USER} -e HUB_PASSWORD='${HUB_PASSWORD}'"
             """
         }
     }
