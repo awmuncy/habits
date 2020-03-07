@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import { Goals, CoreValues, PinnedHabits, Habits, Sorting } from '../../store/ConnectedComponents';
+import { Link } from 'react-router-dom';
+
+import { Goals, CoreValues, PinnedHabits, Habits, Sorting, RandomCoreValue } from '../../store/ConnectedComponents';
 
 
 function HomePage(props) {
@@ -12,15 +14,16 @@ function HomePage(props) {
     <div className="home-layout">
       <Sorting />
       <div className="home-main">
-        <h2>CoreValues</h2>
-        <CoreValues />
+        <RandomCoreValue />
       </div>
       <div className="home-main">
-        <h2>Goals</h2>
+        
+          <h2><Link to={"/goals"}>Goals</Link></h2>
+        
         <Goals hide={["past_completed"]} />
       </div>
       <div className="home-main">
-        <h2>Habits</h2>
+        <h2><Link to={"/goals"}>Habits</Link></h2>
         <Habits />
       </div>
     </div>

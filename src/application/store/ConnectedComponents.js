@@ -48,6 +48,10 @@ import _SingleCoreValue from '../components/main/values/SingleCoreValue.jsx';
     import C_SingleCoreValue from './connections/DefineCoreValue';
     var SingleCoreValue = connect(C_SingleCoreValue.props, C_SingleCoreValue.dispatches)(_SingleCoreValue);
 
+import _RandomCoreValue from '../components/main/values/RandomCoreValue.jsx';
+    import C_RandomCoreValue from './connections/RandomCoreValue';
+    var RandomCoreValue = connect(C_RandomCoreValue.props, C_RandomCoreValue.dispatches)(_RandomCoreValue);
+
 // Goals
 import _SelectAssociated from '../components/main/goals/SelectAssociated.jsx';
     import C_SelectAssociated from './connections/SelectAssociated';
@@ -158,6 +162,7 @@ export {
     CoreValuesPage,
     CoreValues,
     CoreValue,
+    RandomCoreValue,
     DefineCoreValue,
     SelectAssociated,
     GoalsPage,

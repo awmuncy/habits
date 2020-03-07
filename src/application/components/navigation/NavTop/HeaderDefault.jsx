@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { NavSide } from '../../../store/ConnectedComponents';
 
+import { Link } from 'react-router-dom';
 
 
 class HeaderDefault extends Component {
@@ -30,7 +31,7 @@ class HeaderDefault extends Component {
                 <div className="header-nav">
                     <i className="fa fa-bars" aria-hidden="true" onClick={this.toggleNav}></i>
                     <h1 className="app-title">HabCheck</h1>
-                    <i className="fa fa-bell-o disabled" aria-hidden="true" ></i>
+                    <Link to={"/home"}><i className="fa fa-home" aria-hidden="true" ></i></Link>
                 </div>
                 <NavSide />
             </nav>
