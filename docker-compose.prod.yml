@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  habits:
+    image: "awmuncy/habits"
+    ports: 
+      - "5000"
+    labels: 
+      - traefik.http.middlewares.habit-non-secure-to-habit-secure.redirectscheme.scheme=https
+      - traefik.http.routers.habit-non-secure.middlewares=habit-non-secure-to-habit-secure
+      - traefik.http.routers.habit-non-secure.rule=Host(`checkyourhabit.com`)
+      - traefik.http.routers.habit-non-secure.entrypoints=web
+      - traefik.http.routers.habits.rule=Host(`checkyourhabit.com`)  
+      - traefik.http.services.habits.loadbalancer.server.port=5000
+      - traefik.http.routers.habits.tls=true
+      - traefik.http.routers.habits.tls.certresolver=myresolver
+      - traefik.http.middlewares.habits-no-prefix.redirectregex.regex=www.checkyourhabit.com/(.*)
+      - traefik.http.middlewares.habits-no-prefix.redirectregex.replacement=checkyourhabit.com/$${1}
+      - traefik.http.routers.habits-www.rule=Host(`www.checkyourhabit.com`)
+      - traefik.http.routers.habits-www.middlewares=habits-no-prefix
+      - traefik.http.routers.habits-www-secure.rule=Host(`www.checkyourhabit.com`)
+      - traefik.http.routers.habits-www-secure.middlewares=habits-no-prefix
+      - traefik.http.routers.habits-www-secure.tls=true
+      - traefik.http.routers.habits-www-secure.tls.certresolver=myresolver
