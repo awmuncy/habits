@@ -17,9 +17,10 @@ node {
             sshUserPrivateKey(credentialsId: 'my-jenkins-ssh', keyFileVariable: 'KEY_FILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USER'),
             usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_PASSWORD')
             ]) {
-
+            // Copy docker-compose.prod.yml to docker-compose.habits.yml
             sh """
-                ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@134.209.64.102 "make composed-service -e IMAGE=awmuncy/habits:${commit} -e TAG=${commit} -e BRANCH=${env.BRANCH_NAME} -e COMMIT='${commit}' -e HUB_USER=${HUB_USER} -e HUB_PASSWORD='${HUB_PASSWORD}'"
+                ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@134.209.64.102 "docker pull IMAGE=awmuncy/habits:${commit}"
+                scp -oStrictHostKeyChecking=no -i $KEY_FILE docker-compose.prod.yml $USER@134.209.64.102:/root/docker-compose.habits.yml                
             """
         }
     }
