@@ -19,8 +19,9 @@ node {
             ]) {
             // Copy docker-compose.prod.yml to docker-compose.habits.yml
             sh """
-                ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@134.209.64.102 "docker pull awmuncy/habits:latest"
-                scp -oStrictHostKeyChecking=no -i $KEY_FILE docker-compose.prod.yml $USER@134.209.64.102:/root/docker-compose.habits.yml                
+                ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@134.209.64.102 "docker pull awmuncy/habits:${commit}"
+                scp -oStrictHostKeyChecking=no -i $KEY_FILE docker-compose.prod.yml $USER@134.209.64.102:/root/docker-compose.habits.yml
+                ssh -T -oStrictHostKeyChecking=no -i $KEY_FILE $USER@134.209.64.102 "TAG='${commit}' && docker-compose -f docker-compose.habits.yml up -d"
             """
         }
     }
