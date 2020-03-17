@@ -7,13 +7,14 @@ var env = require("dotenv").config({path: __dirname + '/../../.env'}).parsed;
 const passport = require("passport");
 const users = require("./routes/api/users");
 import notifications from "./notifications";
+const resetPassword = require("./routes/passwordReset");
 
 console. devLog = (message) => {
 	console.log("DEVELOPEMENT LOG:");
 	console.log(message);
 }
 
-import { App, Unauth } from "./useHandlebars";
+import { App, Homepage } from "./useHandlebars";
 
 app.use(
     bodyParser.urlencoded({
@@ -48,6 +49,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 
+app.use("/reset-password", resetPassword);
 
 
 app.use( express.static( path.resolve( __dirname, "../../dist/public" ) ) );
@@ -57,7 +59,7 @@ app.get('/', (req, res) => {
     res.writeHead( 200, { "Content-Type": "text/html" } );
 
 
-    res.end(Unauth());
+    res.end(Homepage());
 });
 
 app.get('/login', (req, res) => {

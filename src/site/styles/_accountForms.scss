@@ -1,0 +1,16 @@
+.account-form {
+    input[type="text"], input[type="password"] {
+        display: block;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        font-size: 1.2rem;
+    }
+    .one-line-group {
+        margin-top: 10px;
+        display: flex;
+        .btn {
+            margin: 0px 10px;
+        }
+    }
+}

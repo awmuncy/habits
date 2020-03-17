@@ -1,8 +1,16 @@
 @import '../../application/styles/shared-style';
+@import "passwordReset";
+@import "accountForms";
 
 html {
     scroll-behavior: smooth;
-  }
+}
+
+body {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  min-height: 100vh;
+}
   
   header.site-header {
     scroll-behavior: smooth;
@@ -18,6 +26,10 @@ html {
     left: 0;
     right: 0;
     background-color: rgba(0,0,0,.5);
+    &.sticky {
+      position: sticky;
+      background-color: var(--brand-primary-dark);
+    }
     .mobile-nav {
       display: none;
       width: 50px;
