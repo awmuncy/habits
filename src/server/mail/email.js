@@ -40,4 +40,7 @@ function passwordReset(emailTo, token) {
 
 module.exports = {
     passwordReset
+    // , 
+    // newUser,
+    // registrationEmail
 };
