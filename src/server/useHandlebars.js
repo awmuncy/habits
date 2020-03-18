@@ -27,9 +27,13 @@ var PasswordResetTemplate = data => {
     return createTemplate("../site/templates/PasswordReset.html")(data);
 };
 
+var LoginPage = data => {
+    return createTemplate("../site/templates/LoginPage.html")(data);
+}
 
 export {
     App,
     Homepage,
-    PasswordResetTemplate
+    PasswordResetTemplate,
+    LoginPage
 }

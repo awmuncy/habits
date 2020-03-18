@@ -1,6 +1,7 @@
 @import '../../application/styles/shared-style';
 @import "passwordReset";
 @import "accountForms";
+@import "loginPage";
 
 html {
     scroll-behavior: smooth;
@@ -9,7 +10,7 @@ html {
 body {
   display: grid;
   grid-template-rows: max-content 1fr max-content;
-  min-height: 100vh;
+  min-height: calc(100vh + 1px);
 }
   
   header.site-header {

@@ -1,5 +1,23 @@
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
+import { SAVE_USER } from '../../actions';
+
+function saveUser(token) {
+
+    var action = {
+        type: SAVE_USER,
+        token: token
+    };
+
+    var message = {
+        type: "dispatch",
+        payload: action
+    };
+    navigator.serviceWorker.ready.then(sw => {
+        sw.active.postMessage(message);
+    });
+
+}
 
 
 class Login extends Component {
@@ -36,9 +54,8 @@ class Login extends Component {
                 localStorage.setItem("mySecretToken", token);
                 var detokenizedUser = jwt_decode(token);
                 localStorage.setItem("user", detokenizedUser.name);
-                this.props.saveUser(token);
-                this.props.history.push('/home');
-                this.props.syncStart();
+                saveUser(token);
+                window.location.href = "/home";
             } else {
                 console.log("Login failed");
             }
@@ -51,10 +68,13 @@ class Login extends Component {
 
         return (
             <div className="login-page">
-                <form onSubmit={this.loginAction}>
+                <form className="login-form" onSubmit={this.loginAction}>
                     <input type="text" value={this.state.user} placeholder="User" onChange={(e)=>this.setState({user: e.target.value})} />
                     <input type="password" value={this.state.password} placeholder="Password" onChange={(e)=>this.setState({password: e.target.value})} />
-                    <button type="submit">Log in</button>
+                    <div>
+                        <button type="submit" className="btn primary">Log in</button>
+                        <button type="button" className="btn btn--secondary">Register</button>                
+                    </div>
                 </form>
             </div>
         );

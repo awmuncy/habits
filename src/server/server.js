@@ -14,7 +14,7 @@ console. devLog = (message) => {
 	console.log(message);
 }
 
-import { App, Homepage } from "./useHandlebars";
+import { App, Homepage, LoginPage } from "./useHandlebars";
 
 app.use(
     bodyParser.urlencoded({
@@ -66,7 +66,7 @@ app.get('/login', (req, res) => {
     res.writeHead( 200, { "Content-Type": "text/html" } );
 
 
-    res.end(App());
+    res.end(LoginPage());
 });
 
 app.get("/csrf", (req, res) => {

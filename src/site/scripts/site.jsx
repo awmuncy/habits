@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Register from './Register.jsx';
+import Login from './Login.jsx';
 
 document.querySelector(".mobile-nav").addEventListener('click', function() {
 	document.querySelector(".mobile-nav").classList.toggle("active");
@@ -13,6 +14,14 @@ if (document.getElementById('login-register-app')) {
 		  <Register />
 		, 
 	  document.getElementById('login-register-app'));
+}
+
+
+if (document.getElementById('login-app')) {
+    ReactDOM.render(    	
+		  <Login />
+		, 
+	  document.getElementById('login-app'));
 }
 
 

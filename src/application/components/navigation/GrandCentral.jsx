@@ -10,7 +10,6 @@ import {
   GoalsPage, 
   GoalSingle,
   HabitsPage,
-  Login,
   CoreValuesPage,
   SingleCoreValue
 } from '../../store/ConnectedComponents';
@@ -41,7 +40,6 @@ class GrandCentral extends Component {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/home" component={HomePage} />
 
-            <Route path="/login" component={Login} />
 
             <Route path="/habits" component={HabitsPage} />
             <Route path="/feedback" component={Feedback} />

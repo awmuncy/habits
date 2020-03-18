@@ -133,9 +133,6 @@ import IntervalFor from '../components/main/checkins/IntervalFor.jsx';
 // Misc
 import BoolIcon from '../components/main/BoolIcon.jsx';
 import TimeLeft from '../components/main/TimeLeft.jsx';
-import _Login from '../components/navigation/Login.jsx';
-    import LoginConnections from './connections/Login';
-    var Login = connect(LoginConnections.props, LoginConnections.dispatches)(_Login);
     
 import SortablePlanks from '../components/main/blocks/SortablePlanks.jsx';
 
@@ -189,7 +186,6 @@ export {
     IntervalFor,
     BoolIcon,
     TimeLeft,
-    Login,
     SortablePlanks,
     SingleCoreValue
 }
