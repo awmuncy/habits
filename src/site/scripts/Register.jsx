@@ -43,10 +43,9 @@ const Register = function(props) {
 
     return (
 
-        <div className="login-register-component">
-            <span>Get started building your habits now!</span>
+        <div className="register-form">
             <div className="register-side">
-            <h2>Register</h2>
+            <h2>Start building habits</h2>
                 <form method="POST" onSubmit={registerAction} aria-label="Register">
 
                     <div className="form-group row">
@@ -89,7 +88,7 @@ const Register = function(props) {
                     <div className="form-group row mb-0">
                         <div className="col-md-6 offset-md-4">
                             <button type="submit" className="btn btn-primary">
-                                Register
+                                Create your account
                             </button>
                         </div>
                     </div>

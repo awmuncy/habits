@@ -9,11 +9,11 @@ document.querySelector(".mobile-nav").addEventListener('click', function() {
 });
 
 
-if (document.getElementById('login-register-app')) {
+if (document.getElementById('register-app')) {
     ReactDOM.render(    	
 		  <Register />
 		, 
-	  document.getElementById('login-register-app'));
+	  document.getElementById('register-app'));
 }
 
 

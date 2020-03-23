@@ -1,126 +1,66 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Habit App</title>
-        <link rel="stylesheet" type="text/css" href="/css/unauth.css">
-        <meta data-rh="true" name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
-    </head>
+{{#> site pageTitle="Track Your Habits" fixedHeader="true"}}
+  <main>
+    <div class="front-page-hero" id="register">
+      <div class="intro-content">
+        <div class="headings-intro-blurb">
+          <h1>Habits tracking for imperfect people</h1>
+          <p>We're all trying to do the best things we can</p>
+        </div>
 
-    <body>
+        {{> registerForm}}
+      </div>
+    </div>
 
-            
-            <header class="site-header"> 
-              <div class="mobile-nav">
-                <div class="hamburger hamburger-1"></div>
-                <div class="hamburger hamburger-2"></div>
-                <div class="hamburger hamburger-3"></div>
-              </div>
-              <a href="/">
-                <img src="/images/logo.png" class="logo" />
-            </a>
-            
-              <nav class="site-navigation">
-                <ul class="site-main-menu">
-                  <li><a href="#faq">FAQ</a></li>
-                  <li><a href="#">Blog</a></li>
-                  <li><a href="#">Privacy</a></li>
-                </ul>
-                <div class="auth">
+    <div class="banner">
+      <h2>Track your habits</h2>
+      <span>"We are what we repeatedly do. Excellent therefore is not an act but a habit." - Aristotle</span>
+    </div>
 
-                    <a href="/home" class="btn btn--light btn--md logged-in-status">
-                      Dashboard
-                    </a>
-
-                    <a href="/login" id="login-from-header" class="btn btn--light btn--md guest-status">
-                      Login
-                    </a>
-                    <a href="/#login-register" id="register-from-header" class="btn btn--ghost btn--light btn--md guest-status">
-                      Register
-                    </a>
-                </div>
-              </nav>
-            </header>
-            <main>
-            
-              <div class="front-page-hero">
-                <h1>Habits tracking for imperfect people</h1>
-                <div class="calls-to-action">
-                  <a href="/register" class="btn btn--primary btn--lg">
-                    Find a plan
-                  </a>
-                  <a href="/register" class="btn btn--light btn--lg">
-                    Join for Free
-                  </a>
-                </div>  
-              </div>
-            
-            
-            
-
-            
-              <div class="banner">
-                <h2>Track your habits</h2>
-                <span>Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.</span>
-            
-              </div>
-            
-              <div class="app-features">
-                <div class="feature">
-                  <h3>Convenient</h3>
-                  <i class="fa fa-mobile-phone"></i>      
-                  <h4>Available across your devices</h4>
-                  <p>Android, iOS, Windows, & your web browsers. Track your habits from where you are.</p>
-                </div>
-                <div class="feature">
-                  <h3>Perspective</h3>
-                  <i class="fa fa-eye"></i>      
-                  <h4>See Habits in a new way</h4>
-                  <p>The "wrap" method helps you stay motivated, even if you aren't perfect</p>
-                </div>
-                <div class="feature">
-                  <h3>Flexible</h3>
-                  <i class="fa fa-calendar"></i>
-                  <h4>Track your habits, no matter how big or small</h4>
-                  <p>Daily, on different days, accross weeks, biweekly, bimonthly, quarterly, annually, and more.</p>
-                </div>
-              </div>
-            <!--   <div class="use-cases">
-                <div class="use-case">
-                  Gym
-                </div>
-                <div class="use-case">
-                  Take vitamins
-                </div>
-                <div class="use-case">
-                  Seasonal cleaning
-                </div>  
-                <div class="use-case">
-                  Yearly goal setting
-                </div>
-              </div> -->
-            
-            
-              <div class="splash" id="login-register">
-            
-                <div class="action-items">      
-                  <div id="login-register-app"></div>
-                </div>
-            
-              </div>
-            </main>
-            
-            
-
-            
-            <div class="basic-footer">
-              Built by <a href="https://www.allemuncy.com">Allen Muncy</a>
-            </div>
-            
+    <div class="app-features" id="app-features">
+      <div class="feature">
+        <h3>Convenient</h3>
+        <i class="fa fa-mobile-phone"></i>      
+        <h4>Available across your devices</h4>
+        <p>Android, iOS, Windows, & your web browsers. Track your habits from where you are.</p>
+      </div>
+      <div class="feature">
+        <h3>Perspective</h3>
+        <i class="fa fa-eye"></i>      
+        <h4>See Habits in a new way</h4>
+        <p>The <em>bind</em> method helps you stay motivated, even if you aren't perfect</p>
+      </div>
+      <div class="feature">
+        <h3>Flexible</h3>
+        <i class="fa fa-calendar"></i>
+        <h4>Track your habits, no matter how big or small</h4>
+        <p>Daily, on different days, accross weeks, biweekly, bimonthly, quarterly, annually, and more.</p>
+      </div>
+    </div>
+    <!--   <div class="use-cases">
+      <div class="use-case">
+        Gym
+      </div>
+      <div class="use-case">
+        Take vitamins
+      </div>
+      <div class="use-case">
+        Seasonal cleaning
+      </div>  
+      <div class="use-case">
+        Yearly goal setting
+      </div>
+    </div> -->
 
 
-
-      <script src="./js/site.js"></script>
-    </body>
-</html>
+    <div class="splash">
+      <div class="calls-to-action">
+        <a href="/#register" class="btn btn--primary btn--lg">
+          Get started
+        </a>
+        <a href="/#app-features" class="btn btn--light btn--lg">
+          Learn more
+        </a>
+      </div>  
+    </div>
+  </main>
+{{/site}}

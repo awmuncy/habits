@@ -132,6 +132,18 @@ body {
         }
       }
     }
+    a.logo-box {      
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      font-size: 30px;
+      .logo-text {
+        @include media-breakpoint-down(md) {
+          display: none;
+        }
+      }
+    }
     img.logo {
       width: auto;
       height: 80px;
@@ -150,11 +162,50 @@ body {
     display: flex;
     flex-direction: column;
     grid-template-columns: 100%;
-    background-image: url("/images/hero.jpg");
+    background-image: url("/images/signup-bg.jpg");
+    background-position: center;
     place-items: center;
     justify-content: center;
     align-items: center;
     position: relative;
+    
+    .intro-content {
+      width: 100%;
+      max-width: 1080px;
+      display: flex;
+      color: white;
+      align-items: center;
+      @include media-breakpoint-down(md) {
+        flex-direction: column;
+        padding: 20px;
+        
+      }
+      .headings-intro-blurb {
+        margin-bottom: 40px;
+        @include media-breakpoint-down(md) {
+          text-align: center;;
+        }
+        h1 {
+          color: white;
+          font-size: 60px;
+          margin-bottom: 8px;
+          @include media-breakpoint-down(md) {
+            font-size: 32px;
+          }
+        }
+        p {
+          opacity: .8;
+          font-weight: 800;
+          font-size: 1.4rem;
+        }
+      }
+      .register-form {
+        margin-left: 80px;
+        @include media-breakpoint-down(md) {
+          margin-left: 0px;
+        }
+      }
+    }
     &:after {
       content: "";
       position: absolute;
@@ -165,11 +216,6 @@ body {
     &>* {
       position: relative;
       z-index: 2;
-    }
-    h1 {
-      color: white;
-      text-align: center;
-      font-size: 48px;
     }
   }
   
@@ -292,44 +338,16 @@ body {
   .splash {
     display: block;
     padding: 120px calc(50% - 840px);
-    min-height: 100vh;
+    min-height: 70vh;
     background-color: var(--brand-primary);
-    background-image: url("/images/signup-bg.jpg");
+    background-image: url("/images/hero.jpg");
     background-size: cover;
     background-position: center center;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     position: relative;
-    .login-register-component {
-      background-color: rgba(255,255,255,.85);
-      padding: 50px;
-      color: black;
-      z-index: 5;
-      position: relative;
-      margin: 10px 80px;
 
-      @include media-breakpoint-down(md) {
-        padding: 20px;
-        margin: 10px 30px;
-      }
-
-      .form-error {
-        color: var(--slower);
-      }
-
-      .form-group {
-        margin-top: 10px;
-      }
-      input[type="text"], input[type="password"], input[type="email"] {
-        padding: 5px 10px;
-        font-size: 1.2rem;
-        border-radius: 3px;
-        border: 1px solid #ccc;
-        display: block;
-        width: 100%;
-      }
-    }
     &:after {
       content: "";
       position: absolute;

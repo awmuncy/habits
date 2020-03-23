@@ -64,8 +64,6 @@ class Login extends Component {
 
     render() {
 
-        document.title = "Login | HabitsApp";
-
         return (
             <div className="login-page">
                 <form className="login-form" onSubmit={this.loginAction}>
@@ -73,7 +71,7 @@ class Login extends Component {
                     <input type="password" value={this.state.password} placeholder="Password" onChange={(e)=>this.setState({password: e.target.value})} />
                     <div>
                         <button type="submit" className="btn primary">Log in</button>
-                        <button type="button" className="btn btn--secondary">Register</button>                
+                        <a href="/#register" type="button" className="btn btn--secondary">Register</a>                
                     </div>
                 </form>
             </div>

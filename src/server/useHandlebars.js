@@ -14,6 +14,7 @@ var createPartial = (templateLocation=null, partialName) => {
 }
 
 createPartial("../site/templates/partials/site.html", "site");
+createPartial("../site/templates/partials/register.html", "registerForm");
 
 var App = data => {
     return createTemplate("../site/templates/application.html")(data);
