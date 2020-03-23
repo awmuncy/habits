@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import Permission from './Permission';
 
 class AppNav extends Component {
 
@@ -64,30 +64,38 @@ class AppNav extends Component {
                             Home
                         </Link>
                     </li>
+                    <Permission feature="beyond-habits">
                     <li>
                         <Link to="/habits" onClick={this.props.closeMenu}>
                             <i className="fa fa-rotate-left" aria-hidden="true"></i>
                             Habits
                         </Link>
                     </li>
+                    </Permission>
+                    <Permission feature="goals">
                     <li>
                     	<Link to="/goals" onClick={this.props.closeMenu}>
                             <i className="fa fa-bullseye" aria-hidden="true"></i>
                         	Goals
                         </Link>
                     </li>                    
+                    </Permission>
+                    <Permission feature="core-values">
                     <li>
                     	<Link to="/core-values" onClick={this.props.closeMenu}>
                             <i className="fa fa-sun-o" aria-hidden="true"></i>
                         	Core Values
                         </Link>
                     </li>
-                    <li className="disabled">
-                    	<Link to="/to-do" onClick={this.props.closeMenu}>
-                            <i className="fa fa-check-square-o" aria-hidden="true"></i>
-                        	To-dos
-                        </Link>
-                    </li>
+                    </Permission>
+                    <Permission feature="to-dos">
+                        <li className="disabled">
+                            <Link to="/to-do" onClick={this.props.closeMenu}>
+                                <i className="fa fa-check-square-o" aria-hidden="true"></i>
+                                To-dos
+                            </Link>
+                        </li>
+                    </Permission>
                     <li>
                     	<Link to="/FAQ" onClick={this.props.closeMenu}>
                             <i className="fa fa-question-circle" aria-hidden="true"></i>

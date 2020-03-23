@@ -47,6 +47,7 @@ class FloatingActionButton extends Component {
             <Route path="/goals" component={NewGoal} />
             <Route path="/new" component={null} />
             <Route path="/habits" component={NewHabit} />
+            <Route path="/home" component={NewHabit} />
             
           </Switch>
         );

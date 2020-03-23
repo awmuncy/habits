@@ -55,6 +55,7 @@ class Login extends Component {
                 var detokenizedUser = jwt_decode(token);
                 localStorage.setItem("user", detokenizedUser.name);
                 saveUser(token);
+                // (If service worker is installed, go home. Otherwise, go to install page, which directs home)? 
                 window.location.href = "/home";
             } else {
                 console.log("Login failed");
