@@ -3,6 +3,8 @@ var nodemailer = require('nodemailer');
 const key = require('../config/mailer.json');
 
 import passwordResetTemplate from "./emails/passwordReset";
+import newUserTemplate from './emails/newUser';
+import welcomeEmail from './emails/welcomeEmail';
 
 async function send(email, message, subject) {
     var transporter = nodemailer.createTransport({
@@ -38,8 +40,20 @@ function passwordReset(emailTo, token) {
     send(emailTo, message, "Password Reset");
 }
 
+function newUserEmail(emailTo, name) {
+    send("admin@checkyourhabit.com", newUserTemplate(emailTo, name), "New User");
+
+    send(emailTo, welcomeEmail(name), "Welcome to CheckYourHabit");
+}
+
+function feedbackEmail(content, name, email) {
+    send("admin@checkyourhabit.com", `${content}`, `New feedback from ${name} (${email})`);
+}
+
 module.exports = {
-    passwordReset
+    passwordReset,
+    newUserEmail,
+    feedbackEmail
     // , 
     // newUser,
     // registrationEmail

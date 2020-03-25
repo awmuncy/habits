@@ -1,4 +1,4 @@
-module.exports = (email) => {
+module.exports = (name, email) => {
 
     var at = new Date();
 

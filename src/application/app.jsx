@@ -8,20 +8,20 @@ import store from './store/store';
 import filterConsoleNotifs from './filterConsoleNotifs';
 import tokenizedUser from './tokenizedUser';
 
-console. devLog = function(message) {
-	console.log("DEVELOPEMENT LOG:");
-	console.log(message);
-}
+
 
 filterConsoleNotifs();
 tokenizedUser();
 
 var storeInit = store();
-ReactDOM.render(    	
-	<Provider store={storeInit}>
-		<BrowserRouter>
-			<HabitTracker />
-		</BrowserRouter>
-	</Provider>
-, 
-document.getElementById('momentum-app'));
+
+//navigator.serviceWorker.ready.then(() => {
+	ReactDOM.render(    	
+		<Provider store={storeInit}>
+			<BrowserRouter>
+				<HabitTracker />
+			</BrowserRouter>
+		</Provider>
+	, 
+	document.getElementById('momentum-app'));
+//});

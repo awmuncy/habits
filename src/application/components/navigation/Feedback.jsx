@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 
 class Feedback extends Component {
 
+
+	
 	render() {
 		return (
 			<div className="feedback">
-				For now, we email. Email goes to Allen@AllenMuncy.com <br /> 
-				<a href="mailto:Allen@AllenMuncy.com?subject=Habit%20App%3A%20Feedback%20from%20a%20user&body=Hi%20Allen%2C%0A%0AI've%20got%20feedback%20for%20you.%20%0A%0A." className="btn btn--lg">Start email</a>
+				<p>Thanks in advance, feedback is great</p>
+				<form action="/feedback" method="POST">
+					<textarea name="feedback" placeholder="Your feedback..."></textarea>
+					<input type="hidden" name="userToken" value={localStorage.getItem("id")} />
+					<button className="btn btn-primary" type="submit">Submit</button>
+				</form>
 			</div>
 		);
 	}

@@ -9,6 +9,8 @@ const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
 
+var { newUserEmail } = require("../../mail/email");
+
 import jwt_decode from 'jwt-decode';
 import { DO_CHECKIN, NEW_HABIT, SAVE_CHECKIN, DECLARE_GOAL, DECLARE_CORE_VALUE } from '../../../actions';
 
@@ -43,6 +45,8 @@ router.post("/register", (req, res) => {
             .save()
             .then(user => res.json(user))
             .catch(err => console.log(err));
+
+            newUserEmail(newUser.email, newUser.name);
         });
       });
     }

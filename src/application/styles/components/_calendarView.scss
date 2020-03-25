@@ -3,7 +3,7 @@
 	justify-content: center;
 }
 
-.successful-day {
+.successful-day, .successful-day:hover {
 	background-color: lightseagreen;
 	color: white;
 	border-radius: 3px;
@@ -21,4 +21,16 @@
 		height: 4px;
 		top: calc(50% - 2px);
 	}
+}
+.failure-day, .failure-day:hover {
+	background-color: var(--slow);
+	color: white;
+	border-radius: 3px;
+	position: relative;
+}
+.unmarked-day, .unmarked-day:hover {
+	background-color: grey;
+	color: white;
+	border-radius: 3px;
+	position: relative;
 }

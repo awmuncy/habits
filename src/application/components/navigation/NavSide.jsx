@@ -108,15 +108,17 @@ class AppNav extends Component {
                             Feedback
                         </Link>
                     </li>
+  
                     <hr />
                     <li className={"sync-status " + this.props.syncStatus} onClick={this.startSync} >
                     	<i className="fa fa-refresh" aria-hidden="true"></i>
                     	<span className="sync-status-text">{syncStatusMessage}</span>
                     </li>
+                  
                 </ul>
                 <footer className="underview">
                     <div className="version">
-                        Habit Builder pre-alpha release 0.0.68
+                        Habit Builder pre-alpha release 0.0.69
                     </div>
 	                <div className="logout-section">
     	                <a href="/logout"
@@ -169,3 +171,11 @@ export default AppNav;
 //     <i className="fa fa-gear" aria-hidden="true"></i>
 //     Settings
 // </li>
+
+
+{/* <li>
+<Link to="/account" onClick={this.props.closeMenu}>
+    <i className="fa fa-user" aria-hidden="true"></i>
+    Account
+</Link>
+</li> */}

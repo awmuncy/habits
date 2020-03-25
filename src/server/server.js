@@ -3,19 +3,13 @@ var path = require('path');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var app = express();
-var env = require("dotenv").config({path: __dirname + '/../../.env'}).parsed;
 const passport = require("passport");
 const users = require("./routes/api/users");
 import notifications from "./notifications";
-const resetPassword = require("./routes/passwordReset");
-
-console. devLog = (message) => {
-	console.log("DEVELOPEMENT LOG:");
-	console.log(message);
-}
-
 import { App, Homepage, LoginPage } from "./useHandlebars";
 
+
+/* v I don't actually know what these do? v */
 app.use(
     bodyParser.urlencoded({
         extended: false
@@ -23,21 +17,8 @@ app.use(
 );
 
 app.use(bodyParser.json());
+/* ^ I don't have know what these do ^ */
 
-
-
-const db = require("./config/keys").mongoURI;
-
-mongoose
-    .connect(
-      db,
-      { useNewUrlParser: true }
-    )
-    .then(() => console.log("MongoDB successfully connected"))
-    .catch(err => {
-        //console.log(err)
-        console.log("Mongo didn't connect");
-    });
 
 const port = 5000; 
 app.listen(port, () => console.log(`Server up and running on port ${port}`));
@@ -49,7 +30,9 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 
-app.use("/reset-password", resetPassword);
+app.use("/reset-password", require("./routes/passwordReset"));
+
+app.use("/feedback", require("./routes/feedback"));
 
 
 app.use( express.static( path.resolve( __dirname, "../../dist/public" ) ) );
@@ -94,6 +77,7 @@ var routes = [
     '\/habit\/(([\\d|[a-z]){24}|([\\d|[a-z]){6})',
     '\/habits',
     "\/goals",
+    "\/feedback",
     '\/goal\/(([\\d|[a-z]){24}|([\\d|[a-z]){6})',
     '\/new-goal',
     "*"
@@ -109,7 +93,18 @@ function toHome(route) {
     });
 }
 
+const db = require("./config/keys").mongoURI;
 
+mongoose
+    .connect(
+      db,
+      { useNewUrlParser: true }
+    )
+    .then(() => console.log("MongoDB successfully connected"))
+    .catch(err => {
+        //console.log(err)
+        console.log("Mongo didn't connect");
+    });
 
 notifications(app);
 

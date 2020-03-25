@@ -110,6 +110,10 @@ import _SingleHabit from '../components/main/habits/SingleHabit.jsx';
     import SingleHabitConnections from './connections/SingleHabit';
     var SingleHabit = connect(SingleHabitConnections.props, SingleHabitConnections.dispatches)(_SingleHabit);
 
+import _HabitCalendar from '../components/main/habits/HabitCalendar.jsx';
+    import HabitCalendarConnections from './connections/HabitCalendar';
+    var HabitCalendar = connect(HabitCalendarConnections.props, HabitCalendarConnections.dispatches)(_HabitCalendar);
+
 import _Sorting from '../components/main/habits/Sorting.jsx';
     import SortingConnections from './connections/Sorting';
     var Sorting = connect(SortingConnections.props, SortingConnections.dispatches)(_Sorting);
@@ -179,6 +183,7 @@ export {
     NewHabit,
     PinnedHabits,
     SingleHabit,
+    HabitCalendar,
     Sorting,
     Checkins,
     CheckinNotes,

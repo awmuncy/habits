@@ -1,4 +1,15 @@
 .feedback {
 	margin: 10px;
 	text-align: center;
+	form {
+		display: flex;
+		flex-direction: column;
+		textarea {
+			max-width: 100%;
+			padding: 5px;
+			border-radius: 3px;
+			margin: 10px;
+			height: 100px;
+		}
+	}
 }

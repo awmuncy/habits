@@ -1,10 +1,6 @@
 import station from './station';
-var v = "0.0.68";
+var v = "0.0.69";
 
-console. devLog = function(message) {
-	console.log("DEVELOPEMENT LOG:");
-	console.log(message);
-}
 
 station();
 
@@ -78,7 +74,6 @@ self.addEventListener('install', function(event) {
 function matchesPresetUrls(urlString, presetUrls) {
   var urlObject = new URL(urlString);
   if(presetUrls.includes(urlObject.pathname)) {
-    console.devLog("It's a match");
     return true;
   }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Checkins, Essentials, EditHabit } from '../../../store/ConnectedComponents';
+import { Checkins, Essentials, EditHabit, HabitCalendar } from '../../../store/ConnectedComponents';
 import Datepicker from 'react-datepicker';
 import moment from 'moment';
 
@@ -22,10 +22,19 @@ class SingleHabit extends Component {
         let checkins;
 
         var highlightWithRanges = [];
+        var highlightWithRangesFail = [];
+        var highlightWithRangesNull = [];
 
         this.props.habit.checkinSlots.forEach(item=>{
+
+            var thisMoment = moment(item.checkinFor, "YYYY-MM-DD")
+
             if(item.status==true) {
-                highlightWithRanges.push(moment(item.checkinFor, "YYYY-MM-DD"));
+                highlightWithRanges.push(thisMoment);
+            } else if(item.status===false) {
+                highlightWithRangesFail.push(thisMoment);
+            } else {
+                highlightWithRangesNull.push(thisMoment);
             }
         });
 
@@ -38,11 +47,8 @@ class SingleHabit extends Component {
                     {checkins}
   
                     <EditHabit habit_id={this.props.habit.id} />
-                    <div className="habit-month-view">
-                        <Datepicker inline
-                            highlightDates={[{"successful-day": highlightWithRanges}]}
-                        />
-                    </div>
+
+                    <HabitCalendar habit_id={this.props.habit.id} />
                 </div>            
             </div>
         );

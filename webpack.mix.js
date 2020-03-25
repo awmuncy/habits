@@ -10,4 +10,4 @@ mix .react('src/application/app.jsx',                        'dist/public/js')
     .copy ('src/site/fonts',                                 'dist/public/fonts')
     .copy ('src/site/images',                                'dist/public/images')
     .copy ('src/site/icons',                                 'dist/public/icons')
-    .copy ('src/service-worker/manifest.json',               'dist/public');
+    .copy ('src/service-worker/manifest.json',               'dist/public').sourceMaps();
