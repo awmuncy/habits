@@ -15,13 +15,11 @@ tokenizedUser();
 
 var storeInit = store();
 
-//navigator.serviceWorker.ready.then(() => {
-	ReactDOM.render(    	
-		<Provider store={storeInit}>
-			<BrowserRouter>
-				<HabitTracker />
-			</BrowserRouter>
-		</Provider>
-	, 
-	document.getElementById('momentum-app'));
-//});
+ReactDOM.render(    	
+	<Provider store={storeInit}>
+		<BrowserRouter>
+			<HabitTracker />
+		</BrowserRouter>
+	</Provider>
+, 
+document.getElementById('momentum-app'));
