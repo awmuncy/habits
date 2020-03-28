@@ -46,6 +46,14 @@ function openChannels(store) {
 		if(message.type=="dispatch") {
 			store.dispatch(message.payload);
 		}
+		if(message.type=="dispatches") {
+			var action = {
+				type: "MULTI_ACTION",
+				actions: message.payload
+			}
+			store.dispatch(action);
+			
+		}
 	});
 
 }

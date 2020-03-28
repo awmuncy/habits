@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Permission from '../Permission';
 
 
 class ClosePane extends Component {
@@ -26,7 +27,9 @@ class ClosePane extends Component {
                 <Link to="/home">
                     <i className="fa fa-angle-left" aria-hidden="true"></i>
                 </Link>
-                {pin_icon}
+                <Permission feature="pinned-habits">
+                    {pin_icon}
+                </Permission>
             </nav>
         );
     }

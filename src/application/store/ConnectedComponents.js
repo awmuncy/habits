@@ -110,9 +110,22 @@ import _SingleHabit from '../components/main/habits/SingleHabit.jsx';
     import SingleHabitConnections from './connections/SingleHabit';
     var SingleHabit = connect(SingleHabitConnections.props, SingleHabitConnections.dispatches)(_SingleHabit);
 
-import _HabitCalendar from '../components/main/habits/HabitCalendar.jsx';
+
+
+/* Calendar */ 
+
+import _HabitCalendar from '../components/main/habits/calendars/HabitCalendar.jsx';
     import HabitCalendarConnections from './connections/HabitCalendar';
     var HabitCalendar = connect(HabitCalendarConnections.props, HabitCalendarConnections.dispatches)(_HabitCalendar);
+
+import _HabitCalendarDaily from '../components/main/habits/calendars/HabitCalendarDaily.jsx';
+    import HabitCalendarDailyConnections from './connections/HabitCalendar';
+    var HabitCalendarDaily = connect(HabitCalendarConnections.props, HabitCalendarConnections.dispatches)(_HabitCalendarDaily);
+
+
+import _HabitCalendarMonthly from '../components/main/habits/calendars/HabitCalendarMonthly.jsx';
+    import HabitCalendarMonthlyConnections from './connections/HabitCalendar';
+    var HabitCalendarMonthly = connect(HabitCalendarConnections.props, HabitCalendarConnections.dispatches)(_HabitCalendarMonthly);
 
 import _Sorting from '../components/main/habits/Sorting.jsx';
     import SortingConnections from './connections/Sorting';
@@ -184,6 +197,8 @@ export {
     PinnedHabits,
     SingleHabit,
     HabitCalendar,
+    HabitCalendarDaily,
+    HabitCalendarMonthly,
     Sorting,
     Checkins,
     CheckinNotes,

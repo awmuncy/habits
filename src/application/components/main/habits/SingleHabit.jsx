@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Checkins, Essentials, EditHabit, HabitCalendar } from '../../../store/ConnectedComponents';
-import Datepicker from 'react-datepicker';
-import moment from 'moment';
 
 
 class SingleHabit extends Component {
@@ -21,22 +19,6 @@ class SingleHabit extends Component {
         if(!this.props.habit) return null;
         let checkins;
 
-        var highlightWithRanges = [];
-        var highlightWithRangesFail = [];
-        var highlightWithRangesNull = [];
-
-        this.props.habit.checkinSlots.forEach(item=>{
-
-            var thisMoment = moment(item.checkinFor, "YYYY-MM-DD")
-
-            if(item.status==true) {
-                highlightWithRanges.push(thisMoment);
-            } else if(item.status===false) {
-                highlightWithRangesFail.push(thisMoment);
-            } else {
-                highlightWithRangesNull.push(thisMoment);
-            }
-        });
 
         checkins = <Checkins checkins={this.props.habit.checkinSlots} habit_id={this.props.habit.id} />;
 

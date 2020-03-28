@@ -1,8 +1,6 @@
 import React from 'react';
 import { arrayMove } from 'react-sortable-hoc';
 import { GoalEssential, SortablePlanks } from '../../../store/ConnectedComponents';
-import moment from 'moment';
-
 
 function Goals(props) {
 

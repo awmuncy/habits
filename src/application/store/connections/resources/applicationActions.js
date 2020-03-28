@@ -200,17 +200,3 @@ export const logout = () => {
         sw_dispatch(action);
     }
 }
-
-export const toggleDormancy = id => {
-    return (dispatch, store) => {
-        var action = {
-            type: TOGGLE_DORMANCY,
-            habit: id
-        };
-
-        console.log(action);
-
-        dispatch(action);
-        sw_dispatch(action);
-    }
-}

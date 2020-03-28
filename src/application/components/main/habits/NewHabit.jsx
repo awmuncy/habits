@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
 import { IntervalSelect } from '../../../store/ConnectedComponents';
 
 import {
@@ -14,7 +13,7 @@ class NewHabit extends Component {
         super(props);
         this.state = {
             open : false,
-            startDate: moment()
+            startDate: new Date()
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleStartDateChange = this.handleStartDateChange.bind(this);

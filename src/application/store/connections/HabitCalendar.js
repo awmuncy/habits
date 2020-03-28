@@ -12,7 +12,7 @@ export default {
 
         return {
             checkins: state.habits[habit_position].checkinSlots,
-            pattern: state.habits[habit_position].profile.pattern
+            profile: state.habits[habit_position].profile
         }
     },
     dispatches: dispatch => {

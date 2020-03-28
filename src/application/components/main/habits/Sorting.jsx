@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
+import { format, addDays } from 'date-fns';
 
 
 class Sorting extends Component {
@@ -9,7 +9,7 @@ class Sorting extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            startDate: moment()
+            startDate: new Date()
 
         }
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
@@ -19,11 +19,13 @@ class Sorting extends Component {
 
     handleStartDateChange(e) {
         this.setState({startDate: e});
-        this.props.change_view_date(e.format("MM-DD-YYYY"));
+        var view_to_date = format(e, "MM-dd-yyyy");
+        this.props.change_view_date(view_to_date);
     }
 
     componentDidMount(e) {
-       this.props.change_view_date(this.state.startDate.format("MM-DD-YYYY"));
+        var view_to_date = format(this.state.startDate, "MM-dd-yyyy");
+        this.props.change_view_date(view_to_date);
     }
 
     componentDidMount(){
@@ -32,7 +34,8 @@ class Sorting extends Component {
     }
 
     moveToTomorrow() {
-        var new_day = moment(this.state.startDate, "MMMM Do YYYY").add(1, 'd');
+        // var new_day = moment(this.state.startDate, "MMMM Do YYYY").add(1, 'd');
+        var new_day = addDays(this.state.startDate, 1);
         this.handleStartDateChange(new_day);
         this.setState({
             startDate: new_day
@@ -40,7 +43,8 @@ class Sorting extends Component {
     }
 
     moveToYesterday() {
-        var new_day = moment(this.state.startDate, "MMMM Do YYYY").subtract(1, 'd');
+        // var new_day = moment(this.state.startDate, "MMMM Do YYYY").subtract(1, 'd');
+        var new_day = addDays(this.state.startDate, -1);
         this.handleStartDateChange(new_day);
         this.setState({
             startDate: new_day
@@ -50,16 +54,6 @@ class Sorting extends Component {
 
     render() {
         var filters = this.props.filters;
-        var today = moment();
-    
-
-        if(today.isBefore(this.state.startDate, 'd')) {
-            // console.devLog("It's after today");
-        } else if(today.isAfter(this.state.startDate, 'd')) {
-            // console.devLog("It's before today");
-        } else {
-            // console.devLog("It's today");
-        }
 
         return (
             <div className="sorting">
@@ -68,7 +62,7 @@ class Sorting extends Component {
                     <DatePicker 
                         withPortal 
                         selected={this.state.startDate} 
-                        dateFormat={"MMMM Do YYYY"} 
+                        dateFormat={"MMMM do yyyy"} 
                         todayButton={"Today"} 
                         timeFormat="Y-m-d" 
                         onChange={this.handleStartDateChange}

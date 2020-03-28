@@ -1,4 +1,5 @@
-import moment from 'moment';
+
+import { parse } from 'date-fns';
 
 
 Date.prototype.yyyymmdd = function() {
@@ -105,15 +106,9 @@ const createCheckinList = function(habit) {
 		}
 	}
 
-	if(habit.view_date) {
-		var zone = moment(habit.view_date, 'MM-DD-YYYY').toDate();
-	} else {
-		var zone = moment(moment().format('MM-DD-YYYY'), 'MM-DD-YYYY').toDate();
-	}
 
-	var my_zone_offset = zone.getTimezoneOffset();  
-
-	var base_date = new Date(zone);
+	var base_date = habit.view_date ? parse(habit.view_date, 'MM-dd-yyyy', new Date()) : new Date();
+	
 
 	for (var d = calc_date; d <= base_date; skip()) {
 

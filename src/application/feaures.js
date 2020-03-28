@@ -4,7 +4,8 @@ export default {
         "to-dos",
         "goals",
         "core-values",
-        "beyond-habits"
+        "beyond-habits",
+        "pinned-habits"
     ],
     "default": [
 
