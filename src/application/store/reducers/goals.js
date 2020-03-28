@@ -1,7 +1,7 @@
 import { HYDRATE_PAGE, SORT_GOALS, DECLARE_GOAL } from "../../../actions";
 import { mergeByIdOrAdd } from '../../../helpers';
 
-export default (state = [], action) => {
+function goalsReducer(state = [], action) {
     var goals = state.slice(0);
     switch(action.type) {
         case HYDRATE_PAGE: 
@@ -18,8 +18,17 @@ export default (state = [], action) => {
 
         default: 
             return state;
-
-
-
     }
 };
+
+
+export default function(state = [], action) {
+    if(action.type=="MULTI_ACTION") {
+        var goals = action.actions.reduce((state, singular_action) => {
+            return goalsReducer(state, singular_action);
+        }, state);
+        return goals;
+    } else {
+        return goalsReducer(state, action);
+    }
+}

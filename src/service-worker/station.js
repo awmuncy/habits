@@ -12,6 +12,10 @@ const station = () => {
     addEventListener("message", e => {
         var message = e.data;
         switch(message.type) {
+            case "dispatches": 
+                message.payload.forEach((action) => {
+                    reduceToDB(action);
+                });
             case "dispatch":
                 reduceToDB(message.payload);
                 break;
@@ -48,12 +52,12 @@ function hydrateApp() {
     });
 }
 
-async function getDispatchesNewerThan(moment) {
+async function getDispatchesNewerThan(instant) {
     var dispatches = [];
     var store = await getStore();
 
     store.core_values.forEach(core_value=>{
-        if(core_value.modified_at > moment) {
+        if(core_value.modified_at > instant) {
             dispatches.push({
                 type: DECLARE_CORE_VALUE,
                 payload: core_value
@@ -62,7 +66,7 @@ async function getDispatchesNewerThan(moment) {
     });
 
     store.goals.forEach(goal=>{
-        if(goal.modified_at > moment) {
+        if(goal.modified_at > instant) {
             dispatches.push({
                 type: DECLARE_GOAL,
                 payload: goal
@@ -73,7 +77,7 @@ async function getDispatchesNewerThan(moment) {
     // Checkins
     store.habits.forEach(habit=>{
         habit.checkins.forEach(checkin=>{
-            if(checkin.at > moment) {
+            if(checkin.at > instant) {
                 dispatches.push({
                     type: SAVE_CHECKIN,
                     checkin: checkin,
@@ -86,7 +90,7 @@ async function getDispatchesNewerThan(moment) {
 
     var modified_habits = store.habits.filter(habit => {
 
-        return habit.modified_at > moment;
+        return habit.modified_at > instant;
     });
 
     var dispatchesFromModifiedHabits = modified_habits.map(habit => {
@@ -129,15 +133,21 @@ async function syncDb() {
     }).then((message)=> {
         appInfoSet("lastSyncSuccess", message.timestamp);
         var serverFauxChannel = new BroadcastChannel("store");
+
+
         message.dispatches.forEach(action=>{
             var dispatch = {
                 type: "dispatch",
                 payload: action
             };
-            serverFauxChannel.postMessage(dispatch);
-            self.registration.active.postMessage(dispatch);
+
+            /* Where are these going? One to DB, one to app? */
+
         });
         
+        serverFauxChannel.postMessage({type: "dispatches", payload: message.dispatches});
+        self.registration.active.postMessage({type: "dispatches", payload: message.dispatches});     
+
         serverFauxChannel.close();
     });
 

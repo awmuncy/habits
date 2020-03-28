@@ -1,7 +1,7 @@
 import { HYDRATE_PAGE, SORT_CORE_VALUES, DECLARE_CORE_VALUE } from "../../../actions";
 import { mergeByIdOrAdd } from "../../../helpers";
 
-export default (state = [], action) => {
+function coreValueReducer(state = [], action) {
     var core_values = state.slice(0);
     switch(action.type) {
 
@@ -19,3 +19,14 @@ export default (state = [], action) => {
     }
     return state;
 };
+
+export default function(state = [], action) {
+    if(action.type=="MULTI_ACTION") {
+        var core_values = action.actions.reduce((state, singular_action) => {
+            return coreValueReducer(state, singular_action);
+        }, state);
+        return core_values;
+    } else {
+        return coreValueReducer(state, action);
+    }
+}

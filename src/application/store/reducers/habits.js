@@ -1,7 +1,7 @@
 import { calculateScores, hydrateScores } from "./calculateScores.js";
 import { NEW_HABIT, REMOVE_HABIT, HYDRATE_PAGE, RECALCULATE_SCORES, CLEAR_FILTERS, SORT_HABITS_BY_STATUS, SORT_HABITS_BY_SCORE, SORT_HABITS, DO_CHECKIN } from '../../../actions';
 
-export default function habits(state = 0, action) {
+function habitReducer(state = 0, action, calc_scores=true) {
 	var habits = Array.isArray(state) ? state.slice(0) : [];
 
 	switch(action.type) {
@@ -146,7 +146,7 @@ export default function habits(state = 0, action) {
 					});
 					habit.checkins = checkins;
 					
-					habit.checkinSlots = calculateScores(habit);
+					habit.checkinSlots = calc_scores ? calculateScores(habit) : [];
 
 				}
 				return habit;
@@ -169,5 +169,20 @@ export default function habits(state = 0, action) {
 
 		default: 
 			return state;
+	}
+}
+
+export default function habitsReducer(state = 0, action) {
+	if(action.type=="MULTI_ACTION") {
+		var habits = action.actions.reduce((state, singular_action)=>{
+			return habitReducer(state, singular_action, false);
+		}, state);
+
+		return habits.map(habit=>{
+			habit.checkinSlots = hydrateScores(habit);			
+			return habit;
+		});
+	} else {
+		return habitReducer(state, action);
 	}
 }
