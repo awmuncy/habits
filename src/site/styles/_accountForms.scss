@@ -12,6 +12,12 @@
         .btn {
             margin: 0px 10px;
         }
+        @include media-breakpoint-down(md) {
+            flex-direction: column;
+            .btn {
+                margin: 10px 0px;
+            }
+        }
     }
 }
 
