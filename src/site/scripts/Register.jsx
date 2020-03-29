@@ -16,6 +16,8 @@ const Register = function(props) {
     var [name, setName] = useState("");
     var [password2, setPassword2] = useState("");
 
+    var [success, setSuccess] = useState(false);
+
     var registerAction = e => {
         e.preventDefault();
         fetch('/api/users/register', {
@@ -36,9 +38,25 @@ const Register = function(props) {
         }).then((response) => {
             return response.json();
         }).then((registerInfo)=> {
-            setFormResponse(registerInfo);
+            if(registerInfo.success) {
+                setSuccess(true);
+            } else {
+                setFormResponse(registerInfo);
+            }
+            
             console.log(registerInfo);
         });
+    }
+
+    if(success) {
+        return (
+            <div className="register-form">
+                <div className="register-side">
+                    <h2>Success! You can now <a href="/login">login</a>.</h2>
+                    <a href="/login" className="btn btn-primary btn--lg">Login</a>
+                </div>
+            </div>
+        )
     }
 
     return (
