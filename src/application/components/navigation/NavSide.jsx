@@ -118,7 +118,7 @@ class AppNav extends Component {
                 </ul>
                 <footer className="underview">
                     <div className="version">
-                        Habit Builder pre-alpha release 0.0.70
+                        Habit Builder pre-alpha release 0.0.71
                     </div>
 	                <div className="logout-section">
     	                <a href="/logout"
