@@ -9,6 +9,7 @@ var HabitCalendar = props => {
 
     switch(props.profile.frame) {
         case "daily":
+        case "days":
             return <HabitCalendarDaily habit_id={props.habit_id} />       
         // case "days": 
         //     return <HabitCalendarDays habit_id={props.habit_id} />

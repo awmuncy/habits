@@ -13,6 +13,7 @@ export default {
     
         return {
             habit: state.habits[habit_position],    
+            view_date: state.view_date
         }
     },
     dispatches: dispatch => {

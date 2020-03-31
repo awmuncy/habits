@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import { IntervalSelect } from '../../../store/ConnectedComponents';
+import { parseISO, addMonths } from 'date-fns';
 
 import {
   Redirect
@@ -111,15 +112,9 @@ class NewHabit extends Component {
         
         
 
-        var dddd = new Date(parseInt(object.begin_date));
 
-        var mm = dddd.getMonth() + 1; 
-        var dd = dddd.getDate();
 
-        habit.beginDate = [dddd.getFullYear(),
-          (mm>9 ? '' : '0') + mm,
-          (dd>9 ? '' : '0') + dd
-         ].join('-');
+        habit.beginDate = object.begin_date;
 
 
         if(object.timeframe=="days") {

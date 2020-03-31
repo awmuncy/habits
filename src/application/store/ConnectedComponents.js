@@ -127,10 +127,14 @@ import _HabitCalendarMonthly from '../components/main/habits/calendars/HabitCale
     import HabitCalendarMonthlyConnections from './connections/HabitCalendar';
     var HabitCalendarMonthly = connect(HabitCalendarConnections.props, HabitCalendarConnections.dispatches)(_HabitCalendarMonthly);
 
+import _ViewDate from '../components/main/habits/ViewDate.jsx';
+    import ViewDateConnections from './connections/ViewDate';
+    var ViewDate = connect(ViewDateConnections.props, ViewDateConnections.dispatches)(_ViewDate);
+
+
 import _Sorting from '../components/main/habits/Sorting.jsx';
     import SortingConnections from './connections/Sorting';
     var Sorting = connect(SortingConnections.props, SortingConnections.dispatches)(_Sorting);
-
 
 // Checkins
 import Checkins from '../components/main/checkins/Checkins.jsx';
@@ -200,6 +204,7 @@ export {
     HabitCalendarDaily,
     HabitCalendarMonthly,
     Sorting,
+    ViewDate,
     Checkins,
     CheckinNotes,
     Checkin,

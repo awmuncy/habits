@@ -7,6 +7,7 @@ import pinned from './pinned.js';
 import goals from './goals.js';
 import core_values from './core_values.js';
 import { TOGGLE_NAV } from '../../../actions';
+import syncStatus from './sync_status';
 
 const rootReducer = combineReducers({
 	habits: habits,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
 	filters: filters,
 	pinned_habits: pinned,
 	goals: goals,
-	core_values: core_values
+	core_values: core_values,
+	syncStatus: () => syncStatus
 });
 
 export default rootReducer;

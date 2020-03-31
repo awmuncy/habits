@@ -1,36 +1,53 @@
-.habit-month-view {
+.habit-calendar-days {
+	margin-top: 20px;
 	display: flex;
 	justify-content: center;
-}
-
-.successful-day, .successful-day:hover {
-	background-color: lightseagreen;
-	color: white;
-	border-radius: 3px;
-	position: relative;
-}
-
-.successful-day + .successful-day {
-	&:before {
-		content: '';
-		display: block;
-		background-color: lightseagreen;
-		width: calc(.166rem * 2);
-		position: absolute;
-		right: 100%;
-		height: 4px;
-		top: calc(50% - 2px);
+	.react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
+		@include media-breakpoint-down(sm) {
+			width: calc(12vw - .5rem);
+			max-width: 3rem;
+		}
 	}
-}
-.failure-day, .failure-day:hover {
-	background-color: var(--slow);
-	color: white;
-	border-radius: 3px;
-	position: relative;
-}
-.unmarked-day, .unmarked-day:hover {
-	background-color: grey;
-	color: white;
-	border-radius: 3px;
-	position: relative;
+
+	.react-datepicker__day:focus {
+		outline: none;
+	}
+
+	.successful-day, .successful-day:hover {
+		background-color: lightseagreen;
+		color: white;
+		border-radius: 3px;
+		position: relative;
+	}
+
+	.successful-day + .successful-day {
+		&:before {
+			content: '';
+			display: block;
+			background-color: lightseagreen;
+			width: calc(.166rem * 2);
+			position: absolute;
+			right: 100%;
+			height: 4px;
+			top: calc(50% - 2px);
+		}
+	}
+	.failure-day, .failure-day:hover {
+		color: var(--slow);
+		background-color: transparent;
+		border-radius: 3px;
+		position: relative;
+		font-weight: bold;
+		&.bonus {
+			color: grey;
+			border-color: grey;
+		}
+	}
+	.unmarked-day, .unmarked-day:hover {
+		border: 1px dashed grey;
+		color: grey;
+		border-radius: 3px;
+		position: relative;
+		background-color: transparent;
+	}
 }

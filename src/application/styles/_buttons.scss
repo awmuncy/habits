@@ -29,6 +29,26 @@ html {
     box-shadow: 1px 1px 1px #999;
 }
 
+.fab-feedback {
+	@extend .fab;
+	right: auto;
+	left: 10px;
+	width: auto;
+	max-width: initial;
+	padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+	align-items: center;
+	font-size: 18px;
+	i {
+		margin-right: 6px;
+	}
+	&:after {
+		content: 'Feedback';
+		font-size: 16px;
+	}
+}
+
 .btn {	
 
 	--btn-font-color: var(--light);

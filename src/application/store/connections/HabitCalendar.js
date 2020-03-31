@@ -12,7 +12,8 @@ export default {
 
         return {
             checkins: state.habits[habit_position].checkinSlots,
-            profile: state.habits[habit_position].profile
+            profile: state.habits[habit_position].profile,
+            beginDate: state.habits[habit_position].beginDate
         }
     },
     dispatches: dispatch => {

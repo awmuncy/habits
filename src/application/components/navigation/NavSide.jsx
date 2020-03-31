@@ -110,7 +110,7 @@ class AppNav extends Component {
                     </li>
   
                     <hr />
-                    <li className={"sync-status " + this.props.syncStatus} onClick={this.startSync} >
+                    <li className={"sync-status " + this.props.syncStatus} onClick={()=>this.props.startSync()} >
                     	<i className="fa fa-refresh" aria-hidden="true"></i>
                     	<span className="sync-status-text">{syncStatusMessage}</span>
                     </li>

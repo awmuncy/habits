@@ -13,7 +13,6 @@ var HabitCalendarMonthly = props => {
     props.checkins.forEach(item=>{
 
         var thisMoment = parse(item.checkinFor, "yyyy-MM-dd", new Date());
-        console.log(thisMoment);
 
         if(item.status==true) {
             highlightWithRanges.push(thisMoment);
@@ -37,7 +36,6 @@ var HabitCalendarMonthly = props => {
                 ]}
                 onChange={date=>{
                     var formattedDate = format(date, "yyyy-MM-dd");
-                    console.log(formattedDate);
 
                     var checkin = props.checkins.find((checkin)=>{
                         return (checkin.checkinFor == formattedDate);

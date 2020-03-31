@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Datepicker from 'react-datepicker';
-import { format, parse } from 'date-fns';
+import { format, parse, parseISO, addDays, getDay } from 'date-fns';
 
 // Daily (this one)
 // Daily w/ bonus (this one, probably)
@@ -24,8 +24,6 @@ var HabitCalendar = props => {
     props.checkins.forEach(item=>{
 
         var thisMoment = parse(item.checkinFor, "yyyy-MM-dd", new Date());
-        console.log(thisMoment);
-
         if(item.status==true) {
             highlightWithRanges.push(thisMoment);
         } else if(item.status===false) {
@@ -36,8 +34,10 @@ var HabitCalendar = props => {
     });
 
     return (
-        <div className="habit-month-view">
+        <div className="habit-calendar-days">
             <Datepicker 
+                showWeekNumbers
+                minDate={addDays(parseISO(props.beginDate), 1)}
                 selected={new Date()}
                 inline
                 highlightDates={[
@@ -45,9 +45,22 @@ var HabitCalendar = props => {
                     {"failure-day": highlightWithRangesFail},
                     {"unmarked-day": highlightWithRangesNull},                            
                 ]}
+                dayClassName={date=>{
+                    if(props.profile.frame==="daily") return;
+                    if(props.profile.pattern.includes(getDay(date))) {
+                        return;
+                    } else {
+                        return "bonus";
+                    }
+                }}
+                filterDate={date=>{
+                    if(!props.profile.bonus && !props.profile.pattern.includes(getDay(date))) {
+                        return false;
+                    } 
+                    return true;
+                }}
                 onChange={date=>{
                     var formattedDate = format(date, "yyyy-MM-dd");
-                    console.log(formattedDate);
 
                     var checkin = props.checkins.find((checkin)=>{
                         return (checkin.checkinFor == formattedDate);
