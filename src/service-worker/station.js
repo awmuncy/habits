@@ -1,16 +1,17 @@
 import { saveStore, saveCheckin, getStore, appInfoSet, appInfoGet, logout } from './indexeddb';
 import { NEW_HABIT, DO_CHECKIN, REMOVE_HABIT, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, DECLARE_GOAL, LOGOUT, DECLARE_CORE_VALUE } from '../actions';
-import {BroadcastChannel as broadcastChannel } from 'broadcast-channel';
+import {BroadcastChannel } from 'broadcast-channel';
 
-
-
+// if(typeof(BroadcastChannel)==="undefined") {
+//     BroadcastChannel = broadcastChannel;
+// }
 var storeStation = new BroadcastChannel("store");
 
 
 const station = () => {
     
     addEventListener("message", e => {
-        var message = e.data;
+        var message = e.data ? e.data : e;
         switch(message.type) {
             case "dispatches": 
                 message.payload.forEach((action) => {

@@ -38,7 +38,7 @@ function openChannels(store) {
 	});
 
 	channel.addEventListener("message", e => {
-		var message = e.data;
+		var message = e.data ? e.data : e;
 		if(message.type==HYDRATE_PAGE) {
 			store.dispatch(hydrate(message));
 			store.dispatch(syncStart());
