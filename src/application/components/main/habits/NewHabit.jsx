@@ -161,11 +161,7 @@ class NewHabit extends Component {
                     <DatePicker selected={this.state.startDate} timeFormat="Y-m-d" onChange={this.handleStartDateChange} />
                     <input type="text" placeholder="Title" name="title" />
                     <IntervalSelect />
-                    <div className="goals">
-                        <label>Short term: <input name="goal1" type="number" /></label>
-                        <label>Mid term: <input name="goal2" type="number" /></label>
-                        <label>Ultimate: <input name="goal3" type="number" /></label>
-                    </div>
+
                     <input type="submit" value="Submit" className="btn primary" />
                 </form>
             
@@ -176,3 +172,9 @@ class NewHabit extends Component {
 
 
 export default NewHabit;
+
+{/* <div className="goals">
+<label>Short term: <input name="goal1" type="number" /></label>
+<label>Mid term: <input name="goal2" type="number" /></label>
+<label>Ultimate: <input name="goal3" type="number" /></label>
+</div> */}

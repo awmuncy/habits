@@ -36,7 +36,6 @@ var HabitCalendar = props => {
     return (
         <div className="habit-calendar-days">
             <Datepicker 
-                showWeekNumbers
                 minDate={addDays(parseISO(props.beginDate), 1)}
                 selected={new Date()}
                 inline
@@ -54,6 +53,7 @@ var HabitCalendar = props => {
                     }
                 }}
                 filterDate={date=>{
+                    if(props.profile.frame==="daily") return true;
                     if(!props.profile.bonus && !props.profile.pattern.includes(getDay(date))) {
                         return false;
                     } 

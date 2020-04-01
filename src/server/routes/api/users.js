@@ -155,9 +155,9 @@ var findStored = function(user, lastSync) {
 
 
     habit.checkins.forEach(checkin=>{
-      var modified_at = new Date(checkin.at).getTime()
+      var synced_at = new Date(checkin.synced_at).getTime()
 
-      if(modified_at>lastSync) {
+      if(synced_at>lastSync) {
         dispatches.push({
           type: DO_CHECKIN,
           habit_id: habit._id,

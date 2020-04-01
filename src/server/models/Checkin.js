@@ -11,6 +11,9 @@ const CheckinSchema = new Schema({
     type: Date,
     required: true
   },
+  synced_at: {
+    type: Date
+  },
   status: {
     type: Boolean
   },

@@ -38,6 +38,7 @@ HabitSchema.methods.syncCheckins = function(newCheckins) {
 
   newCheckins.forEach(newCheckin => {
     var exists = false;
+    newCheckin.synced_at = new Date();
 
     this.checkins.forEach((storedCheckin, index) => {
       if(storedCheckin.checkinFor == newCheckin.checkinFor) {

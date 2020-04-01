@@ -25,7 +25,7 @@ class ClosePane extends Component {
         return (
             <nav className="top-left-action-button header-nav">
                 <Link to="/home">
-                    <i className="fa fa-angle-left" aria-hidden="true"></i>
+                    <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
                 </Link>
                 <Permission feature="pinned-habits">
                     {pin_icon}
