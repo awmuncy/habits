@@ -1,5 +1,7 @@
 import { calculateScores, hydrateScores } from "./calculateScores.js";
 import { NEW_HABIT, REMOVE_HABIT, HYDRATE_PAGE, RECALCULATE_SCORES, CLEAR_FILTERS, SORT_HABITS_BY_STATUS, SORT_HABITS_BY_SCORE, SORT_HABITS, DO_CHECKIN } from '../../../actions';
+import { format } from 'date-fns';
+
 
 function habitReducer(state = 0, action, calc_scores=true) {
 	var habits = Array.isArray(state) ? state.slice(0) : [];
@@ -23,6 +25,9 @@ function habitReducer(state = 0, action, calc_scores=true) {
 			return calcedHabits;
 
 		case NEW_HABIT:
+			if(-1!==habits.findIndex(habit=>{
+				return (habit.id === action.habit.id);
+			})) return habits;
 			if(action.habit.deleted===true) return habits;
 			var createdHabit = {};
 			createdHabit.title = action.habit.title;
@@ -164,8 +169,40 @@ function habitReducer(state = 0, action, calc_scores=true) {
 			data[index].modified_at = new Date().getTime();
 
 
-      		return data;
+			return data;
+			  
+		case "NEW_HABIT_GOAL":
 
+			var data = state.slice(0);
+
+			var index = data.findIndex(habit => habit.id==action.habit_id);
+			
+
+			data[index].goals = data[index].goals ? data[index].goals : [];
+
+			action.goal.modified_at = new Date().getTime();
+
+			data[index].goals.push(action.goal);
+			
+
+			return data;
+
+		
+		case "DELETE_HABIT_GOAL":
+
+
+
+		case "ARCHIVE_HABIT":
+
+			var data = state.slice(0);
+
+			var index = data.findIndex(habit => habit.id==action.habit_id);
+
+			data[index].archived = format(new Date(), "yyyy-MM-dd");
+			data[index].modified_at = new Date().getTime();
+
+
+			return data;
 
 		default: 
 			return state;

@@ -68,11 +68,11 @@ class Login extends Component {
         return (
             <div className="login-page">
                 <form className="login-form" onSubmit={this.loginAction}>
-                    <input type="text" value={this.state.user} placeholder="User" onChange={(e)=>this.setState({user: e.target.value})} />
+                    <input type="text" value={this.state.user} placeholder="Email" onChange={(e)=>this.setState({user: e.target.value})} />
                     <input type="password" value={this.state.password} placeholder="Password" onChange={(e)=>this.setState({password: e.target.value})} />
                     <div>
-                        <button type="submit" className="btn primary">Log in</button>
-                        <a href="/#register" type="button" className="btn btn--secondary">Register</a>                
+                    <a href="/#register" type="button" className="btn btn--ghost">Register</a>
+                        <button type="submit" className="btn primary">Log in</button>                                        
                     </div>
                 </form>
             </div>

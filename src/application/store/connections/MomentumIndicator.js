@@ -1,4 +1,3 @@
-import { doCheckin } from './resources/applicationActions';
 
 export default {
     props: (state, props) => {
@@ -11,8 +10,6 @@ export default {
         });
     
         var checkins = state.habits[habit_position].checkinSlots;
-    
-        var outstanding = checkins.filter(checkin => checkin.status==null).length;
 
         var currentCheckin = checkins[checkins.length - 1];
     
@@ -20,20 +17,12 @@ export default {
         return {
             habit: state.habits[habit_position],
             currentCheckin: currentCheckin,
-            currentCheckinStatus: currentCheckin ? currentCheckin.status : null,
-            outstanding: outstanding,
-            goals: state.habits[habit_position].goals
+            goals: state.habits[habit_position].goals,
+            score: currentCheckin ? currentCheckin.score : 0
         }
     },
     dispatches: dispatch => {
-
         return {
-            checkIn: (habit_id, date, status) => {
-                let now = new Date();
-                now = now.getTime();
-                dispatch(doCheckin(habit_id, date, status, now));        
-            }
-        };
-    
+        }    
     }
 };

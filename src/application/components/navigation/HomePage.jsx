@@ -28,7 +28,6 @@ function HomePage(props) {
       </div>
       </Permission>
       <div className="home-main">
-        <h2><Link to={"/goals"}>Habits</Link></h2>
         <Habits />
       </div>
     </div>

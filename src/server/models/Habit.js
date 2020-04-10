@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const {Checkin, CheckinModel} = require("./Checkin.js");
+const {Goal, GoalModel} = require("./HabitGoal.js");
 
 const Schema = mongoose.Schema;
 var Habit;
@@ -21,6 +22,10 @@ const HabitSchema = new Schema({
   },
   checkins: {
     type: [Checkin],
+    default: []
+  },
+  goals: {
+    type: [Goal],
     default: []
   },
   profile: {
@@ -51,6 +56,26 @@ HabitSchema.methods.syncCheckins = function(newCheckins) {
     });
     if(!exists) {
       this.checkins.push(newCheckin);
+    }
+  });  
+
+};
+
+HabitSchema.methods.syncGoals = function(newGoals) {
+
+  newGoals.forEach(newGoal => {
+    var exists = false;
+    newGoal.synced_at = new Date();
+    this.goals.forEach((storedGoal, index) => {
+      if(storedGoal._id == newGoal._id) {
+        if(storedGoal.isNewerThan(newGoal)){
+          this.goal[index] = newGoal;          
+        }        
+        exists = true;
+      }
+    });
+    if(!exists) {
+      this.goals.push(newGoal);
     }
   });  
 

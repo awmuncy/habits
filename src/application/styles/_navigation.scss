@@ -25,6 +25,16 @@ header.app-header {
 		align-items: center;
 		align-content: center;
 		margin: 0 auto;
+		.ricons {
+			display: flex;
+			justify-content: flex-end;
+			i {
+				width: 56px;
+				display: flex;
+				align-items: flex-end;
+				padding: 0px 10px;
+			}
+		}
 		&.back-with-icons {
 			justify-content: flex-end;
 			flex-grow: 0;

@@ -1,0 +1,27 @@
+.habit-goals {
+    text-align: center;
+    &--color-picker {
+        position: relative;
+    }
+    &--swatch {
+        height: 25px;
+        width: 50px;
+        border-radius: 4px;
+        background-color: var(--goal-color);
+    }
+    &--floating-picker {
+        position: absolute;
+        z-index: 2;
+        display: none;
+
+    }
+    &--show {
+        display: block;
+    }
+    &--goals-list {
+        input {
+            max-width: 60px;
+            text-align: center;
+        }
+    }
+}

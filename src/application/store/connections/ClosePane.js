@@ -1,4 +1,4 @@
-import { pinHabit, unpinHabit } from "./resources/applicationActions";
+import { pinHabit, unpinHabit, removeHabit } from "./resources/applicationActions";
 
 export default {
     props: () => state => {
@@ -13,7 +13,8 @@ export default {
             },
             unpin: id => {
                 dispatch(unpinHabit(id));
-            }
+            },
+            removeHabit: id => dispatch(removeHabit(id))
         };
     }
 };

@@ -1,38 +1,45 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import Permission from '../Permission';
+import { Redirect } from 'react-router-dom';
 
+var ClosePane = props => {
+    var [deleted, deleteThis] = useState(false);
+    if(deleted) return <Redirect to={"/home"}  />;
 
-class ClosePane extends Component {
-
-    constructor(props) {
-        super(props);
+    var history = useHistory();
+    var habit = props.match.params.id;
+    var pin_icon;
+    if(props.pinned_habits.includes(habit)) {
+        pin_icon = <div onClick={()=>props.unpin(habit)}>Unpin</div>;
+    } else if(props.pinned_habits.length==3) {
+        pin_icon = '';
+    } else {
+        pin_icon = <i className="fa fa-thumb-tack" onClick={()=>props.pin(habit)}></i>
     }
 
-
-
-    render() {
-        var habit = this.props.match.params.id;
-        var pin_icon;
-        if(this.props.pinned_habits.includes(habit)) {
-            pin_icon = <div onClick={()=>this.props.unpin(habit)}>Unpin</div>;
-        } else if(this.props.pinned_habits.length==3) {
-            pin_icon = '';
-        } else {
-            pin_icon = <i className="fa fa-thumb-tack" onClick={()=>this.props.pin(habit)}></i>
+    var deleteHabit = () => {
+        if(confirm("Delete habit: are you sure? This operation cannot be undone.")) {
+            if(confirm("You seem pretty sure. Seriously, delete?")) {
+                props.removeHabit(habit);
+                deleteThis(true);
+            }
         }
+    }
 
-        return (
-            <nav className="top-left-action-button header-nav">
-                <Link to="/home">
-                    <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
-                </Link>
+    return (
+        <nav className="top-left-action-button header-nav">
+            <i onClick={()=>history.goBack()} className="fa fa-arrow-left" aria-hidden="true"></i>
+            <div className="ricons">
+                <i onClick={()=>{confirm("Archive habit?")}} className="fa fa-archive" aria-hidden="true" ></i>
+                <i onClick={deleteHabit} className="fa fa-trash" aria-hidden="true"></i>
+            
                 <Permission feature="pinned-habits">
                     {pin_icon}
                 </Permission>
-            </nav>
-        );
-    }
+            </div>
+        </nav>
+    );
 }
 
 export default ClosePane;

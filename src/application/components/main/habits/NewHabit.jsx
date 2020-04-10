@@ -138,33 +138,38 @@ class NewHabit extends Component {
         habit.profile.goal1 = object.goal1;
         habit.profile.goal2 = object.goal2;
         habit.profile.goal3 = object.goal3;
+        
 
-        this.setState({closed: true});
-
-        this.props.createHabit(habit);
+        var habit_id = this.props.createHabit(habit);
+        this.setState({closed: habit_id});
     }
 
     render() {
-        if (this.state.closed === true) {
-          return <Redirect to='/home' />
+        if (this.state.closed) {
+            var directTo = `/habit/${this.state.closed}`;
+            return <Redirect to={directTo}  />
         }
 
 
         return(
-            <div className="new-habit">
-                
-                <form id="new_habit" className="new-habit-form"  onSubmit={this.submitNewHabit}>
-                    
-                    <h3>New Habit</h3>            
-                    <span className="nevermind" onClick={this.nevermind.bind(this)}>Cancel</span>        
-                    <input type="hidden" value={this.state.startDate} placeholder="Begin Date" name="begin_date" />
-                    <DatePicker selected={this.state.startDate} timeFormat="Y-m-d" onChange={this.handleStartDateChange} />
-                    <input type="text" placeholder="Title" name="title" />
-                    <IntervalSelect />
+            <div className="home-layout">
+                <div className="home-main">
+                    <div className="new-habit">
+                        
+                        <form id="new_habit" className="new-habit-form"  onSubmit={this.submitNewHabit}>
+                            
+                            <h3>New Habit</h3>            
+                            <span className="nevermind" onClick={this.nevermind.bind(this)}>Cancel</span>        
+                            <input type="hidden" value={this.state.startDate} placeholder="Begin Date" name="begin_date" />
+                            <DatePicker selected={this.state.startDate} timeFormat="Y-m-d" onChange={this.handleStartDateChange} />
+                            <input type="text" placeholder="Title" name="title" />
+                            <IntervalSelect />
 
-                    <input type="submit" value="Submit" className="btn primary" />
-                </form>
-            
+                            <input type="submit" value="Submit" className="btn primary" />
+                        </form>
+                    
+                    </div>
+                </div>
             </div>
         );
     }

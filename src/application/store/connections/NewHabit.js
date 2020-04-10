@@ -10,7 +10,7 @@ export default {
                 let now = new Date();
                 now = now.getTime();
                 habit.checkins = [];
-                dispatch(newHabit(habit));
+                return dispatch(newHabit(habit));
             },
         };
     }

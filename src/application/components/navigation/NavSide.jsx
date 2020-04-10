@@ -97,6 +97,12 @@ class AppNav extends Component {
                         </li>
                     </Permission>
                     <li>
+                        <Link to="/archived-habits" onClick={this.props.closeMenu}>
+                            <i className="fa fa-inbox" aria-hidden="true"></i>
+                            Archived Habits
+                        </Link>
+                    </li>
+                    <li>
                     	<Link to="/FAQ" onClick={this.props.closeMenu}>
                             <i className="fa fa-question-circle" aria-hidden="true"></i>
                         	Help

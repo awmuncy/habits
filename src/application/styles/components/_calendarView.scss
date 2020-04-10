@@ -12,6 +12,9 @@
 	.react-datepicker__day:focus {
 		outline: none;
 	}
+	.react-datepicker__day {
+		border: 1px solid transparent;
+	}
 
 	.successful-day, .successful-day:hover {
 		background-color: lightseagreen;

@@ -1,4 +1,4 @@
-import { saveStore, saveCheckin, getStore, appInfoSet, appInfoGet, logout } from './indexeddb';
+import { saveStore, saveCheckin, getStore, appInfoSet, appInfoGet, logout, saveHabitGoal } from './indexeddb';
 import { NEW_HABIT, DO_CHECKIN, REMOVE_HABIT, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, DECLARE_GOAL, LOGOUT, DECLARE_CORE_VALUE } from '../actions';
 import {BroadcastChannel } from 'broadcast-channel';
 
@@ -74,8 +74,8 @@ async function getDispatchesNewerThan(instant) {
             });
         }
     });
-
-    // Checkins
+    
+    // Checkins    
     store.habits.forEach(habit=>{
         habit.checkins.forEach(checkin=>{
             if(checkin.at > instant) {
@@ -84,6 +84,16 @@ async function getDispatchesNewerThan(instant) {
                     checkin: checkin,
                     habit_id: habit.id
                 });
+            }
+        });
+        habit.goals = habit.goals || [];
+        habit.goals.forEach(goal=>{
+            if(goal.modified_at > instant) {
+                dispatches.push({
+                    type: "NEW_HABIT_GOAL",
+                    goal: goal,
+                    habit_id: habit.id
+                })
             }
         });
     });
@@ -173,6 +183,13 @@ function reduceToDB(payload) {
                 checkin: payload.checkin
             });
 
+            break;
+
+        case "NEW_HABIT_GOAL":
+            saveHabitGoal({
+                habit_id: payload.habit_id,
+                goal: payload.goal
+            });
             break;
         
         case REMOVE_HABIT:

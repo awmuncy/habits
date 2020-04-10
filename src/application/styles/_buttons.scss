@@ -40,6 +40,7 @@ html {
     display: flex;
 	align-items: center;
 	font-size: 18px;
+	border-bottom-left-radius: 0px;
 	i {
 		margin-right: 6px;
 	}
@@ -140,7 +141,7 @@ html {
 
 
 
-	display: inline-grid;
+	display: inline-block;
 	place-items: center;
 
 	margin: 10px;
@@ -159,6 +160,10 @@ html {
 
 	text-align: center;
 	text-decoration: none;
+	a {
+		text-decoration: none;
+		color: var(--button-color);
+	}
 
 
 }

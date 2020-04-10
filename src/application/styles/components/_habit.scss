@@ -30,6 +30,12 @@
 			border-radius: 8px;
 		}
 	}
+	.calendar-and-date {
+		display: flex;
+		justify-content: space-around;
+		flex-wrap: wrap;
+		align-items: center;
+	}
 }
 .habit-details {
 	padding: 0px 0px 0px;
@@ -44,4 +50,5 @@
 		transition-timing-function: cubic-bezier(0.48, 0.42, 0.26, 0.63);
 		transition: max-height .3s, padding .3s;
 	}
+	
 }

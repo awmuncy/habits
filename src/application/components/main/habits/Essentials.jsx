@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import { EssentialProgress,  BoolIcon } from "../../../store/ConnectedComponents";
+import { BoolIcon, MomentumIndicator } from "../../../store/ConnectedComponents";
 
-import ProgressRings from "../blocks/ProgressRings"; // Route through central?
+
 
 class Essentials extends Component {
 
@@ -66,12 +66,12 @@ class Essentials extends Component {
             });
         } 
 
-        var todayCounts = this.props.currentCheckin.status===null ? 1 : 0;
+        var todayCounts = this.props.currentCheckinStatus===null ? 1 : 0;
 
         var notedOutstanding = this.props.outstanding > todayCounts ? "Missed checkins" : null;
 
         return (
-            <div className={"essentials status-" + this.props.currentCheckin.status } >
+            <div className={"essentials status-" + this.props.currentCheckinStatus } >
                 <BoolIcon action={this.doCheckin} status={this.props.currentCheckinStatus} />
                 <div className="title-and-type">
                     <h2>{this.props.habit.title}</h2>
@@ -83,15 +83,8 @@ class Essentials extends Component {
                 </div>
                 
                 <div className="meta">
-                    <span className="score">{this.props.currentCheckin.score}</span>
-                    {
-                        this.props.habit.profile.goal1 ? <ProgressRings
-                        outer={this.props.currentCheckin.score / this.props.habit.profile.goal3} 
-                        middle={this.props.currentCheckin.score / this.props.habit.profile.goal2} 
-                        inner={this.props.currentCheckin.score / this.props.habit.profile.goal1} />  : 
-                        <EssentialProgress checkin={this.props.currentCheckin} />
-                    }
-                    
+                    <span className="score">{this.props.currentCheckin ? this.props.currentCheckin.score : ""}</span>
+                    <MomentumIndicator habit_id={this.props.habit.id} />                 
                 </div>
             </div>
         );

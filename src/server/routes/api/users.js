@@ -165,6 +165,18 @@ var findStored = function(user, lastSync) {
         });
       }
     });
+    habit.goals.forEach(goal=>{
+      var synced_at = new Date(goal.synced_at).getTime();
+
+      if(synced_at>lastSync) {
+        dispatches.push({
+          type: "NEW_HABIT_GOAL",
+          habit_id: habit._id,
+          goal: goal
+        });
+      }
+    });
+
   });
 
   return dispatches;
@@ -185,6 +197,14 @@ var saveNewer = function(user, incoming) {
           return dispatch.habit_id==habit._id;
         });
         user.habits[habIndex].syncCheckins([dispatch.checkin]);
+        break;
+
+      case "NEW_HABIT_GOAL":
+        var habIndex = user.habits.findIndex(habit=>{
+          return dispatch.habit_id==habit._id;
+        });
+
+        user.habits[habIndex].syncGoals([dispatch.goal]);
         break;
     }
   });

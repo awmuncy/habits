@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
-
+import { Link } from 'react-router-dom';
 import { PinnedHabits, Habit } from '../../../store/ConnectedComponents';
 
 
@@ -64,6 +64,7 @@ class Habits extends Component {
 
             if(props.filters.includes("outstanding")) {
                 habits = habits.map(function(habit){
+                    if(!(habit.checkinSlots && habit.checkinSlots[0])) return habit;
                     if(habit.checkinSlots[habit.checkinSlots.length - 1].status!==null) {
                         habit.filtered_out = true;                  
                     } 
@@ -85,7 +86,16 @@ class Habits extends Component {
 	render () {     
 
         if(this.state.habits.length==0) {
-            return <div>Make a new habit!</div>
+            return (
+                <div className="no-habits">
+                    <p>Looks like you don't have any active habits. Go ahead and make one!</p>
+                    <button className="btn btn--primary">
+                        <Link to="/new">
+                            Make a new habit!
+                        </Link>
+                    </button>
+                </div>
+            );
         }
 
 		return (

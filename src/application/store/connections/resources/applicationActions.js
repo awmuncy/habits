@@ -51,6 +51,22 @@ export const doCheckin = (habit_id, checkinFor, status, at) => {
     }
 }
 
+export const newHabitGoal = (habit_id, goal) => {
+    
+    return (dispatch, store) => {
+        if(!goal._id) goal._id = new ObjectID().toHexString();
+        
+        var action = {
+            type: "NEW_HABIT_GOAL",
+            habit_id: habit_id,
+            goal: goal
+        };
+        
+        sw_dispatch(action);
+        dispatch(action);
+    }
+};
+
 export const removeHabit = id => {
     return (dispatch, store) => {
 
@@ -122,6 +138,7 @@ export const newHabit = habit => {
 
         sw_dispatch(action);
         dispatch(action);
+        return habit.id;
     }
 }
 

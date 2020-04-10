@@ -1,25 +1,16 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 
-class HeadBack extends Component {
+export default props => {
 
-    constructor(props) {
-        super(props);
-    }
+    var history = useHistory();
 
 
-    render() {
+    return (
+        <nav className="top-left-action-button header-nav">
+            <i onClick={()=>history.goBack()} className="fa fa-arrow-left" aria-hidden="true"></i>
+        </nav>
+    );
 
-
-        return (
-            <nav className="top-left-action-button header-nav">
-                <Link to="/home">
-                    <i className="fa fa-close" aria-hidden="true"></i>
-                </Link>
-            </nav>
-        );
-    }
 }
-
-export default HeadBack;

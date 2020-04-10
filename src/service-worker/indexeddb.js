@@ -129,6 +129,35 @@ var saveCheckin = function(payload) {
 	});
 }
 
+var saveHabitGoal = function(payload) {
+
+	var goal = payload.goal;
+
+	accessDb(function(event){
+		var db = event.target.result;
+		var transaction = db.transaction("habits", "readwrite");
+		var habit = transaction.objectStore("habits").get(payload.habit_id);
+		habit.onsuccess = function(e) {
+			var habit = e.target.result;
+
+			if(!Array.isArray(habit.goals)) habit.goals = [];
+			var goalIndex = habit.goals.findIndex(storedGoal => {
+				return (goal._id==storedGoal._id);
+			});
+
+			if(goalIndex==-1) {
+				habit.goals.push(goal);
+			} else {
+				habit.goals[goalIndex] = goal;
+			}
+			
+
+			transaction.objectStore("habits").put(habit);
+		}
+	});
+}
+
+
 var appInfoSet = function(key, value) {
 	accessDb(function(e){
 		var db = e.target.result;
@@ -156,6 +185,7 @@ export {
 	getStore,
 	saveStore,
 	saveCheckin,
+	saveHabitGoal,
 	appInfoSet,
 	appInfoGet,
 	logout

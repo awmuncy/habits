@@ -18,6 +18,8 @@ class EssentialProgress extends Component {
 
 	render() {
 
+		if(!this.props.checkin) return null;
+
 
 		var l5_style = this.bar_styles(this.props.checkin.latest_five);
 		var l15_style = this.bar_styles(this.props.checkin.latest_fifteen);

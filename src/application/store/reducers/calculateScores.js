@@ -1,5 +1,5 @@
 
-import { parse } from 'date-fns';
+import { parse, format } from 'date-fns';
 
 
 Date.prototype.yyyymmdd = function() {
@@ -18,8 +18,10 @@ const createCheckinList = function(habit) {
 
 	var checkinSlots = [];
 
-	var calc_date = new Date(Date.parse(habit.beginDate));
-	calc_date.setMinutes(calc_date.getMinutes() + calc_date.getTimezoneOffset());
+	var formatted = format(new Date(habit.beginDate), 'MM-dd-yyyy');
+
+	var calc_date = parse(formatted, 'MM-dd-yyyy', new Date());
+	// calc_date.setMinutes(calc_date.getMinutes() + calc_date.getTimezoneOffset());
 		
 
 	switch(habit.profile.frame) {

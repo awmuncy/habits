@@ -7,3 +7,5 @@ A few useful commands on digital oceans
 -   `sudo systemctl restart nginx` restarts server.
 -   `ssh root@134.209.64.102` Get into server from laptop
 -   `sudo certbox`
+-   `taskkill -f //fi "pid eq 2976"`
+-   `netstat -ano | findStr "5000"`

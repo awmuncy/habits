@@ -85,9 +85,6 @@ import _Habits from '../components/main/habits/Habits.jsx';
     var Habits = connect(HabitsConnections.props, HabitsConnections.dispatches)(_Habits);
 
 
-import _EditHabit from '../components/main/habits/EditHabit.jsx';
-    import EditHabitConnections from './connections/EditHabit';
-    var EditHabit = connect(EditHabitConnections.props, EditHabitConnections.dispatches)(_EditHabit);
 
 import EssentialProgress from '../components/main/habits/EssentialProgress.jsx';
 
@@ -97,7 +94,12 @@ import _Essentials from '../components/main/habits/Essentials.jsx';
     var Essentials = connect(EssentialsConnections.props, EssentialsConnections.dispatches)(_Essentials);
 
 import IntervalSelect from '../components/main/habits/IntervalSelect.jsx';
-import MomentumIndicator from '../components/main/habits/MomentumIndicator.jsx';
+
+
+import _MomentumIndicator from '../components/main/habits/MomentumIndicator.jsx';
+    import MomentumIndicatorConncetions from './connections/MomentumIndicator';
+    var MomentumIndicator = connect(MomentumIndicatorConncetions.props, MomentumIndicatorConncetions.dispatches)(_MomentumIndicator);
+
 import _NewHabit from '../components/main/habits/NewHabit.jsx';
     import NewHabitConnections from './connections/NewHabit';
     var NewHabit = connect(NewHabitConnections.props, NewHabitConnections.dispatches)(_NewHabit);
@@ -148,7 +150,13 @@ import _Checkin from '../components/main/checkins/Checkin.jsx';
 import IntervalFor from '../components/main/checkins/IntervalFor.jsx';
 
 
-// Tics
+import _NewHabitGoal from '../components/main/habits/HabitGoals/NewHabitGoal';
+    import NewHabitGoalConnections from './connections/NewHabitGoal';
+    var NewHabitGoal = connect(NewHabitGoalConnections.props, NewHabitGoalConnections.dispatches)(_NewHabitGoal);
+
+import _HabitGoals from '../components/main/habits/HabitGoals/HabitGoals';
+    import HabitGoalsConnections from './connections/HabitGoals';
+    var HabitGoals = connect(HabitGoalsConnections.props, HabitGoalsConnections.dispatches)(_HabitGoals);
 
 
 // Misc
@@ -192,7 +200,6 @@ export {
     HabitsPage,
     Habit,
     Habits,
-    EditHabit,
     EssentialProgress,
     Essentials,
     IntervalSelect,
@@ -212,5 +219,7 @@ export {
     BoolIcon,
     TimeLeft,
     SortablePlanks,
-    SingleCoreValue
+    SingleCoreValue,
+    NewHabitGoal,
+    HabitGoals
 }
