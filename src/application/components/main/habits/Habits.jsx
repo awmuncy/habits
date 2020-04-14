@@ -97,7 +97,7 @@ class Habits extends Component {
 
 
         var filters = {
-            outstanding: !props.filters.includes("outstanding") || false,
+            outstanding: props.filters.includes("outstanding") || false,
             archived: props.archived || false,
             archivedOnly: props.archivedOnly
         };
