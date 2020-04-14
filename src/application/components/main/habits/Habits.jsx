@@ -4,6 +4,43 @@ import { Link } from 'react-router-dom';
 import { PinnedHabits, Habit } from '../../../store/ConnectedComponents';
 
 
+function filterHabits(habits, filters) {
+
+    habits = habits.map(habit=>{
+        if(filters.outstanding) {
+            if(habit.checkinSlots[habit.checkinSlots.length - 1].status!==null) {
+                habit.filtered_out = (habit.filtered_out || true);                  
+            } 
+        }
+        if(filters.archived) {
+            if(habit.deleted) {
+                habit.filtered_out = (habit.filtered_out || true);
+            }
+            if(habit.archived) {
+                habit.filtered_out = (habit.filtered_out || true);
+            }     
+        }
+        if(filters.archivedOnly) {
+
+            if(habit.archived) {
+                habit.filtered_out = false;
+            } else {
+                habit.filtered_out = true;
+            }
+        
+        } else {
+            if(habit.archived) {
+                habit.filtered_out = true;
+            }
+        }
+
+        return habit;
+    });
+
+    return habits;
+}
+
+
 const SortableHabit = SortableElement(({habit}) => 
     <Habit id={habit.id} />
 );
@@ -58,26 +95,15 @@ class Habits extends Component {
             return item;
         });
 
-        function filterHabits() {
 
-            var habits = props.habits;
-
-            if(props.filters.includes("outstanding")) {
-                habits = habits.map(function(habit){
-                    if(!(habit.checkinSlots && habit.checkinSlots[0])) return habit;
-                    if(habit.checkinSlots[habit.checkinSlots.length - 1].status!==null) {
-                        habit.filtered_out = true;                  
-                    } 
-                    return habit;
-                });
-            }
-
-            return habits;
-        }
-
+        var filters = {
+            outstanding: !props.filters.includes("outstanding") || false,
+            archived: props.archived || false,
+            archivedOnly: props.archivedOnly
+        };
 
         return {
-            habits: filterHabits()
+            habits: filterHabits(props.habits, filters)
         }        
     }
 
@@ -85,7 +111,9 @@ class Habits extends Component {
 
 	render () {     
 
-        if(this.state.habits.length==0) {
+        var hasShowing = !(this.state.habits.filter(habit=>!!!habit.filtered_out).length > 0);
+
+        if(this.state.habits.length==0 || hasShowing) {
             return (
                 <div className="no-habits">
                     <p>Looks like you don't have any active habits. Go ahead and make one!</p>

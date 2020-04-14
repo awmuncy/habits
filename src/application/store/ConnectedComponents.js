@@ -8,6 +8,8 @@ import FAQ from '../components/navigation/FAQ.jsx';
 import Feedback from '../components/navigation/Feedback.jsx';
 import FloatingActionButton from '../components/navigation/FloatingActionButton.jsx';
 import HomePage from '../components/navigation/HomePage.jsx';
+import ArchivedHabitsPage from '../components/main/pages/ArchivedHabitsPage';
+
 import _NavTop from '../components/navigation/NavTop.jsx';
     import NavTopConnections from './connections/NavTop';
     var NavTop = withRouter(connect(NavTopConnections.props, NavTopConnections.dispatches)(_NavTop));
@@ -172,6 +174,7 @@ import SortablePlanks from '../components/main/blocks/SortablePlanks.jsx';
 
 export {
     HabitTracker,
+    ArchivedHabitsPage,
     GrandCentral,
     FAQ,
     Feedback,

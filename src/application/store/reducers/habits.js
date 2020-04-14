@@ -198,7 +198,7 @@ function habitReducer(state = 0, action, calc_scores=true) {
 
 			var index = data.findIndex(habit => habit.id==action.habit_id);
 
-			data[index].archived = format(new Date(), "yyyy-MM-dd");
+			data[index].archived = action.date;
 			data[index].modified_at = new Date().getTime();
 
 

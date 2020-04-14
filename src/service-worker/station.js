@@ -203,6 +203,19 @@ function reduceToDB(payload) {
             });
             break;
 
+        case "ARCHIVE_HABIT":
+
+            var now = new Date().getTime();
+            saveStore({
+                habits: [{
+                    id: payload.habit_id,
+                    archived: payload.date,
+                    modified_at: now
+                }]
+            });
+        
+            break;
+
         case DECLARE_GOAL: 
             saveStore({
                 goals: [payload.goal]

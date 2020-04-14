@@ -2,6 +2,7 @@ import { hydrateScores } from '../../reducers/calculateScores';
 import { ObjectID } from 'bson';
 import { DO_CHECKIN, REMOVE_HABIT, SAVE_USER, SYNC_START, NEW_HABIT, UNPIN_HABIT, PIN_HABIT, LOGOUT, DECLARE_GOAL, DECLARE_CORE_VALUE } from "../../../../actions";
 import {BroadcastChannel } from 'broadcast-channel';
+import { format } from 'date-fns';
 
 var channel = new BroadcastChannel("store");
 
@@ -80,6 +81,23 @@ export const removeHabit = id => {
 
     }
 }
+
+export const archiveHabit = id => {
+    return (dispatch, store) => {
+
+        
+        var action = {
+            type: "ARCHIVE_HABIT", 
+            habit_id: id,
+            date: format(new Date(), "yyyy-MM-dd")
+        }
+
+        sw_dispatch(action);
+        dispatch(action);
+
+    }
+}
+
 
 export const pinHabit = id => {
     return (dispatch, store) => {

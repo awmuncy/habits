@@ -16,7 +16,7 @@ class Habit extends Component {
 
     render() {
         
-        var hide = this.props.habit.filtered_out || this.props.habit.checkinSlots.length==0 || this.props.habit.deleted;
+        var hide = this.props.habit.filtered_out;
         var id = this.props.id;
 
         if(hide || this.props.pinned_habits.includes(id.toString())){

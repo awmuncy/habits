@@ -31,7 +31,7 @@ var ClosePane = props => {
         <nav className="top-left-action-button header-nav">
             <i onClick={()=>history.goBack()} className="fa fa-arrow-left" aria-hidden="true"></i>
             <div className="ricons">
-                <i onClick={()=>{confirm("Archive habit?")}} className="fa fa-archive" aria-hidden="true" ></i>
+                <i onClick={()=>{if(confirm("Archive habit?")) props.archiveHabit(habit)}} className="fa fa-archive" aria-hidden="true" ></i>
                 <i onClick={deleteHabit} className="fa fa-trash" aria-hidden="true"></i>
             
                 <Permission feature="pinned-habits">
