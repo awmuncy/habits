@@ -95,6 +95,18 @@ self.addEventListener('push', ev => {
 
 });
 
+self.addEventListener('message', ev => {
+  if(ev.data.type!=="newNotification") return;
+  var title = "Hi!";
+  
+  var close = self.registration.showNotification(title, {
+    body: "Hello",
+    showTrigger: new TimestampTrigger(new Date().getTime() + 3 * 1000)
+  });
+
+  ev.waitUntil(close);
+});
+
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
 

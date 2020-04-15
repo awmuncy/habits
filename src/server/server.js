@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 var app = express();
 const passport = require("passport");
 const users = require("./routes/api/users");
+
 import notifications from "./notifications";
 import { App, Homepage, LoginPage } from "./useHandlebars";
 
@@ -15,6 +16,8 @@ app.use(
         extended: false
     })
 );
+
+app.use("/payments", require('./routes/payments'));
 
 app.use(bodyParser.json());
 /* ^ I don't have know what these do ^ */

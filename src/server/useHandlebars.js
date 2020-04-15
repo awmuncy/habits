@@ -32,9 +32,14 @@ var LoginPage = data => {
     return createTemplate("../site/templates/LoginPage.html")(data);
 }
 
+var PaymentsPage = data => {
+    return createTemplate('../site/templates/PaymentsPage.html')(data);
+}
+
 export {
     App,
     Homepage,
     PasswordResetTemplate,
-    LoginPage
+    LoginPage,
+    PaymentsPage
 }
