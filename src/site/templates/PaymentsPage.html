@@ -45,15 +45,13 @@
         var button = document.querySelector('#submit-button');
 
         braintree.dropin.create({
-        authorization: '{{token}}',
-        selector: '#dropin-container'
+            authorization: '{{token}}',
+            selector: '#dropin-container'
         }, function (err, instance) {
         button.addEventListener('click', function () {
             instance.requestPaymentMethod(function (err, payload) {
                 console.log(payload);
                 var noncedata = JSON.stringify(payload);
-                console.log(noncedata);
-                console.log(JSON.stringify(payload));
                 fetch('/payments', {
                     method: 'POST',  
                     headers: {

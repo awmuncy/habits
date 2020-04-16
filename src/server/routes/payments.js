@@ -23,19 +23,23 @@ router.use(bodyParser.json());
 
 router.post("/", function (req, res) {
     var nonceFromTheClient = req.body.nonce;
-    // Use payment method nonce here
-    console.log("REQ");
-    console.log(req.body);
-    paymentGateway.transaction.sale({
-        amount: "10.00",
-        paymentMethodNonce: nonceFromTheClient,
-        // deviceData: deviceDataFromTheClient,
-        options: {
-          submitForSettlement: true
-        }
-      }, function (err, result) {
-          console.log(result);
-          res.json(result);
+
+    // You must create a custom to create a subscription
+    paymentGateway.customer.create({
+        firstName: "Allen",
+        lastName: "Muncy",
+        paymentMethodNonce: nonceFromTheClient
+    }, function(err, result){
+        // Callbacks, so oldschool
+        var tokenFromTheCustomer = result.customer.paymentMethods[0].token;
+
+        paymentGateway.subscription.create({
+            paymentMethodToken: tokenFromTheCustomer,
+            planId: "basic"
+        }, function(err, result) {
+            // Callbacks, so oldschool
+            res.json(result);
+        });
     });
 });
 
