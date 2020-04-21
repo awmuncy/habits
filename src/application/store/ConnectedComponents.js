@@ -9,6 +9,7 @@ import Feedback from '../components/navigation/Feedback.jsx';
 import FloatingActionButton from '../components/navigation/FloatingActionButton.jsx';
 import HomePage from '../components/navigation/HomePage.jsx';
 import ArchivedHabitsPage from '../components/main/pages/ArchivedHabitsPage';
+import AccountPage from '../components/main/pages/AccountPage.jsx';
 
 import _NavTop from '../components/navigation/NavTop.jsx';
     import NavTopConnections from './connections/NavTop';
@@ -180,6 +181,7 @@ export {
     Feedback,
     FloatingActionButton,
     HomePage,
+    AccountPage,
     NavTop,
     NavSide,
     NavBottom,

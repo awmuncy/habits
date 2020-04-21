@@ -15,7 +15,7 @@ var paymentGateway = braintree.connect({
 router.get('/client_token', (req, res, next) => {
 
     paymentGateway.clientToken.generate({}, function (err, response) {
-        res.send(PaymentsPage({token:response.clientToken}));
+        res.send({token:response.clientToken});
     });
 
 });
@@ -43,6 +43,11 @@ router.post("/", function (req, res) {
     });
 });
 
+router.post("/cancel", (req, res, next) => {
+
+    
+    res.json({success:true, message: "Subscription canceled."});
+});
 
 
 module.exports = router;

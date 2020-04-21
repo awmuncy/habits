@@ -12,7 +12,8 @@ import {
   HabitsPage,
   CoreValuesPage,
   SingleCoreValue,
-  ArchivedHabitsPage
+  ArchivedHabitsPage,
+  AccountPage
 } from '../../store/ConnectedComponents';
 
 import {
@@ -41,6 +42,7 @@ class GrandCentral extends Component {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/home" component={HomePage} />
             <Route exact path="/archived-habits" component={ArchivedHabitsPage} />
+            <Route exact path="/account" component={AccountPage} />
 
             <Route path="/habits" component={HabitsPage} />
             <Route path="/feedback" component={Feedback} />

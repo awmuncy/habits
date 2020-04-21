@@ -114,6 +114,12 @@ class AppNav extends Component {
                             Feedback
                         </Link>
                     </li>
+                    <li>
+                        <Link to="/account" onClick={this.props.closeMenu}>
+                            <i className="fa fa-user" aria-hidden="true"></i>
+                            Account
+                        </Link>
+                    </li>
   
                     <hr />
                     <li className={"sync-status " + this.props.syncStatus} onClick={()=>this.props.startSync()} >
