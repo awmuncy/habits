@@ -114,9 +114,10 @@ class Habits extends Component {
         var hasShowing = !(this.state.habits.filter(habit=>!!!habit.filtered_out).length > 0);
 
         if(this.state.habits.length==0 || hasShowing) {
+            let message = this.props.archivedOnly ? "Looks like you don't have any archived habits" : "Looks like you don't have any active habits. Go ahead and make one!";
             return (
                 <div className="no-habits">
-                    <p>Looks like you don't have any active habits. Go ahead and make one!</p>
+                    <p>{message}</p>
                     <button className="btn btn--primary">
                         <Link to="/new">
                             Make a new habit!
