@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-
-import Subscription from '../Subscription';
+import GetSubscription from './GetSubscription';
+import { Link } from 'react-router-dom';
 
 var AccountPage = props => {
-    var user = {// props.user 
-        subscription: "premium",
-        id: "8675s09",
-        subscription_id: "21414fa"
-    };
+
 
     return (
-        <form onSubmit={e=>e.preventDefault()}>
-            <Subscription />
-        </form>
+        <div>
+            <h1>Account</h1>
+            <p>Name: Allen</p>
+            <p>Joined: A long long time ago</p>
+            <button class="btn btn--primary"><Link to="/get-subscription">Get Premium</Link></button>
+        </div>
     )
 }
 export default AccountPage;

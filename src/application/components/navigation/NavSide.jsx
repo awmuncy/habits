@@ -120,7 +120,12 @@ class AppNav extends Component {
                             Account
                         </Link>
                     </li>
-  
+                    <li className="gold">
+                        <Link to="/get-subscription" onClick={this.props.closeMenu}>
+                            <i className="fa fa-trophy" aria-hidden="true"></i>
+                            Upgrade to premium                  
+                        </Link>
+                    </li>  
                     <hr />
                     <li className={"sync-status " + this.props.syncStatus} onClick={()=>this.props.startSync()} >
                     	<i className="fa fa-refresh" aria-hidden="true"></i>
@@ -146,10 +151,7 @@ class AppNav extends Component {
 }
 
 export default AppNav;
-// <li className="gold">
-//     <i className="fa fa-trophy" aria-hidden="true"></i>
-//     Upgrade to premium                      
-// </li>
+
 // <li className="disabled">
 //     <i className="fa fa-envelope" aria-hidden="true"></i>
 //     Messages

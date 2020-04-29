@@ -10,6 +10,8 @@ import FloatingActionButton from '../components/navigation/FloatingActionButton.
 import HomePage from '../components/navigation/HomePage.jsx';
 import ArchivedHabitsPage from '../components/main/pages/ArchivedHabitsPage';
 import AccountPage from '../components/main/pages/AccountPage.jsx';
+import GetSubscription from '../components/main/pages/GetSubscription.jsx';
+import Checkout from '../components/main/pages/Checkout.jsx';
 
 import _NavTop from '../components/navigation/NavTop.jsx';
     import NavTopConnections from './connections/NavTop';
@@ -226,5 +228,7 @@ export {
     SortablePlanks,
     SingleCoreValue,
     NewHabitGoal,
-    HabitGoals
+    HabitGoals,
+    GetSubscription,
+    Checkout
 }

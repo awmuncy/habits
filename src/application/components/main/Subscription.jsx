@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import paymentRequest from 'braintree-web/payment-request';
 var createClient = require('braintree-web/client').create;
 
-function startPayment(instance) {
+function startPayment(instance, callback) {
 
     var amount = '0.00';
 
@@ -35,8 +35,12 @@ function startPayment(instance) {
                     'Content-Type': 'application/json'
                 }, 
                 body: JSON.stringify(createSubscription)                  
-            }).then(r=>r.json()).then(json=>console.log(json));
+            }).then(r=>r.json()).then(json=>{
+                console.log(json)
+                callback(true);   
+            });
         });
+        
 }
 
 
@@ -48,10 +52,17 @@ var SubscriptionModule = props => {
         id: "8675s09",
         subscription_id: "21414fa"
     };
+    var [success, setSuccess] = useState(false);
     var [auth, setAuth] = useState(null);
     var [client, setClient] = useState(null);
     var [paymentInstance, setPaymentInstance] = useState(null);
     var [subscriptionStarted, setStartSubscription] = useState(false);
+
+    if(success) {
+        return (
+            <div className="successfully-subscribed">Payment succeeded. Welcome to Premium!</div>
+        )
+    }
 
     if(auth===null) {
         fetch('/payments/client_token')
@@ -61,10 +72,9 @@ var SubscriptionModule = props => {
             .then(json=>{
                 console.log("Token: " + json.token);
                 setAuth(json.token);
-            })
-        return null;
+            });
     }
-    if(client===null) {
+    if(client===null && auth!==null) {
         createClient({
             authorization: auth
         }, (err, response) => {
@@ -72,9 +82,8 @@ var SubscriptionModule = props => {
             console.log(response);
             setClient(response);
         });
-        return null;
     }
-    if(paymentInstance===null) {
+    if(paymentInstance===null && client!==null) {
         paymentRequest.create({
             client: client
         }, (err, instance) => {
@@ -85,7 +94,6 @@ var SubscriptionModule = props => {
     
             setPaymentInstance(instance);
         });
-        return null; 
     }    
 
     if(user.subscription=="premium") {
@@ -96,29 +104,25 @@ var SubscriptionModule = props => {
         )
     }
     var start;
+    if(paymentInstance===null) {
+        start = null;
+    } else
     if(!subscriptionStarted) {
         start = (
-            <button onClick={()=>setStartSubscription(true)}>
-                Get premium
+            <button className="btn btn--ghost" onClick={()=>setStartSubscription(true)}>
+                I understand & agree
             </button>
         );
     } else {
         start = (
-            <button className="btn btn--primary" onClick={() => startPayment(paymentInstance)}>Proceed to payment</button>
+            <button className="btn btn--primary" onClick={() => startPayment(paymentInstance, setSuccess)}>Proceed to payment</button>
         );
     }
 
     return (
 
         <form onSubmit={e=>e.preventDefault()}>
-            <div className="startPayment">
-                <h2>Updgrade to premium</h2>
-                <p><em>Get a premium subscription for $5 a month.</em> <a href="/learn-more">Learn more</a></p>
-                <div>
-                    You will _not_ be chanrged for the first 28 days. After that, you will be charged $5 a month. You can cancel any time and will receive no further charges.
-                </div>
-                {start}
-            </div>
+            {start}
         </form>
     )
 }

@@ -178,12 +178,16 @@ main {
 	width: 100%;
 	@include media-breakpoint-up(lg) {
 		display: grid;
-		grid-template-columns: [sidebar-start] 300px [sidebar-end main-start] minmax(0, 1fr) [main-end];
+		grid-template-columns: [sidebar-start] 300px [sidebar-end main-start focus-start] minmax(0, 1fr) [focus-end] 300px [main-end];
 		margin: 0 auto;
 		max-width: 1080px;
 		align-items: start;
 		gap: 10px;
 	}
+}
+
+%focus-content {
+	grid-column: focus-start / focus-end;
 }
 
 %main-content {
