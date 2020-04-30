@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Habits, Sorting, HeaderDefault } from '../../../store/ConnectedComponents';
+import { Habits, Sorting, HeaderDefault } from "../store/ConnectedComponents";
 
 
 function HabitsPage() {

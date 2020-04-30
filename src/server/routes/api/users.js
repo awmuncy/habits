@@ -12,7 +12,7 @@ const User = require("../../models/User");
 var { newUserEmail } = require("../../mail/email");
 
 import jwt_decode from 'jwt-decode';
-import { DO_CHECKIN, NEW_HABIT, SAVE_CHECKIN, DECLARE_GOAL, DECLARE_CORE_VALUE } from '../../../actions';
+import { DO_CHECKIN, NEW_HABIT, SAVE_CHECKIN } from '../../../actions';
 
 
 // @route POST api/users/register
@@ -113,33 +113,8 @@ var findStored = function(user, lastSync) {
 
   var dispatches = [];
 
-  user.goals.forEach(goal => {
-    if(goal.modified_at>lastSync) {
-      var sendGoal = {id: goal.id};
-      sendGoal = Object.assign(sendGoal, goal._doc);
-      sendGoal.id = goal._id;
-      sendGoal.endDate = new Date(sendGoal.endDate).getTime();
-      delete sendGoal._id;
-      dispatches.push({
-        type: DECLARE_GOAL,
-        goal: sendGoal
-      });
-    }
-  });
 
-  user.corevalues.forEach(goal => {
-    if(goal.modified_at>lastSync) {
-      var sendGoal = {id: goal.id};
-      sendGoal = Object.assign(sendGoal, goal._doc);
-      sendGoal.id = goal._id;
-      sendGoal.endDate = new Date(sendGoal.endDate).getTime();
-      delete sendGoal._id;
-      dispatches.push({
-        type: DECLARE_CORE_VALUE,
-        core_value: sendGoal
-      });
-    }
-  });
+
 
   user.habits.forEach(habit => {
 
@@ -167,6 +142,7 @@ var findStored = function(user, lastSync) {
         });
       }
     });
+    habit.goals = habit.goals ? habit.goals : [];
     habit.goals.forEach(goal=>{
       var synced_at = new Date(goal.synced_at).getTime();
 

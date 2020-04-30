@@ -1,5 +1,5 @@
 import { saveStore, saveCheckin, getStore, appInfoSet, appInfoGet, logout, saveHabitGoal } from './indexeddb';
-import { NEW_HABIT, DO_CHECKIN, REMOVE_HABIT, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, DECLARE_GOAL, LOGOUT, DECLARE_CORE_VALUE } from '../actions';
+import { NEW_HABIT, DO_CHECKIN, REMOVE_HABIT, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, LOGOUT } from '../actions';
 import {BroadcastChannel } from 'broadcast-channel';
 
 // if(typeof(BroadcastChannel)==="undefined") {
@@ -36,14 +36,6 @@ function hydrateApp() {
             if(habit.deleted) return false;
             return true;
         });
-        content.goals = content.goals.filter((goal)=>{
-            if(goal.deleted) return false;
-            return true;
-        });
-        content.core_values = content.core_values.filter((core_value)=>{
-            if(core_value.deleted) return false;
-            return true;
-        });
 
 
         storeStation.postMessage({
@@ -57,23 +49,6 @@ async function getDispatchesNewerThan(instant) {
     var dispatches = [];
     var store = await getStore();
 
-    store.core_values.forEach(core_value=>{
-        if(core_value.modified_at > instant) {
-            dispatches.push({
-                type: DECLARE_CORE_VALUE,
-                payload: core_value
-            });
-        }
-    });
-
-    store.goals.forEach(goal=>{
-        if(goal.modified_at > instant) {
-            dispatches.push({
-                type: DECLARE_GOAL,
-                payload: goal
-            });
-        }
-    });
     
     // Checkins    
     store.habits.forEach(habit=>{
@@ -216,17 +191,6 @@ function reduceToDB(payload) {
         
             break;
 
-        case DECLARE_GOAL: 
-            saveStore({
-                goals: [payload.goal]
-            });
-            break;
-
-        case DECLARE_CORE_VALUE:
-            saveStore({
-                core_values: [payload.core_value]
-            });
-            break;
 
         case SYNC_START:
             syncDb();

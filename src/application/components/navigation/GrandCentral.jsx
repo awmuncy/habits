@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 
 import { 
-  HomePage,
-  FAQ, 
-  Feedback,
   NewHabit,
-  NewGoal, 
-  SingleHabit, 
-  GoalsPage, 
-  GoalSingle,
-  HabitsPage,
-  CoreValuesPage,
-  SingleCoreValue,
-  ArchivedHabitsPage,
-  AccountPage,
-  GetSubscription,
-  Checkout,
+  SingleHabit,
   HeaderDefault
 } from '../../store/ConnectedComponents';
+
+import {
+  HomePage,
+  ArchivedHabitsPage,
+  AccountPage,
+  GetSubscriptionPage,
+  CheckoutPage,
+  HabitsPage,
+  FAQPage, 
+  FeedbackPage
+} from '../../pages/pages';
 
 import {
   Route,
@@ -51,31 +49,20 @@ class GrandCentral extends Component {
             <Route exact path="/home" component={HomePage} />
             <Route exact path="/archived-habits" component={ArchivedHabitsPage} />
             <Route exact path="/account" component={AccountPage} />
-            <Route exact path="/get-subscription" component={GetSubscription} />
-            <Route exact path="/checkout" component={Checkout} />
+            <Route exact path="/get-subscription" component={GetSubscriptionPage} />
+            <Route exact path="/checkout" component={CheckoutPage} />
 
             <Route path="/habits" component={HabitsPage} />
-            <Route path="/feedback" component={Feedback} />
+            <Route path="/feedback" component={FeedbackPage} />
             <Route path="/new" component={NewHabit} />
-            <Route path="/new-goal" component={NewGoal} />
+            
             <Route
               path='/habit/:id'
               render={(props) => <SingleHabit {...props} />}
             />
-            <Route 
-                path='/goal/:id'
-                component={GoalSingle}
-            />
-            <Route 
-                path='/core-value/:id'
-                component={SingleCoreValue}
-            />
-            <Route 
-                path='/goals'
-                component={GoalsPage}
-            />
-            <Route path="/core-values" component={CoreValuesPage} />
-            <Route path="/FAQ" component={FAQ} />
+
+
+            <Route path="/FAQ" component={FAQPage} />
             <Route component={FourOhFourPage} />
           </Switch>
         );

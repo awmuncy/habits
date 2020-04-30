@@ -100,17 +100,3 @@ export const toggleNav = () => {
 
     }   
 }
-
-
-export const sortCoreValues = core_values_sorted => {
-    return (dispatch, store) => {
-
-        var action = {
-            type: SORT_CORE_VALUES,
-            core_values: core_values_sorted
-        }
-
-        dispatch(action);
-
-    }  
-}

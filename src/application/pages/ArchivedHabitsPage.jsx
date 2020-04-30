@@ -1,5 +1,5 @@
 import React from 'react';
-import { Habits, HeaderDefault } from '../../../store/ConnectedComponents';
+import { Habits, HeaderDefault } from '../store/ConnectedComponents';
 
 
 

@@ -1,6 +1,6 @@
 import { hydrateScores } from '../../reducers/calculateScores';
 import { ObjectID } from 'bson';
-import { DO_CHECKIN, REMOVE_HABIT, SAVE_USER, SYNC_START, NEW_HABIT, UNPIN_HABIT, PIN_HABIT, LOGOUT, DECLARE_GOAL, DECLARE_CORE_VALUE } from "../../../../actions";
+import { DO_CHECKIN, REMOVE_HABIT, SAVE_USER, SYNC_START, NEW_HABIT, UNPIN_HABIT, PIN_HABIT, LOGOUT } from "../../../../actions";
 import {BroadcastChannel } from 'broadcast-channel';
 import { format } from 'date-fns';
 
@@ -160,52 +160,7 @@ export const newHabit = habit => {
     }
 }
 
-export const declareGoal = goal => {
-    return (dispatch, store) => {
-        goal.id = goal.id || new ObjectID().toHexString();
-        
-        var action = {
-            type: DECLARE_GOAL,
-            goal: goal
-        };
 
-        sw_dispatch(action);
-        dispatch(action);
-    }
-}
-
-export const doGoal = (id, status) => {
-    return (dispatch, store) => {
-        var goal = {
-            id: id,
-            status: status,
-            modified_at: new Date().getTime()
-        };
-        
-        var action = {
-            type: DECLARE_GOAL,
-            goal: goal
-        };
-
-        sw_dispatch(action);
-        dispatch(action);
-    }
-}
-
-
-export const defineCoreValue = core_value => {
-    return (dispatch, store) => {
-        core_value.id = core_value.id || new ObjectID().toHexString();
-
-        var action = {
-            type: DECLARE_CORE_VALUE,
-            core_value: core_value
-        };
-
-        sw_dispatch(action);
-        dispatch(action);
-    }    
-}
 
 export const saveUser = (token, subscription_type) => {
 

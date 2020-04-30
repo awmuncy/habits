@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import GetSubscription from './GetSubscription';
+import GetSubscription from './GetSubscriptionPage';
 import { Link } from 'react-router-dom';
-import { HeaderDefault } from '../../../store/ConnectedComponents';
+import { HeaderDefault } from '../store/ConnectedComponents';
 
 var AccountPage = props => {
 

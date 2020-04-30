@@ -88,10 +88,7 @@ var routes = [
     "/",
     '\/habit\/(([\\d|[a-z]){24}|([\\d|[a-z]){6})',
     '\/habits',
-    "\/goals",
     "\/feedback",
-    '\/goal\/(([\\d|[a-z]){24}|([\\d|[a-z]){6})',
-    '\/new-goal',
     "*"
 ];
 

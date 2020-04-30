@@ -72,30 +72,6 @@ class AppNav extends Component {
                         </Link>
                     </li>
                     </Permission>
-                    <Permission feature="goals">
-                    <li>
-                    	<Link to="/goals" onClick={this.props.closeMenu}>
-                            <i className="fa fa-bullseye" aria-hidden="true"></i>
-                        	Goals
-                        </Link>
-                    </li>                    
-                    </Permission>
-                    <Permission feature="core-values">
-                    <li>
-                    	<Link to="/core-values" onClick={this.props.closeMenu}>
-                            <i className="fa fa-sun-o" aria-hidden="true"></i>
-                        	Core Values
-                        </Link>
-                    </li>
-                    </Permission>
-                    <Permission feature="to-dos">
-                        <li className="disabled">
-                            <Link to="/to-do" onClick={this.props.closeMenu}>
-                                <i className="fa fa-check-square-o" aria-hidden="true"></i>
-                                To-dos
-                            </Link>
-                        </li>
-                    </Permission>
                     <li>
                         <Link to="/archived-habits" onClick={this.props.closeMenu}>
                             <i className="fa fa-inbox" aria-hidden="true"></i>
@@ -151,45 +127,3 @@ class AppNav extends Component {
 }
 
 export default AppNav;
-
-// <li className="disabled">
-//     <i className="fa fa-envelope" aria-hidden="true"></i>
-//     Messages
-// </li>
-// <li className="disabled">
-//     <i className="fa fa-users" aria-hidden="true"></i>
-//     Friends
-// </li>
-// <li className="disabled">
-//     <i className="fa fa-clock-o" aria-hidden="true"></i>
-//     Reminders
-// </li>
-// <li className="disabled">
-//     <i className="fa fa-newspaper-o" aria-hidden="true"></i>
-//     Blog
-// </li>
-// <li className="disabled">
-//     <i className="fa fa-comments" aria-hidden="true"></i>
-//     Forums
-// </li>
-// <li className="disabled">
-//     <i className="fa fa-certificate" aria-hidden="true"></i>
-//     Suggested Habits
-// </li>
-// <li className="disabled">
-//     <i className="fa fa-bullseye" aria-hidden="true"></i>
-//     Goals
-// </li>
-// <hr />
-// <li className="disabled">
-//     <i className="fa fa-gear" aria-hidden="true"></i>
-//     Settings
-// </li>
-
-
-{/* <li>
-<Link to="/account" onClick={this.props.closeMenu}>
-    <i className="fa fa-user" aria-hidden="true"></i>
-    Account
-</Link>
-</li> */}

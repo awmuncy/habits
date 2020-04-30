@@ -24,10 +24,6 @@ const HabitSchema = new Schema({
     type: [Checkin],
     default: []
   },
-  goals: {
-    type: [Goal],
-    default: []
-  },
   profile: {
     type: Object
   },

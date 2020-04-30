@@ -4,7 +4,7 @@ import {
   Switch
 } from 'react-router-dom';
 
-import { HeaderDefault, HeadBack, ClosePane, GoalHeader } from "../../store/ConnectedComponents";
+import { HeaderDefault, HeadBack, ClosePane } from "../../store/ConnectedComponents";
 
 
 
@@ -38,10 +38,6 @@ class Navigation extends Component {
                     <Route
                         path='/habit/:id'
                         render={(props) => <ClosePane {...props} />}
-                    />
-                    <Route 
-                        path='/goal/:id'
-                        component={GoalHeader}
                     />
 
                     <Route component={HeaderDefault} />

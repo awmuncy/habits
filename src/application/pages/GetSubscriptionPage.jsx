@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 
-import { HeadBack } from "../../../store/ConnectedComponents";
+import { HeadBack } from "../store/ConnectedComponents";
 
 var GetSubscription = props => {
     var [monthly, setMonthly]   = useState(false);

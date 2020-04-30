@@ -25,15 +25,7 @@ const NewHabit = () => {
 };
 
 
-const NewGoal = () => {
-  return (
-    <Link to="/new-goal"> 
-      <button aria-label="Start a new habit" className="new-habit-button fab">
-          +
-      </button>
-    </Link>
-  );
-};
+
 
 const DefaultFAB = () => {
   return (
@@ -56,7 +48,6 @@ class FloatingActionButton extends Component {
 
         return (        
           <Switch>
-            <Route path="/goals" component={NewGoal} />
             <Route path="/new" component={null} />
             <Route path="/habits" component={NewHabit} />
             <Route path="/home" component={NewHabit} />
