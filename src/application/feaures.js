@@ -5,12 +5,13 @@ export default {
         "goals",
         "core-values",
         "beyond-habits",
-        "pinned-habits"
+        "pinned-habits",
+        "habit-goals"
     ],
     "default": [
 
     ],
     "premium": [
-        
+        "habit-goals"
     ]
 };

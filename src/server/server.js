@@ -7,7 +7,7 @@ const passport = require("passport");
 const users = require("./routes/api/users");
 
 import notifications from "./notifications";
-import { App, Homepage, LoginPage } from "./useHandlebars";
+import { App, Homepage, LoginPage, LegalPage } from "./useHandlebars";
 
 
 /* v I don't actually know what these do? v */
@@ -18,6 +18,7 @@ app.use(
 );
 
 app.use("/payments", require('./routes/payments'));
+
 
 app.use(bodyParser.json());
 /* ^ I don't have know what these do ^ */
@@ -53,6 +54,14 @@ app.get('/login', (req, res) => {
 
 
     res.end(LoginPage());
+});
+
+
+app.get('/legal', (req, res) => {
+    res.writeHead( 200, { "Content-Type": "text/html" } );
+
+
+    res.end(LegalPage({pageTitle: "Legal"}));
 });
 
 app.get("/csrf", (req, res) => {

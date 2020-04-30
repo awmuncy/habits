@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { changeSubscription } from '../../store/connections/resources/applicationActions';
 
 import paymentRequest from 'braintree-web/payment-request';
 var createClient = require('braintree-web/client').create;
@@ -57,6 +58,11 @@ var SubscriptionModule = props => {
     var [client, setClient] = useState(null);
     var [paymentInstance, setPaymentInstance] = useState(null);
     var [subscriptionStarted, setStartSubscription] = useState(false);
+    
+    var subscriptionSuccess = () => {
+        setSuccess(true);
+        props.changeSubscription("premium");
+    }
 
     if(success) {
         return (
@@ -115,7 +121,7 @@ var SubscriptionModule = props => {
         );
     } else {
         start = (
-            <button className="btn btn--primary" onClick={() => startPayment(paymentInstance, setSuccess)}>Proceed to payment</button>
+            <button className="btn btn--primary" onClick={() => startPayment(paymentInstance, subscriptionSuccess)}>Proceed to payment</button>
         );
     }
 
@@ -126,4 +132,20 @@ var SubscriptionModule = props => {
         </form>
     )
 }
-export default SubscriptionModule;
+
+export {
+    SubscriptionModule
+};
+
+var storeToProps = () => {
+    return {};
+};
+
+var dispatchesToStore = dispatch => {
+    return {
+        changeSubscription: new_subscription_type => dispatch(changeSubscription(new_subscription_type))
+    }
+};
+
+import { connect } from 'react-redux';
+export default connect(storeToProps, dispatchesToStore)(SubscriptionModule);

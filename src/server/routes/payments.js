@@ -3,8 +3,6 @@ const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
 
-import { PaymentsPage } from "../useHandlebars";
-
 var paymentGateway = braintree.connect({
     environment: braintree.Environment.Sandbox,
     merchantId: "5vgdb6pw6c254bvh",

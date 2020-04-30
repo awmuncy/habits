@@ -1,5 +1,5 @@
 import React from 'react';
-import { Goals, CoreValues, PinnedHabits, Habits, Sorting, RandomCoreValue } from '../../../store/ConnectedComponents';
+import { Habits, HeaderDefault } from '../../../store/ConnectedComponents';
 
 
 
@@ -9,11 +9,14 @@ function ArchivedHabitsPage(props) {
 
 
   return (	
+    <>
+    <HeaderDefault />
     <div className="home-layout">
       <div className="home-main">
         <Habits archivedOnly={true} />
       </div>
     </div>
+    </>
   );
 }
 

@@ -12,6 +12,7 @@
 	right: 0;
 	bottom: 0;
 	width: 300px;
+	z-index: 5000;
 	background-color: white;
 	&.open {
 		transition: .2s;

@@ -32,8 +32,8 @@ var LoginPage = data => {
     return createTemplate("../site/templates/LoginPage.html")(data);
 }
 
-var PaymentsPage = data => {
-    return createTemplate('../site/templates/PaymentsPage.html')(data);
+var LegalPage = data => {
+    return createTemplate('../site/templates/LegalPage.html')(data);
 }
 
 export {
@@ -41,5 +41,5 @@ export {
     Homepage,
     PasswordResetTemplate,
     LoginPage,
-    PaymentsPage
+    LegalPage
 }

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
 
-import { NavTop, NavBottom, GrandCentral, FloatingActionButton } from '../../store/ConnectedComponents';
-
+import { NavSide, GrandCentral } from '../../store/ConnectedComponents';
 
 class HabitTracker extends Component {
 
@@ -17,12 +16,9 @@ class HabitTracker extends Component {
 
         return (
         
-            <div className="habit-tracker">
-                <NavTop />
-                <main>
-                  <GrandCentral />
-                  <FloatingActionButton />
-                </main>
+            <div className="habit-tracker">           
+                <GrandCentral />            
+                <NavSide />
             </div>
 
         );

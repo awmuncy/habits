@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Habits, Sorting } from '../../../store/ConnectedComponents';
+import { Habits, Sorting, HeaderDefault } from '../../../store/ConnectedComponents';
 
 
 function HabitsPage() {
@@ -8,10 +8,13 @@ function HabitsPage() {
     document.title = "Habits | HabitsApp";
 
     return (	
-        <div className="home-layout">
-            <Sorting />
-            <Habits />
-        </div>
+        <>
+            <HeaderDefault />
+            <div className="home-layout">
+                <Sorting />
+                <Habits />
+            </div>
+        </>
     );
 }
 

@@ -15,7 +15,8 @@ import {
   ArchivedHabitsPage,
   AccountPage,
   GetSubscription,
-  Checkout
+  Checkout,
+  HeaderDefault
 } from '../../store/ConnectedComponents';
 
 import {
@@ -25,7 +26,12 @@ import {
 
 const FourOhFourPage = function() {
   document.title = "404 | HabitsApp";
-  return <div>No page here. 404.</div>
+  return (
+    <>
+      <HeaderDefault />
+      <div>No page here. 404.</div>
+    </>
+  );
 }
 
 class GrandCentral extends Component {

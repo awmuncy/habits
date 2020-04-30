@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
-import { IntervalSelect } from '../../../store/ConnectedComponents';
-import { parseISO, addMonths } from 'date-fns';
+import { IntervalSelect, HeadBack} from '../../../store/ConnectedComponents';
 
 import {
   Redirect
@@ -152,25 +151,28 @@ class NewHabit extends Component {
 
 
         return(
-            <div className="home-layout">
-                <div className="home-main">
-                    <div className="new-habit">
-                        
-                        <form id="new_habit" className="new-habit-form"  onSubmit={this.submitNewHabit}>
+            <>
+                <HeadBack />
+                <div className="home-layout">
+                    <div className="home-main">
+                        <div className="new-habit">
                             
-                            <h3>New Habit</h3>            
-                            <span className="nevermind" onClick={this.nevermind.bind(this)}>Cancel</span>        
-                            <input type="hidden" value={this.state.startDate} placeholder="Begin Date" name="begin_date" />
-                            <DatePicker selected={this.state.startDate} timeFormat="Y-m-d" onChange={this.handleStartDateChange} />
-                            <input type="text" placeholder="Title" name="title" />
-                            <IntervalSelect />
+                            <form id="new_habit" className="new-habit-form"  onSubmit={this.submitNewHabit}>
+                                
+                                <h3>New Habit</h3>            
+                                <span className="nevermind" onClick={this.nevermind.bind(this)}>Cancel</span>        
+                                <input type="hidden" value={this.state.startDate} placeholder="Begin Date" name="begin_date" />
+                                <DatePicker selected={this.state.startDate} timeFormat="Y-m-d" onChange={this.handleStartDateChange} />
+                                <input type="text" placeholder="Title" name="title" />
+                                <IntervalSelect />
 
-                            <input type="submit" value="Submit" className="btn primary" />
-                        </form>
-                    
+                                <input type="submit" value="Submit" className="btn primary" />
+                            </form>
+                        
+                        </div>
                     </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

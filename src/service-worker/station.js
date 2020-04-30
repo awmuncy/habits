@@ -234,6 +234,7 @@ function reduceToDB(payload) {
 
         case SAVE_USER:
             appInfoSet("userToken", payload.token);
+            appInfoSet("userSubscription", payload.subscription_type);
             break;
         
         case LOGOUT:

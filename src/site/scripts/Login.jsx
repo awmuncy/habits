@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 import { SAVE_USER } from '../../actions';
 
-function saveUser(token) {
+function saveUser(token, subscription_type) {
 
     var action = {
         type: SAVE_USER,
-        token: token
+        token: token,
+        subscription_type: subscription_type
     };
 
     var message = {
@@ -54,7 +55,7 @@ class Login extends Component {
                 localStorage.setItem("mySecretToken", token);
                 var detokenizedUser = jwt_decode(token);
                 localStorage.setItem("user", detokenizedUser.name);
-                saveUser(token);
+                saveUser(token, detokenizedUser.subscription_type);
                 // (If service worker is installed, go home. Otherwise, go to install page, which directs home)? 
                 window.location.href = "/home";
             } else {

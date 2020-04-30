@@ -29,13 +29,14 @@ var logout = function() {
 var getStore = function() {
 	return new Promise((resolve, reject) => {
 		accessDb(async function(event) {
-			var transaction = event.target.result.transaction(["habits", "goals", "coreValues", "toDos"], "readonly");
+			var transaction = event.target.result.transaction(["habits", "goals", "coreValues", "toDos", "appGeneral"], "readonly");
 			var habits = transaction.objectStore("habits").getAll()
 			var goals = transaction.objectStore("goals").getAll()
 			var coreValues = transaction.objectStore("coreValues").getAll()
 			var toDos = transaction.objectStore("toDos").getAll()
+			var userSubscription = transaction.objectStore("appGeneral").get("userSubscription");
 			
-			var items = [habits, goals, toDos, coreValues].map((item) => {
+			var items = [habits, goals, toDos, coreValues, userSubscription].map((item) => {
 				return new Promise((resolve, reject) => {
 					item.onsuccess = e => {
 						resolve(e.target.result);
@@ -43,7 +44,7 @@ var getStore = function() {
 				});
 			});
 
-			var [habits, goals, toDos, coreValues] = await Promise.all(items);			
+			var [habits, goals, toDos, coreValues, userSubscription] = await Promise.all(items);			
 
 			habits = habits.map((habit) => {
 				return habit;
@@ -53,7 +54,10 @@ var getStore = function() {
 				habits: habits,
 				goals: goals,
 				core_values: coreValues,
-				todos: toDos
+				todos: toDos,
+				user: {
+					subscription: userSubscription.value
+				}
 			};
 
 			resolve(store);

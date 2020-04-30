@@ -207,13 +207,14 @@ export const defineCoreValue = core_value => {
     }    
 }
 
-export const saveUser = token => {
+export const saveUser = (token, subscription_type) => {
 
 
     return (dispatch, store) => {
         var action = {
             type: SAVE_USER,
-            token: token
+            token: token,
+            subscription_type: subscription_type
         };
 
         
@@ -231,6 +232,18 @@ export const logout = () => {
         };
 
         
+        dispatch(action);
+        sw_dispatch(action);
+    }
+}
+
+export const changeSubscription = new_subscription_type => {
+    return (dispatch, store) => {
+        var action = {
+            type: "CHANGE_SUBSCRIPTION",
+            subscription: "premium"
+        };
+
         dispatch(action);
         sw_dispatch(action);
     }

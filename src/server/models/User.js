@@ -37,6 +37,9 @@ const UserSchema = new Schema({
   },
   pinned_habits: {
     type: [ObjectId]
+  },
+  subscription_type: {
+    type: String
   }
 });
 

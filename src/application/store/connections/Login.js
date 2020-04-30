@@ -6,7 +6,7 @@ export default {
     },
     dispatches: dispatch => {
         return {
-            saveUser: token => dispatch(saveUser(token)),
+            saveUser: (token, subscription_type) => dispatch(saveUser(token, subscription_type)),
             syncStart: () => dispatch(syncStart())
         };
     }

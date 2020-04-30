@@ -8,6 +8,7 @@ import goals from './goals.js';
 import core_values from './core_values.js';
 import { TOGGLE_NAV } from '../../../actions';
 import syncStatus from './sync_status';
+import user from './user';
 
 const rootReducer = combineReducers({
 	habits: habits,
@@ -17,7 +18,16 @@ const rootReducer = combineReducers({
 	pinned_habits: pinned,
 	goals: goals,
 	core_values: core_values,
-	syncStatus: () => syncStatus
+	syncStatus: () => syncStatus,
+	subscription: (store=null, action) => {
+		switch(action.type) {
+			case "SET_CHECKOUT":
+				return action.to;		
+			default:
+				return store;
+		}
+	},
+	user: user
 });
 
 export default rootReducer;
