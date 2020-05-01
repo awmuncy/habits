@@ -2,13 +2,8 @@ const braintree = require('braintree');
 const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
-
-var paymentGateway = braintree.connect({
-    environment: braintree.Environment.Sandbox,
-    merchantId: "5vgdb6pw6c254bvh",
-    publicKey: "yskh5gkmvsv6vszf",
-    privateKey: "4e47344c208a672fba7c922be1bf736a"
-});
+const braintreeAuth = require("../config/braintree")
+var paymentGateway = braintree.connect(braintreeAuth);
 
 router.get('/client_token', (req, res, next) => {
 
