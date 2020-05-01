@@ -18,7 +18,7 @@ services:
       - traefik.http.routers.habits-${branch}.tls.certresolver=myresolver
     networks:
       default:   
-    volume: 
+    volumes: 
       - ./config/braintree.js:/app/src/server/config/braintree.js
     
 
