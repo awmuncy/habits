@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Habits, Sorting, HeaderDefault, FloatingActionButton } from '../store/ConnectedComponents';
-import Permission from '../components/navigation/Permission';
+import Permission from '../atoms/Permission';
 
 
 function HomePage(props) {

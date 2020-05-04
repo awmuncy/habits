@@ -1,0 +1,46 @@
+
+// Planks
+.plank-list {
+    a {
+        text-decoration: none;;
+    }
+}
+
+main {
+    margin: 0 auto;
+    max-width: 1080px;
+    width: 100%;
+    position: relative;
+    padding-bottom: 70px;
+  }
+  
+.home-layout {
+    position: relative;
+    width: 100%;
+    @include media-breakpoint-up(lg) {
+        display: grid;
+        grid-template-columns: [sidebar-start] 300px [sidebar-end main-start focus-start] minmax(0, 1fr) [focus-end] 300px [main-end];
+        margin: 0 auto;
+        max-width: 1080px;
+        align-items: start;
+        gap: 10px;
+    }
+}
+  
+%focus-content {
+    grid-column: focus-start / focus-end;
+}
+  
+%main-content {
+    grid-column: main-start / main-end;
+    padding: 1em 0px;
+    &> h2 {
+        text-align: left;
+        padding: 10px;
+        margin: 0px;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        background-color: #f6f6f6;
+        border-top: 1px solid #ccc;
+    }
+}

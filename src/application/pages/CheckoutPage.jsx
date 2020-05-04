@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Subscription from "../components/main/Subscription";
+import Subscription from "./Subscription";
 
 import { Redirect } from 'react-router-dom';
 import { HeadBack } from "../store/ConnectedComponents";

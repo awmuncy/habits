@@ -1,0 +1,62 @@
+.top-left-action-button a {
+	color: white;
+}
+
+.header-nav {
+	a .fa {
+		color: white;
+	}
+}
+
+
+h1.app-title {
+	margin: 0px;
+	font-size: 24px;
+}
+
+header.app-header {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	background-color: white;
+	color: white;
+	background-color: var(--brand-primary);
+	padding: 5px 10px;
+	height: 42px;
+	.header-nav {
+		.fa {
+			font-size: 28px;
+			flex: 40px 0 0;
+			&.fa-bell-o {
+				place-self: center end;
+			}
+			&.disabled {
+				opacity: .5;
+			}
+		}
+		display: flex;
+		justify-content: space-between;
+		grid-template-columns: 50px 1fr 50px;
+		max-width: 1080px;
+		align-items: center;
+		align-content: center;
+		margin: 0 auto;
+		.ricons {
+			display: flex;
+			justify-content: flex-end;
+			i {
+				width: 56px;
+				display: flex;
+				align-items: flex-end;
+				padding: 0px 10px;
+			}
+		}
+		&.back-with-icons {
+			justify-content: flex-end;
+			flex-grow: 0;
+			&>:first-child {
+				flex-grow: 1;
+			}
+		}
+	}
+}
