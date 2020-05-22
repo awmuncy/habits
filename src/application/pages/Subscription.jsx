@@ -27,7 +27,7 @@ function startPayment(instance, callback) {
         }
             var createSubscription = {
                 nonce: payload.nonce,
-                user: localStorage.getItem("id")
+                user: localStorage.getItem("id") // User token from store
             };
 
             fetch('/payments', {
@@ -137,8 +137,10 @@ export {
     SubscriptionModule
 };
 
-var storeToProps = () => {
-    return {};
+var storeToProps = (store, props) => {
+    return {
+        userToken: store.user.token
+    };
 };
 
 var dispatchesToStore = dispatch => {

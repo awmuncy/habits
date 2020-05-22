@@ -26,8 +26,9 @@ var getStore = function() {
 			var transaction = event.target.result.transaction(["habits", "appGeneral"], "readonly");
 			var habits = transaction.objectStore("habits").getAll()
 			var userSubscription = transaction.objectStore("appGeneral").get("userSubscription");
-			
-			var items = [habits, userSubscription].map((item) => {
+			var userToken = transaction.objectStore("appGeneral").get("userToken");
+
+			var items = [habits, userSubscription, userToken].map((item) => {
 				return new Promise((resolve, reject) => {
 					item.onsuccess = e => {
 						resolve(e.target.result);
@@ -35,7 +36,7 @@ var getStore = function() {
 				});
 			});
 
-			var [habits, userSubscription] = await Promise.all(items);			
+			var [habits, userSubscription, userToken, userName] = await Promise.all(items);			
 
 			habits = habits.map((habit) => {
 				return habit;
@@ -44,7 +45,8 @@ var getStore = function() {
 			var store = {
 				habits: habits,
 				user: {
-					subscription: userSubscription.value
+					subscription: userSubscription.value,
+					token: userToken.value
 				}
 			};
 

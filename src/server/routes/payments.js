@@ -4,6 +4,7 @@ const router = express.Router();
 const bodyParser = require("body-parser");
 const braintreeAuth = require("../config/braintree")
 var paymentGateway = braintree.connect(braintreeAuth);
+const User = require("../models/User");
 
 router.get('/client_token', (req, res, next) => {
 
@@ -14,13 +15,17 @@ router.get('/client_token', (req, res, next) => {
 });
 router.use(bodyParser.json());
 
-router.post("/", function (req, res) {
+router.post("/", async function (req, res) {
     var nonceFromTheClient = req.body.nonce;
-
+    var currentUser = req.body.user;
+  
+    var name = await User.findById(currentUser).then((user) => {
+        return user.name;
+    });
     // You must create a custom to create a subscription
     paymentGateway.customer.create({
-        firstName: "Allen",
-        lastName: "Muncy",
+        firstName: name,
+        lastName: "",
         paymentMethodNonce: nonceFromTheClient
     }, function(err, result){
         // Callbacks, so oldschool
