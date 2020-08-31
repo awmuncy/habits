@@ -31,7 +31,7 @@ app.listen(port, () => console.log(`Server up and running on port ${port}`));
 // Passport middleware
 app.use(passport.initialize());
 // Passport config
-require("./config/passport")(passport);
+require("./validation/passport")(passport);
 // Routes
 app.use("/api/users", users);
 
