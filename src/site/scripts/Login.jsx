@@ -60,6 +60,7 @@ class Login extends Component {
                 window.location.href = "/home";
             } else {
                 console.log("Login failed");
+                alert("Login failed.")
             }
         });
     }

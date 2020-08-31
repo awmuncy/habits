@@ -4,25 +4,41 @@ import { Link } from 'react-router-dom';
 import { HeadBack } from "../store/ConnectedComponents";
 
 var GetSubscription = props => {
+
+
+    var user = props.user;
+
+    if(user.subscription=="premium") {
+        return (
+                <>
+                    <HeadBack />
+                    <div className="home-layout">
+                        <div>
+                            To cancel subscription, email admin@checkyourhabit.com. 
+                        </div>
+                    </div>
+                </>
+        )
+    }
     var [monthly, setMonthly]   = useState(false);
-    var [annual, setAnnual]     = useState(false);
+    var [yearly, setyearly]     = useState(false);
 
     var disabled = "btn--disabled";
-    if(monthly || annual) {
+    if(monthly || yearly) {
         disabled = "";
     }
 
     var clickMonthly = () => {
         setMonthly(!monthly);
-        setAnnual(false);      
+        setyearly(false);      
         var to = monthly ? null : "monthly";  
         props.setCheckout(to);
     }
 
-    var clickAnnual = () => {
-        setAnnual(!annual);
+    var clickyearly = () => {
+        setyearly(!yearly);
         setMonthly(false);
-        var to = annual ? null : "annual";
+        var to = yearly ? null : "yearly";
         props.setCheckout(to);
     }
 
@@ -43,7 +59,7 @@ var GetSubscription = props => {
                                 <p>Monthly subscription to premium</p>
                             </div>
                         </div>
-                        <div onClick={clickAnnual} className={"select-premium select-premium-annual " + (annual ? "select-premium--selected" : "")}>
+                        <div onClick={clickyearly} className={"select-premium select-premium-yearly " + (yearly ? "select-premium--selected" : "")}>
                             <div className="select-premium--graphic">
                                 <img src="/images/logo.png" />
                             </div>
@@ -79,7 +95,8 @@ var dispatchesToStore = dispatch => {
 };
 var storeToProps = (store, props) => {
     return {
-        checkout_selected: store.checkout
+        checkout_selected: store.checkout,
+        user: store.user
     }
 };
 

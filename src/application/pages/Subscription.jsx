@@ -4,7 +4,7 @@ import { changeSubscription } from '../store/connections/resources/applicationAc
 import paymentRequest from 'braintree-web/payment-request';
 var createClient = require('braintree-web/client').create;
 
-function startPayment(instance, callback) {
+function startPayment(instance, subscriptionType, callback) {
 
     var amount = '0.00';
 
@@ -27,7 +27,8 @@ function startPayment(instance, callback) {
         }
             var createSubscription = {
                 nonce: payload.nonce,
-                user: localStorage.getItem("id") // User token from store
+                user: localStorage.getItem("id"), // User token from store
+                subscriptionType: subscriptionType
             };
 
             fetch('/payments', {
@@ -48,11 +49,7 @@ function startPayment(instance, callback) {
 
 
 var SubscriptionModule = props => {
-    var user = {// props.user 
-        subscription: "basic",
-        id: "8675s09",
-        subscription_id: "21414fa"
-    };
+
     var [success, setSuccess] = useState(false);
     var [auth, setAuth] = useState(null);
     var [client, setClient] = useState(null);
@@ -102,13 +99,7 @@ var SubscriptionModule = props => {
         });
     }    
 
-    if(user.subscription=="premium") {
-        return (
-            <div>
-                To cancel subscription, email admin@checkyourhabit.com. 
-            </div>
-        )
-    }
+
     var start;
     if(paymentInstance===null) {
         start = null;
@@ -121,7 +112,7 @@ var SubscriptionModule = props => {
         );
     } else {
         start = (
-            <button className="btn btn--primary" onClick={() => startPayment(paymentInstance, subscriptionSuccess)}>Proceed to payment</button>
+            <button className="btn btn--primary" onClick={() => startPayment(paymentInstance, props.subscriptionType, subscriptionSuccess)}>Proceed to payment</button>
         );
     }
 

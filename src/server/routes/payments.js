@@ -18,6 +18,7 @@ router.use(bodyParser.json());
 router.post("/", async function (req, res) {
     var nonceFromTheClient = req.body.nonce;
     var currentUser = req.body.user;
+    var plan = req.body.subscriptionType;
   
     var name = await User.findById(currentUser).then((user) => {
         return user.name;
@@ -33,9 +34,14 @@ router.post("/", async function (req, res) {
 
         paymentGateway.subscription.create({
             paymentMethodToken: tokenFromTheCustomer,
-            planId: "basic"
+            planId: plan
         }, function(err, result) {
             // Callbacks, so oldschool
+            // If succcess, tell browser & db to change user's sub type
+            User.findById(currentUser).then(user => {
+                user.subscription_type = "premium";
+                user.save();
+            });
             res.json(result);
         });
     });
