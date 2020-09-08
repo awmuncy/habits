@@ -37,9 +37,9 @@ site.use(bodyParser.json());
 /* ^ I don't have know what these do ^ */
 app.use("/payments", require('./routes/payments'));
 
-const port = 5000; 
+const port = 5499; 
 app.listen(port, () => console.log(`App server up and running on port ${port}`));
-const sitePort = 5001;
+const sitePort = 5173;
 site.listen(sitePort, () => console.log(`Site server up and running on port ${sitePort}`));
 
 // Passport middleware
