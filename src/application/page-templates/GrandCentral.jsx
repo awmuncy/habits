@@ -14,7 +14,8 @@ import {
   FAQPage, 
   FeedbackPage,
   NewHabitPage,
-  SingleHabitPage
+  SingleHabitPage,
+  LoginPage
 } from '../pages/pages';
 
 import {
@@ -63,6 +64,9 @@ class GrandCentral extends Component {
 
 
             <Route path="/FAQ" component={FAQPage} />
+
+            <Route path="/login" component={LoginPage} />
+
             <Route component={FourOhFourPage} />
           </Switch>
         );

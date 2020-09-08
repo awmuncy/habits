@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 import { SAVE_USER } from '../../actions';
+import { HeaderDefault } from '../store/ConnectedComponents';
 
 function saveUser(token, subscription_type) {
 
@@ -67,16 +68,24 @@ class Login extends Component {
     render() {
 
         return (
-            <div className="login-page">
-                <form className="login-form" onSubmit={this.loginAction}>
-                    <input type="text" value={this.state.user} placeholder="Email" onChange={(e)=>this.setState({user: e.target.value})} />
-                    <input type="password" value={this.state.password} placeholder="Password" onChange={(e)=>this.setState({password: e.target.value})} />
-                    <div>
-                    <a href="/#register" type="button" className="btn btn--ghost">Register</a>
-                        <button type="submit" className="btn primary">Log in</button>                                        
+            <>
+                <HeaderDefault blank={true} />
+                <div className="home-layout">
+                    <div className="home-main">
+                        <div className="login-page">
+                            <form className="login-form" onSubmit={this.loginAction}>
+                                <input type="text" value={this.state.user} placeholder="Email" onChange={(e)=>this.setState({user: e.target.value})} />
+                                <input type="password" value={this.state.password} placeholder="Password" onChange={(e)=>this.setState({password: e.target.value})} />
+                                <div>
+                                <a href="/#register" type="button" className="btn btn--ghost">Register</a>
+                                    <button type="submit" className="btn primary">Log in</button>                                        
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </>
+                
         );
     }
 }

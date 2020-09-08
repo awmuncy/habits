@@ -22,17 +22,35 @@ class HeaderDefault extends Component {
         this.props.toggleNav();
     }
 
+    
+
 
     render() {
+        var NavContents;
+        if(this.props.blank) {
+            NavContents = (
+                <>
+                <span />
+                <h1 className="app-title">HabCheck</h1>
+                <span />
+                </>
+            );
+        } else {
+            NavContents = (
+                <>
+                    <i className="fa fa-bars" aria-hidden="true" onClick={this.toggleNav}></i>
+                    
+                    <Link to={"/home"}><i className="fa fa-home" aria-hidden="true" ></i></Link>
+                </>
+            );
+        }
 
 
         return (
             <header className="app-header">
                 <nav className="site-nav">
                     <div className="header-nav">
-                        <i className="fa fa-bars" aria-hidden="true" onClick={this.toggleNav}></i>
-                        <h1 className="app-title">HabCheck</h1>
-                        <Link to={"/home"}><i className="fa fa-home" aria-hidden="true" ></i></Link>
+                        {NavContents}
                     </div>                
                 </nav>
             </header>

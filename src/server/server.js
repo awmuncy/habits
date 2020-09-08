@@ -50,28 +50,12 @@ app.get('/', (req, res) => {
     res.end(Homepage());
 });
 
-app.get('/login', (req, res) => {
-    res.writeHead( 200, { "Content-Type": "text/html" } );
-
-
-    res.end(LoginPage());
-});
-
 
 app.get('/legal', (req, res) => {
     res.writeHead( 200, { "Content-Type": "text/html" } );
 
 
     res.end(LegalPage({pageTitle: "Legal"}));
-});
-
-app.get("/csrf", (req, res) => {
-    res.writeHead( 200, { "Content-Type": "text/json" } );
-
-	var content = `{"csrf":"2AgNFInqdb0unkwcB9kFpYOwLezq8qMKkoqUmzQw", "tokenizedUser": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjZjQyM2NmOGEyYTgwM2MwODYzZmM0MCIsIm5hbWUiOiJNYXJrIEVsc29uIiwiaWF0IjoxNTY2MDgxNDY0LCJleHAiOjE1OTc2MzgzOTB9.KQHHdyO09iNDznP4S7n_EDmRy_kkb4i82aaqO9lITR"}`;
-
-	
-    res.end(content);
 });
 
 app.post("/sync", (req, res) => {
@@ -90,7 +74,8 @@ var routes = [
     '\/habit\/(([\\d|[a-z]){24}|([\\d|[a-z]){6})',
     '\/habits',
     "\/feedback",
-    "*"
+    "*",
+    "/login"
 ];
 
 routes.forEach(toHome);

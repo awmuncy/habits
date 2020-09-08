@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Register from './Register.jsx';
-import Login from './Login.jsx';
 
 document.querySelector(".mobile-nav").addEventListener('click', function() {
 	document.querySelector(".mobile-nav").classList.toggle("active");
@@ -16,13 +15,6 @@ if (document.getElementById('register-app')) {
 	  document.getElementById('register-app'));
 }
 
-
-if (document.getElementById('login-app')) {
-    ReactDOM.render(    	
-		  <Login />
-		, 
-	  document.getElementById('login-app'));
-}
 
 
 var loggedIn = localStorage.getItem("user");
