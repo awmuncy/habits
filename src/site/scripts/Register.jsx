@@ -32,8 +32,7 @@ const Register = function(props) {
             headers: {
                 'Content-Type': 'application/json',
                 "Accept": "application/json",
-                "X-Requested-With": "XMLHttpRequest",
-                'X-CSRF-TOKEN': document.csrf
+                "X-Requested-With": "XMLHttpRequest"
             }
         }).then((response) => {
             return response.json();

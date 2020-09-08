@@ -110,8 +110,7 @@ async function syncDb() {
         headers: {
             'Content-Type': 'application/json',
             "Accept": "application/json",
-            "X-Requested-With": "XMLHttpRequest",
-            'X-CSRF-TOKEN': "DADD"//document.csrf
+            "X-Requested-With": "XMLHttpRequest"
         }
     }).then((body)=>{
         
