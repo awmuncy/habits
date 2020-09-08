@@ -3,13 +3,22 @@ var path = require('path');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var app = express();
+var site = express();
 const passport = require("passport");
 const users = require("./routes/api/users");
-
+const env = require('dotenv').config().parsed;
 
 import notifications from "./notifications";
 import { App, Homepage, LoginPage, LegalPage } from "./useHandlebars";
 
+function environment(req, res, next) {
+    res.writeHead( 200, { "Content-Type": "application/javascript" } );
+    var encodedEnv = Buffer.from(JSON.stringify(env)).toString('base64');
+    res.end(`const env=JSON.parse(atob("${encodedEnv}"))`);   
+}
+
+app.get("/jdcyn8675309.js", environment);
+site.get("/jdcyn8675309.js", environment);
 
 /* v I don't actually know what these do? v */
 app.use(
@@ -17,16 +26,21 @@ app.use(
         extended: false
     })
 );
+app.use(bodyParser.json());
+site.use(
+    bodyParser.urlencoded({
+        extended: false
+    })
+);
+site.use(bodyParser.json());
 
+/* ^ I don't have know what these do ^ */
 app.use("/payments", require('./routes/payments'));
 
-
-app.use(bodyParser.json());
-/* ^ I don't have know what these do ^ */
-
-
 const port = 5000; 
-app.listen(port, () => console.log(`Server up and running on port ${port}`));
+app.listen(port, () => console.log(`App server up and running on port ${port}`));
+const sitePort = 5001;
+site.listen(sitePort, () => console.log(`Site server up and running on port ${sitePort}`));
 
 // Passport middleware
 app.use(passport.initialize());
@@ -34,6 +48,7 @@ app.use(passport.initialize());
 require("./validation/passport")(passport);
 // Routes
 app.use("/api/users", users);
+site.use("/api/users", users);
 
 app.use("/reset-password", require("./routes/passwordReset"));
 
@@ -41,17 +56,20 @@ app.use("/feedback", require("./routes/feedback"));
 
 
 app.use( express.static( path.resolve( __dirname, "../../dist/public" ) ) );
+site.use( express.static( path.resolve( __dirname, "../../dist/public" ) ) );
 
-
-app.get('/', (req, res) => {
+site.get('/', (req, res) => {
     res.writeHead( 200, { "Content-Type": "text/html" } );
 
 
-    res.end(Homepage());
+    res.end(Homepage({
+        appUrl: `${env.APPLICATION_URL}`
+    }));
 });
 
 
-app.get('/legal', (req, res) => {
+
+site.get('/legal', (req, res) => {
     res.writeHead( 200, { "Content-Type": "text/html" } );
 
 
@@ -102,6 +120,3 @@ mongoose
     });
 
 notifications(app);
-
-
-module.exports = app;

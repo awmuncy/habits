@@ -11,15 +11,17 @@ import tokenizedUser from './tokenizedUser';
 
 
 filterConsoleNotifs();
-tokenizedUser();
+var loggedin = tokenizedUser();
 
-var storeInit = store();
+if(loggedin) {
+	var storeInit = store();
 
-ReactDOM.render(    	
-	<Provider store={storeInit}>
-		<BrowserRouter>
-			<HabitTracker />
-		</BrowserRouter>
-	</Provider>
-, 
-document.getElementById('momentum-app'));
+	ReactDOM.render(    	
+		<Provider store={storeInit}>
+			<BrowserRouter>
+				<HabitTracker />
+			</BrowserRouter>
+		</Provider>
+	, 
+	document.getElementById('momentum-app'));
+}

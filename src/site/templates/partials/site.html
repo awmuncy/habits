@@ -16,6 +16,7 @@
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-512.png">
         <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-512.png">
         <link rel="manifest" href="/manifest.json">
+        <script src="/jdcyn8675309.js"></script>
     </head>
 
     <body>      
@@ -42,7 +43,7 @@
                       Dashboard
                     </a>
 
-                    <a href="/login" id="login-from-header" class="btn btn--light btn--md guest-status">
+                    <a href="{{appUrl}}/login" id="login-from-header" class="btn btn--light btn--md guest-status">
                       Login
                     </a>
                     <a href="/#register" id="register-from-header" class="btn btn--ghost btn--light btn--md guest-status">
@@ -54,7 +55,6 @@
 
         <main>
         {{> @partial-block }}
-        <div id="blog"></div>
         </main>
         <div class="basic-footer">
             Built by <a href="https://www.allenmuncy.com" target="_blank">Allen Muncy</a> | <a href="/legal">Privacy & Terms</a>

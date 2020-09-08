@@ -14,4 +14,6 @@ export default () => {
 		localStorage.setItem("id", detokenizedUser.id);
 	}
 
+	return !(localToken==null && window.location.pathname!="/login");
+
 };
