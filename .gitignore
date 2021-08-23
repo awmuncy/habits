@@ -3,4 +3,4 @@
 .env
 /src/server/config
 /.terraform
-/varfile.secret
+secret.tfvars
