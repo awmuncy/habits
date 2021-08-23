@@ -1,0 +1,19 @@
+{{ $ident := (print .Release.Name "-" .Release.Revision "-" .Values.Env) }}
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: habits-service-{{ $ident }}
+  namespace: habits-{{ .Values.Env }}
+spec:
+  selector:
+    habits-pod: pod-{{ $ident }}
+  ports:
+    - protocol: TCP
+      targetPort: 5499
+      port: 5499
+      name: http-app
+    - protocol: TCP
+      port: 5173
+      targetPort: 5173
+      name: http-site

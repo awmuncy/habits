@@ -1,0 +1,6 @@
+dockerTag: "latest"
+Env: "dev"
+domain: "checkyourhabit.com"
+devSubDomain: "dev"
+siteSubdomainPrefix: "site"
+appSubdomainPrefix: "app"

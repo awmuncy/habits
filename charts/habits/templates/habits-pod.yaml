@@ -1,0 +1,35 @@
+{{ $ident := (print .Release.Name "-" .Release.Revision "-" .Values.Env) }}
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: habits-pod-{{ $ident }}
+  namespace: habits-{{ .Values.Env }}
+  labels: 
+    habits-pod: pod-{{ $ident }}
+spec:
+  containers:
+  - name: habit
+    ports: 
+    -  containerPort: 5499
+       name: habits-app
+    -  containerPort: 5173
+       name: habits-site
+    image: awmuncy/habits:{{ .Values.dockerTag }}
+    volumeMounts:
+    - name: habits-config
+      readOnly: true
+      mountPath: "/app/src/server/config"
+    - name: dotenv
+      readOnly: true
+      mountPath: "/app/.env"
+      subPath: ".env"
+  imagePullSecrets:
+  - name: docker-hub-access
+  volumes:
+  - name: habits-config
+    secret: 
+      secretName: {{ .Values.Env }}-habits-config
+  - name: dotenv
+    configMap: 
+      name: {{ .Values.Env }}-habits-dotenv
