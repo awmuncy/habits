@@ -28,6 +28,9 @@ const urlsToCache = [
   '/fonts/fontAwesome/FontAwesome.otf',
   '/js/service-worker-install.js'
 ];
+const urlsPatternsToCache = [
+  "\/habit\/(([\\d|[a-z]){24}|([\\d|[a-z]){6})"
+];
 
 const home_urls = [
   '/habits'
@@ -73,11 +76,14 @@ self.addEventListener('install', function(event) {
 
 function matchesPresetUrls(urlString, presetUrls) {
   var urlObject = new URL(urlString);
-  if(presetUrls.includes(urlObject.pathname)) {
-    return true;
-  }
-
-  return false;
+  var matchesExistingPatterns = false;
+  urlsPatternsToCache.forEach(pattern => {
+    if(urlObject.pathname.match(pattern)) {
+      matchesExistingPatterns = true;
+    };
+  });
+  
+  return matchesExistingPatterns;
 }
 
 
