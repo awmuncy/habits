@@ -1,10 +1,8 @@
-import { saveStore, saveCheckin, getStore, appInfoSet, appInfoGet, logout, saveHabitGoal } from './indexeddb';
+import { saveItem, getStore, appInfoSet, appInfoGet, logout } from './indexeddb';
 import { NEW_HABIT, DO_CHECKIN, REMOVE_HABIT, SYNC_START, SAVE_USER, SAVE_HABIT, SAVE_CHECKIN, HYDRATE_PAGE, LOGOUT } from '../actions';
 import {BroadcastChannel } from 'broadcast-channel';
 
-// if(typeof(BroadcastChannel)==="undefined") {
-//     BroadcastChannel = broadcastChannel;
-// }
+
 var storeStation = new BroadcastChannel("store");
 
 
@@ -145,14 +143,14 @@ function reduceToDB(payload) {
     switch(payload.type) {
         case NEW_HABIT:
 
-            saveStore({
+            saveItem("habit", {
                 habits: [payload.habit]
             });
             break;
 
         case DO_CHECKIN: 
 
-            saveCheckin({
+            saveItem("checkin", {
                 habit_id : payload.habit_id, 
                 checkin: payload.checkin
             });
@@ -160,7 +158,7 @@ function reduceToDB(payload) {
             break;
 
         case "NEW_HABIT_GOAL":
-            saveHabitGoal({
+            saveItem("habit_goal", {
                 habit_id: payload.habit_id,
                 goal: payload.goal
             });
@@ -168,7 +166,7 @@ function reduceToDB(payload) {
         
         case REMOVE_HABIT:
             var now = new Date().getTime();
-            saveStore({
+            saveItem("habit", {
                 habits: [{
                     id: payload.habit_id,
                     deleted: true,
@@ -180,7 +178,7 @@ function reduceToDB(payload) {
         case "ARCHIVE_HABIT":
 
             var now = new Date().getTime();
-            saveStore({
+            saveItem("habit", {
                 habits: [{
                     id: payload.habit_id,
                     archived: payload.date,

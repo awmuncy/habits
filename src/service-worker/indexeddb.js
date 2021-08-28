@@ -62,7 +62,7 @@ function accessDb(action) {
 	request.onsuccess = action;
 }
 
-var saveStore = function(store) {
+var saveHabit = function(store) {
 
 	var habits = Array.isArray(store.habits) ? store.habits : [];
 	
@@ -117,6 +117,11 @@ var saveCheckin = function(payload) {
 	});
 }
 
+var saveSpacedReminder = function(payload) {
+	console.log(payload);
+}
+
+
 var saveHabitGoal = function(payload) {
 
 	var goal = payload.goal;
@@ -169,11 +174,29 @@ var appInfoGet = function(key) {
 
 }
 
+
+function saveItem(type, payload) {
+	switch(type) { 
+		case "habit": 
+			saveHabit(payload);
+			break;
+		case "habit_goal": 
+			saveHabitGoal(payload);
+			break;
+
+		case "checkin":
+			saveCheckin(payload);
+			break;
+		case "spaced_reminder":
+			saveSpacedReminder(payload)
+			break;
+	
+	}
+}
+
 export {
 	getStore,
-	saveStore,
-	saveCheckin,
-	saveHabitGoal,
+	saveItem,
 	appInfoSet,
 	appInfoGet,
 	logout

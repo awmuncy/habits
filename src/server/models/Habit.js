@@ -32,6 +32,9 @@ const HabitSchema = new Schema({
   },
   dormant: {
     type: Object
+  },
+  goals: {
+    type: Array
   }
 });
 
