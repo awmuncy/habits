@@ -10,11 +10,11 @@ import {
 import { RECALCULATE_SCORES } from '../../../actions';
 
 export default {
-    props: () => (state, props) => {
+    props: () => (store, props) => {
 
         return {
-            filters: state.filters,
-            view_date: state.view_date
+            filters: store.filters,
+            view_date: store.view_date
         };
     },
     dispatches: dispatch => {

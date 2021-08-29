@@ -9,7 +9,7 @@ import HomePage from './HomePage.jsx';
 import NewHabitPage from './NewHabitPage.jsx';
 import SingleHabitPage from './SingleHabitPage.jsx';
 import LoginPage from './Login.jsx';
-
+import RecallPage from './RecallPage.jsx';
 
 
 
@@ -24,5 +24,6 @@ export {
     HomePage,
     NewHabitPage,
     SingleHabitPage,
-    LoginPage
+    LoginPage,
+    RecallPage
 };

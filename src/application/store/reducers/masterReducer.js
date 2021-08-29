@@ -3,17 +3,33 @@ import { combineReducers } from 'redux';
 import habits from './habits.js';
 import filters from './filters.js';
 import view_date from './view_date.js';
-import pinned from './pinned.js';
-import { TOGGLE_NAV } from '../../../actions';
+import pinned_habits from './pinned.js';
+import { HYDRATE_PAGE, TOGGLE_NAV } from '../../../actions';
 import syncStatus from './sync_status';
 import user from './user';
 
+var navigationOpen = (s=0,a)=>a.type===TOGGLE_NAV ? !s : s;
+
+var recalls = (store=null, action) => {
+	switch(action.type) { 
+		case HYDRATE_PAGE: 
+			return action.payload.recalls;
+		case "NEW_RECALL":
+			var newStore = store.slice();
+			
+			newStore.push(action.content);
+			return newStore;
+		default: 
+			return store;
+	}
+};
+
 const rootReducer = combineReducers({
-	habits: habits,
-	navigationOpen: (s=0,a)=>a.type===TOGGLE_NAV ? !s : s,
-  	view_date: view_date,
-	filters: filters,
-	pinned_habits: pinned,
+	habits,
+	navigationOpen: navigationOpen,
+  	view_date,
+	filters,
+	pinned_habits,
 	syncStatus: () => syncStatus,
 	subscription: (store=null, action) => {
 		switch(action.type) {
@@ -23,7 +39,8 @@ const rootReducer = combineReducers({
 				return store;
 		}
 	},
-	user: user
+	user,
+	recalls
 });
 
 export default rootReducer;

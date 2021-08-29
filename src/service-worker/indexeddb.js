@@ -2,6 +2,7 @@ var dbV1 = function(event) {
 	var db = event.target.result;
 	db.createObjectStore("habits", {keyPath: "id"});
 	db.createObjectStore("appGeneral", {keyPath: "key"});
+	db.createObjectStore("recalls", {keyPath: "id"});
 };
 
 var dbError = function(error) {
@@ -23,12 +24,13 @@ var logout = function() {
 var getStore = function() {
 	return new Promise((resolve, reject) => {
 		accessDb(async function(event) {
-			var transaction = event.target.result.transaction(["habits", "appGeneral"], "readonly");
-			var habits = transaction.objectStore("habits").getAll()
+			var transaction = event.target.result.transaction(["habits", "appGeneral", "recalls"], "readonly");
+			var habits = transaction.objectStore("habits").getAll();
+			var recalls = transaction.objectStore("recalls").getAll();
 			var userSubscription = transaction.objectStore("appGeneral").get("userSubscription");
 			var userToken = transaction.objectStore("appGeneral").get("userToken");
 
-			var items = [habits, userSubscription, userToken].map((item) => {
+			var items = [habits, recalls, userSubscription, userToken].map((item) => {
 				return new Promise((resolve, reject) => {
 					item.onsuccess = e => {
 						resolve(e.target.result);
@@ -36,13 +38,10 @@ var getStore = function() {
 				});
 			});
 
-			var [habits, userSubscription, userToken, userName] = await Promise.all(items);			
-
-			habits = habits.map((habit) => {
-				return habit;
-			});
+			var [habits, recalls, userSubscription, userToken, userName] = await Promise.all(items);			
 
 			var store = {
+				recalls,
 				habits: habits,
 				user: {
 					subscription: userSubscription.value,
@@ -117,8 +116,29 @@ var saveCheckin = function(payload) {
 	});
 }
 
-var saveSpacedReminder = function(payload) {
-	console.log(payload);
+var saveRecall = function(recallToSave) {
+
+
+	var save = function(event) {
+
+		var db = event.target.result;
+		var transaction = db.transaction(["recalls"], "readwrite");
+		var placeItem = (database, item) => {
+
+			var existing = transaction.objectStore(database).get(item.id);
+
+			existing.onsuccess = e => {
+				var fullItem = Object.assign(e.target.result || {}, item);
+				transaction.objectStore(database).put(fullItem);
+			}
+			
+		}
+		// Potential filter function = store only if item has changed
+		placeItem("recalls", recallToSave);
+		
+	}
+
+	accessDb(save);
 }
 
 
@@ -187,8 +207,8 @@ function saveItem(type, payload) {
 		case "checkin":
 			saveCheckin(payload);
 			break;
-		case "spaced_reminder":
-			saveSpacedReminder(payload)
+		case "recall":
+			saveRecall(payload)
 			break;
 	
 	}

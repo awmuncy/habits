@@ -1,7 +1,7 @@
 export default {
-    props: (state, props) => {
+    props: (store, props) => {
 
-        var habit_position = state.habits.findIndex(function(habit) {
+        var habit_position = store.habits.findIndex(function(habit) {
             if(habit.id==props.id) {
                 return true;
             }
@@ -9,10 +9,10 @@ export default {
         });
     
         return {
-            habit: state.habits[habit_position],
-            view_date: state.habits[habit_position].view_date,
-            filters: state.filters,
-            pinned_habits: state.pinned_habits
+            habit: store.habits[habit_position],
+            view_date: store.habits[habit_position].view_date,
+            filters: store.filters,
+            pinned_habits: store.pinned_habits
         }
     },
     dispatches: () => {

@@ -1,7 +1,7 @@
 export default {
-    props: (state, props) => {
+    props: (store, props) => {
 
-        var habit_position = state.habits.findIndex(function(habit) {
+        var habit_position = store.habits.findIndex(function(habit) {
     
             if(habit.id==props.habit_id) {
                 return true;
@@ -11,11 +11,11 @@ export default {
 
 
 
-        var goals = state.habits[habit_position] ? state.habits[habit_position].goals || [] : false || [];
+        var goals = store.habits[habit_position] ? store.habits[habit_position].goals || [] : false || [];
         var canary = goals[goals.length - 1] && goals[goals.length - 1].strength;
     
         return {
-            habit: state.habits[habit_position],    
+            habit: store.habits[habit_position],    
             goals: goals,
             canary: canary
         }

@@ -192,6 +192,18 @@ export const logout = () => {
     }
 }
 
+export const newRecall = recall => {
+    return (dispatch, store) => {
+        var action = {
+            type: "NEW_RECALL",
+            content: {...recall, id: new ObjectID().toHexString()}
+        }
+
+        dispatch(action);
+        sw_dispatch(action);
+    }
+}
+
 export const changeSubscription = new_subscription_type => {
     return (dispatch, store) => {
         var action = {

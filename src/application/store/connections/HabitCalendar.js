@@ -1,9 +1,9 @@
 import { doCheckin } from './resources/applicationActions';
 
 export default {
-    props: (state, props) => {
+    props: (store, props) => {
 
-        var habit_position = state.habits.findIndex(function(habit) {
+        var habit_position = store.habits.findIndex(function(habit) {
             if(habit.id==props.habit_id) {
                 return true;
             }
@@ -11,9 +11,9 @@ export default {
         });
 
         return {
-            checkins: state.habits[habit_position].checkinSlots,
-            profile: state.habits[habit_position].profile,
-            beginDate: state.habits[habit_position].beginDate
+            checkins: store.habits[habit_position].checkinSlots,
+            profile: store.habits[habit_position].profile,
+            beginDate: store.habits[habit_position].beginDate
         }
     },
     dispatches: dispatch => {

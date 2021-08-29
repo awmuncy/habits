@@ -79,6 +79,18 @@ class AppNav extends Component {
                         </Link>
                     </li>
                     <li>
+                        <Link to="/recalls" onClick={this.props.closeMenu}>
+                            <i className="fa fa-microchip" aria-hidden="true"></i>
+                            Recall
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/ephemeral-habits" onClick={this.props.closeMenu}>
+                            <i className="fa fa-magic" aria-hidden="true"></i>
+                            Ephermeral Habits
+                        </Link>
+                    </li>
+                    <li>
                     	<Link to="/FAQ" onClick={this.props.closeMenu}>
                             <i className="fa fa-question-circle" aria-hidden="true"></i>
                         	Help

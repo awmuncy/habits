@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const {Habit} = require("./Habit.js");
+const {Recall} = require("./Recall.js");
 const Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var toObjectId = mongoose.Types.ObjectId;
@@ -29,6 +30,9 @@ const UserSchema = new Schema({
   },
   pinned_habits: {
     type: [ObjectId]
+  },
+  recalls: {
+    type: [Recall],
   },
   subscription_type: {
     type: String

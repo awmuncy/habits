@@ -100,15 +100,13 @@ import _HabitGoals from '../organisms/HabitGoals';
     var HabitGoals = connect(HabitGoalsConnections.props, HabitGoalsConnections.dispatches)(_HabitGoals);
 
 
-// Misc
-import BoolIcon from '../atoms/BoolIcon.jsx';
 
-    
+
 import SortablePlanks from '../atoms/SortablePlanks.jsx';
 
-
-
-
+export { Recalls } from '../organisms/Recalls.jsx';
+export { RecallCard } from '../molecules/RecallCard.jsx';
+export { default as BoolIcon } from '../atoms/BoolIcon.jsx';
 
 
 export {
@@ -134,7 +132,6 @@ export {
     Checkins,
     Checkin,
     IntervalFor,
-    BoolIcon,
     SortablePlanks,
     NewHabitGoal,
     HabitGoals

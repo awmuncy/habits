@@ -1,23 +1,23 @@
 
 export default {
-    props: (state, props) => {
+    props: (store, props) => {
 
-        var habit_position = state.habits.findIndex(function(habit) {
+        var habit_position = store.habits.findIndex(function(habit) {
             if(habit.id==props.habit_id) {
                 return true;
             }
             return false;
         });
     
-        var checkins = state.habits[habit_position].checkinSlots;
+        var checkins = store.habits[habit_position].checkinSlots;
 
         var currentCheckin = checkins[checkins.length - 1];
     
     
         return {
-            habit: state.habits[habit_position],
+            habit: store.habits[habit_position],
             currentCheckin: currentCheckin,
-            goals: state.habits[habit_position].goals,
+            goals: store.habits[habit_position].goals,
             score: currentCheckin ? currentCheckin.score : 0
         }
     },

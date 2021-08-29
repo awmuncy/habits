@@ -17,7 +17,8 @@ if(window.hasOwnProperty("__REDUX_DEVTOOLS_EXTENSION__")) {
 const store = () => {
 
 	const newStore = createStore(rootReducer, {
-			habits: []
+			habits: [],
+			recalls: []
 		}, 
 		middleware
 	);

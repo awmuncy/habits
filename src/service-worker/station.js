@@ -47,7 +47,7 @@ async function getDispatchesNewerThan(instant) {
     var dispatches = [];
     var store = await getStore();
 
-    
+
     // Checkins    
     store.habits.forEach(habit=>{
         habit.checkins.forEach(checkin=>{
@@ -156,7 +156,9 @@ function reduceToDB(payload) {
             });
 
             break;
-
+        case "NEW_RECALL":
+            saveItem("recall", payload.content);
+            break;
         case "NEW_HABIT_GOAL":
             saveItem("habit_goal", {
                 habit_id: payload.habit_id,
