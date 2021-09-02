@@ -16,7 +16,8 @@ import {
   NewHabitPage,
   SingleHabitPage,
   LoginPage,
-  RecallPage
+  RecallPage,
+  NewRecallPage
 } from '../pages/pages';
 
 import {
@@ -54,7 +55,7 @@ class GrandCentral extends Component {
             <Route exact path="/get-subscription" component={GetSubscriptionPage} />
             <Route exact path="/checkout" component={CheckoutPage} />
             <Route exact path="/recalls" component={RecallPage} />
-            {/* <Route exact path="/new-recall" component={NewRecallPage} /> */}
+            <Route exact path="/new-recall" component={NewRecallPage} />
 
             <Route path="/habits" component={HabitsPage} />
             <Route path="/feedback" component={FeedbackPage} />

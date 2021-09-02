@@ -10,6 +10,7 @@ export default {
 
     ],
     "premium": [
-        "habit-goals"
+        "habit-goals",
+        "recalls"
     ]
 };

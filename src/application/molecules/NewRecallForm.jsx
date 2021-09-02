@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { newRecall } from '../store/connections/resources/applicationActions';
 import { connect } from 'react-redux';
 
-function NewRecallFormComponent(props) {
+function C_NewRecallForm(props) {
     var [title, setTitle] = useState("");
     var [prompt, setPrompt] = useState("");
     var [body, setBody] = useState("");
@@ -43,9 +43,8 @@ var connectors = [
     }
 ];
 
-var NewRecallForm = connect(...connectors)(NewRecallFormComponent);
+var NewRecallForm = connect(...connectors)(C_NewRecallForm);
 
 export {
-    NewRecallForm,
-    NewRecallFormComponent
+    NewRecallForm
 };

@@ -10,7 +10,7 @@ import SingleHabitPage from './SingleHabitPage.jsx';
 import LoginPage from './Login.jsx';
 import RecallPage from './RecallPage.jsx';
 export { NewHabitPage } from './NewHabitPage.jsx';
-
+export { NewRecallPage } from './NewRecallPage.jsx';
 
 export {
     AccountPage,

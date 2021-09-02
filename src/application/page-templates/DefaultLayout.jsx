@@ -1,4 +1,5 @@
 import React from 'react';
+import { HeaderDefault } from '../store/ConnectedComponents';
 
 function DefaultLayout(props) {
 

@@ -1,5 +1,5 @@
-export default {
-    props: (store, props) => {
+export default [
+    (store, props) => {
 
         var habit_position = store.habits.findIndex(function(habit) {
     
@@ -20,5 +20,5 @@ export default {
             canary: canary
         }
     },
-    dispatches: () => {return {}}
-};
+    () => {return {}}
+];

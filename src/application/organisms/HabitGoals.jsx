@@ -1,6 +1,6 @@
 import React from 'react';
 import { NewHabitGoal } from '../store/ConnectedComponents';
-import { S_NewHabitGoal } from '../store/connectors';
+import { S_HabitGoals } from '../store/connectors';
 import { connect } from 'react-redux';
 
 function C_HabitGoals(props) {
@@ -18,7 +18,7 @@ function C_HabitGoals(props) {
                 <tbody>
                     {props.goals ? props.goals.map(goal=>{
                         return (
-                            <tr>
+                            <tr key={goal.goalDate}>
                                 <td style={{backgroundColor: goal.color}}></td>
                                 <td>{goal.goalDate}</td>
                                 <td>{goal.startingPoint}</td>
@@ -34,7 +34,7 @@ function C_HabitGoals(props) {
     )
 }
 
-var HabitGoals = connect(...S_NewHabitGoal)(C_HabitGoals);
+var HabitGoals = connect(...S_HabitGoals)(C_HabitGoals);
 
 export {
     HabitGoals

@@ -112,8 +112,11 @@ class C_NavSide extends Component {
                         </Link>                        
                     </li>
                     </Permission>
-                
-                    <NavItem path="/recalls" icon="fa-microchip" text="Recall" />
+                    <Permission feature="recalls">
+                        <NavItem path="/recalls" icon="fa-microchip" text="Recall">
+                            <SubnavItem path="/new-recall" text="New Recall" />
+                        </NavItem>
+                    </Permission>
                     <NavItem path="/FAQ" icon="fa-question-circle" text="Help" />
                     <NavItem path="/feedback" icon="fa-commenting" text="Feedback" />
                     <NavItem path="/account" icon="fa-user" text="Account" />

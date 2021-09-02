@@ -16,7 +16,6 @@ function RecallPageComponent(props) {
         <main>
 
           <div className="home-layout">
-            <NewRecallForm />
             <div className="home-main recalls-page">
               <div className="recalls">
                 <Recalls />
