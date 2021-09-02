@@ -15,7 +15,7 @@ const NewHabit = () => {
       <Link to="/feedback">
         <button aria-label="Give feedback" className="fab-feedback"><i className="fa fa-comment"></i> </button>
       </Link>
-      <Link to="/new"> 
+      <Link to="/new-habit"> 
         <button aria-label="Start a new habit"className="new-habit-button fab">
             +
         </button>
@@ -48,7 +48,7 @@ class FloatingActionButton extends Component {
 
         return (        
           <Switch>
-            <Route path="/new" component={null} />
+            <Route path="/new-habit" component={null} />
             <Route path="/habits" component={NewHabit} />
             <Route path="/home" component={NewHabit} />
             <Route component={DefaultFAB} />
@@ -57,4 +57,6 @@ class FloatingActionButton extends Component {
     }
 }
 
-export default FloatingActionButton;
+export {
+  FloatingActionButton
+};

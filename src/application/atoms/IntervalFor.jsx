@@ -103,4 +103,6 @@ class IntervalFor extends Component {
 }
 
 
-export default IntervalFor;
+export {
+  IntervalFor
+};

@@ -38,6 +38,41 @@ var testDays = [
     ]}
 ];
 
+var fibonacci_series = function (n) 
+{
+    if (n<=0) {
+        return [0];
+    }
+  if (n===1) 
+  {
+    return [0, 1];
+  } 
+  else 
+  {
+    var s = fibonacci_series(n - 1);
+    s.push(s[s.length - 1] + s[s.length - 2]);
+    return s;
+  }
+};
+
+function findCurrentLevel(completions) {
+    
+    var level = completions.reduce((prev, current, index) => {
+        var level = prev;
+        if(current) {
+            level++;
+        } else {
+            level--;
+        }
+        return level;
+    }, 0);
+
+
+    var fibArray = fibonacci_series(level);
+
+    return fibArray[fibArray.length -1];
+
+}
 
 function RecallsDaysComponent(props) {
     return (
@@ -57,7 +92,8 @@ function RecallsComponent(props) {
     var days = [];
 
     props.recalls.forEach(recall => {
-        var day = (recall.level || 0) - differenceInCalendarDays(new Date(), addDays(new Date(), i));
+        var level = findCurrentLevel(recall.completions || []);
+        var day = level - differenceInCalendarDays(new Date(), addDays(new Date(), i));
         if(day<0) return;
         if(i<2) {
             i++;

@@ -21,4 +21,6 @@ function BoolIcon(props) {
     );
 }
 
-export default BoolIcon;
+export {
+    BoolIcon
+};

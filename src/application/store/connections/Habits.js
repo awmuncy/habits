@@ -1,18 +1,18 @@
 import { sortHabits } from "./resources/pageActions";
 
-export default {
-    props: () => state => {
+export default [
+    (store) => {
         return {
-            habits: state.habits,
-            filters: state.filters || [],
-            view_date: state.view_date
+            habits: store.habits,
+            filters: store.filters || [],
+            view_date: store.view_date
         }
     },
-    dispatches: dispatch => {
+    dispatch => {
         return {
             sortHabits: habits => {
                 dispatch(sortHabits(habits));
             },
         };
     }
-};
+];

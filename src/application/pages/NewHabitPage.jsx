@@ -3,11 +3,11 @@ import DatePicker from 'react-datepicker';
 import { IntervalSelect, HeadBack} from '../store/ConnectedComponents';
 
 import {
-  Redirect
+  Redirect, useHistory
 } from 'react-router-dom';
 
 
-class NewHabit extends Component {
+class C_NewHabitPage extends Component {
 
     constructor(props) {
         super(props);
@@ -18,6 +18,7 @@ class NewHabit extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.submitNewHabit = this.submitNewHabit.bind(this);
+        
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -143,6 +144,7 @@ class NewHabit extends Component {
         this.setState({closed: habit_id});
     }
 
+
     render() {
         if (this.state.closed) {
             var directTo = `/habit/${this.state.closed}`;
@@ -160,7 +162,7 @@ class NewHabit extends Component {
                             <form id="new_habit" className="new-habit-form"  onSubmit={this.submitNewHabit}>
                                 
                                 <h3>New Habit</h3>            
-                                <span className="nevermind" onClick={this.nevermind.bind(this)}>Cancel</span>        
+                                <Nevermind />
                                 <input type="hidden" value={this.state.startDate} placeholder="Begin Date" name="begin_date" />
                                 <DatePicker selected={this.state.startDate} timeFormat="Y-m-d" onChange={this.handleStartDateChange} />
                                 <input type="text" placeholder="Title" name="title" />
@@ -175,6 +177,14 @@ class NewHabit extends Component {
             </>
         );
     }
+}
+
+function Nevermind (props) {
+    var history = useHistory();
+
+    return (
+        <span className="nevermind" onClick={e=>history.goBack()}>Cancel</span> 
+    )
 }
 
 import { connect } from 'react-redux';
@@ -196,10 +206,8 @@ var connectors = {
     }
 };
 
-export default connect(connectors.props, connectors.dispatches)(NewHabit);
+var NewHabitPage = connect(connectors.props, connectors.dispatches)(C_NewHabitPage);
 
-{/* <div className="goals">
-<label>Short term: <input name="goal1" type="number" /></label>
-<label>Mid term: <input name="goal2" type="number" /></label>
-<label>Ultimate: <input name="goal3" type="number" /></label>
-</div> */}
+export {
+    NewHabitPage
+}

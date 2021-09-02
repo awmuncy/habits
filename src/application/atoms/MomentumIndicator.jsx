@@ -1,11 +1,12 @@
 import React from 'react';
 import { dynamicSortMultiple } from '../../helpers';
 import ProgressRings from "../atoms/ProgressRings"; // Route through central?
-
+import { connect } from 'react-redux';
 import { EssentialProgress } from "../store/ConnectedComponents";
+import { S_MomentumIndicator  } from '../store/connectors';
 
 
-var MomentumIndicator = props => {
+var C_MomentumIndicator = props => {
 
     props.canary;
     if(!props.goals || props.goals.length<1) return <EssentialProgress checkin={props.currentCheckin} />;
@@ -58,4 +59,8 @@ var MomentumIndicator = props => {
     );
 }
 
-export default MomentumIndicator;
+var MomentumIndicator = connect(...S_MomentumIndicator)(C_MomentumIndicator);
+
+export {
+    MomentumIndicator
+};

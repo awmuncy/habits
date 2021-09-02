@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-
-
-
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { S_HeaderDefault } from '../../store/connectors';
 
-
-class HeaderDefault extends Component {
+class C_HeaderDefault extends Component {
 
     constructor(props) {
 
@@ -58,5 +56,8 @@ class HeaderDefault extends Component {
     }
 }
 
-export default HeaderDefault;
+var HeaderDefault = connect(...S_HeaderDefault)(C_HeaderDefault);
 
+export {
+    HeaderDefault
+};

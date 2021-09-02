@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
-export default props => {
+var HeadBack = props => {
 
     var history = useHistory();
 
@@ -16,3 +16,7 @@ export default props => {
     );
 
 }
+
+export {
+    HeadBack
+};

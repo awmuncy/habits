@@ -1,13 +1,13 @@
 import { toggleNav } from "./resources/pageActions";
 
-export default {
-    props: state => {
+export default [
+    state => {
         return { navigation: state.navigation };
     },
-    dispatches: dispatch => {
+    dispatch => {
    
         return {
             toggleNav: toggle => dispatch(toggleNav())
         };
     }
-};
+];

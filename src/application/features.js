@@ -3,7 +3,8 @@ export default {
         "notifications",
         "beyond-habits",
         "pinned-habits",
-        "habit-goals"
+        "habit-goals",
+        "recalls"
     ],
     "default": [
 

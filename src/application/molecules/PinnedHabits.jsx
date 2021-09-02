@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Essentials } from '../store/ConnectedComponents';
-
-
+import { connect } from 'react-redux';
+import { S_PinnedHabits } from '../store/connectors';
 
 
 class PinnedHabit extends Component {
@@ -25,7 +25,7 @@ class PinnedHabit extends Component {
 }
 
 
-class PinnedHabits extends Component {
+class C_PinnedHabits extends Component {
 
     constructor(props) {
         super(props);
@@ -48,4 +48,8 @@ class PinnedHabits extends Component {
     }
 }
 
-export default PinnedHabits;
+var PinnedHabits = connect(...S_PinnedHabits)(C_PinnedHabits);
+
+export { 
+    PinnedHabits
+};

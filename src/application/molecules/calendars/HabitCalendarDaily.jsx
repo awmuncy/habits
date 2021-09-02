@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Datepicker from 'react-datepicker';
 import { format, parse, parseISO, addDays, getDay } from 'date-fns';
+import { connect } from 'react-redux';
+import { S_HabitsCalendar } from '../../store/connectors';
 
 // Daily (this one)
 // Daily w/ bonus (this one, probably)
@@ -14,7 +16,7 @@ import { format, parse, parseISO, addDays, getDay } from 'date-fns';
 
 // Quartly, annually
 
-var HabitCalendar = props => {
+var C_HabitCalendar = props => {
 
 
     var highlightWithRanges = [];
@@ -81,5 +83,8 @@ var HabitCalendar = props => {
     );
 }
 
+var HabitCalendarDaily = connect(...S_HabitsCalendar)(C_HabitCalendar);
 
-export default HabitCalendar;
+export {
+    HabitCalendarDaily
+};

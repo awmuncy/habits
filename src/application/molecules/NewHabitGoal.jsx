@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import Datepicker from 'react-datepicker';
 import { format } from 'date-fns';
 import { GithubPicker } from 'react-color';
+import { connect } from 'react-redux';
+import { S_NewHabitGoal } from '../store/connectors';
 
-export default props => {
+function C_NewHabitGoal(props) {
     var [goalDate, setGoalDate] = useState(new Date());
     var [strength, setStrength] = useState(0);
     var [startingPoint, setStartingPoint] = useState(0);
@@ -57,3 +59,9 @@ export default props => {
                     </tr>
     );
 }
+
+var NewHabitGoal = connect(...S_NewHabitGoal)(C_NewHabitGoal);
+
+export { 
+    NewHabitGoal
+};

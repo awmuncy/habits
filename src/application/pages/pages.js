@@ -6,11 +6,10 @@ import FeedbackPage from './FeedbackPage.jsx';
 import GetSubscriptionPage from './GetSubscriptionPage.jsx';
 import HabitsPage from './HabitsPage.jsx';
 import HomePage from './HomePage.jsx';
-import NewHabitPage from './NewHabitPage.jsx';
 import SingleHabitPage from './SingleHabitPage.jsx';
 import LoginPage from './Login.jsx';
 import RecallPage from './RecallPage.jsx';
-
+export { NewHabitPage } from './NewHabitPage.jsx';
 
 
 export {
@@ -22,7 +21,6 @@ export {
     GetSubscriptionPage,
     HabitsPage,
     HomePage,
-    NewHabitPage,
     SingleHabitPage,
     LoginPage,
     RecallPage

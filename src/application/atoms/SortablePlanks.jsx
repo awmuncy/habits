@@ -45,4 +45,6 @@ function SortablePlanks(props) {
     );
 }
 
-export default SortablePlanks;
+export {
+    SortablePlanks
+};

@@ -67,4 +67,6 @@ class Checkins extends Component {
 }
 
 
-export default Checkins;
+export {
+    Checkins
+};

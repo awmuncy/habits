@@ -1,5 +1,5 @@
-export default {
-    props: (store, props) => {
+export default [
+    (store, props) => {
 
         var habit_position = store.habits.findIndex(function(habit) {
             if(habit.id==props.id) {
@@ -15,7 +15,7 @@ export default {
             pinned_habits: store.pinned_habits
         }
     },
-    dispatches: () => {
+    () => {
         return {};
     }
-};
+];

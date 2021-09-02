@@ -1,12 +1,12 @@
 import { newHabitGoal } from "./resources/applicationActions";
 
-export default {
-    props: () => {
+export default [
+    () => {
         return {};
     },
-    dispatches: dispatch => {
+    dispatch => {
         return {
             newHabitGoal: (habit_id, goal) => dispatch(newHabitGoal(habit_id, goal)) 
         };
     }
-};
+];

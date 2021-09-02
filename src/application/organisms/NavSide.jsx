@@ -1,8 +1,49 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Permission from '../atoms/Permission';
+import NavItemConnector from '../store/connections/NavItem';
+import NavSideConnector from '../store/connections/NavSide';
 
-class AppNav extends Component {
+function NavItemComponent(props) {
+    
+    var [subNavOpen, setSubNavOpen] = useState(false);
+
+    return (
+        <li className={props.className + " navitem"}>
+            <div className="link-container">
+                <Link to={props.path} onClick={props.closeMenu}>
+                    <i className={`fa ${props.icon}`} aria-hidden="true"></i>
+                    {props.text}
+                </Link>
+                {props.children && (
+                    <i className={`fa fa-chevron-${subNavOpen ? "down" : "right"}`} onClick={e=>setSubNavOpen(!subNavOpen)}></i>
+                )}
+            </div>
+            {props.children && subNavOpen && (
+                <ul className="subnav">
+                    {props.children}
+                </ul>
+            )}
+        </li>
+    );
+}
+
+var NavItem = connect(...NavItemConnector)(NavItemComponent);
+var SubnavItem = connect(...NavItemConnector)(SubnavItemComponent);
+
+function SubnavItemComponent(props) {
+    return (
+        <li>
+            <Link to={props.path} onClick={props.closeMenu}>
+                {props.text}
+            </Link>
+        </li>
+    );
+}
+
+
+class C_NavSide extends Component {
 
     constructor(props) {
         super(props);
@@ -58,66 +99,31 @@ class AppNav extends Component {
                 </div>
 
             	<ul className="places">
-                    <li>
-                        <Link to="/home" onClick={this.props.closeMenu}>
-                            <i className="fa fa-home" aria-hidden="true"></i>
-                            Home
-                        </Link>
-                    </li>
+                    <NavItem path="/home" icon="fa-home" text="Home" />
+                    <NavItem path="/habits" icon="fa-rotate-left" text="Habits">
+                        <SubnavItem path="/new-habit" text="New Habit" />
+                        <SubnavItem path="/archived-habits" text="Archived Habits" />                        
+                    </NavItem>
                     <Permission feature="beyond-habits">
                     <li>
                         <Link to="/habits" onClick={this.props.closeMenu}>
                             <i className="fa fa-rotate-left" aria-hidden="true"></i>
                             Habits
-                        </Link>
+                        </Link>                        
                     </li>
                     </Permission>
-                    <li>
-                        <Link to="/archived-habits" onClick={this.props.closeMenu}>
-                            <i className="fa fa-inbox" aria-hidden="true"></i>
-                            Archived Habits
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/recalls" onClick={this.props.closeMenu}>
-                            <i className="fa fa-microchip" aria-hidden="true"></i>
-                            Recall
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/ephemeral-habits" onClick={this.props.closeMenu}>
-                            <i className="fa fa-magic" aria-hidden="true"></i>
-                            Ephermeral Habits
-                        </Link>
-                    </li>
-                    <li>
-                    	<Link to="/FAQ" onClick={this.props.closeMenu}>
-                            <i className="fa fa-question-circle" aria-hidden="true"></i>
-                        	Help
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/feedback" onClick={this.props.closeMenu}>
-                            <i className="fa fa-commenting" aria-hidden="true"></i>
-                            Feedback
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/account" onClick={this.props.closeMenu}>
-                            <i className="fa fa-user" aria-hidden="true"></i>
-                            Account
-                        </Link>
-                    </li>
-                    <li className="gold">
-                        <Link to="/get-subscription" onClick={this.props.closeMenu}>
-                            <i className="fa fa-trophy" aria-hidden="true"></i>
-                            Upgrade to premium                  
-                        </Link>
-                    </li>  
+                
+                    <NavItem path="/recalls" icon="fa-microchip" text="Recall" />
+                    <NavItem path="/FAQ" icon="fa-question-circle" text="Help" />
+                    <NavItem path="/feedback" icon="fa-commenting" text="Feedback" />
+                    <NavItem path="/account" icon="fa-user" text="Account" />
+                    <NavItem path="/get-subscription" icon="fa-trophy" text="Upgrade to premium " className="gold" />
                     <hr />
                     <li className={"sync-status " + this.props.syncStatus} onClick={()=>this.props.startSync()} >
-                    	<i className="fa fa-refresh" aria-hidden="true"></i>
-                    	<span className="sync-status-text">{syncStatusMessage}</span>
+                        <div className="link-container">
+                        	<i className="fa fa-refresh" aria-hidden="true"></i>
+                    	    <span className="sync-status-text">{syncStatusMessage}</span>
+                        </div>
                     </li>
                   
                 </ul>
@@ -138,4 +144,9 @@ class AppNav extends Component {
     }
 }
 
-export default AppNav;
+
+const NavSide = connect(...NavSideConnector)(C_NavSide);
+
+export { 
+    NavSide
+};

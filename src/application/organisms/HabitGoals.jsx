@@ -1,8 +1,9 @@
 import React from 'react';
 import { NewHabitGoal } from '../store/ConnectedComponents';
+import { S_NewHabitGoal } from '../store/connectors';
+import { connect } from 'react-redux';
 
-
-export default props => {
+function C_HabitGoals(props) {
     return (
         <div className="habit-goals">
             <table className="habit-goals--goals-list">
@@ -32,3 +33,9 @@ export default props => {
         </div>
     )
 }
+
+var HabitGoals = connect(...S_NewHabitGoal)(C_HabitGoals);
+
+export {
+    HabitGoals
+};

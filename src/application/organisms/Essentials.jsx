@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import { BoolIcon, MomentumIndicator } from "../store/ConnectedComponents";
+import { S_Essentials } from '../store/connectors';
 
-
-
-class Essentials extends Component {
+class EssentialsComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -91,4 +90,8 @@ class Essentials extends Component {
     }
 }
 
-export default Essentials;
+var Essentials = connect(...S_Essentials)(EssentialsComponent);
+
+export {
+    Essentials
+};

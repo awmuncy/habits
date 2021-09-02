@@ -1,7 +1,6 @@
 export default [
     (store, props) => {
         return {
-            id: "HELLO IM AN ID LOL"
         };
         // store should read store?
 
@@ -13,11 +12,8 @@ export default [
             newRecall: () => {
                 disaptch({type: "NEW_RECALL"});
             },
-            recallSuccessful: id => {
-                console.log(id);
-            },
-            recallFailed: id => {
-                console.log(id);
+            recallAttempt: (id, success) => {
+                dispatch({type: "RECALL_ATTEMPT", id, success});
             }
         }
     }

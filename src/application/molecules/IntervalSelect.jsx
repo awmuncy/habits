@@ -236,4 +236,6 @@ class IntervalSelect extends Component {
     }
 }
 
-export default IntervalSelect;
+export {
+    IntervalSelect
+};

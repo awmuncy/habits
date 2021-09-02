@@ -1,12 +1,12 @@
 import { pinHabit, unpinHabit, removeHabit, archiveHabit } from "./resources/applicationActions";
 
-export default {
-    props: () => state => {
+export default [
+    state => {
         return {
             pinned_habits: state.pinned_habits
         }
     },
-    dispatches: dispatch => {
+    dispatch => {
         return {
             pin: id => {
                 dispatch(pinHabit(id));
@@ -18,4 +18,4 @@ export default {
             archiveHabit: id => dispatch(archiveHabit(id))
         };
     }
-};
+];

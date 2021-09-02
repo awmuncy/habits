@@ -1,7 +1,7 @@
 import { doCheckin } from './resources/applicationActions';
 
-export default {
-    props: (store, props) => {
+export default [
+    (store, props) => {
 
         var habit_position = store.habits.findIndex(function(habit) {
             if(habit.id==props.habit_id) {
@@ -16,7 +16,7 @@ export default {
             beginDate: store.habits[habit_position].beginDate
         }
     },
-    dispatches: dispatch => {
+    dispatch => {
 
         return {
             checkIn: (habit_id, date, status) => {
@@ -27,4 +27,4 @@ export default {
         };
     
     }
-};
+];

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { SortableHandle } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import { Essentials } from '../store/ConnectedComponents';
+import { S_Habit } from '../store/connectors';
 
 
-
-
-class Habit extends Component {
+class C_Habit extends Component {
 
     constructor(props) {
         super(props);
@@ -40,5 +39,8 @@ class Habit extends Component {
     }
 }
 
+const Habit = connect(...S_Habit)(C_Habit);
 
-export default Habit;
+export {
+    Habit
+};

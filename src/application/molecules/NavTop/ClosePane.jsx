@@ -1,9 +1,11 @@
-import React, { Component, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Permission from '../../atoms/Permission';
 import { Redirect } from 'react-router-dom';
+import { S_ClosePane } from '../../store/connectors';
 
-var ClosePane = props => {
+var C_ClosePane = props => {
     var [deleted, deleteThis] = useState(false);
     if(deleted) return <Redirect to={"/home"}  />;
 
@@ -44,4 +46,8 @@ var ClosePane = props => {
     );
 }
 
-export default ClosePane;
+var ClosePane = connect(...S_ClosePane)(C_ClosePane);
+
+export {
+    ClosePane
+};

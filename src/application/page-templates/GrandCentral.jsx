@@ -54,10 +54,11 @@ class GrandCentral extends Component {
             <Route exact path="/get-subscription" component={GetSubscriptionPage} />
             <Route exact path="/checkout" component={CheckoutPage} />
             <Route exact path="/recalls" component={RecallPage} />
+            {/* <Route exact path="/new-recall" component={NewRecallPage} /> */}
 
             <Route path="/habits" component={HabitsPage} />
             <Route path="/feedback" component={FeedbackPage} />
-            <Route path="/new" component={NewHabitPage} />
+            <Route path="/new-habit" component={NewHabitPage} />
             
             <Route
               path='/habit/:id'
@@ -76,4 +77,6 @@ class GrandCentral extends Component {
     }
 }
 
-export default GrandCentral;
+export {
+  GrandCentral
+};

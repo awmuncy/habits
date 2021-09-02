@@ -1,28 +1,17 @@
-import React, { Component } from 'react';
-
-
+import React from 'react';
 import { NavSide, GrandCentral } from '../store/ConnectedComponents';
 
-class HabitTracker extends Component {
+function HabitTracker() {
 
-    constructor(props) {
-        super(props);
-    }
-
-
-
-    render() {
-
-
-        return (
-        
-            <div className="habit-tracker">           
-                <GrandCentral />            
-                <NavSide />
-            </div>
-
-        );
-    }
+    return (        
+        <div className="habit-tracker">           
+            <GrandCentral />            
+            <NavSide />
+        </div>
+    );
 }
 
-export default HabitTracker;
+
+export {
+    HabitTracker
+};

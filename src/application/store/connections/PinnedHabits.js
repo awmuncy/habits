@@ -1,10 +1,10 @@
-export default {
-    props: () => state => {
+export default [
+    () => state => {
         return {
             pinned_habits: state.pinned_habits
         }
     },
-    dispatches: () => {
+    () => {
         return {};
     }
-};
+];

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { ViewDate } from '../store/ConnectedComponents';
+import { S_Sorting } from '../store/connectors';
+import { connect } from 'react-redux';
 
-
-
-class Sorting extends Component {
+class C_Sorting extends Component {
 
 
     constructor(props) {
@@ -34,7 +34,12 @@ class Sorting extends Component {
     }
 }
 
-export default Sorting;
+
+var Sorting = connect(...S_Sorting)(C_Sorting);
+
+export {
+    Sorting
+};
 
         // View
             // Every day

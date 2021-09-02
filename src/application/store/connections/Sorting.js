@@ -9,15 +9,15 @@ import {
 } from './resources/pageActions';
 import { RECALCULATE_SCORES } from '../../../actions';
 
-export default {
-    props: () => (store, props) => {
+export default [
+    (store, props) => {
 
         return {
             filters: store.filters,
             view_date: store.view_date
         };
     },
-    dispatches: dispatch => {
+    dispatch => {
         return {
             change_view_date: (view_date) => {
                 dispatch(setViewDate(view_date));
@@ -44,4 +44,4 @@ export default {
             }
         };
     }
-};
+];

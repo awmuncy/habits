@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import { format, addDays } from 'date-fns';
+import { connect } from 'react-redux';
+import { S_ViewDate } from '../store/connectors';
 
-
-class ViewDate extends Component {
+class C_ViewDate extends Component {
 
 
     constructor(props) {
@@ -73,4 +74,8 @@ class ViewDate extends Component {
     }
 }
 
-export default ViewDate;
+var ViewDate = connect(...S_ViewDate)(C_ViewDate);
+
+export {
+    ViewDate
+};

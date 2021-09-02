@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
 import { PinnedHabits, Habit } from '../store/ConnectedComponents';
-
+import { connect } from 'react-redux';
+import { S_Habits } from '../store/connectors';
 
 function filterHabits(habits, filters) {
 
@@ -61,7 +62,7 @@ const SortableHabits = SortableContainer(({habits}) => {
 });
 
 
-class Habits extends Component {
+class C_Habits extends Component {
 
     constructor(props) {
         super(props);
@@ -119,7 +120,7 @@ class Habits extends Component {
                 <div className="no-habits">
                     <p>{message}</p>
                     <button className="btn btn--primary">
-                        <Link to="/new">
+                        <Link to="/new-habit">
                             Make a new habit!
                         </Link>
                     </button>
@@ -145,5 +146,8 @@ class Habits extends Component {
 	}
 }
 
+var Habits = connect(...S_Habits)(C_Habits);
 
-export default Habits;
+export {
+    Habits
+};

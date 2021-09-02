@@ -1,4 +1,4 @@
-import featureList from '../feaures';
+import featureList from '../features';
 
 import { connect } from 'react-redux';
 
@@ -8,7 +8,6 @@ var Permission = props => {
     if(props.subscription_type) {
         role = props.subscription_type;
     }
-    console.log(role);
     var features = featureList[role];
 
     if(features.includes(props.feature)) {

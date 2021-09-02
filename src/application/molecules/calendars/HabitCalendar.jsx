@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import Datepicker from 'react-datepicker';
-import { format, parse } from 'date-fns';
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { HabitCalendarDaily, /*HabitCalendarDays, HabitCalendarWeekly,*/ HabitCalendarMonthly/*,HabitCalendarQuarterly*/ } from '../../store/ConnectedComponents';
+import { HabitCalendarDaily, HabitCalendarMonthly } from '../../store/ConnectedComponents';
+import { S_HabitsCalendar } from '../../store/connectors';
 
 
-var HabitCalendar = props => {
+var C_HabitCalendar = props => {
 
     switch(props.profile.frame) {
         case "daily":
@@ -30,4 +30,8 @@ var HabitCalendar = props => {
 }
 
 
-export default HabitCalendar;
+var HabitCalendar = connect(...S_HabitsCalendar)(C_HabitCalendar);
+
+export { 
+    HabitCalendar
+};

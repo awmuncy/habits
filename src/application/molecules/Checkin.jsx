@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { IntervalFor } from '../store/ConnectedComponents';
+import { connect } from 'react-redux';
+import { S_Checkin } from '../store/connectors';
 
-
-class Checkin extends Component {
+class C_Checkin extends Component {
 
     constructor(props) {
         super(props);
@@ -44,4 +45,8 @@ class Checkin extends Component {
 }
 
 
-export default Checkin;
+var Checkin = connect(...S_Checkin)(C_Checkin);
+
+export {
+    Checkin
+};

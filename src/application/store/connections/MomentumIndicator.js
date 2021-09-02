@@ -1,6 +1,6 @@
 
-export default {
-    props: (store, props) => {
+export default [
+    (store, props) => {
 
         var habit_position = store.habits.findIndex(function(habit) {
             if(habit.id==props.habit_id) {
@@ -21,8 +21,8 @@ export default {
             score: currentCheckin ? currentCheckin.score : 0
         }
     },
-    dispatches: dispatch => {
+    dispatch => {
         return {
         }    
     }
-};
+];

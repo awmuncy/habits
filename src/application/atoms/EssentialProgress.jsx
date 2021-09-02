@@ -39,4 +39,6 @@ class EssentialProgress extends Component {
 }
 
 
-export default EssentialProgress;
+export {
+	EssentialProgress
+};

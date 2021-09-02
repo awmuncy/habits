@@ -10,15 +10,25 @@ import user from './user';
 
 var navigationOpen = (s=0,a)=>a.type===TOGGLE_NAV ? !s : s;
 
-var recalls = (store=null, action) => {
+var recalls = (store=[], action) => {
+
+
 	switch(action.type) { 
 		case HYDRATE_PAGE: 
 			return action.payload.recalls;
 		case "NEW_RECALL":
 			var newStore = store.slice();
-			
+
 			newStore.push(action.content);
 			return newStore;
+
+		case "RECALL_ATTEMPT": 
+			var newStore = store.slice();
+
+			newStore[newStore.findIndex(r => r.id==action.id)].completions.push(action.success);
+			
+
+			return [...newStore];
 		default: 
 			return store;
 	}
