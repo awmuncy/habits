@@ -193,16 +193,35 @@ var saveNewer = function(user, incoming) {
 
 }
 
+router.use("*", AuthenticateUser);
+
+async function AuthenticateUser(req, res, next) {
+
+  var currentUser;
+  
+  try {
+    currentUser = jwt_decode(req.body.userToken && req.body.userToken.value).id;
+
+    currentUser = User.findById(currentUser);
+
+  } catch (err) {
+    res.status(401).send("User not authenticated");
+  }
+
+
+  req.user = currentUser;
+  next();
+}
+
 router.post("/sync", (req, res) => {
 
   var incomingDispatches, currentUser, lastSync;
   
   incomingDispatches = req.body.dispatches;
-  currentUser = jwt_decode(req.body.userToken.value).id;
-  lastSync = req.body.lastSync ? req.body.lastSync.value : 0;
+  
 
-  User.findById(currentUser).then((user) => {
-
+  req.user.then((user) => {
+    var lastSync = req.body.lastSync ? req.body.lastSync.value : 0;
     var dispatchesFromNewer = saveNewer(user, incomingDispatches);
     var dispatches = findStored(user, lastSync);
     
