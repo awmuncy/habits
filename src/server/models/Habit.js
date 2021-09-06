@@ -1,27 +1,27 @@
-const mongoose = require("mongoose");
-const {Checkin, CheckinModel} = require("./Checkin.js");
-const {Goal, GoalModel} = require("./HabitGoal.js");
+const mongoose = require('mongoose');
+const {Checkin, CheckinModel} = require('./Checkin.js');
+const {Goal, GoalModel} = require('./HabitGoal.js');
 
 const Schema = mongoose.Schema;
-var Habit;
+let Habit;
 // Create Schema
 const HabitSchema = new Schema({
   title: {
-    type: String,
+    type    : String,
     required: true
   },
   position: {
     type: Number
   },
   beginDate: {
-    type: Date,
+    type    : Date,
     required: true
   },
   deleted: {
     type: Boolean
   },
   checkins: {
-    type: [Checkin],
+    type   : [Checkin],
     default: []
   },
   profile: {
@@ -41,46 +41,46 @@ const HabitSchema = new Schema({
 HabitSchema.methods.syncCheckins = function(newCheckins) {
 
   newCheckins.forEach(newCheckin => {
-    var exists = false;
+    let exists = false;
     newCheckin.synced_at = new Date();
 
     this.checkins.forEach((storedCheckin, index) => {
-      if(storedCheckin.checkinFor == newCheckin.checkinFor) {
-        if(storedCheckin.isNewerThan(newCheckin)){
+      if (storedCheckin.checkinFor === newCheckin.checkinFor) {
+        if (storedCheckin.isNewerThan(newCheckin)) {
           this.checkins[index] = newCheckin;
-          
-        }        
+
+        }
         exists = true;
       }
     });
-    if(!exists) {
+    if (!exists) {
       this.checkins.push(newCheckin);
     }
-  });  
+  });
 
 };
 
 HabitSchema.methods.syncGoals = function(newGoals) {
 
   newGoals.forEach(newGoal => {
-    var exists = false;
+    let exists = false;
     newGoal.synced_at = new Date();
     this.goals.forEach((storedGoal, index) => {
-      if(storedGoal._id == newGoal._id) {
-        if(storedGoal.isNewerThan(newGoal)){
-          this.goal[index] = newGoal;          
-        }        
+      if (storedGoal._id === newGoal._id) {
+        if (storedGoal.isNewerThan(newGoal)) {
+          this.goal[index] = newGoal;
+        }
         exists = true;
       }
     });
-    if(!exists) {
+    if (!exists) {
       this.goals.push(newGoal);
     }
-  });  
+  });
 
 };
 
 module.exports = {
-  Habit: HabitSchema,
-  HabitModel: mongoose.model("habits", HabitSchema)
+  Habit     : HabitSchema,
+  HabitModel: mongoose.model('habits', HabitSchema)
 };

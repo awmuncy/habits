@@ -1,38 +1,42 @@
-const mongoose = require("mongoose");
-const {Habit} = require("./Habit.js");
-const {Recall} = require("./Recall.js");
+const mongoose = require('mongoose');
+const {Habit} = require('./Habit.js');
+const {Recall} = require('./Recall.js');
+let { EphemeralSchema } = require('./Ephemeral.model');
 const Schema = mongoose.Schema;
-var ObjectId = mongoose.Schema.Types.ObjectId;
-var toObjectId = mongoose.Types.ObjectId;
-var User;
+let ObjectId = mongoose.Schema.Types.ObjectId;
+let toObjectId = mongoose.Types.ObjectId;
+let User;
 import { SAVE_HABIT } from '../../actions';
 
 // Create Schema
 const UserSchema = new Schema({
   name: {
-    type: String,
+    type    : String,
     required: true
   },
   email: {
-    type: String,
+    type    : String,
     required: true
   },
   password: {
-    type: String,
+    type    : String,
     required: true
   },
   date: {
-    type: Date,
+    type   : Date,
     default: Date.now
   },
   habits: {
-      type: [Habit]
+    type: [Habit]
   },
   pinned_habits: {
     type: [ObjectId]
   },
   recalls: {
-    type: [Recall],
+    type: [Recall]
+  },
+  ephemeral: {
+    type: [EphemeralSchema]
   },
   subscription_type: {
     type: String
@@ -42,13 +46,13 @@ const UserSchema = new Schema({
 
 UserSchema.methods.syncTopLevelItems = function(incomingDispatches) {
   incomingDispatches.forEach(dispatch => {
-    var storeType;
+    let storeType;
     switch (dispatch.type) {
-      case SAVE_HABIT: 
-        storeType = "habits";
-        break;
-      default: 
-        return;
+    case SAVE_HABIT:
+      storeType = 'habits';
+      break;
+    default:
+      return;
     }
 
     dispatch.payload._id = dispatch.payload.id;
@@ -56,10 +60,10 @@ UserSchema.methods.syncTopLevelItems = function(incomingDispatches) {
 
 
 
-    var storeItemIndex = this[storeType].findIndex(storableItem => {
-      return storableItem._id==dispatch.payload._id;
+    let storeItemIndex = this[storeType].findIndex(storableItem => {
+      return storableItem._id === dispatch.payload._id;
     });
-    if(storeItemIndex==-1) {
+    if (storeItemIndex === -1) {
       this[storeType].push(dispatch.payload);
     } else {
       this[storeType][storeItemIndex] = Object.assign(this[storeType][storeItemIndex], dispatch.payload);
@@ -67,6 +71,6 @@ UserSchema.methods.syncTopLevelItems = function(incomingDispatches) {
 
 
   });
-}
+};
 
-module.exports = User = mongoose.model("users", UserSchema);
+module.exports = User = mongoose.model('users', UserSchema);

@@ -1,14 +1,14 @@
-const express = require("express");
-const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-var { feedbackEmail } = require("../mail/email");
+const express = require('express');
+const router = new express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+let { feedbackEmail } = require('../mail/email');
 
 
-var PasswordReset = require("../models/PasswordReset");
-var User = require("../models/User");
+let PasswordReset = require('../models/PasswordReset');
+let User = require('../models/User');
 
-import { PasswordResetTemplate } from "../useHandlebars";
+import { PasswordResetTemplate } from '../useHandlebars';
 
 
 
@@ -17,19 +17,18 @@ import { PasswordResetTemplate } from "../useHandlebars";
 router.post('/', (req, res) => {
 
 
-    var currentUser = req.body.userToken;
-  
-
-    User.findById(currentUser).then((user) => {
-
-        feedbackEmail(req.body.feedback, user.name, user.email);
-        res.redirect("/home");
-    });
-
-    
+  let currentUser = req.body.userToken;
 
 
-    
+  User.findById(currentUser).then((user) => {
+
+    feedbackEmail(req.body.feedback, user.name, user.email);
+    res.redirect('/home');
+  });
+
+
+
+
 });
 
 module.exports = router;

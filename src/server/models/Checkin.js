@@ -1,14 +1,14 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-var Habit;
+let Habit;
 // Create Schema
 const CheckinSchema = new Schema({
   checkinFor: {
-    type: String,
+    type    : String,
     required: true
   },
   at: {
-    type: Date,
+    type    : Date,
     required: true
   },
   synced_at: {
@@ -23,15 +23,15 @@ const CheckinSchema = new Schema({
 });
 
 CheckinSchema.methods.isNewerThan = function(incoming) {
-  var currentlyStored = this;
+  let currentlyStored = this;
 
-  if(incoming.at > currentlyStored.at) {
+  if (incoming.at > currentlyStored.at) {
     return this;
   }
   return null;
 };
 
 module.exports = {
-  Checkin: CheckinSchema,
-  CheckinModel: mongoose.model("checkins", CheckinSchema)
+  Checkin     : CheckinSchema,
+  CheckinModel: mongoose.model('checkins', CheckinSchema)
 };

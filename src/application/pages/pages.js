@@ -13,15 +13,15 @@ export { NewHabitPage } from './NewHabitPage.jsx';
 export { NewRecallPage } from './NewRecallPage.jsx';
 
 export {
-    AccountPage,
-    ArchivedHabitsPage,
-    CheckoutPage,
-    FAQPage,
-    FeedbackPage,
-    GetSubscriptionPage,
-    HabitsPage,
-    HomePage,
-    SingleHabitPage,
-    LoginPage,
-    RecallPage
+  AccountPage,
+  ArchivedHabitsPage,
+  CheckoutPage,
+  FAQPage,
+  FeedbackPage,
+  GetSubscriptionPage,
+  HabitsPage,
+  HomePage,
+  SingleHabitPage,
+  LoginPage,
+  RecallPage
 };

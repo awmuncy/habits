@@ -6,20 +6,20 @@ if ('serviceWorker' in navigator) {
 }
 
 async function run() {
-  const registration = await navigator.serviceWorker.
-    register('/service-worker.js');
+  const registration = await navigator.serviceWorker
+    .register('/service-worker.js');
 
 
 
-  const subscription = await registration.pushManager.
-    subscribe({
-      userVisibleOnly: true,
+  const subscription = await registration.pushManager
+    .subscribe({
+      userVisibleOnly     : true,
       applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
     });
 
   await fetch('/subscribe', {
-    method: 'POST',
-    body: JSON.stringify(subscription),
+    method : 'POST',
+    body   : JSON.stringify(subscription),
     headers: {
       'content-type': 'application/json'
     }
@@ -31,7 +31,7 @@ async function run() {
 function urlBase64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);
   const base64 = (base64String + padding)
-    .replace(/\-/g, '+')
+    .replace(/-/g, '+')
     .replace(/_/g, '/');
 
   const rawData = window.atob(base64);
@@ -45,29 +45,30 @@ function urlBase64ToUint8Array(base64String) {
 
 
 if ('serviceWorker' in navigator) {
-  var checkForUpdate = async () => {
-    var registration = await navigator.serviceWorker.register('/service-worker.js');
+  let checkForUpdate = async() => {
+    let registration = await navigator.serviceWorker.register('/service-worker.js');
     registration.onupdatefound = () => {
-      var installingWorker = registration.installing;
+      let installingWorker = registration.installing;
       installingWorker.onstatechange = () => {
-        if(installingWorker.state=='installed' 
-          && navigator.serviceWorker.controller) return true;
-        
+        if (installingWorker.state === 'installed'
+          && navigator.serviceWorker.controller) { return true; }
+
         return false;
-      }
-    }
-  }
+      };
+    };
+  };
 
 
   checkForUpdate()
-  .then(isAvailable => {
-    if (isAvailable) {
-      if(confirm("A new version of the app is available. Refresh?")) {
-        navigator.serviceWorker.controller.postMessage({action: "skipWaiting"});
-        location.reload();
+    .then(isAvailable => {
+      if (isAvailable) {
+        if (confirm('A new version of the app is available. Refresh?')) {
+          navigator.serviceWorker.controller.postMessage({action: 'skipWaiting'});
+          location.reload();
+        }
       }
-    }
-  });
+    });
 } else {
-    console.log('Service Worker is not supported by browser.');
-}   
+  // eslint-disable-next-line no-console
+  console.log('Service Worker is not supported by browser.');
+}

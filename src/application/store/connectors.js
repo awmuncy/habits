@@ -11,3 +11,4 @@ export { default as S_Sorting } from './connections/Sorting';
 export { default as S_Checkin } from './connections/Checkin';
 export { default as S_NewHabitGoal } from './connections/NewHabitGoal';
 export { default as S_HabitGoals } from './connections/HabitGoals';
+export { default as S_EphemeralForm } from './connections/EphemeralForm';

@@ -1,10 +1,10 @@
 import station from './station';
-var v = "0.0.72";
+let v = '0.0.72';
 
 
 station();
 
-var CACHE_NAME = 'Habit'
+let CACHE_NAME = 'Habit';
 
 const urlsToCache = [
   '/favicon.ico',
@@ -29,7 +29,7 @@ const urlsToCache = [
   '/js/service-worker-install.js'
 ];
 const urlsPatternsToCache = [
-  "\/habit\/(([\\d|[a-z]){24}|([\\d|[a-z]){6})"
+  '/habit/(([\\d|[a-z]){24}|([\\d|[a-z]){6})'
 ];
 
 const home_urls = [
@@ -40,7 +40,8 @@ const home_urls = [
 
 
 self.addEventListener('activate', event => {
-  console.log("[SW] Actived");
+  // eslint-disable-next-line no-console
+  console.log('[SW] Actived');
   const currentCachelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys()
@@ -69,20 +70,20 @@ self.addEventListener('install', function(event) {
           })
           .then(assets => {
             cache.addAll(urlsToCache);
-          })
+          });
       })
   );
 });
 
 function matchesPresetUrls(urlString, presetUrls) {
-  var urlObject = new URL(urlString);
-  var matchesExistingPatterns = false;
+  let urlObject = new URL(urlString);
+  let matchesExistingPatterns = false;
   urlsPatternsToCache.forEach(pattern => {
-    if(urlObject.pathname.match(pattern)) {
+    if (urlObject.pathname.match(pattern)) {
       matchesExistingPatterns = true;
     };
   });
-  
+
   return matchesExistingPatterns;
 }
 
@@ -90,11 +91,11 @@ function matchesPresetUrls(urlString, presetUrls) {
 
 self.addEventListener('push', ev => {
   const data = ev.data.json();
-  console.log('Got push', data);
-  var close = self.registration.showNotification(data.title, {
-    body: data.body || 'Message from HabitApp',
-    icon: data.icon || '/images/logo.png',
-    image: data.image,
+
+  let close = self.registration.showNotification(data.title, {
+    body  : data.body || 'Message from HabitApp',
+    icon  : data.icon || '/images/logo.png',
+    image : data.image,
     action: 'open'
   });
   ev.waitUntil(close);
@@ -102,11 +103,12 @@ self.addEventListener('push', ev => {
 });
 
 self.addEventListener('message', ev => {
-  if(ev.data.type!=="newNotification") return;
-  var title = "Hi!";
-  
-  var close = self.registration.showNotification(title, {
-    body: "Hello",
+  if (ev.data.type !== 'newNotification') { return; }
+  let title = 'Hi!';
+
+  let close = self.registration.showNotification(title, {
+    body       : 'Hello',
+    // eslint-disable-next-line
     showTrigger: new TimestampTrigger(new Date().getTime() + 3 * 1000)
   });
 
@@ -115,18 +117,18 @@ self.addEventListener('message', ev => {
 
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
-
-  clients.openWindow("/habits");
+  // eslint-disable-next-line
+  clients.openWindow('/habits');
 }, false);
 
 self.addEventListener('fetch', function(event) {
 
-  var request = event.request;
-  if(matchesPresetUrls(request.url, home_urls)) request = "/home";
+  let request = event.request;
+  if (matchesPresetUrls(request.url, home_urls)) { request = '/home'; }
 
   event.respondWith(
     caches.open(CACHE_NAME).then(function(cache) {
-      return cache.match(request, {ignoreSearch:true}).then(function (response) {
+      return cache.match(request, {ignoreSearch: true}).then(function(response) {
         return response || fetch(event.request).then(function(response) {
           // cache.put(event.request, response.clone());
           return response;

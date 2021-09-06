@@ -1,13 +1,13 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-var Habit;
+let Habit;
 // Create Schema
 const GoalSchema = new Schema({
   strength: {
-      type: Number
+    type: Number
   },
   goalDate: {
-    type: String,
+    type    : String,
     required: true
   },
   startingPoint: {
@@ -17,7 +17,7 @@ const GoalSchema = new Schema({
     type: String
   },
   modified_at: {
-    type: Date,
+    type    : Date,
     required: true
   },
   synced_at: {
@@ -26,15 +26,15 @@ const GoalSchema = new Schema({
 });
 
 GoalSchema.methods.isNewerThan = function(incoming) {
-  var currentlyStored = this;
+  let currentlyStored = this;
 
-  if(incoming.modified_at > currentlyStored.modified_at) {
+  if (incoming.modified_at > currentlyStored.modified_at) {
     return this;
   }
   return null;
 };
 
 module.exports = {
-  Goal: GoalSchema,
-  GoalModel: mongoose.model("goals", GoalSchema)
+  Goal     : GoalSchema,
+  GoalModel: mongoose.model('goals', GoalSchema)
 };

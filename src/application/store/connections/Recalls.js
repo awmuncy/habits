@@ -1,10 +1,10 @@
 export default [
-    (store, props) => {
-        return {
-            recalls: store.recalls
-        }
-    },
-    dispatch => {
-        return {}
-    }
+  (store, props) => {
+    return {
+      recalls: store.recalls
+    };
+  },
+  dispatch => {
+    return {};
+  }
 ];

@@ -1,13 +1,13 @@
 export default {
-    props: (store) => {
+  props: (store) => {
 
-        var associations = Array.isArray(store.associations) ? store.associations : [];
+    let associations = Array.isArray(store.associations) ? store.associations : [];
 
-        return {
+    return {
 
-        }
-    },
-    dispatches: () => {
-        return {};
-    },
-}
+    };
+  },
+  dispatches: () => {
+    return {};
+  }
+};

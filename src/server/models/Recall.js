@@ -1,24 +1,24 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-var Recall;
+let Recall;
 // Create Schema
 const RecallSchema = new Schema({
   title: {
-    type: String,
+    type    : String,
     required: true
   },
   body: {
-      type: String,
-      required: true
+    type    : String,
+    required: true
   },
   recalls: {
-      type: Array,
-      default: []
+    type   : Array,
+    default: []
   }
 });
 
 module.exports = {
-    Recall: RecallSchema,
-    RecallModel: mongoose.model("Recalls", RecallSchema)
+  Recall     : RecallSchema,
+  RecallModel: mongoose.model('Recalls', RecallSchema)
 };

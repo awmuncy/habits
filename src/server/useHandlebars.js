@@ -1,45 +1,45 @@
 import handlebars from 'handlebars';
 import fs from 'fs';
-import path from "path";
+import path from 'path';
 
 
-var createTemplate = (templateLocation=null) => {
-    var template = fs.readFileSync(path.resolve(__dirname, templateLocation), 'utf-8');
-    return handlebars.compile(template);
-}
-
-var createPartial = (templateLocation=null, partialName) => {
-    var template = fs.readFileSync(path.resolve(__dirname, templateLocation), 'utf-8');
-    handlebars.registerPartial(partialName, template);
-}
-
-createPartial("../site/templates/partials/site.html", "site");
-createPartial("../site/templates/partials/register.html", "registerForm");
-
-var App = data => {
-    return createTemplate("../site/templates/application.html")(data);
-}
-
-var Homepage = data => {
-    return createTemplate("../site/templates/unauth.html")(data);
-}
-
-var PasswordResetTemplate = data => {
-    return createTemplate("../site/templates/PasswordReset.html")(data);
+let createTemplate = (templateLocation = null) => {
+  let template = fs.readFileSync(path.resolve(__dirname, templateLocation), 'utf-8');
+  return handlebars.compile(template);
 };
 
-var LoginPage = data => {
-    return createTemplate("../site/templates/LoginPage.html")(data);
-}
+let createPartial = (templateLocation = null, partialName) => {
+  let template = fs.readFileSync(path.resolve(__dirname, templateLocation), 'utf-8');
+  handlebars.registerPartial(partialName, template);
+};
 
-var LegalPage = data => {
-    return createTemplate('../site/templates/LegalPage.html')(data);
-}
+createPartial('../site/templates/partials/site.html', 'site');
+createPartial('../site/templates/partials/register.html', 'registerForm');
+
+let appTemplate = data => {
+  return createTemplate('../site/templates/application.html')(data);
+};
+
+let homepageTemplate = data => {
+  return createTemplate('../site/templates/unauth.html')(data);
+};
+
+let passwordResetTemplate = data => {
+  return createTemplate('../site/templates/PasswordReset.html')(data);
+};
+
+let loginPage = data => {
+  return createTemplate('../site/templates/LoginPage.html')(data);
+};
+
+let legalPage = data => {
+  return createTemplate('../site/templates/LegalPage.html')(data);
+};
 
 export {
-    App,
-    Homepage,
-    PasswordResetTemplate,
-    LoginPage,
-    LegalPage
-}
+  appTemplate,
+  homepageTemplate,
+  passwordResetTemplate,
+  loginPage,
+  legalPage
+};

@@ -1,4 +1,4 @@
-export { Habit } from '../organisms/Habit.jsx'
+export { Habit } from '../organisms/Habit.jsx';
 export { Habits } from '../organisms/Habits.jsx';
 export { Essentials } from '../organisms/Essentials.jsx';
 export { HabitCalendarDaily } from '../molecules/calendars/HabitCalendarDaily.jsx';
