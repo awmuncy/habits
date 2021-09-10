@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { newRecall } from '../store/connections/resources/applicationActions';
+import { newRecall } from '../store/connections/resources/applicationActions.js';
 import { connect } from 'react-redux';
 
 function C_NewRecallForm(props) {

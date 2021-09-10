@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
-import { IntervalSelect, HeadBack} from '../store/ConnectedComponents';
+import { IntervalSelect, HeadBack} from '../store/ConnectedComponents.js';
 
 import {
   Redirect, useHistory
@@ -188,7 +188,7 @@ function Nevermind (props) {
 }
 
 import { connect } from 'react-redux';
-import { newHabit } from '../store/connections/resources/applicationActions';
+import { newHabit } from '../store/connections/resources/applicationActions.js';
 
 var connectors = {
     props: () => {

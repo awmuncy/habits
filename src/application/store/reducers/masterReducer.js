@@ -4,9 +4,9 @@ import habits from './habits.js';
 import filters from './filters.js';
 import view_date from './view_date.js';
 import pinned_habits from './pinned.js';
-import { HYDRATE_PAGE, TOGGLE_NAV } from '../../../actions';
-import syncStatus from './sync_status';
-import user from './user';
+import { HYDRATE_PAGE, TOGGLE_NAV } from '../../../actions.js';
+import syncStatus from './sync_status.js';
+import user from './user.js';
 
 let navigationOpen = (s = 0, a)=>a.type === TOGGLE_NAV ? !s : s;
 

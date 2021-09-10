@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Permission from '../../atoms/Permission';
+import Permission from '../../atoms/Permission.jsx';
 import { Redirect } from 'react-router-dom';
-import { S_ClosePane } from '../../store/connectors';
+import { S_ClosePane } from '../../store/connectors.js';
 
 var C_ClosePane = props => {
     var [deleted, deleteThis] = useState(false);

@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = new express.Router();
 
-import { DO_CHECKIN, NEW_HABIT, SAVE_CHECKIN } from '../../../actions';
+import { DO_CHECKIN, NEW_HABIT, SAVE_CHECKIN } from '../../../actions.js';
 
 
 let findStored = function(user, lastSync) {
@@ -93,7 +93,7 @@ let saveNewer = function(user, incoming) {
 
 
 router.post('/sync', (req, res) => {
-  console.log("SYnc?");
+
   req.user.then(user => {
     user.ephemerals.push({});
     user.save();
@@ -117,4 +117,4 @@ router.post('/sync', (req, res) => {
 
 });
 
-module.exports = router;
+export default router;

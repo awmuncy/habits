@@ -1,4 +1,4 @@
-import {HYDRATE_PAGE} from '../../../actions';
+import {HYDRATE_PAGE} from '../../../actions.js';
 
 export default (store = {}, action) => {
   let newStore = {};

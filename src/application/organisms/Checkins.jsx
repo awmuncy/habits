@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Checkin } from '../store/ConnectedComponents';
+import { Checkin } from '../store/ConnectedComponents.js';
 
 
 

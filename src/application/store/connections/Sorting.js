@@ -6,8 +6,8 @@ import {
   filterToOutstanding,
   clearOutstandingFilters
 
-} from './resources/pageActions';
-import { RECALCULATE_SCORES } from '../../../actions';
+} from './resources/pageActions.js';
+import { RECALCULATE_SCORES } from '../../../actions.js';
 
 export default [
   (store, props) => {

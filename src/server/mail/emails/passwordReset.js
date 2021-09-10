@@ -1,4 +1,4 @@
-module.exports = (token) => {
+export default (token) => {
 
   return `
         <p>To reset your password, follow this link:</p>

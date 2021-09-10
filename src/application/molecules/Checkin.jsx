@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { IntervalFor } from '../store/ConnectedComponents';
+import { IntervalFor } from '../store/ConnectedComponents.js';
 import { connect } from 'react-redux';
-import { S_Checkin } from '../store/connectors';
+import { S_Checkin } from '../store/connectors.js';
 
 class C_Checkin extends Component {
 

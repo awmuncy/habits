@@ -1,17 +1,27 @@
-let express = require('express');
-let path = require('path');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+import express from 'express';
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+
+
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 let app = express();
 let site = express();
-const passport = require('passport');
-const users = require('./routes/api');
-const env = require('dotenv').config().parsed;
-import docs from './docs/docs';
+import passport from 'passport';
+import users from './routes/api.js';
+
+import dotenv from 'dotenv';
+const env = dotenv.config().parsed;
+import docs from './docs/docs.js';
 
 
-import notifications from './notifications';
-import { appTemplate, homepageTemplate, legalPage } from './useHandlebars';
+import notifications from './notifications.js';
+import { appTemplate, homepageTemplate, legalPage } from './useHandlebars.js';
 
 function environment(req, res, next) {
   res.writeHead(200, { 'Content-Type': 'application/javascript' });
@@ -40,7 +50,8 @@ site.use(
 site.use(bodyParser.json());
 
 /* ^ I don't have know what these do ^ */
-app.use('/payments', require('./routes/payments'));
+import payments from './routes/payments.js';
+app.use('/payments', payments);
 
 const port = 5499;
 // eslint-disable-next-line no-console
@@ -52,14 +63,18 @@ site.listen(sitePort, () => console.log(`Site server up and running on port ${si
 // Passport middleware
 app.use(passport.initialize());
 // Passport config
-require('./validation/passport')(passport);
+import validation from './validation/passport.js';
+
+validation(passport);
 // Routes
 app.use('/api', users);
 site.use('/api', users);
 
-app.use('/reset-password', require('./routes/passwordReset'));
+import resetPassword from './routes/passwordReset.js';
+app.use('/reset-password', resetPassword);
 
-app.use('/feedback', require('./routes/feedback'));
+import feedback from './routes/feedback.js';
+app.use('/feedback', feedback);
 
 
 app.use(express.static(path.resolve(__dirname, '../../dist/public')));
@@ -113,7 +128,8 @@ function toHome(route) {
   });
 }
 
-const db = require('./config/keys').mongoURI;
+import keys from './config/keys.js';
+const db = keys.mongoURI;
 
 mongoose
   .connect(

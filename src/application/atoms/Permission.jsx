@@ -1,4 +1,4 @@
-import featureList from '../features';
+import featureList from '../features.js';
 
 import { connect } from 'react-redux';
 

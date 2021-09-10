@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from '../store/reducers/masterReducer';
+import rootReducer from '../store/reducers/masterReducer.js';
 import thunk from 'redux-thunk';
-import { dispatchChannel, hydrate, syncStart } from './connections/resources/applicationActions';
-import { HYDRATE_PAGE } from '../../actions';
+import { dispatchChannel, hydrate, syncStart } from './connections/resources/applicationActions.js';
+import { HYDRATE_PAGE } from '../../actions.js';
 let middleware;
 
 if (window.hasOwnProperty('__REDUX_DEVTOOLS_EXTENSION__')) {

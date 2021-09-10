@@ -1,4 +1,4 @@
-import { hydrateScores } from '../../reducers/calculateScores';
+import { hydrateScores } from '../../reducers/calculateScores.js';
 import { ObjectID } from 'bson';
 import {
   DO_CHECKIN,
@@ -8,7 +8,7 @@ import {
   NEW_HABIT,
   UNPIN_HABIT,
   PIN_HABIT,
-  LOGOUT } from '../../../../actions';
+  LOGOUT } from '../../../../actions.js';
 import {BroadcastChannel } from 'broadcast-channel';
 import { format } from 'date-fns';
 

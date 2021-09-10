@@ -1,9 +1,9 @@
 import React from 'react';
-import { dynamicSortMultiple } from '../../helpers';
-import ProgressRings from "../atoms/ProgressRings"; // Route through central?
+import { dynamicSortMultiple } from '../../helpers.js';
+import ProgressRings from "../atoms/ProgressRings.jsx"; // Route through central?
 import { connect } from 'react-redux';
-import { EssentialProgress } from "../store/ConnectedComponents";
-import { S_MomentumIndicator  } from '../store/connectors';
+import { EssentialProgress } from "../store/ConnectedComponents.js";
+import { S_MomentumIndicator  } from '../store/connectors.js';
 
 
 var C_MomentumIndicator = props => {

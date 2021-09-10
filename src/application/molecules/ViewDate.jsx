@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import { format, addDays } from 'date-fns';
 import { connect } from 'react-redux';
-import { S_ViewDate } from '../store/connectors';
+import { S_ViewDate } from '../store/connectors.js';
 
 class C_ViewDate extends Component {
 

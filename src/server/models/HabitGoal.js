@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 let Habit;
 // Create Schema
@@ -34,7 +34,10 @@ GoalSchema.methods.isNewerThan = function(incoming) {
   return null;
 };
 
-module.exports = {
-  Goal     : GoalSchema,
-  GoalModel: mongoose.model('goals', GoalSchema)
+const Goal = GoalSchema;
+const GoalModel = mongoose.model('goals', GoalSchema);
+
+export {
+  Goal,
+  GoalModel
 };

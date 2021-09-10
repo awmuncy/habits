@@ -1,5 +1,5 @@
-import { syncStart, logout } from './resources/applicationActions';
-import { toggleNav } from './resources/pageActions';
+import { syncStart, logout } from './resources/applicationActions.js';
+import { toggleNav } from './resources/pageActions.js';
 
 
 export default [

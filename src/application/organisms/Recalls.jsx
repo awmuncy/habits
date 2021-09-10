@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { RecallCard } from '../store/ConnectedComponents';
+import { RecallCard } from '../store/ConnectedComponents.js';
 import { differenceInCalendarDays, addDays } from 'date-fns';
 
 var testDays = [
@@ -113,7 +113,7 @@ function RecallsComponent(props) {
     );
 }
 
-import RecallsConnector from '../store/connections/Recalls';
+import RecallsConnector from '../store/connections/Recalls.js';
 
 var Recalls = connect(...RecallsConnector)(RecallsComponent);
 

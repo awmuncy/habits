@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
 const router = new express.Router();
-const usersRoutes = require('./api/users');
-const authRoutes = require('./api/authentication');
-const apiMiddleware = require('./api/apiMiddleware');
+import usersRoutes from './api/users.js';
+import authRoutes from './api/authentication.js';
+import apiMiddleware from './api/apiMiddleware.js';
 
 router.use('/auth', authRoutes);
 router.use('*', apiMiddleware);
 router.use('/users', usersRoutes);
 // router.use('/ephemeral', ephemeralRoutes);
 
-module.exports = router;
+export default router;

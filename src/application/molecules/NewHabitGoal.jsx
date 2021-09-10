@@ -3,7 +3,7 @@ import Datepicker from 'react-datepicker';
 import { format } from 'date-fns';
 import { GithubPicker } from 'react-color';
 import { connect } from 'react-redux';
-import { S_NewHabitGoal } from '../store/connectors';
+import { S_NewHabitGoal } from '../store/connectors.js';
 
 function C_NewHabitGoal(props) {
     var [goalDate, setGoalDate] = useState(new Date());

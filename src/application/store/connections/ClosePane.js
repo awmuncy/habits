@@ -1,4 +1,4 @@
-import { pinHabit, unpinHabit, removeHabit, archiveHabit } from './resources/applicationActions';
+import { pinHabit, unpinHabit, removeHabit, archiveHabit } from './resources/applicationActions.js';
 
 export default [
   state => {

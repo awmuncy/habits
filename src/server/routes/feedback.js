@@ -1,14 +1,14 @@
-const express = require('express');
+import express from 'express';
 const router = new express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-let { feedbackEmail } = require('../mail/email');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { feedbackEmail } from '../mail/email.js';
 
 
-let PasswordReset = require('../models/PasswordReset');
-let User = require('../models/User');
+import PasswordReset from '../models/PasswordReset.js';
+import User from '../models/User.js';
 
-import { PasswordResetTemplate } from '../useHandlebars';
+import { passwordResetTemplate } from '../useHandlebars.js';
 
 
 
@@ -31,4 +31,4 @@ router.post('/', (req, res) => {
 
 });
 
-module.exports = router;
+export default router;

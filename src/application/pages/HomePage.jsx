@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { Habits, Sorting, HeaderDefault, FloatingActionButton } from '../store/ConnectedComponents';
-import Permission from '../atoms/Permission';
+import { Habits, Sorting, HeaderDefault, FloatingActionButton } from '../store/ConnectedComponents.js';
+import Permission from '../atoms/Permission.jsx';
 
 
 function HomePage(props) {

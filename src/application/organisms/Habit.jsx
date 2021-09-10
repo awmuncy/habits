@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { SortableHandle } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Essentials } from '../store/ConnectedComponents';
-import { S_Habit } from '../store/connectors';
+import { Essentials } from '../store/ConnectedComponents.js';
+import { S_Habit } from '../store/connectors.js';
 
 
 class C_Habit extends Component {

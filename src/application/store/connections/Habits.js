@@ -1,4 +1,4 @@
-import { sortHabits } from './resources/pageActions';
+import { sortHabits } from './resources/pageActions.js';
 
 export default [
   (store) => {

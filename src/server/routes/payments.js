@@ -1,10 +1,10 @@
-const braintree = require('braintree');
-const express = require('express');
+import braintree from 'braintree';
+import express from 'express';
 const router = new express.Router();
-const bodyParser = require('body-parser');
-const braintreeAuth = require('../config/braintree');
+import bodyParser from 'body-parser';
+import braintreeAuth from '../config/braintree.js';
 let paymentGateway = braintree.connect(braintreeAuth);
-const User = require('../models/User');
+import User from '../models/User.js';
 
 router.get('/client_token', (req, res, next) => {
 
@@ -60,4 +60,4 @@ router.post('/cancel', (req, res, next) => {
 });
 
 
-module.exports = router;
+export default router;

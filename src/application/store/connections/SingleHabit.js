@@ -1,4 +1,4 @@
-import { pinHabit, unpinHabit } from './resources/applicationActions';
+import { pinHabit, unpinHabit } from './resources/applicationActions.js';
 
 export default {
   props: (store, props) => {

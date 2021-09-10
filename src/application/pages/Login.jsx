@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
-import { SAVE_USER } from '../../actions';
-import { HeaderDefault } from '../store/ConnectedComponents';
+import { SAVE_USER } from '../../actions.js';
+import { HeaderDefault } from '../store/ConnectedComponents.js';
 
 function saveUser(token, subscription_type) {
 

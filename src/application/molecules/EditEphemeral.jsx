@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { S_EphemeralForm } from '../store/connectors';
+import { S_EphemeralForm } from '../store/connectors.js';
 
 
 

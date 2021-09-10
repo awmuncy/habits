@@ -1,4 +1,4 @@
-import { newHabitGoal } from './resources/applicationActions';
+import { newHabitGoal } from './resources/applicationActions.js';
 
 export default [
   () => {

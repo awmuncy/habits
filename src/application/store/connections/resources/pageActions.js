@@ -7,7 +7,7 @@ import {
   TOGGLE_NAV,
   FILTER_TO_OUTSTANDING,
   CLEAR_OUTSTANDING_FILTER
-} from '../../../../actions';
+} from '../../../../actions.js';
 
 export const sortHabits = habits => {
 

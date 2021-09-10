@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = new express.Router();
-const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
 const swaggerDocument = YAML.load('src/server/docs/openapi.yaml');
 
 export default router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ViewDate } from '../store/ConnectedComponents';
-import { S_Sorting } from '../store/connectors';
+import { ViewDate } from '../store/ConnectedComponents.js';
+import { S_Sorting } from '../store/connectors.js';
 import { connect } from 'react-redux';
 
 class C_Sorting extends Component {

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const EphemeralSchema = new mongoose.Schema({
   title        : { type: String },
@@ -15,7 +15,7 @@ const EphemeralSchema = new mongoose.Schema({
 
 const Ephemeral = mongoose.model('Ephemeral', EphemeralSchema);
 
-module.exports = {
+export {
   EphemeralSchema,
   Ephemeral
 };

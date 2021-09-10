@@ -18,7 +18,7 @@ function RecallCardComponent(props) {
 }
 
 
-import RecallCardConnector from '../store/connections/RecallCard';
+import RecallCardConnector from '../store/connections/RecallCard.js';
 
 var RecallCard = connect(...RecallCardConnector)(RecallCardComponent);
 

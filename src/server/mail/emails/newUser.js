@@ -1,4 +1,4 @@
-module.exports = (name, email) => {
+export default (name, email) => {
 
   let at = new Date();
 

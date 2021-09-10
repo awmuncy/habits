@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
-let Recall;
 // Create Schema
 const RecallSchema = new Schema({
   title: {
@@ -18,7 +17,9 @@ const RecallSchema = new Schema({
   }
 });
 
-module.exports = {
-  Recall     : RecallSchema,
-  RecallModel: mongoose.model('Recalls', RecallSchema)
+
+const RecallModel = mongoose.model('Recalls', RecallSchema);
+export {
+  RecallSchema as Recall,
+  RecallModel
 };

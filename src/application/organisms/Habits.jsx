@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
-import { PinnedHabits, Habit } from '../store/ConnectedComponents';
+import { PinnedHabits, Habit } from '../store/ConnectedComponents.js';
 import { connect } from 'react-redux';
-import { S_Habits } from '../store/connectors';
+import { S_Habits } from '../store/connectors.js';
 
 function filterHabits(habits, filters) {
 

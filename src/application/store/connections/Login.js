@@ -1,4 +1,4 @@
-import { saveUser, syncStart } from './resources/applicationActions';
+import { saveUser, syncStart } from './resources/applicationActions.js';
 
 export default {
   props: () => {

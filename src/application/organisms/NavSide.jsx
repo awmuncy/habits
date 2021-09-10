@@ -1,9 +1,9 @@
 import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Permission from '../atoms/Permission';
-import NavItemConnector from '../store/connections/NavItem';
-import NavSideConnector from '../store/connections/NavSide';
+import Permission from '../atoms/Permission.jsx';
+import NavItemConnector from '../store/connections/NavItem.js';
+import NavSideConnector from '../store/connections/NavSide.js';
 
 function NavItemComponent(props) {
     

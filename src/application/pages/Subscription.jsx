@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { changeSubscription } from '../store/connections/resources/applicationActions';
 
 import paymentRequest from 'braintree-web/payment-request';
-var createClient = require('braintree-web/client').create;
+import { create as createClient } from 'braintree-web/client';
 
 function startPayment(instance, subscriptionType, callback) {
 

@@ -1,15 +1,15 @@
-const express = require('express');
+import express from 'express';
 const router = new express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const keys = require('../../config/keys');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import keys from '../../config/keys.js';
 // Load input validation
-const validateRegisterInput = require('../../validation/register');
-const validateLoginInput = require('../../validation/login');
+import validateRegisterInput from '../../validation/register.js';
+import validateLoginInput from '../../validation/login.js';
 // Load User model
-const User = require('../../models/User');
+import User from '../../models/User.js';
 
-let { newUserEmail } = require('../../mail/email');
+import { newUserEmail } from '../../mail/email.js';
 
 
 // @route POST api/users/register
@@ -110,4 +110,4 @@ router.post('/login', (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;

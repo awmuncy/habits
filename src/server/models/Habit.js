@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const {Checkin, CheckinModel} = require('./Checkin.js');
-const {Goal, GoalModel} = require('./HabitGoal.js');
+import mongoose from 'mongoose';
+import {Checkin, CheckinModel} from './Checkin.js';
+import {Goal, GoalModel} from './HabitGoal.js';
 
 const Schema = mongoose.Schema;
-let Habit;
+
 // Create Schema
 const HabitSchema = new Schema({
   title: {
@@ -80,7 +80,10 @@ HabitSchema.methods.syncGoals = function(newGoals) {
 
 };
 
-module.exports = {
-  Habit     : HabitSchema,
-  HabitModel: mongoose.model('habits', HabitSchema)
+const Habit = HabitSchema;
+const HabitModel = mongoose.model('habits', HabitSchema);
+
+export {
+  Habit,
+  HabitModel
 };

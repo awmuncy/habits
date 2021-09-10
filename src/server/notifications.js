@@ -1,5 +1,5 @@
-const webpush = require('web-push');
-const CronJob = require('cron').CronJob;
+import webpush from 'web-push';
+import { CronJob } from 'cron';
 
 
 export default (app) => {

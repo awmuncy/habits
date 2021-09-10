@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
-const {Habit} = require('./Habit.js');
-const {Recall} = require('./Recall.js');
-let { EphemeralSchema } = require('./Ephemeral.model');
+import mongoose from 'mongoose';
+import {Habit} from './Habit.js';
+import {Recall} from './Recall.js';
+import { EphemeralSchema } from './Ephemeral.model.js';
 const Schema = mongoose.Schema;
 let ObjectId = mongoose.Schema.Types.ObjectId;
 let toObjectId = mongoose.Types.ObjectId;
 let User;
-import { SAVE_HABIT } from '../../actions';
+import { SAVE_HABIT } from '../../actions.js';
 
 // Create Schema
 const UserSchema = new Schema({
@@ -73,4 +73,4 @@ UserSchema.methods.syncTopLevelItems = function(incomingDispatches) {
   });
 };
 
-module.exports = User = mongoose.model('users', UserSchema);
+export default User = mongoose.model('users', UserSchema);

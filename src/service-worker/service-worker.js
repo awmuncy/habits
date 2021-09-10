@@ -1,4 +1,4 @@
-import station from './station';
+import station from './station.js';
 let v = '0.0.72';
 
 
@@ -13,8 +13,8 @@ const urlsToCache = [
   '/icons/icon-256.png',
   '/icons/icon-512.png',
   '/home',
-  '/css/style.css',
-  '/js/app.js',
+  // '/css/style.css',
+  // '/js/app.js',
   '/fonts/Nunito_Sans/NunitoSans-Bold.ttf',
   '/fonts/Nunito_Sans/NunitoSans-Regular.ttf',
   '/fonts/Nunito_Sans/NunitoSans-BoldItalic.ttf',

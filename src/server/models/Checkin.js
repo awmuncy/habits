@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 let Habit;
 // Create Schema
@@ -31,7 +31,9 @@ CheckinSchema.methods.isNewerThan = function(incoming) {
   return null;
 };
 
-module.exports = {
-  Checkin     : CheckinSchema,
-  CheckinModel: mongoose.model('checkins', CheckinSchema)
+const CheckinModel = mongoose.model('checkins', CheckinSchema);
+const Checkin = CheckinSchema;
+export {
+  Checkin,
+  CheckinModel
 };

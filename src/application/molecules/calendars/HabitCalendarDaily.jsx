@@ -2,7 +2,7 @@ import React from 'react';
 import Datepicker from 'react-datepicker';
 import { format, parse, parseISO, addDays, getDay } from 'date-fns';
 import { connect } from 'react-redux';
-import { S_HabitsCalendar } from '../../store/connectors';
+import { S_HabitsCalendar } from '../../store/connectors.js';
 
 // Daily (this one)
 // Daily w/ bonus (this one, probably)

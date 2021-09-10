@@ -1,6 +1,6 @@
 import React from 'react';
-import { NewHabitGoal } from '../store/ConnectedComponents';
-import { S_HabitGoals } from '../store/connectors';
+import { NewHabitGoal } from '../store/ConnectedComponents.js';
+import { S_HabitGoals } from '../store/connectors.js';
 import { connect } from 'react-redux';
 
 function C_HabitGoals(props) {

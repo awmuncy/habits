@@ -1,7 +1,7 @@
 import React from 'react';
-import { EphemeralForm } from '../molecules/EditEphemeral';
-import { DefaultLayout } from '../page-templates/DefaultLayout';
-import { NewRecallForm } from '../store/ConnectedComponents';
+import { EphemeralForm } from '../molecules/EditEphemeral.jsx';
+import { DefaultLayout } from '../page-templates/DefaultLayout.jsx';
+import { NewRecallForm } from '../store/ConnectedComponents.js';
 
 function NewRecallPage() {
     return (

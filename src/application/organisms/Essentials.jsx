@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BoolIcon, MomentumIndicator } from "../store/ConnectedComponents";
-import { S_Essentials } from '../store/connectors';
+import { BoolIcon, MomentumIndicator } from "../store/ConnectedComponents.js";
+import { S_Essentials } from '../store/connectors.js';
 
 class EssentialsComponent extends Component {
 

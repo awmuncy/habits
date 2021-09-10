@@ -1,4 +1,4 @@
-import { saveItem, getStore, appInfoSet, appInfoGet, logout } from './indexeddb';
+import { saveItem, getStore, appInfoSet, appInfoGet, logout } from './indexeddb.js';
 import {
   NEW_HABIT,
   DO_CHECKIN,
@@ -8,7 +8,7 @@ import {
   SAVE_HABIT,
   SAVE_CHECKIN,
   HYDRATE_PAGE,
-  LOGOUT } from '../actions';
+  LOGOUT } from '../actions.js';
 import {BroadcastChannel } from 'broadcast-channel';
 
 

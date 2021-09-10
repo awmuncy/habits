@@ -9,7 +9,7 @@ import {
   SORT_HABITS_BY_SCORE,
   SORT_HABITS,
   DO_CHECKIN
-} from '../../../actions';
+} from '../../../actions.js';
 // TODO: Refector the heck out of this file
 
 

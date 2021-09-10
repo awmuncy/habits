@@ -1,4 +1,4 @@
-import { removeHabit } from './resources/applicationActions';
+import { removeHabit } from './resources/applicationActions.js';
 
 export default {
   props: () => {

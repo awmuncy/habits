@@ -1,4 +1,4 @@
-import { doCheckin } from './resources/applicationActions';
+import { doCheckin } from './resources/applicationActions.js';
 
 export default [
   (store, props) => {

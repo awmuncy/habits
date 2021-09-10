@@ -1,4 +1,4 @@
-import { PIN_HABIT, UNPIN_HABIT } from '../../../actions';
+import { PIN_HABIT, UNPIN_HABIT } from '../../../actions.js';
 
 const pinned = (state = [], action) => {
   let new_state;

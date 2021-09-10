@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { HabitCalendarDaily, HabitCalendarMonthly } from '../../store/ConnectedComponents';
-import { S_HabitsCalendar } from '../../store/connectors';
+import { HabitCalendarDaily, HabitCalendarMonthly } from '../../store/ConnectedComponents.js';
+import { S_HabitsCalendar } from '../../store/connectors.js';
 
 
 var C_HabitCalendar = props => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { HeaderDefault } from '../store/ConnectedComponents'; 
+import { HeaderDefault } from '../store/ConnectedComponents.js'; 
 
 class Feedback extends Component {
 

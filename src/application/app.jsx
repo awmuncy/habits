@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import { HabitTracker } from './store/ConnectedComponents';
-import store from './store/store';
-import filterConsoleNotifs from './filterConsoleNotifs';
-import tokenizedUser from './tokenizedUser';
+import { HabitTracker } from './store/ConnectedComponents.js';
+import store from './store/store.js';
+import filterConsoleNotifs from './filterConsoleNotifs.js';
+import tokenizedUser from './tokenizedUser.js';
 
 
 

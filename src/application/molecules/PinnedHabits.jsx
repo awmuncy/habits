@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Essentials } from '../store/ConnectedComponents';
+import { Essentials } from '../store/ConnectedComponents.js';
 import { connect } from 'react-redux';
-import { S_PinnedHabits } from '../store/connectors';
+import { S_PinnedHabits } from '../store/connectors.js';
 
 
 class PinnedHabit extends Component {

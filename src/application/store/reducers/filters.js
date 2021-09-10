@@ -1,4 +1,4 @@
-import { FILTER_TO_OUTSTANDING, CLEAR_OUTSTANDING_FILTER, CLEAR_FILTERS } from '../../../actions';
+import { FILTER_TO_OUTSTANDING, CLEAR_OUTSTANDING_FILTER, CLEAR_FILTERS } from '../../../actions.js';
 
 export default function habits(state = [], action) {
   let filters, index;

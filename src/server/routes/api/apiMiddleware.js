@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = new express.Router();
 import jwt_decode from 'jwt-decode';
-const User = require('../../models/User');
+import User from '../../models/User.js';
 
 async function AuthenticateUser(req, res, next) {
 
@@ -24,4 +24,4 @@ async function AuthenticateUser(req, res, next) {
 
 router.use(AuthenticateUser);
 
-module.exports = router;
+export default router;

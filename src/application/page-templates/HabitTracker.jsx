@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavSide, GrandCentral } from '../store/ConnectedComponents';
+import { NavSide, GrandCentral } from '../store/ConnectedComponents.js';
 
 function HabitTracker() {
 
