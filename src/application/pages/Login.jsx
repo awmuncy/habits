@@ -37,7 +37,7 @@ class Login extends Component {
 
     loginAction(e) {
         e.preventDefault();
-        fetch('/api/users/login', {
+        fetch('/api/auth/login', {
             method: 'POST',  
             credentials: "same-origin",
             body: JSON.stringify({password: this.state.password, email: this.state.user}),

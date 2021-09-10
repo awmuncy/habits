@@ -1,0 +1,149 @@
+openapi: 3.0.3
+info:
+  title: Check your habit API
+  description: > 
+    Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+    \  
+
+    I've got even more stuff 
+  version: 0.1.9
+servers:
+  - url: https://checkyourhabit.com/api/v1/
+    description: Optional server description, e.g. Main (production) server
+  - url: https://dev.checkyourhabit.com/api/v1/
+    description: Optional server description, e.g. Internal staging server for testing
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ephemeral: 
+      type: object
+      properties: 
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+          example: "Take vitamins"
+        cron: 
+          type: string
+          format: cronstring
+          example: "0 12-23 * * *"
+        seconds:
+          type: number
+        minutes:
+          type: number
+        hours:
+          type: number
+        days:
+          type: number
+        weeks:
+          type: number
+        months:
+          type: number
+        actions: 
+          type: array
+          items:
+            type: object
+            properties:
+              title: 
+                type: string
+                example: "Activate button"
+              url:
+                type: string
+                format: uri
+        completions: 
+          type: array
+          items:
+            type: object
+            properties:
+              title: 
+                type: string
+              url:
+                type: string
+                format: uri
+    dispatch: 
+      type: object
+      properties:
+        type: 
+          type: string
+          example: SAVE_CHECKIN
+        checkin: 
+          $ref: '#/components/schemas/checkin'
+    checkin: 
+      type: object
+      properties: 
+        at: 
+          type: int
+          format: Milliseconds
+          example: 1631031047282
+          description: The moment the checkin was complete, denominated in milliseconds
+        checkinFor: 
+          type: string
+          format: Date
+          example: "2021-09-08"
+        status: 
+          type: boolean
+paths:
+  /new-ephemeral: 
+    post: 
+      security:
+        - bearerAuth: []
+      tags: 
+        - Ephemeral
+      summary: Create a new ephemeral item
+      requestBody: 
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ephemeral'
+      responses: 
+        '200':
+          description: Ephemeral created
+          content:
+            application/json:
+              schema:
+                type: object      
+  /sync: 
+    post:
+      security: 
+        - bearerAuth: []
+      tags:
+        - "Sync"
+      summary: Syncs the state of the app with the servers
+      responses:
+        '200':
+          description: Messages for app to update itself with server
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  userToken: 
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                      value:
+                        type: string
+                        format: Base64
+                  lastSync: 
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                        value: "userToken"
+                      value:
+                        type: string
+                        format: Base64
+                        example: "aGVsbG8gbXkgbmFtZSBpcyBsb2Nh"
+                  dispatches:
+                    type: array
+                    items: 
+                      oneOf:
+                        ## - '#/components/schemas/checkin'      

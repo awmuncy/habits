@@ -35,7 +35,7 @@ const UserSchema = new Schema({
   recalls: {
     type: [Recall]
   },
-  ephemeral: {
+  ephemerals: {
     type: [EphemeralSchema]
   },
   subscription_type: {

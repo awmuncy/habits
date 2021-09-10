@@ -20,7 +20,7 @@ const Register = function(props) {
 
     var registerAction = e => {
         e.preventDefault();
-        fetch('/api/users/register', {
+        fetch('/api/auth/register', {
             method: 'POST',  
             credentials: "same-origin",
             body: JSON.stringify({

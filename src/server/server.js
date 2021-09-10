@@ -5,17 +5,22 @@ const bodyParser = require('body-parser');
 let app = express();
 let site = express();
 const passport = require('passport');
-const users = require('./routes/api/users');
+const users = require('./routes/api');
 const env = require('dotenv').config().parsed;
+import docs from './docs/docs';
+
 
 import notifications from './notifications';
-import { appTemplate, homepageTemplate, loginPage, legalPage } from './useHandlebars';
+import { appTemplate, homepageTemplate, legalPage } from './useHandlebars';
 
 function environment(req, res, next) {
   res.writeHead(200, { 'Content-Type': 'application/javascript' });
   let encodedEnv = Buffer.from(JSON.stringify(env)).toString('base64');
   res.end(`const env=JSON.parse(atob("${encodedEnv}"))`);
 }
+
+
+site.use(docs);
 
 app.get('/jdcyn8675309.js', environment);
 site.get('/jdcyn8675309.js', environment);
@@ -49,8 +54,8 @@ app.use(passport.initialize());
 // Passport config
 require('./validation/passport')(passport);
 // Routes
-app.use('/api/users', users);
-site.use('/api/users', users);
+app.use('/api', users);
+site.use('/api', users);
 
 app.use('/reset-password', require('./routes/passwordReset'));
 

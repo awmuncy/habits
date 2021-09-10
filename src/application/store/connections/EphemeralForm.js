@@ -11,14 +11,14 @@ export default [
         weeks  : '',
         months : ''
       },
-      cron     : '* * * * *',
-      notifiers: [
+      cron   : '* * * * *',
+      actions: [
         {
           title : '',
           action: ''
         }
       ],
-      successActions: [
+      completions: [
         {
           title : '',
           action: ''
