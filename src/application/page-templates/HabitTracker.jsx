@@ -3,15 +3,15 @@ import { NavSide, GrandCentral } from '../store/ConnectedComponents.js';
 
 function HabitTracker() {
 
-    return (        
-        <div className="habit-tracker">           
-            <GrandCentral />            
-            <NavSide />
-        </div>
-    );
+  return (
+    <div className='habit-tracker'>
+      <GrandCentral />
+      <NavSide />
+    </div>
+  );
 }
 
 
 export {
-    HabitTracker
+  HabitTracker
 };

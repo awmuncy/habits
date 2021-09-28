@@ -5,59 +5,59 @@ import { S_HeaderDefault } from '../../store/connectors.js';
 
 class C_HeaderDefault extends Component {
 
-    constructor(props) {
+  constructor(props) {
 
-        super(props);
-        this.state = {
-            menuState : "minimized"
-        }
-        this.toggleNav = this.toggleNav.bind(this);
+    super(props);
+    this.state = {
+      menuState: 'minimized'
+    };
+    this.toggleNav = this.toggleNav.bind(this);
+  }
+
+
+
+  toggleNav() {
+    this.props.toggleNav();
+  }
+
+
+
+
+  render() {
+    let NavContents;
+    if (this.props.blank) {
+      NavContents
+                = <>
+          <span />
+          <h1 className='app-title'>HabCheck</h1>
+          <span />
+        </>
+      ;
+    } else {
+      NavContents
+                = <>
+          <i className='fa fa-bars' aria-hidden='true' onClick={this.toggleNav}></i>
+
+          <Link to={'/home'}><i className='fa fa-home' aria-hidden='true' ></i></Link>
+        </>
+      ;
     }
 
 
-
-    toggleNav() {
-        this.props.toggleNav();
-    }
-
-    
-
-
-    render() {
-        var NavContents;
-        if(this.props.blank) {
-            NavContents = (
-                <>
-                <span />
-                <h1 className="app-title">HabCheck</h1>
-                <span />
-                </>
-            );
-        } else {
-            NavContents = (
-                <>
-                    <i className="fa fa-bars" aria-hidden="true" onClick={this.toggleNav}></i>
-                    
-                    <Link to={"/home"}><i className="fa fa-home" aria-hidden="true" ></i></Link>
-                </>
-            );
-        }
-
-
-        return (
-            <header className="app-header">
-                <nav className="site-nav">
-                    <div className="header-nav">
-                        {NavContents}
-                    </div>                
-                </nav>
-            </header>
-        );
-    }
+    return (
+      <header className='app-header'>
+        <nav className='site-nav'>
+          <div className='header-nav'>
+            {NavContents}
+          </div>
+        </nav>
+      </header>
+    );
+  }
 }
 
-var HeaderDefault = connect(...S_HeaderDefault)(C_HeaderDefault);
+let HeaderDefault = connect(...S_HeaderDefault)(C_HeaderDefault);
 
 export {
-    HeaderDefault
+  HeaderDefault
 };

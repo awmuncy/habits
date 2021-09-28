@@ -8,21 +8,21 @@ import Permission from '../atoms/Permission.jsx';
 
 function HomePage(props) {
 
-  document.title = "Home | HabitsApp";
+  document.title = 'Home | HabitsApp';
 
 
   return (
-    <>	
-    <HeaderDefault />
-    <main>
-      <div className="home-layout">
-        <Sorting />
-        <div className="home-main">
-          <Habits />
+    <>
+      <HeaderDefault />
+      <main>
+        <div className='home-layout'>
+          <Sorting />
+          <div className='home-main'>
+            <Habits />
+          </div>
         </div>
-      </div>
-      <FloatingActionButton />
-    </main>
+        <FloatingActionButton />
+      </main>
     </>
   );
 }

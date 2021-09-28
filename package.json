@@ -4,7 +4,8 @@
     "version": "1.2.2",
     "type": "module",
     "scripts": {
-        "lint": "eslint ./",
+        "lint": "eslint --ext .jsx ./",
+        "lint:fix": "eslint --ext .jsx ./ --fix",
         "dev": "mix",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",

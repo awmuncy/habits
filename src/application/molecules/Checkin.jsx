@@ -5,48 +5,56 @@ import { S_Checkin } from '../store/connectors.js';
 
 class C_Checkin extends Component {
 
-    constructor(props) {
-        super(props);
 
 
+  render() {
+
+    let args = [this, this.props.id, this.props.checkin.checkinFor];
+
+
+    let icons;
+
+    if (this.props.status !== null) {
+      // eslint-disable-next-line
+      icons = <span className='icon' onClick={this.props.checkIn.bind(...args, null)}></span>;
+    } else {
+      icons
+                = <React.Fragment>
+          <button
+            aria-label='Yes, I did check in'
+            className='check-yes'
+            onClick={this.props.checkIn.bind(...args, true)}></button>
+          <button
+            aria-label='No, I did not check in'
+            className='check-no'
+            onClick={this.props.checkIn.bind(...args, false)}></button>
+        </React.Fragment>
+      ;
     }
 
-    render() {
+    let note = this.props.checkin.note ? this.props.checkin.note : 'No note';
+    let className = (this.props.loading ? 'loading' : '')
+      + (this.props.status === true ? ' did' : ' didnt')
+      + ' checkin '
+      + (this.props.checkin.bonus === true ? 'bonus' : '');
 
-        var args = [this, this.props.id,  this.props.checkin.checkinFor]        
-        
+    return (
+      <li
+        className={ className }>
+        <IntervalFor checkinFor={this.props.checkin.checkinFor} frame={this.props.frame} />
 
-        let icons;
+        <span className='score'>{this.props.score}</span>
 
-        if(this.props.status!=null) {
-            icons = (<span className="icon" onClick={this.props.checkIn.bind(...args, null)}></span>);
-        } else {
-            icons = (
-                <React.Fragment>
-                    <button aria-label="Yes, I did check in" className="check-yes" onClick={this.props.checkIn.bind(...args, true)}></button>
-                    <button aria-label="No, I did not check in" className="check-no" onClick={this.props.checkIn.bind(...args, false)}></button>
-                </React.Fragment>
-            );            
-        } 
+        {icons}
 
-        var note = this.props.checkin.note ? this.props.checkin.note : "No note";
-
-        return (
-            <li className={ (this.props.loading ? "loading" : "") + (this.props.status==true ? " did" : " didnt") + " checkin " + (this.props.checkin.bonus==true ? "bonus": "")}>
-                <IntervalFor checkinFor={this.props.checkin.checkinFor} frame={this.props.frame} />
-            
-                <span className="score">{this.props.score}</span>         
-                
-                {icons}
-
-            </li>
-        );
-    }
+      </li>
+    );
+  }
 }
 
 
-var Checkin = connect(...S_Checkin)(C_Checkin);
+let Checkin = connect(...S_Checkin)(C_Checkin);
 
 export {
-    Checkin
+  Checkin
 };

@@ -5,17 +5,17 @@ import { Habits, HeaderDefault } from '../store/ConnectedComponents.js';
 
 function ArchivedHabitsPage(props) {
 
-  document.title = "Home | HabitsApp";
+  document.title = 'Home | HabitsApp';
 
 
-  return (	
+  return (
     <>
-    <HeaderDefault />
-    <div className="home-layout">
-      <div className="home-main">
-        <Habits archivedOnly={true} />
+      <HeaderDefault />
+      <div className='home-layout'>
+        <div className='home-main'>
+          <Habits archivedOnly={true} />
+        </div>
       </div>
-    </div>
     </>
   );
 }

@@ -8,39 +8,35 @@ import { S_Habit } from '../store/connectors.js';
 
 class C_Habit extends Component {
 
-    constructor(props) {
-        super(props);
 
+  render() {
+
+    let hide = this.props.habit.filtered_out;
+    let id = this.props.id;
+
+    if (hide || this.props.pinned_habits.includes(id.toString())) {
+      return <div></div>;
     }
 
-    render() {
-        
-        var hide = this.props.habit.filtered_out;
-        var id = this.props.id;
+    if (!this.props.habit) { return null; }
 
-        if(hide || this.props.pinned_habits.includes(id.toString())){
-            return <div></div>;
-        }
+    // eslint-disable-next-line
+    const SortHandle = SortableHandle(() =>
+      <Link to={'habit/' + id}>
+        <Essentials habit_id={id} />
+      </Link>
+    );
 
-        if(!this.props.habit) return null;
-
-
-        const SortHandle = SortableHandle(() => (
-            <Link to={"habit/" + id}>
-                <Essentials habit_id={id} />
-            </Link>
-        )); 
-
-        return (
-            <div className="single-habit" id={"habit-" + id}>   
-                <SortHandle />                
-            </div>
-        );
-    }
+    return (
+      <div className='single-habit' id={'habit-' + id}>
+        <SortHandle />
+      </div>
+    );
+  }
 }
 
 const Habit = connect(...S_Habit)(C_Habit);
 
 export {
-    Habit
+  Habit
 };

@@ -4,63 +4,63 @@ import { format, parse } from 'date-fns';
 import { connect } from 'react-redux';
 import { S_HabitsCalendar } from '../../store/connectors.js';
 
-var C_HabitCalendarMonthly = props => {
+let C_HabitCalendarMonthly = props => {
 
 
-    var highlightWithRanges = [];
-    var highlightWithRangesFail = [];
-    var highlightWithRangesNull = [];
+  let highlightWithRanges = [];
+  let highlightWithRangesFail = [];
+  let highlightWithRangesNull = [];
 
-    props.checkins.forEach(item=>{
+  props.checkins.forEach(item=>{
 
-        var thisMoment = parse(item.checkinFor, "yyyy-MM-dd", new Date());
+    let thisMoment = parse(item.checkinFor, 'yyyy-MM-dd', new Date());
 
-        if(item.status==true) {
-            highlightWithRanges.push(thisMoment);
-        } else if(item.status===false) {
-            highlightWithRangesFail.push(thisMoment);
-        } else {
-            highlightWithRangesNull.push(thisMoment);
-        }
-    });
-
-
-    return (
-        <div className="habit-month-view">
-            <Datepicker 
-                selected={new Date()}
-                inline
-                highlightDates={[
-                    {"successful-day": highlightWithRanges}, 
-                    {"failure-day": highlightWithRangesFail},
-                    {"unmarked-day": highlightWithRangesNull},                            
-                ]}
-                onChange={date=>{
-                    var formattedDate = format(date, "yyyy-MM-dd");
-
-                    var checkin = props.checkins.find((checkin)=>{
-                        return (checkin.checkinFor == formattedDate);
-                    })
-
-                    let newStatus = null;
-
-                    if(checkin.status==null) {
-                        newStatus=true;
-                    } else if(checkin.status==true) {
-                        newStatus=false;
-                    }
-
-                    props.checkIn(props.habit_id, formattedDate, newStatus);
-                }}
-                showMonthYearPicker
-            />
-        </div>
-    );
-}
+    if (item.status === true) {
+      highlightWithRanges.push(thisMoment);
+    } else if (item.status === false) {
+      highlightWithRangesFail.push(thisMoment);
+    } else {
+      highlightWithRangesNull.push(thisMoment);
+    }
+  });
 
 
-var HabitCalendarMonthly = connect(...S_HabitsCalendar)(C_HabitCalendarMonthly);
+  return (
+    <div className='habit-month-view'>
+      <Datepicker
+        selected={new Date()}
+        inline
+        highlightDates={[
+          {'successful-day': highlightWithRanges},
+          {'failure-day': highlightWithRangesFail},
+          {'unmarked-day': highlightWithRangesNull}
+        ]}
+        onChange={date=>{
+          let formattedDate = format(date, 'yyyy-MM-dd');
+
+          let checkin = props.checkins.find((checkin)=>{
+            return checkin.checkinFor === formattedDate;
+          });
+
+          let newStatus = null;
+
+          if (checkin.status === null) {
+            newStatus = true;
+          } else if (checkin.status === true) {
+            newStatus = false;
+          }
+
+          props.checkIn(props.habit_id, formattedDate, newStatus);
+        }}
+        showMonthYearPicker
+      />
+    </div>
+  );
+};
+
+
+let HabitCalendarMonthly = connect(...S_HabitsCalendar)(C_HabitCalendarMonthly);
 
 export {
-    HabitCalendarMonthly
+  HabitCalendarMonthly
 };

@@ -3,29 +3,29 @@ import featureList from '../features.js';
 import { connect } from 'react-redux';
 
 
-var Permission = props => {
-    var role = "default";
-    if(props.subscription_type) {
-        role = props.subscription_type;
-    }
-    var features = featureList[role];
+let Permission = props => {
+  let role = 'default';
+  if (props.subscription_type) {
+    role = props.subscription_type;
+  }
+  let features = featureList[role];
 
-    if(features.includes(props.feature)) {
-        return props.children;
-    }
-    if(props.alt) {
-        return props.alt;
-    }
-    return null;
-}
+  if (features.includes(props.feature)) {
+    return props.children;
+  }
+  if (props.alt) {
+    return props.alt;
+  }
+  return null;
+};
 
-var storeToProps = (store, props) => {
-    return {
-        subscription_type: store.user.subscription
-    }
+let storeToProps = (store, props) => {
+  return {
+    subscription_type: store.user.subscription
+  };
 };
 
 export {
-    Permission
+  Permission
 };
 export default connect(storeToProps)(Permission);
