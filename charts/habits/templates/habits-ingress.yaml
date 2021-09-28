@@ -1,5 +1,5 @@
 {{ $site_domain := ( print (ternary (print .Values.siteSubdomainPrefix "." .Values.Env ".") "" (ne .Values.Env "prod")) .Values.domain ) }}
-{{ $app_domain := ( print (ternary (print .Values.appSubdomainPrefix "." .Values.Env ".") "" (ne .Values.Env "prod")) .Values.domain ) }}
+{{ $app_domain := ( print (ternary (print .Values.appSubdomainPrefix "." .Values.Env ".") "app." (ne .Values.Env "prod")) .Values.domain ) }}
 {{ $ident := (print .Release.Name "-" .Release.Revision "-" .Values.Env) }}
 
 apiVersion: networking.k8s.io/v1
@@ -8,12 +8,11 @@ metadata:
   name: habits-site-ingress-{{ $ident }}
   namespace: habits-{{ .Values.Env }}
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   tls: 
   - hosts:
-    - {{ $app_domain }}
+    - {{ $site_domain }}
     secretName: ssl-for--{{ $site_domain }}
   rules:
   - host: {{ $site_domain }}
@@ -25,7 +24,7 @@ spec:
           service:
             name: habits-service-{{ $ident }}
             port: 
-              number: 5173
+              name: http-site
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -33,7 +32,6 @@ metadata:
   name: habits-app-ingress-{{ $ident }} 
   namespace: habits-{{ .Values.Env }}
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   tls: 
@@ -50,4 +48,4 @@ spec:
           service:
             name: habits-service-{{ $ident }} 
             port: 
-              number: 5499
+              name: http-app
