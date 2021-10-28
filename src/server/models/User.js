@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 import {Habit} from './Habit.js';
-import {Recall} from './Recall.js';
-import { EphemeralSchema } from './Ephemeral.model.js';
 const Schema = mongoose.Schema;
 let ObjectId = mongoose.Schema.Types.ObjectId;
 let toObjectId = mongoose.Types.ObjectId;
@@ -28,15 +26,6 @@ const UserSchema = new Schema({
   },
   habits: {
     type: [Habit]
-  },
-  pinned_habits: {
-    type: [ObjectId]
-  },
-  recalls: {
-    type: [Recall]
-  },
-  ephemerals: {
-    type: [EphemeralSchema]
   },
   subscription_type: {
     type: String

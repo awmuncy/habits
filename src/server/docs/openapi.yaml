@@ -70,24 +70,21 @@ components:
       properties:
         type: 
           type: string
-          example: SAVE_CHECKIN
-        checkin: 
-          $ref: '#/components/schemas/checkin'
-    checkin: 
-      type: object
-      properties: 
-        at: 
-          type: int
-          format: Milliseconds
-          example: 1631031047282
-          description: The moment the checkin was complete, denominated in milliseconds
-        checkinFor: 
-          type: string
-          format: Date
-          example: "2021-09-08"
-        status: 
-          type: boolean
+
 paths:
+  /:user/:habit:
+    get: 
+      security: 
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Detials about a habit
+          content: 
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                   
   /new-ephemeral: 
     post: 
       security:

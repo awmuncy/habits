@@ -2,9 +2,9 @@ import braintree from 'braintree';
 import express from 'express';
 const router = new express.Router();
 import bodyParser from 'body-parser';
-import braintreeAuth from '../config/braintree.js';
+import braintreeAuth from '../../config/braintree.js';
 let paymentGateway = braintree.connect(braintreeAuth);
-import User from '../models/User.js';
+import User from '../../models/User.js';
 
 router.get('/client_token', (req, res, next) => {
 

@@ -1,12 +1,12 @@
 import express from 'express';
 const router = new express.Router();
 import bcrypt from 'bcryptjs';
-import { passwordReset } from '../mail/email.js';
+import { passwordReset } from '../../mail/email.js';
 
-import PasswordReset from '../models/PasswordReset.js';
-import User from '../models/User.js';
+import PasswordReset from '../../models/PasswordReset.js';
+import User from '../../models/User.js';
 
-import { passwordResetTemplate } from '../useHandlebars.js';
+import { passwordResetTemplate } from '../../useHandlebars.js';
 
 
 // This route is dead simple: display a form

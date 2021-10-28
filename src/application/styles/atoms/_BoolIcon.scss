@@ -27,4 +27,18 @@
         font-size: var(--md-font);
         font-size: 16px;
     }
+    &.add:after {
+        content: '\f067';
+        border-color: var(--fastest);
+        font-size: 16px;
+        color: var(--fastest);
+    }
+    &.add.in-grace-period:after {
+        color: #ccc;
+        border-color: var(--fast);
+    }
+    &.add.out-of-grace-period:after {
+        color: #777;
+        border-color: #777;
+    }
 }

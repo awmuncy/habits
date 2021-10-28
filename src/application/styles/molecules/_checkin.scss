@@ -69,6 +69,16 @@
 		place-items: center;
 		min-height: 46px;
 		color: white;
+		&.check-time {
+			background-color: #f6f6f6;
+			color: #4e8bdb;
+			border-bottom-right-radius: 8px;
+			font-size: var(--md-font);
+			&:after {
+				content: '\f017';
+				font-family: fontAwesome;
+			}
+		}
 		&.check-no {
 			background-color: #f6f6f6;
 			color: #DB4E57;

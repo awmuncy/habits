@@ -13,6 +13,7 @@ let AccountPage = props => {
         <h1>Account</h1>
         <p>Name: Allen</p>
         <p>Joined: A long long time ago</p>
+        <p>ID: {localStorage.getItem('id')}</p>
         <button class='btn btn--primary'><Link to='/get-subscription'>Get Premium</Link></button>
       </div>
     </>

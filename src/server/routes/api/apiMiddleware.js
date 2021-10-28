@@ -8,9 +8,10 @@ async function AuthenticateUser(req, res, next) {
   let currentUser;
 
   try {
-    currentUser = jwt_decode(req.body.userToken && req.body.userToken.value).id;
+    let token = req.headers.authorization.split('  ')[1];
 
-    currentUser = User.findById(currentUser);
+    let id = jwt_decode(token)?.id;
+    currentUser = User.findById(id);
 
   } catch (err) {
     res.status(401).send('User not authenticated');

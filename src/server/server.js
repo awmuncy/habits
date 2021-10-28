@@ -13,7 +13,6 @@ import bodyParser from 'body-parser';
 let app = express();
 let site = express();
 import passport from 'passport';
-import users from './routes/api.js';
 
 import dotenv from 'dotenv';
 const env = dotenv.config().parsed;
@@ -50,8 +49,7 @@ site.use(
 site.use(bodyParser.json());
 
 /* ^ I don't have know what these do ^ */
-import payments from './routes/payments.js';
-app.use('/payments', payments);
+
 
 const port = 5499;
 // eslint-disable-next-line no-console
@@ -60,18 +58,6 @@ const sitePort = 5173;
 // eslint-disable-next-line no-console
 site.listen(sitePort, () => console.log(`Site server up and running on port ${sitePort}`));
 
-// Passport middleware
-app.use(passport.initialize());
-// Passport config
-import validation from './validation/passport.js';
-
-validation(passport);
-// Routes
-app.use('/api', users);
-site.use('/api', users);
-
-import resetPassword from './routes/passwordReset.js';
-app.use('/reset-password', resetPassword);
 
 import feedback from './routes/feedback.js';
 app.use('/feedback', feedback);

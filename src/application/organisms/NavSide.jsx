@@ -105,14 +105,6 @@ class C_NavSide extends Component {
             <SubnavItem path='/new-habit' text='New Habit' />
             <SubnavItem path='/archived-habits' text='Archived Habits' />
           </NavItem>
-          <Permission feature='beyond-habits'>
-            <li>
-              <Link to='/habits' onClick={this.props.closeMenu}>
-                <i className='fa fa-rotate-left' aria-hidden='true'></i>
-                            Habits
-              </Link>
-            </li>
-          </Permission>
           <Permission feature='recalls'>
             <NavItem path='/recalls' icon='fa-microchip' text='Recall'>
               <SubnavItem path='/new-recall' text='New Recall' />

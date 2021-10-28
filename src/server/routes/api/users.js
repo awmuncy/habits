@@ -1,7 +1,55 @@
 import express from 'express';
 const router = new express.Router();
+import HabitsRoutes from './habitsRoutes.js';
+import { NEW_HABIT} from '../../../actions.js';
 
-import { DO_CHECKIN, NEW_HABIT, SAVE_CHECKIN } from '../../../actions.js';
+
+router.post('/sync', SyncRequestDepracated);
+router.get('/:id((([\\d|[a-z]){24}|([\\d|[a-z]){6}))', RequestUser);
+router.use('/:id((([\\d|[a-z]){24}|([\\d|[a-z]){6}))/habits', HabitsRoutes);
+
+
+
+function SyncRequestDepracated(req, res, next) {
+
+  req.user.then(user => {
+    user.save();
+  });
+  let incomingDispatches, currentUser, lastSync;
+
+  incomingDispatches = req.body.dispatches;
+
+
+  req.user.then((user) => {
+    if (user === undefined) {
+      res.send(401);
+      return;
+    }
+
+    let lastSync = req.body.lastSync ? req.body.lastSync.value : 0;
+    let dispatchesFromNewer = saveNewer(user, incomingDispatches);
+    let dispatches = findStored(user, lastSync);
+
+    res.json({
+      timestamp : new Date().getTime(),
+      dispatches: [...dispatches]
+    });
+  });
+}
+
+function RequestUser(req, res, next) {
+  req.user.then(user => {
+    if (user._id.toString() !== req.params.id.toString()) {
+      res.status(401);
+      res.send('Nope');
+      return;
+    }
+    let userBasics = JSON.parse(JSON.stringify(user));
+    delete userBasics.habits;
+    delete userBasics.password;
+    res.json(userBasics);
+  });
+}
 
 
 let findStored = function(user, lastSync) {
@@ -26,17 +74,7 @@ let findStored = function(user, lastSync) {
     }
 
 
-    habit.checkins.forEach(checkin=>{
-      let synced_at = new Date(checkin.synced_at).getTime();
 
-      if (synced_at > lastSync) {
-        dispatches.push({
-          type    : DO_CHECKIN,
-          habit_id: habit._id,
-          checkin : checkin
-        });
-      }
-    });
     habit.goals = habit.goals ? habit.goals : [];
     habit.goals.forEach(goal=>{
       let synced_at = new Date(goal.synced_at).getTime();
@@ -59,26 +97,21 @@ let saveNewer = function(user, incoming) {
 
   // Why two switch statements?
   // Because a habit needs to be
-  // saved before it's checkins
   user.syncTopLevelItems(incoming);
 
   incoming.forEach(dispatch => {
     let habIndex;
     switch (dispatch.type) {
 
-    case SAVE_CHECKIN:
-      habIndex = user.habits.findIndex(habit=>{
 
-        return dispatch.habit_id === habit._id.toString();
-      });
-      user.habits[habIndex].syncCheckins([dispatch.checkin]);
-      break;
 
     case 'NEW_HABIT_GOAL':
       habIndex = user.habits.findIndex(habit=>{
         return dispatch.habit_id === habit._id;
       });
-
+      if (habIndex === -1) {
+        break;
+      }
       user.habits[habIndex].syncGoals([dispatch.goal]);
       break;
     }
@@ -91,30 +124,5 @@ let saveNewer = function(user, incoming) {
 };
 
 
-
-router.post('/sync', (req, res) => {
-
-  req.user.then(user => {
-    user.ephemerals.push({});
-    user.save();
-  });
-  let incomingDispatches, currentUser, lastSync;
-
-  incomingDispatches = req.body.dispatches;
-
-
-  req.user.then((user) => {
-
-    let lastSync = req.body.lastSync ? req.body.lastSync.value : 0;
-    let dispatchesFromNewer = saveNewer(user, incomingDispatches);
-    let dispatches = findStored(user, lastSync);
-
-    res.json({
-      timestamp : new Date().getTime(),
-      dispatches: [...dispatches]
-    });
-  });
-
-});
 
 export default router;

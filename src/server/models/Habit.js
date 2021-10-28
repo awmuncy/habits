@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {Checkin, CheckinModel} from './Checkin.js';
+
 import {Goal, GoalModel} from './HabitGoal.js';
 
 const Schema = mongoose.Schema;
@@ -13,52 +13,28 @@ const HabitSchema = new Schema({
   position: {
     type: Number
   },
-  beginDate: {
-    type    : Date,
-    required: true
-  },
   deleted: {
     type: Boolean
-  },
-  checkins: {
-    type   : [Checkin],
-    default: []
   },
   profile: {
     type: Object
   },
+  checkins: {
+    type   : [Number],
+    default: []
+  },
   modified_at: {
     type: Number
   },
-  dormant: {
-    type: Object
+  sleep: {
+    type: Boolean
   },
   goals: {
     type: Array
   }
 });
 
-HabitSchema.methods.syncCheckins = function(newCheckins) {
 
-  newCheckins.forEach(newCheckin => {
-    let exists = false;
-    newCheckin.synced_at = new Date();
-
-    this.checkins.forEach((storedCheckin, index) => {
-      if (storedCheckin.checkinFor === newCheckin.checkinFor) {
-        if (storedCheckin.isNewerThan(newCheckin)) {
-          this.checkins[index] = newCheckin;
-
-        }
-        exists = true;
-      }
-    });
-    if (!exists) {
-      this.checkins.push(newCheckin);
-    }
-  });
-
-};
 
 HabitSchema.methods.syncGoals = function(newGoals) {
 
