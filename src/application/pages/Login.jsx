@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 import { SAVE_USER } from '../../actions.js';
 import { HeaderDefault } from '../store/ConnectedComponents.js';
+import { login } from '../lib/requests.js';
 
 function saveUser(token, subscription_type) {
 
@@ -22,6 +23,7 @@ function saveUser(token, subscription_type) {
 }
 
 
+
 class Login extends Component {
 
   constructor(props) {
@@ -37,21 +39,13 @@ class Login extends Component {
 
   loginAction(e) {
     e.preventDefault();
-    fetch('/api/auth/login', {
-      method     : 'POST',
-      credentials: 'same-origin',
-      body       : JSON.stringify({password: this.state.password, email: this.state.user}),
-      headers    : {
-        'Content-Type'    : 'application/json',
-        'Accept'          : 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
-      }
-    }).then((response) => {
+    login(this.state.user, this.state.password).then((response) => {
       return response.text();
     }).then((data)=> {
       let loginInfo = JSON.parse(data);
       if (loginInfo.token) {
-        let token = loginInfo.token.slice(6);
+
+        let token = loginInfo.token.slice(7);
         localStorage.setItem('mySecretToken', token);
         let detokenizedUser = jwt_decode(token);
         localStorage.setItem('user', detokenizedUser.name);

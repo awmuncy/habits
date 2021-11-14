@@ -1,9 +1,21 @@
 let user = localStorage.getItem('id');
 let bearer = localStorage.getItem('mySecretToken');
-let host = 'http://localhost:3030';
+let host = 'http://ras.allenmuncy.com:3030';
 
 import { store } from '../app.jsx';
 
+export async function login(user, password) {
+  return await fetch(`${host}/api/auth/login`, {
+    method     : 'POST',
+    credentials: 'same-origin',
+    body       : JSON.stringify({password: password, email: user}),
+    headers    : {
+      'Content-Type'    : 'application/json',
+      'Accept'          : 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  });
+}
 
 export async function deleteCheckin(checkin, habitId) {
 
