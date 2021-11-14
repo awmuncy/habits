@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+import { createCheckin, deleteCheckin, getHabits } from '../lib/requests.js';
 
-import { Link } from 'react-router-dom';
+import { Habits, HeaderDefault, FloatingActionButton, Checkin } from '../store/ConnectedComponents.js';
 
-import { Habits, Sorting, HeaderDefault, FloatingActionButton } from '../store/ConnectedComponents.js';
-import Permission from '../atoms/Permission.jsx';
+
+let user = localStorage.getItem('id');
+let bearer = localStorage.getItem('mySecretToken');
+
+
 
 
 function HomePage(props) {
@@ -16,7 +20,6 @@ function HomePage(props) {
       <HeaderDefault />
       <main>
         <div className='home-layout'>
-          <Sorting />
           <div className='home-main'>
             <Habits />
           </div>

@@ -1,5 +1,8 @@
 .essentials {
 	background-color: white;
+    &.sleep {
+        background-color: #eee;
+    }
 	display: grid;
 	grid-template-columns: 70px 1fr 120px;
 	min-height: 56px;
@@ -18,12 +21,21 @@
             font-weight: 700;
         }
     }
-    .interval {
+    .time-span {
         font-size: 12px;
         font-style: italic;
         color: #999;
         display: inline-block;
-        text-transform: capitalize;
+        &.abide {
+            .interval {
+                font-weight: 900;
+            }
+        }
+        &.target {
+            .target {
+                font-weight: 900;
+            }
+        }
     }
     .meta {
         display: flex;

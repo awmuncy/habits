@@ -23,40 +23,11 @@ const store = () => {
   middleware
   );
 
-  openChannels(newStore);
 
   return newStore;
 
 };
 
 
-function openChannels(store) {
-  let channel = dispatchChannel;
-
-  navigator.serviceWorker.ready.then((sw) => {
-    channel.postMessage({type: 'init'});
-    sw.active.postMessage({type: 'init'});
-  });
-
-  channel.addEventListener('message', e => {
-    let message = e.data ? e.data : e;
-    if (message.type === HYDRATE_PAGE) {
-      store.dispatch(hydrate(message));
-      store.dispatch(syncStart());
-    }
-    if (message.type === 'dispatch') {
-      store.dispatch(message.payload);
-    }
-    if (message.type === 'dispatches') {
-      let action = {
-        type   : 'MULTI_ACTION',
-        actions: message.payload
-      };
-      store.dispatch(action);
-
-    }
-  });
-
-}
 
 export default store;

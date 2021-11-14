@@ -22,8 +22,5 @@ export { EssentialProgress } from '../atoms/EssentialProgress.jsx';
 export { Checkins } from '../organisms/Checkins.jsx';
 export { IntervalFor } from '../atoms/IntervalFor.jsx';
 export { SortablePlanks } from '../atoms/SortablePlanks.jsx';
-export { Recalls } from '../organisms/Recalls.jsx';
-export { RecallCard } from '../molecules/RecallCard.jsx';
-export { NewRecallForm } from '../molecules/NewRecallForm.jsx';
 export { BoolIcon } from '../atoms/BoolIcon.jsx';
 export { IntervalSelect } from '../molecules/IntervalSelect.jsx';

@@ -7,16 +7,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 
-
-import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 let app = express();
 let site = express();
-import passport from 'passport';
 
 import dotenv from 'dotenv';
 const env = dotenv.config().parsed;
-import docs from './docs/docs.js';
 
 
 import notifications from './notifications.js';
@@ -28,8 +24,6 @@ function environment(req, res, next) {
   res.end(`const env=JSON.parse(atob("${encodedEnv}"))`);
 }
 
-
-site.use(docs);
 
 app.get('/jdcyn8675309.js', environment);
 site.get('/jdcyn8675309.js', environment);
@@ -59,8 +53,8 @@ const sitePort = 5173;
 site.listen(sitePort, () => console.log(`Site server up and running on port ${sitePort}`));
 
 
-import feedback from './routes/feedback.js';
-app.use('/feedback', feedback);
+// import feedback from './routes/feedback.js';
+// app.use('/feedback', feedback);
 
 
 app.use(express.static(path.resolve(__dirname, '../../dist/public')));
@@ -114,21 +108,5 @@ function toHome(route) {
   });
 }
 
-import keys from './config/keys.js';
-const db = keys.mongoURI;
-
-mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
-  // eslint-disable-next-line no-console
-  .then(() => console.log('MongoDB successfully connected'))
-  .catch(err => {
-    // eslint-disable-next-line no-console
-    console.log(err);
-    // eslint-disable-next-line no-console
-    console.log('Mongo didn\'t connect');
-  });
 
 notifications(app);

@@ -27,17 +27,18 @@
         font-size: var(--md-font);
         font-size: 16px;
     }
-    &.add:after {
+    &.aim:after {
         content: '\f067';
         border-color: var(--fastest);
         font-size: 16px;
         color: var(--fastest);
     }
-    &.add.in-grace-period:after {
+    
+    &.target:after {
         color: #ccc;
         border-color: var(--fast);
     }
-    &.add.out-of-grace-period:after {
+    &.urgent:after {
         color: #777;
         border-color: #777;
     }

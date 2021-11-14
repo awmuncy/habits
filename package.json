@@ -17,6 +17,9 @@
         "serve": "nodemon --experimental-json-modules src/server/server.js ",
         "serve-api": "nodemon --experimental-json-modules src/server/api-server.js"
     },
+    "browser": {
+        "crypto": false
+    },
     "devDependencies": {
         "@babel/node": "^7.15.4",
         "@babel/preset-env": "^7.15.6",
@@ -34,6 +37,8 @@
         "resolve-url-loader": "^3.1.1",
         "sass": "^1.42.1",
         "sass-loader": "^12.1.0",
+        "ts-loader": "^9.2.6",
+        "typescript": "^4.4.4",
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {

@@ -16,7 +16,7 @@ function FootprintsEssentials(props) {
         <span className='idk'>
         5 hours {/*  */}
         </span>
-        <span><i class='fa fa-plus'></i></span>
+        <span><i className='fa fa-plus'></i></span>
       </div>
     </div>
   );

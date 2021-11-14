@@ -11,7 +11,7 @@ let AccountPage = props => {
       <HeaderDefault />
       <div>
         <h1>Account</h1>
-        <p>Name: Allen</p>
+        <p>Name: {localStorage.getItem('user')}</p>
         <p>Joined: A long long time ago</p>
         <p>ID: {localStorage.getItem('id')}</p>
         <button class='btn btn--primary'><Link to='/get-subscription'>Get Premium</Link></button>

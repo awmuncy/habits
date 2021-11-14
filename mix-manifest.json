@@ -1,9 +1,5 @@
 {
     "/dist/public/js/app.js": "/dist/public/js/app.js",
-    "/dist/public/service-worker.js": "/dist/public/service-worker.js",
-    "/dist/public/js/service-worker-install.js": "/dist/public/js/service-worker-install.js",
-    "/dist/public/js/site.js": "/dist/public/js/site.js",
-    "/dist/public/css/unauth.css": "/dist/public/css/unauth.css",
     "/dist/public/css/style.css": "/dist/public/css/style.css",
     "/dist/public/images/hero.jpg": "/dist/public/images/hero.jpg",
     "/dist/public/images/logo.png": "/dist/public/images/logo.png",

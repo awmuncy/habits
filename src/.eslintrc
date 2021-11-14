@@ -15,7 +15,7 @@
       "import",
       "react",
       "jsdoc",
-      "jsx-a11y"
+//      "jsx-a11y"
     ],
     "settings": {
       "import/ignore": [
@@ -30,7 +30,7 @@
       "document": true
     },
     "extends": [
-      "plugin:jsx-a11y/recommended"
+//      "plugin:jsx-a11y/recommended"
     ],
     "rules": {
       "indent": ["error", 2],

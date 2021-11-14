@@ -13,10 +13,27 @@ import {
 // TODO: Refector the heck out of this file
 
 
-function habitReducer(state = 0, action, calc_scores = true) {
+function habitReducer(state = [], action, calc_scores = true) {
   let habits = Array.isArray(state) ? state.slice(0) : [];
   let index;
   switch (action.type) {
+
+  case 'UPDATE_HABIT_CHECKINS':
+
+    return habits.map(function(habit) {
+      if (habit._id === action.habit) {
+        habit.checkins = action.checkins;
+      }
+      return habit;
+    });
+
+
+
+  case 'SAVE_HABITS':
+
+    return action.habits;
+
+
 
   case HYDRATE_PAGE:
 
