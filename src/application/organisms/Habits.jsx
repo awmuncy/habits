@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { getHabits } from '../lib/requests';
 import { Habit } from '../store/ConnectedComponents.js';
+import { SectionsConnected } from './Sections.tsx';
 
 function HabitsComponent(props) {
 
@@ -16,9 +17,7 @@ function HabitsComponent(props) {
 
   return (
     <div className='habit-list'>
-      {habits.map(habit => {
-        return <Habit {...habit} />;
-      })}
+      <SectionsConnected habits={habits} />
     </div>
   );
 }

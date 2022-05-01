@@ -34,12 +34,23 @@ let recalls = (store = [], action) => {
   }
 };
 
+function sort(store = [], action) {
+  switch (action.type) {
+  case 'SORT_BY':
+    return [action.spec];
+
+  default:
+    return store;
+  }
+}
+
 const rootReducer = combineReducers({
   habits,
   navigationOpen: navigationOpen,
   view_date,
   filters,
   pinned_habits,
+  sort,
   syncStatus    : () => syncStatus,
   subscription  : (store = null, action) => {
     switch (action.type) {

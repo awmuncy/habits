@@ -3,7 +3,7 @@ var mix = require('laravel-mix');
 
 
 mix.sourceMaps(true, 'source-map')
-    .js('src/application/app.jsx',                        'dist/public/js')
+    .ts('src/application/app.jsx',                        'dist/public/js')
     .react()
     .sass ('src/application/styles/style.scss',              'dist/public/css')
     .react()

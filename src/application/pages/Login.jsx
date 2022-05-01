@@ -49,7 +49,7 @@ class Login extends Component {
         localStorage.setItem('mySecretToken', token);
         let detokenizedUser = jwt_decode(token);
         localStorage.setItem('user', detokenizedUser.name);
-        saveUser(token, detokenizedUser.subscription_type);
+        // saveUser(token, detokenizedUser.subscription_type);
         // (If service worker is installed, go home. Otherwise, go to install page, which directs home)?
         window.location.href = '/home';
       } else {

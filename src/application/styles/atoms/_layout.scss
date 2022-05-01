@@ -27,6 +27,14 @@ main {
         gap: 10px;
     }
 }
+
+.sidebar {
+    @extend %sidebar-content;
+}
+
+%sidebar-content {
+    grid-column: sidebar-start / sidebar-end;
+}
   
 %focus-content {
     grid-column: focus-start / focus-end;

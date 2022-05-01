@@ -20,9 +20,13 @@ function HomePage(props) {
       <HeaderDefault />
       <main>
         <div className='home-layout'>
+          <div className='sidebar'>
+            Hello!
+          </div>
           <div className='home-main'>
             <Habits />
           </div>
+
         </div>
         <FloatingActionButton />
       </main>

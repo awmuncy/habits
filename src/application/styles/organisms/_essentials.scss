@@ -91,3 +91,7 @@
     	color: #333;
     }
 }
+
+:last-of-type>.essentials {
+    border-bottom-width: 0px;
+}

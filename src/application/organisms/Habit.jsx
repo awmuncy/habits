@@ -1,83 +1,17 @@
-import { isBefore } from 'date-fns';
-import { formatDistance } from 'date-fns/esm';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { createCheckin, sleepHabit } from '../lib/requests';
+import { createCheckin, sleepHabit } from '../lib/requests.js';
 import { Checkin } from '../store/ConnectedComponents.js';
 
 
-const SECOND = 1000;
-const MINUTE = 60 * SECOND;
-const HOUR = 60 * MINUTE;
-const DAY = 24 * HOUR;
+import { distToUrgent, intervalToString, inTargetWindow } from '../lib/timing';
 
-const intervalCount = interval => {
-  let mills = 0;
-
-  mills += interval.days * DAY;
-  mills += interval.hours * HOUR;
-  mills += interval.minutes * MINUTE;
-  mills += interval.seconds * SECOND;
-
-  return mills;
-};
-
-const distToUrgent = function(interval, targetWindow, checkin) {
-  let totalMills = intervalCount(interval);
-  let targetMills = intervalCount(targetWindow);
-  checkin = checkin || 0;
-  let timesUp = new Date(checkin + totalMills + targetMills);
-
-  if (isBefore(timesUp, new Date())) {
-    return 'Time is up';
-  }
-
-  return formatDistance(new Date(), timesUp);
-};
-
-const window = function inTargetWindow(interval, targetWindow, checkin) {
-
-
-  let now = new Date().getTime();
-  let distanceBetweenMoments = now - checkin;
-
-  let abide = intervalCount(interval);
-  let target = intervalCount(targetWindow) + abide;
-
-
-  switch (true) {
-
-  case distanceBetweenMoments < abide:
-    return 'abide';
-  case distanceBetweenMoments < target:
-    return 'target';
-  default:
-    return 'urgent';
-
-  }
-
-};
-
-function intervalToString(interval, removeS = false) {
-  let outputString = '';
-  for (let timePeriod in interval) {
-    let i = 0;
-    if (interval[timePeriod] !== 0 && timePeriod !== '_id') {
-      if (i > 0) { outputString += ', '; }
-      outputString += interval[timePeriod] + ' ';
-      outputString += removeS ? timePeriod.slice(0, -1) : timePeriod;
-      i++;
-    }
-  }
-
-  return outputString + ' ';
-}
 
 function FootprintsEssentials(props) {
 
 
 
-  let statusIcon = window(props.profile.interval, props.profile.targetWindow, props.checkins[0]);
+  let statusIcon = inTargetWindow(props.profile.interval, props.profile.targetWindow, props.checkins[0]);
   let distToTimesUp = distToUrgent(props.profile.interval, props.profile.targetWindow, props.checkins[0]);
 
   let sleep = props.sleep ? 'sleep' : '';

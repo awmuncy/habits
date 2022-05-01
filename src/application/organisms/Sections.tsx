@@ -1,0 +1,127 @@
+import React, { useState } from 'react';
+import { inTargetWindow } from '../lib/timing.js';
+import { Habit } from '../store/ConnectedComponents.js';
+import { connect } from 'react-redux';
+
+
+function sortByPoints(habits:any) {
+
+  let sections = {};
+
+  habits.forEach(habit => {
+    if (Array.isArray(sections[habit.profile.pointsPerDay])) {
+      sections[habit.profile.pointsPerDay].push(habit);
+    } else {
+      sections[habit.profile.pointsPerDay] = [habit];
+    }
+
+  });
+
+
+  let arraySection = Object.entries(sections);
+
+  return arraySection;
+
+
+}
+
+interface TimingInterval {
+  days: number
+}
+
+interface Profile {
+  mode: string,
+  targetWindow: TimingInterval,
+  pointsPerDay: number,
+  interval: TimingInterval
+}
+
+interface TypeHabit {
+  title: string,
+  checkins: Array<number>,
+  _id: string,
+  profile: Profile
+}
+
+function sortByStatus(habits: Array<TypeHabit>) {
+
+  let sections = {};
+
+  habits.forEach(habit => {
+    let status = inTargetWindow(habit.profile.interval, habit.profile.targetWindow, habit.checkins[0]);
+    if (Array.isArray(sections[status])) {
+      sections[status].push(habit);
+    } else {
+      sections[status] = [habit];
+    }
+
+  });
+
+  return Object.entries(sections);
+
+}
+
+function Sections(props) {
+
+  let sortBy = props.sort[0];
+  let sorted;
+
+  switch (sortBy) {
+  case 'points':
+    sorted = sortByPoints(props.habits);
+    break;
+  case 'status':
+    sorted = sortByStatus(props.habits);
+    break;
+
+  default:
+    sorted = [['Habits', props.habits]];
+
+  }
+
+  return (<>
+    <ul>
+      <li onClick={() => {props.applySort('points')}}>Points</li>
+      <li onClick={() => {props.applySort('status')}}>Status</li>
+      <li onClick={() => {props.applySort('')}}>No sort</li>
+    </ul>
+
+    {sorted.map(section => <Section data={section} />)}
+  </>)
+}
+
+
+function Section(props) {
+  let [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className='habit-section'>
+      <h2 onClick={()=>setIsOpen(!isOpen)}>{props.data[0]}</h2>
+      <div style={{'display': isOpen ? 'block' : 'none'}} >
+        {props.data[1].map(habit => {
+          return <Habit {...habit} />;
+        })}
+      </div>
+    </div>
+  );
+}
+
+export default Sections;
+
+let connections = [
+  (store, props) => {
+    return {
+      sort: store.sort
+    };
+  },
+  dispatch => {
+    return {
+      applySort: (spec) => {
+        dispatch({type: 'SORT_BY', spec});
+      }
+    };
+  }
+];
+
+const SectionsConnected = connect(...connections)(Sections);
+export { SectionsConnected };

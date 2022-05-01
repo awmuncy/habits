@@ -3,6 +3,13 @@ import { FILTER_TO_OUTSTANDING, CLEAR_OUTSTANDING_FILTER, CLEAR_FILTERS } from '
 export default function habits(state = [], action) {
   let filters, index;
   switch (action.type) {
+
+  // case APPLY_FILTER:
+  //   filters = [...state];
+
+
+
+  //   return filters;
   case FILTER_TO_OUTSTANDING:
     filters = [...state];
 
