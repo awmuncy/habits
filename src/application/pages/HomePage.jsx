@@ -1,7 +1,6 @@
-import React, { Component, useState } from 'react';
-import { createCheckin, deleteCheckin, getHabits } from '../lib/requests.js';
+import React from 'react';
 
-import { Habits, HeaderDefault, FloatingActionButton, Checkin } from '../store/ConnectedComponents.js';
+import { Habits, HeaderDefault, FloatingActionButton, Buckets } from '../store/ConnectedComponents.js';
 
 
 let user = localStorage.getItem('id');
@@ -21,7 +20,7 @@ function HomePage(props) {
       <main>
         <div className='home-layout'>
           <div className='sidebar'>
-            Hello!
+            <Buckets />
           </div>
           <div className='home-main'>
             <Habits />

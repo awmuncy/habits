@@ -25,6 +25,37 @@ function sortByPoints(habits:any) {
 
 }
 
+function sortByCategories(habits) {
+
+  let sections = {
+    'Uncategorized': []
+  };
+
+  habits.forEach(habit => {
+    if (Array.isArray(habit.categories) && habit.categories.length > 0) {
+      habit.categories.forEach(category => {
+        if (Array.isArray(sections[category])) {
+          sections[category].push(habit);
+        } else {
+          sections[category] = [habit];
+        }
+      });
+    } else {
+      sections['Uncategorized'].push(habit);
+    }
+
+
+  });
+  if (sections['Uncategorized'].length === 0) {
+    delete sections['Uncategorized'];
+  }
+
+  let arraySection = Object.entries(sections);
+
+  return arraySection;
+
+}
+
 interface TimingInterval {
   days: number
 }
@@ -70,6 +101,9 @@ function Sections(props) {
   case 'points':
     sorted = sortByPoints(props.habits);
     break;
+  case 'category':
+    sorted = sortByCategories(props.habits);
+    break;
   case 'status':
     sorted = sortByStatus(props.habits);
     break;
@@ -79,15 +113,7 @@ function Sections(props) {
 
   }
 
-  return (<>
-    <ul>
-      <li onClick={() => {props.applySort('points')}}>Points</li>
-      <li onClick={() => {props.applySort('status')}}>Status</li>
-      <li onClick={() => {props.applySort('')}}>No sort</li>
-    </ul>
-
-    {sorted.map(section => <Section data={section} />)}
-  </>)
+  return sorted.map(section => <Section data={section} />);
 }
 
 

@@ -24,3 +24,4 @@ export { IntervalFor } from '../atoms/IntervalFor.jsx';
 export { SortablePlanks } from '../atoms/SortablePlanks.jsx';
 export { BoolIcon } from '../atoms/BoolIcon.jsx';
 export { IntervalSelect } from '../molecules/IntervalSelect.jsx';
+export { ConnectedBuckets as Buckets } from '../molecules/Buckets.tsx';
