@@ -6,5 +6,6 @@
       "preserveConstEnums": true,
       "sourceMap": true,
       "jsx": "react",
+      "allowSyntheticDefaultImports": true,
     },
 }

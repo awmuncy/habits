@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createCheckin, sleepHabit } from '../lib/requests.js';
 import { Checkin } from '../store/ConnectedComponents.js';
 
-
+import NewCheckin from '../molecules/NewCheckin';
 import { distToUrgent, intervalToString, inTargetWindow } from '../lib/timing';
 
 
@@ -46,6 +46,8 @@ function FootprintsEssentials(props) {
   );
 };
 
+
+
 function HabitComponent(props) {
 
   let [open, setOpen] = useState(false);
@@ -56,22 +58,7 @@ function HabitComponent(props) {
       <FootprintsEssentials {...props} opener={[open, setOpen]} />
       <div className={`checkin-window ${windowClass}`}>
         <ul className='checkins'>
-          <li className='checkin'>
-            <h2 className='title'><span className='focus'>New Checkin</span></h2>
-            <span className='score'>+</span>
-
-            <button
-              aria-label='Yes, I did check in'
-              className='check-yes'
-              onClick={async(e) => {
-                let checkinResponse = await createCheckin(props._id);
-              }}
-            ></button>
-            <button
-              aria-label='No, I did not check in'
-              className='check-time'
-            ></button>
-          </li>
+          <NewCheckin {...props} />
           {props.checkins.map(checkin => {
             return <Checkin checkin={checkin} habitId={props._id} />;
           })}
