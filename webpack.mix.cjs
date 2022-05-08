@@ -3,6 +3,13 @@ var mix = require('laravel-mix');
 
 
 mix.sourceMaps(true, 'source-map')
+    .webpackConfig({
+        resolve: {
+            fallback: {
+                crypto: false
+            }
+        }
+    })
     .ts('src/application/app.jsx',                        'dist/public/js')
     .react()
     .sass ('src/application/styles/style.scss',              'dist/public/css')
