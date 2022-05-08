@@ -129,6 +129,16 @@
 			}
 		}
 	}
+	&.vices {
+		button.check-yes {
+			&:after {
+				color: crimson;
+				font-size: 1.6em;
+				content: '\f043';
+				font-family: fontAwesome;
+			}
+		}
+	}
 	.title {
 		grid-column: span 2;
 		padding: 5px 10px 0px;

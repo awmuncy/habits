@@ -68,8 +68,9 @@ export default function NewCheckin(props) {
   if (pickerOpen) {
     timePicker = <TimedCheckin close={()=>setPickerOpen(false)} {...props} />;
   }
+  let mode = props.profile.mode;
   return (
-    <li className='checkin'>
+    <li className={`checkin ${mode}`}>
       <h2 className='title'><span className='focus'>New Checkin</span></h2>
       <span className='score'>+</span>
 

@@ -79,7 +79,12 @@ function sortByStatus(habits: Array<TypeHabit>) {
   let sections = {};
 
   habits.forEach(habit => {
-    let status = inTargetWindow(habit.profile.interval, habit.profile.targetWindow, habit.checkins[0]);
+    let status;
+    if (habit.profile.mode === 'vices') {
+      status = 'Vice';
+    } else {
+      status = inTargetWindow(habit.profile.interval, habit.profile.targetWindow, habit.checkins[0]);
+    }
     if (Array.isArray(sections[status])) {
       sections[status].push(habit);
     } else {
@@ -90,6 +95,22 @@ function sortByStatus(habits: Array<TypeHabit>) {
 
   return Object.entries(sections);
 
+}
+
+function sortByMode(habits: Array<TypeHabit>) {
+  let sections = {};
+
+  habits.forEach(habit => {
+    let mode = habit.profile.mode;
+    if (Array.isArray(sections[mode])) {
+      sections[mode].push(habit);
+    } else {
+      sections[mode] = [habit];
+    }
+
+  });
+
+  return Object.entries(sections);
 }
 
 function Sections(props) {
@@ -108,8 +129,12 @@ function Sections(props) {
     sorted = sortByStatus(props.habits);
     break;
 
+  case 'mode':
+    sorted = sortByMode(props.habits);
+    break;
   default:
     sorted = [['Habits', props.habits]];
+    sorted = sortByMode(props.habits);
 
   }
 

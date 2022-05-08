@@ -29,10 +29,6 @@ function FootprintsEssentials(props) {
           <span className='target'> {intervalToString(props.profile.targetWindow, true)}</span> target window
           || {distToTimesUp}
         </span>
-        {/* <span className='grace-period-expires'>
-          Target window ends in three hours.
-          Shows up 3/4 through grace period
-        </span> */}
       </div>
       <div className='meta'>
         <span className='idk'>
@@ -46,6 +42,35 @@ function FootprintsEssentials(props) {
   );
 };
 
+function VicesEssentials(props) {
+  let statusIcon = ''; //  inTargetWindow(props.profile.interval, props.profile.targetWindow, props.checkins[0]);
+  // let distToTimesUp = distToUrgent(props.profile.interval, props.profile.targetWindow, props.checkins[0]);
+
+  let sleep = props.sleep ? 'sleep' : '';
+
+  return (
+    <div className={`essentials status-add ${sleep}`} onClick={e=>{ props.opener[1](!props.opener[0]); }}>
+      <span className={`${statusIcon} aim status-icon `}>
+
+      </span>
+      <div className='title-and-type'>
+        <h2>{props.title}</h2>
+        <span className={`time-span ${statusIcon}`}>
+
+        </span>
+      </div>
+      <div className='meta'>
+        <span className='idk'>
+          <i className='fa fa-moon-o' onClick={async(e) => {
+            let checkinResponse = await sleepHabit(props._id);
+          }}></i>
+        </span>
+        <span><i class='fa fa-plus'></i>{props.profile.pointsPerDay}</span>
+      </div>
+    </div>
+  );
+}
+
 
 
 function HabitComponent(props) {
@@ -53,9 +78,18 @@ function HabitComponent(props) {
   let [open, setOpen] = useState(false);
 
   let windowClass = open ? '' : 'closed';
+  let essentials = null;
+  switch (props.profile.mode) {
+  case 'footprints':
+    essentials = <FootprintsEssentials {...props} opener={[open, setOpen]} />;
+    break;
+  case 'vices':
+    essentials = <VicesEssentials {...props} opener={[open, setOpen]} />;
+    break;
+  }
   return (
     <div>
-      <FootprintsEssentials {...props} opener={[open, setOpen]} />
+      {essentials}
       <div className={`checkin-window ${windowClass}`}>
         <ul className='checkins'>
           <NewCheckin {...props} />
