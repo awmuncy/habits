@@ -1,4 +1,46 @@
+@keyframes slide-to-left {
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+
+	.curtain {
+		position: fixed;
+		transition: .5s;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: calc(100vw);
+		z-index: 101;
+		background-color: #0007;
+		page-transition-tag: curtain;
+		contain: paint;
+	}
+
+@keyframes disipait {
+	to {
+		opacity: 0;
+	}
+}
+
+::page-transition-outgoing-image(curtain) {
+	animation: .2s cubic-bezier(.55,0,.1,1) both disipait;
+	animation-delay: .1s;
+}
+
+::page-transition-outgoing-image(side-nav) {
+	animation: .1s cubic-bezier(.55,0,.1,1) both slide-to-left;
+
+}
 .app-navigation {
+
+	page-transition-tag: side-nav;
+	/* Paint containment is required */
+	contain: paint;
+
+
+
 	display: flex;
 	justify-content: space-between;
 	background-color: white;

@@ -1,9 +1,11 @@
 import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from '../atoms/Link';
 import Permission from '../atoms/Permission.jsx';
 import NavItemConnector from '../store/connections/NavItem.js';
 import NavSideConnector from '../store/connections/NavSide.js';
+import { pageTransition } from '../lib/pageTransition';
+import ReactDOM from 'react-dom';
 
 function NavItemComponent(props) {
 
@@ -12,7 +14,7 @@ function NavItemComponent(props) {
   return (
     <li className={props.className + ' navitem'}>
       <div className='link-container'>
-        <Link to={props.path} onClick={props.closeMenu}>
+        <Link to={props.path} do={props.closeMenu}>
           <i className={`fa ${props.icon}`} aria-hidden='true'></i>
           {props.text}
         </Link>
@@ -43,6 +45,14 @@ function SubnavItemComponent(props) {
   );
 }
 
+function Curtain(props) {
+  return ReactDOM.createPortal(
+    <div className='curtain' onClick={() => { 
+      props.closeMenu()}
+    }></div>,
+    document.getElementById('modal-portal')
+  );
+}
 
 class C_NavSide extends Component {
 
@@ -68,6 +78,7 @@ class C_NavSide extends Component {
   render() {
 
     let menuClass = this.props.menuState ? 'open' : 'closed';
+    const curtain = this.props.menuState ? <Curtain closeMenu={this.props.closeMenu} /> : null;
 
     let syncStatusMessage;
     switch (this.props.syncStatus) {
@@ -87,6 +98,7 @@ class C_NavSide extends Component {
       syncStatusMessage = 'Sync';
     }
 
+
     return (
 
 
@@ -97,7 +109,8 @@ class C_NavSide extends Component {
         </header>
 
         {/* eslint-disable-next-line */}
-        <div className='curtain' onClick={this.props.closeMenu}></div>
+        
+        {curtain}
 
         <ul className='places'>
           <NavItem path='/home' icon='fa-home' text='Home' />

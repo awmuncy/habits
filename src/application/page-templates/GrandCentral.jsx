@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 
 import {
   HeaderDefault
@@ -20,7 +20,8 @@ import {
 
 import {
   Route,
-  Switch
+  Switch,
+  useLocation
 } from 'react-router-dom';
 
 const FourOhFourPage = function() {
@@ -33,39 +34,47 @@ const FourOhFourPage = function() {
   );
 };
 
-class GrandCentral extends Component {
 
 
-  render() {
-
-    return (
-      <Switch>
-        <Route exact path='/' component={HomePage} />
-        <Route exact path='/home' component={HomePage} />
-        <Route exact path='/archived-habits' component={ArchivedHabitsPage} />
-        <Route exact path='/account' component={AccountPage} />
-        <Route exact path='/get-subscription' component={GetSubscriptionPage} />
-        <Route exact path='/checkout' component={CheckoutPage} />
-
-        <Route path='/habits' component={HabitsPage} />
-        <Route path='/feedback' component={FeedbackPage} />
-        <Route path='/new-habit' component={NewHabitPage} />
-
-        <Route
-          path='/habit/:id'
-          render={(props) => <SingleHabitPage {...props} />}
-        />
+function GrandCentral(props) {
+  const location = useLocation();
+  useEffect(() => {
+    if (window.pageIsRendering) {
+      console.log("This is what I see");
+      console.log(window.pageRenderComplete);
+      window.pageRenderComplete();
+    }
+  }, [location]);
 
 
-        <Route path='/FAQ' component={FAQPage} />
+  return (
+    <Switch>
+      <Route exact path='/' component={HomePage} />
+      <Route exact path='/home' component={HomePage} />
+      <Route exact path='/archived-habits' component={ArchivedHabitsPage} />
+      <Route exact path='/account' component={AccountPage} />
+      <Route exact path='/get-subscription' component={GetSubscriptionPage} />
+      <Route exact path='/checkout' component={CheckoutPage} />
 
-        <Route path='/login' component={LoginPage} />
+      <Route path='/habits' component={HabitsPage} />
+      <Route path='/feedback' component={FeedbackPage} />
+      <Route path='/new-habit' component={NewHabitPage} />
 
-        <Route component={FourOhFourPage} />
-      </Switch>
-    );
+      <Route
+        path='/habit/:id'
+        render={(props) => <SingleHabitPage {...props} />}
+      />
 
-  }
+
+      <Route path='/FAQ' component={FAQPage} />
+
+      <Route path='/login' component={LoginPage} />
+
+      <Route component={FourOhFourPage} />
+    </Switch>
+  );
+
+
 }
 
 export {

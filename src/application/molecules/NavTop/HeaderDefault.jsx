@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from '../../atoms/Link';
 import { S_HeaderDefault } from '../../store/connectors.js';
 
 class C_HeaderDefault extends Component {

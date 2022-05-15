@@ -4,8 +4,42 @@
 }
 html, body {
 	margin: 0px;
-	// background-color: #777;
+	background-color: green;
 }
+.habit-tracker {
+	background-color: white;
+}
+
+
+.transition-warming-up::page-transition-container(*),
+.transition-warming-up::page-transition-incoming-image(*),
+.transition-warming-up::page-transition-outgoing-image(*) {
+  animation-play-state: paused !important;
+}
+
+@keyframes slide-to-left {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-from-right {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+::page-transition-outgoing-image(root) {
+  animation: 500ms ease-out both slide-to-left;
+  animation-delay: .2s;
+}
+
+::page-transition-incoming-image(root) {
+  
+  animation: 500ms ease-out both slide-from-right;
+  animation-delay: .2s;
+}
+
 html {
 	// font-size: 62.5%;
 
