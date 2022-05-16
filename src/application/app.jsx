@@ -5,13 +5,12 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { HabitTracker } from './store/ConnectedComponents.js';
 import store from './store/store.js';
-import filterConsoleNotifs from './filterConsoleNotifs.js';
 import tokenizedUser from './tokenizedUser.js';
 import { getHabits } from './lib/requests.js';
 
 
 
-filterConsoleNotifs();
+
 let loggedin = tokenizedUser();
 
 // if (loggedin) {
@@ -26,7 +25,6 @@ ReactDOM.render(
   ,
   document.getElementById('momentum-app'));
 
-// }
 
 getHabits().then(r=>r.json()).then(habits=>{
   storeInit.dispatch({type: 'SAVE_HABITS', habits});
