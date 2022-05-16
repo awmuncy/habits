@@ -4,8 +4,8 @@ import { pageTransition } from '../lib/pageTransition';
 
 function handleTransitionClickEvent(e, props) {
   if (!document.createDocumentTransition) {
-    if (props.do) {
-      props.do();
+    if (props.action) {
+      props.action();
     }
     return;
   }
@@ -15,7 +15,7 @@ function handleTransitionClickEvent(e, props) {
   } else {
     e.preventDefault();
     window.pageIsRendering = true;
-    pageTransition(props.do).then(() => {
+    pageTransition(props.action).then(() => {
       target.click();
     });
   }
@@ -24,6 +24,7 @@ function handleTransitionClickEvent(e, props) {
 
 
 function Link(props) {
+
 
   return (
     <RouterLink {...props} onClick={e => handleTransitionClickEvent(e, props)} />

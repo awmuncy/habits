@@ -21,7 +21,7 @@ let Permission = props => {
 
 let storeToProps = (store, props) => {
   return {
-    subscription_type: store.user.subscription
+    subscription_type: 'dev'
   };
 };
 

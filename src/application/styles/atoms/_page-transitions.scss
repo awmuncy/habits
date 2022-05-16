@@ -1,0 +1,49 @@
+.transition-warming-up::page-transition-container(*),
+.transition-warming-up::page-transition-incoming-image(*),
+.transition-warming-up::page-transition-outgoing-image(*) {
+  animation-play-state: paused !important;
+}
+
+.default-page-transition {
+  &::page-transition-outgoing-image(root) {
+    animation: 500ms ease-out both slide-to-left;
+    animation-delay: .2s;
+  }
+
+  &::page-transition-incoming-image(root) {
+    
+    animation: 500ms ease-out both slide-from-right;
+    animation-delay: .2s;
+  }
+}
+
+.backwards-page-transition {
+  &::page-transition-outgoing-image(root) {
+    animation: 500ms ease-out both slide-to-right;
+    animation-delay: .2s;
+  }
+
+  &::page-transition-incoming-image(root) {
+    
+    animation: 500ms ease-out both slide-from-left;
+    animation-delay: .2s;
+  }
+}
+
+
+::page-transition-outgoing-image(fab) {
+	animation: 300ms ease-out both explode;
+}
+::page-transition-incoming-image(fab) {
+	animation: 300ms ease-in both rise;
+}
+
+::page-transition-outgoing-image(curtain) {
+	animation: .2s cubic-bezier(.55,0,.1,1) both disipait;
+	animation-delay: .1s;
+}
+
+::page-transition-outgoing-image(side-nav) {
+	animation: .1s cubic-bezier(.55,0,.1,1) both slide-to-left;
+
+}

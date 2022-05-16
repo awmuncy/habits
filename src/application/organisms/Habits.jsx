@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { getHabits } from '../lib/requests';
-import { Habit } from '../store/ConnectedComponents.js';
+
 import { SectionsConnected } from './Sections.tsx';
 
 function HabitsComponent(props) {

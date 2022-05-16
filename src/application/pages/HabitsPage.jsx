@@ -11,7 +11,6 @@ function HabitsPage() {
     <>
       <HeaderDefault />
       <div className='home-layout'>
-        <Sorting />
         <Habits />
       </div>
     </>

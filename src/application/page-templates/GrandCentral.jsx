@@ -40,8 +40,7 @@ function GrandCentral(props) {
   const location = useLocation();
   useEffect(() => {
     if (window.pageIsRendering) {
-      console.log("This is what I see");
-      console.log(window.pageRenderComplete);
+
       window.pageRenderComplete();
     }
   }, [location]);

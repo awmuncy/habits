@@ -1,6 +1,8 @@
 .new-habit {
 	margin: 0 auto;
 	.btn.new-habit-button {
+		page-transition-tag: fab;
+		contain: paint;
 		display: grid;
 		border: none;
 		text-align: center;

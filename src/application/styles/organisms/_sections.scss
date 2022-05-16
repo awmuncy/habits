@@ -1,0 +1,12 @@
+.section-content {
+	overflow: hidden;
+    max-height: 0px;
+    transition: max-height .3s;
+    transition-timing-function: ease-in;
+    &.open {
+        max-height: 3000px;
+    }
+    &.closed {
+        overflow: hidden;
+    }
+}

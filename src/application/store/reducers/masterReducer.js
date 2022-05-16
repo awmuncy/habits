@@ -47,11 +47,7 @@ function sort(store = [], action) {
 const rootReducer = combineReducers({
   habits,
   navigationOpen: navigationOpen,
-  view_date,
-  filters,
-  pinned_habits,
   sort,
-  syncStatus    : () => syncStatus,
   subscription  : (store = null, action) => {
     switch (action.type) {
     case 'SET_CHECKOUT':
@@ -59,9 +55,7 @@ const rootReducer = combineReducers({
     default:
       return store;
     }
-  },
-  user,
-  recalls
+  }
 });
 
 export default rootReducer;

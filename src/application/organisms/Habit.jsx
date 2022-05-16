@@ -77,7 +77,7 @@ function HabitComponent(props) {
 
   let [open, setOpen] = useState(false);
 
-  let windowClass = open ? '' : 'closed';
+  let windowClass = open ? 'open' : 'closed';
   let essentials = null;
   switch (props.profile.mode) {
   case 'footprints':
@@ -90,13 +90,15 @@ function HabitComponent(props) {
   return (
     <div>
       {essentials}
-      <div className={`checkin-window ${windowClass}`}>
-        <ul className='checkins'>
-          <NewCheckin {...props} />
-          {props.checkins.map(checkin => {
-            return <Checkin checkin={checkin} habitId={props._id} />;
-          })}
-        </ul>
+      <div className={`checkin-window-wrapper ${windowClass}`}>
+        <div className={`checkin-window ${windowClass}`}>
+          <ul className='checkins'>
+            <NewCheckin {...props} />
+            {props.checkins.map(checkin => {
+              return <Checkin checkin={checkin} habitId={props._id} />;
+            })}
+          </ul>
+        </div>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ let HeadBack = props => {
   return (
     <header className='app-header'>
       <nav className='top-left-action-button header-nav'>
-        <i onClick={()=>pageTransition().then(()=>history.goBack()) }
+        <i onClick={()=>pageTransition(null, 'backwards-page-transition').then(()=>history.goBack()) }
           className='fa fa-arrow-left' aria-hidden='true'></i>
       </nav>
     </header>

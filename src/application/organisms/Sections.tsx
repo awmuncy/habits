@@ -144,11 +144,12 @@ function Sections(props) {
 
 function Section(props) {
   let [isOpen, setIsOpen] = useState(false);
+  const displayClass = isOpen ? 'open' : 'closed';
 
   return (
     <div className='habit-section'>
       <h2 onClick={()=>setIsOpen(!isOpen)}>{props.data[0]}</h2>
-      <div style={{'display': isOpen ? 'block' : 'none'}} >
+      <div className={`section-content ${displayClass}`} >
         {props.data[1].map(habit => {
           return <Habit {...habit} />;
         })}

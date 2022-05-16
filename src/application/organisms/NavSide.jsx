@@ -4,7 +4,6 @@ import { Link } from '../atoms/Link';
 import Permission from '../atoms/Permission.jsx';
 import NavItemConnector from '../store/connections/NavItem.js';
 import NavSideConnector from '../store/connections/NavSide.js';
-import { pageTransition } from '../lib/pageTransition';
 import ReactDOM from 'react-dom';
 
 function NavItemComponent(props) {
@@ -14,7 +13,7 @@ function NavItemComponent(props) {
   return (
     <li className={props.className + ' navitem'}>
       <div className='link-container'>
-        <Link to={props.path} do={props.closeMenu}>
+        <Link to={props.path} action={props.closeMenu}>
           <i className={`fa ${props.icon}`} aria-hidden='true'></i>
           {props.text}
         </Link>

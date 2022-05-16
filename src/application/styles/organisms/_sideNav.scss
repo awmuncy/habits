@@ -1,8 +1,4 @@
-@keyframes slide-to-left {
-	to {
-		transform: translateX(-100%);
-	}
-}
+
 
 
 	.curtain {
@@ -18,21 +14,8 @@
 		contain: paint;
 	}
 
-@keyframes disipait {
-	to {
-		opacity: 0;
-	}
-}
 
-::page-transition-outgoing-image(curtain) {
-	animation: .2s cubic-bezier(.55,0,.1,1) both disipait;
-	animation-delay: .1s;
-}
 
-::page-transition-outgoing-image(side-nav) {
-	animation: .1s cubic-bezier(.55,0,.1,1) both slide-to-left;
-
-}
 .app-navigation {
 
 	page-transition-tag: side-nav;
