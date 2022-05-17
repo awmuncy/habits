@@ -23,6 +23,11 @@ header.app-header {
 	background-color: var(--brand-primary);
 	padding: 5px 10px;
 	height: 42px;
+	&.default {
+		page-transition-tag: header;
+		contain: paint;
+		mix-blend-mode: normal;
+	}
 	.header-nav {
 		.fa {
 			font-size: 28px;
