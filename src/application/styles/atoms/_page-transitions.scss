@@ -6,26 +6,33 @@
 
 .default-page-transition {
   &::page-transition-outgoing-image(root) {
-    animation: 500ms ease-out both slide-to-left;
+    animation: 250ms ease-out both slide-to-left;
     animation-delay: .2s;
   }
 
   &::page-transition-incoming-image(root) {
     
-    animation: 500ms ease-out both slide-from-right;
+    animation: 250ms ease-out both slide-from-right;
     animation-delay: .2s;
+  }
+
+  &::page-transition-incoming-image(header) {
+    animation: none;
+  }
+  &::page-transition-outgoing-image(header) {
+    animation: none;
   }
 }
 
 .backwards-page-transition {
   &::page-transition-outgoing-image(root) {
-    animation: 500ms ease-out both slide-to-right;
+    animation: 250ms ease-out both slide-to-right;
     animation-delay: .2s;
   }
 
   &::page-transition-incoming-image(root) {
     
-    animation: 500ms ease-out both slide-from-left;
+    animation: 250ms ease-out both slide-from-left;
     animation-delay: .2s;
   }
 }

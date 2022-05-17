@@ -45,7 +45,7 @@ class C_HeaderDefault extends Component {
 
 
     return (
-      <header className='app-header'>
+      <header className='app-header default'>
         <nav className='site-nav'>
           <div className='header-nav'>
             {NavContents}
