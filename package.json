@@ -18,7 +18,8 @@
         "serve-api": "nodemon --experimental-json-modules src/server/api-server.js"
     },
     "browser": {
-        "crypto": false
+        "crypto": false,
+        "fs": "empty"
     },
     "devDependencies": {
         "@babel/node": "^7.15.4",
@@ -46,9 +47,12 @@
         "@babel/core": "^7.15.5",
         "@emotion/react": "^11.9.0",
         "@emotion/styled": "^11.8.1",
+        "@jlongster/sql.js": "^1.6.7",
         "@mui/material": "^5.6.4",
         "@mui/styled-engine": "^5.6.1",
         "@mui/x-date-pickers": "^5.0.0-alpha.2",
+        "@reduxjs/toolkit": "^1.8.1",
+        "absurd-sql": "^0.0.53",
         "babel-eslint": "^10.1.0",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
@@ -83,11 +87,12 @@
         "react-dnd": "^5.0.0",
         "react-dnd-html5-backend": "^5.0.1",
         "react-dom": "^16.13.1",
-        "react-redux": "^5.1.2",
+        "react-redux": "^8.0.1",
         "react-router-dom": "^5.2.0",
         "react-sortable-hoc": "^1.10.1",
-        "redux": "^4.0.4",
+        "redux": "^4.2",
         "redux-thunk": "^2.3.0",
+        "sql.js": "^1.6.2",
         "swagger-ui-express": "^4.1.6",
         "validator": "^11.1.0",
         "web-push": "^3.4.4",

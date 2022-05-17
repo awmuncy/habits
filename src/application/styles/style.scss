@@ -1,33 +1,28 @@
-@import '../../../node_modules/react-datepicker/src/stylesheets/datepicker';
 @import 'atoms/fonts//fontawesome/font-awesome.scss';
 
 // Quarks
-@import 'atoms/mixins';
-@import 'atoms/colors';
-@import 'atoms/typography';
-@import 'atoms/page-transitions';
-@import 'atoms/animations';
+@import 'atoms/mixins'; // 2
+@import 'atoms/colors'; // 2
+@import 'atoms/typography'; // 1
+@import 'atoms/page-transitions'; // 1
+@import 'atoms/animations'; // 1
 
 // Atoms 
 @import 'atoms/layout';
 @import 'atoms/global';
 
 
-@import 'atoms/buttons';
-@import 'atoms/BoolIcon';
+@import 'atoms/buttons'; // 1
+@import 'atoms/BoolIcon'; // 1
 
-@import 'atoms/forms';
-@import 'atoms/faq-cards';
-@import 'atoms/progressRings';
-@import 'atoms/essentialsProgress';
+@import 'atoms/forms'; // 1
+@import 'atoms/faq-cards'; // 1
 
 // Molecules 
 @import 'molecules/habit';
-@import 'molecules/pinned-habits';
 @import 'molecules/checkin';
 @import 'molecules/goals';
 @import 'molecules/sorting';
-@import 'molecules/calendarView';
 @import 'molecules/loginPage';
 @import 'molecules/recall';
 
@@ -37,6 +32,5 @@
 @import 'organisms/login';
 @import 'organisms/new-habit';
 @import 'organisms/sideNav';
-@import 'organisms/subscription';
 @import 'organisms/topNav';
 @import 'organisms/sections';

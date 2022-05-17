@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-
-import { HabitTracker } from './store/ConnectedComponents.js';
+import { HabitTracker } from './page-templates/HabitTracker';
 import store from './store/store.js';
 import tokenizedUser from './tokenizedUser.js';
 import { getHabits } from './lib/requests.js';
+import { addHabits } from './store/slices/habitsSlice.js';
 
 
 
@@ -14,10 +14,10 @@ import { getHabits } from './lib/requests.js';
 let loggedin = tokenizedUser();
 
 // if (loggedin) {
-let storeInit = store();
+// let storeInit = store();
 
 ReactDOM.render(
-  <Provider store={storeInit}>
+  <Provider store={store}>
     <BrowserRouter>
       <HabitTracker />
     </BrowserRouter>
@@ -27,9 +27,9 @@ ReactDOM.render(
 
 
 getHabits().then(r=>r.json()).then(habits=>{
-  storeInit.dispatch({type: 'SAVE_HABITS', habits});
+  store.dispatch(addHabits(habits));
 });
 
 export {
-  storeInit as store
+  store
 };

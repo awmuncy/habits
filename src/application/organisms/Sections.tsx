@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { inTargetWindow } from '../lib/timing.js';
-import { Habit } from '../store/ConnectedComponents.js';
+import { Habit } from '../organisms/Habit';
 import { connect } from 'react-redux';
 
 
@@ -138,7 +138,7 @@ function Sections(props) {
 
   }
 
-  return sorted.map(section => <Section data={section} />);
+  return sorted.map(section => <Section key={section[0]} data={section} />);
 }
 
 
@@ -151,7 +151,7 @@ function Section(props) {
       <h2 onClick={()=>setIsOpen(!isOpen)}>{props.data[0]}</h2>
       <div className={`section-content ${displayClass}`} >
         {props.data[1].map(habit => {
-          return <Habit {...habit} />;
+          return <Habit key={habit.title} {...habit} />;
         })}
       </div>
     </div>
@@ -160,8 +160,10 @@ function Section(props) {
 
 export default Sections;
 
-let connections = [
-  (store, props) => {
+
+
+const SectionsConnected = connect(
+  (store:any, props) => {
     return {
       sort: store.sort
     };
@@ -173,7 +175,5 @@ let connections = [
       }
     };
   }
-];
-
-const SectionsConnected = connect(...connections)(Sections);
+)(Sections);
 export { SectionsConnected };

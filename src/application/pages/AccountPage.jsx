@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import { HeaderDefault } from '../store/ConnectedComponents.js';
+import { HeaderDefault } from '../molecules/NavTop/HeaderDefault';
 
 let AccountPage = props => {
 
@@ -14,7 +14,7 @@ let AccountPage = props => {
         <p>Name: {localStorage.getItem('user')}</p>
         <p>Joined: A long long time ago</p>
         <p>ID: {localStorage.getItem('id')}</p>
-        <button class='btn btn--primary'><Link to='/get-subscription'>Get Premium</Link></button>
+        <button className='btn btn--primary'><Link to='/get-subscription'>Get Premium</Link></button>
       </div>
     </>
   );

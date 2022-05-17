@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { HeaderDefault } from '../store/ConnectedComponents.js';
+import { HeaderDefault } from '../molecules/NavTop/HeaderDefault';
 
 class Feedback extends Component {
 

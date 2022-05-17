@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeaderDefault } from '../store/ConnectedComponents.js';
+import { HeaderDefault } from '../molecules/NavTop/HeaderDefault';
 
 function FAQ() {
   document.title = 'Frequently Asked Questions | HabitApp';

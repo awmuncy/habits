@@ -7,5 +7,6 @@
     "/dist/public/icons/icon-192.png": "/dist/public/icons/icon-192.png",
     "/dist/public/icons/icon-256.png": "/dist/public/icons/icon-256.png",
     "/dist/public/icons/icon-512.png": "/dist/public/icons/icon-512.png",
+    "/dist/public/sql-wasm.wasm": "/dist/public/sql-wasm.wasm",
     "/dist/public/manifest.json": "/dist/public/manifest.json"
 }

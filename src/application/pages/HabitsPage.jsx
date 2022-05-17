@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import { Habits, Sorting, HeaderDefault } from '../store/ConnectedComponents';
-
+import { HeaderDefault } from '../molecules/NavTop/HeaderDefault';
+import { Habits } from '../organisms/Habits';
 
 function HabitsPage() {
 

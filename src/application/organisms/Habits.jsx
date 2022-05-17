@@ -1,16 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { SectionsConnected } from './Sections.tsx';
 
-function HabitsComponent(props) {
+function Habits(props) {
 
-  let habits = props.habits.slice();
+  let habits = useSelector(store=>store.habits).slice();
 
   habits.sort(function(x, y) {
-    x.sleep = x.sleep ? 1 : 0;
-    y.sleep = y.sleep ? 1 : 0;
-    return Number(x.sleep) - Number(y.sleep);
+    let xsleep = x.sleep ? 1 : 0;
+    let ysleep = y.sleep ? 1 : 0;
+    return Number(xsleep) - Number(ysleep);
   });
 
 
@@ -21,26 +21,4 @@ function HabitsComponent(props) {
   );
 }
 
-
-function HabitsProps(store, props) {
-  return {
-    habits: store.habits
-  };
-};
-
-function HabitsDispatches(dispatch) {
-  return {
-    saveHabits: habits => {
-      dispatch({type: 'SAVE_HABITS', habits});
-    }
-  };
-}
-
-const Habits = connect(HabitsProps, HabitsDispatches)(HabitsComponent);
-
-export {
-  Habits,
-  HabitsComponent,
-  HabitsDispatches,
-  HabitsProps
-};
+export { Habits };

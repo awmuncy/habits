@@ -1,19 +1,14 @@
 import React, { Component, useEffect } from 'react';
+import { HeaderDefault } from '../molecules/NavTop/HeaderDefault';
 
-import {
-  HeaderDefault
-} from '../store/ConnectedComponents';
+
 
 import {
   HomePage,
-  ArchivedHabitsPage,
   AccountPage,
-  GetSubscriptionPage,
-  CheckoutPage,
   HabitsPage,
   FAQPage,
   FeedbackPage,
-  NewHabitPage,
   SingleHabitPage,
   LoginPage
 } from '../pages/pages';
@@ -50,15 +45,9 @@ function GrandCentral(props) {
     <Switch>
       <Route exact path='/' component={HomePage} />
       <Route exact path='/home' component={HomePage} />
-      <Route exact path='/archived-habits' component={ArchivedHabitsPage} />
       <Route exact path='/account' component={AccountPage} />
-      <Route exact path='/get-subscription' component={GetSubscriptionPage} />
-      <Route exact path='/checkout' component={CheckoutPage} />
-
       <Route path='/habits' component={HabitsPage} />
       <Route path='/feedback' component={FeedbackPage} />
-      <Route path='/new-habit' component={NewHabitPage} />
-
       <Route
         path='/habit/:id'
         render={(props) => <SingleHabitPage {...props} />}

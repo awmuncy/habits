@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 function Buckets(props) {
   return (
@@ -12,23 +11,6 @@ function Buckets(props) {
   );
 }
 
-
-let connections = [
-  (store, props) => {
-    return {
-      sort: store.sort
-    };
-  },
-  dispatch => {
-    return {
-      applySort: (spec) => {
-        dispatch({type: 'SORT_BY', spec});
-      }
-    };
-  }
-];
-
-const ConnectedBuckets = connect(...connections)(Buckets);
 export {
-  ConnectedBuckets
+  Buckets
 };

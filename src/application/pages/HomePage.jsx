@@ -1,15 +1,12 @@
 import React from 'react';
 
-import { Habits, HeaderDefault, FloatingActionButton, Buckets } from '../store/ConnectedComponents.js';
+import { FloatingActionButton } from '../molecules/FloatingActionButton';
+import { Buckets } from '../molecules/Buckets';
+import { HeaderDefault } from '../molecules/NavTop/HeaderDefault';
+import { Habits } from '../organisms/Habits';
 
 
-let user = localStorage.getItem('id');
-let bearer = localStorage.getItem('mySecretToken');
-
-
-
-
-function HomePage(props) {
+function HomePage() {
 
   document.title = 'Home | HabitsApp';
 

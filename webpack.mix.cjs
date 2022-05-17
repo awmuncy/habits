@@ -6,7 +6,8 @@ mix.sourceMaps(true, 'source-map')
     .webpackConfig({
         resolve: {
             fallback: {
-                crypto: false
+                crypto: false,
+                fs: false
             }
         }
     })
@@ -17,4 +18,5 @@ mix.sourceMaps(true, 'source-map')
     .copy ('src/site/fonts',                                 'dist/public/fonts')
     .copy ('src/site/images',                                'dist/public/images')
     .copy ('src/site/icons',                                 'dist/public/icons')
+    .copy ( 'src/application/lib/sql-wasm.wasm', 'dist/public')
     .copy ('src/service-worker/manifest.json',               'dist/public');

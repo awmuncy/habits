@@ -1,62 +1,42 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from '../../atoms/Link';
-import { S_HeaderDefault } from '../../store/connectors.js';
+import { toggleNavigation } from '../../store/slices/navigationOpenSlice';
 
-class C_HeaderDefault extends Component {
+function HeaderDefault(props) {
 
-  constructor(props) {
+  const dispatch = useDispatch();
 
-    super(props);
-    this.state = {
-      menuState: 'minimized'
-    };
-    this.toggleNav = this.toggleNav.bind(this);
-  }
-
-
-
-  toggleNav() {
-    this.props.toggleNav();
-  }
-
-
-
-
-  render() {
-    let NavContents;
-    if (this.props.blank) {
-      NavContents
+  let NavContents;
+  if (props.blank) {
+    NavContents
                 = <>
-          <span />
-          <h1 className='app-title'>HabCheck</h1>
-          <span />
-        </>
-      ;
-    } else {
-      NavContents
+        <span />
+        <h1 className='app-title'>HabCheck</h1>
+        <span />
+      </>
+    ;
+  } else {
+    NavContents
                 = <>
-          <i className='fa fa-bars' aria-hidden='true' onClick={this.toggleNav}></i>
+        <i className='fa fa-bars' aria-hidden='true' onClick={() => dispatch(toggleNavigation())}></i>
 
-          <Link to={'/home'}><i className='fa fa-home' aria-hidden='true' ></i></Link>
-        </>
-      ;
-    }
-
-
-    return (
-      <header className='app-header default'>
-        <nav className='site-nav'>
-          <div className='header-nav'>
-            {NavContents}
-          </div>
-        </nav>
-      </header>
-    );
+        <Link to={'/home'}><i className='fa fa-home' aria-hidden='true' ></i></Link>
+      </>
+    ;
   }
+
+
+  return (
+    <header className='app-header default'>
+      <nav className='site-nav'>
+        <div className='header-nav'>
+          {NavContents}
+        </div>
+      </nav>
+    </header>
+  );
 }
-
-let HeaderDefault = connect(...S_HeaderDefault)(C_HeaderDefault);
 
 export {
   HeaderDefault

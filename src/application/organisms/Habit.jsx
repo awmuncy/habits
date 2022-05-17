@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { createCheckin, sleepHabit } from '../lib/requests.js';
-import { Checkin } from '../store/ConnectedComponents.js';
+
+import { sleepHabit } from '../lib/requests.js';
+import { Checkin } from '../molecules/Checkin';
 
 import NewCheckin from '../molecules/NewCheckin';
 import { distToUrgent, intervalToString, inTargetWindow } from '../lib/timing';
@@ -36,7 +36,7 @@ function FootprintsEssentials(props) {
             let checkinResponse = await sleepHabit(props._id);
           }}></i>
         </span>
-        <span><i class='fa fa-plus'></i>{props.profile.pointsPerDay}</span>
+        <span><i className='fa fa-plus'></i>{props.profile.pointsPerDay}</span>
       </div>
     </div>
   );
@@ -65,7 +65,7 @@ function VicesEssentials(props) {
             let checkinResponse = await sleepHabit(props._id);
           }}></i>
         </span>
-        <span><i class='fa fa-plus'></i>{props.profile.pointsPerDay}</span>
+        <span><i className='fa fa-plus'></i>{props.profile.pointsPerDay}</span>
       </div>
     </div>
   );
@@ -73,7 +73,7 @@ function VicesEssentials(props) {
 
 
 
-function HabitComponent(props) {
+function Habit(props) {
 
   let [open, setOpen] = useState(false);
 
@@ -95,7 +95,7 @@ function HabitComponent(props) {
           <ul className='checkins'>
             <NewCheckin {...props} />
             {props.checkins.map(checkin => {
-              return <Checkin checkin={checkin} habitId={props._id} />;
+              return <Checkin key={checkin} checkin={checkin} habitId={props._id} />;
             })}
           </ul>
         </div>
@@ -105,27 +105,6 @@ function HabitComponent(props) {
 
 }
 
-function HabitProps(store, props) {
-  let habit_position = store.habits.findIndex(function(habit) {
-    if (habit._id === props._id) {
-      return true;
-    }
-    return false;
-  });
-  return {
-    checkins: store.habits[habit_position].checkins
-  };
-}
-
-function HabitDispatches() {
-  return {};
-}
-
-const Habit = connect(HabitProps, HabitDispatches)(HabitComponent);
-
 export {
-  Habit,
-  HabitComponent,
-  HabitProps,
-  HabitDispatches
+  Habit
 };

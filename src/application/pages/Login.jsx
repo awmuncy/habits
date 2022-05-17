@@ -1,26 +1,7 @@
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
-import { SAVE_USER } from '../../actions.js';
-import { HeaderDefault } from '../store/ConnectedComponents.js';
+import { HeaderDefault } from '../molecules/NavTop/HeaderDefault';
 import { login } from '../lib/requests.js';
-
-function saveUser(token, subscription_type) {
-
-  let action = {
-    type             : SAVE_USER,
-    token            : token,
-    subscription_type: subscription_type
-  };
-
-  let message = {
-    type   : 'dispatch',
-    payload: action
-  };
-  navigator.serviceWorker.ready.then(sw => {
-    sw.active.postMessage(message);
-  });
-
-}
 
 
 
