@@ -1,4 +1,5 @@
 import { formatDistance, isBefore } from 'date-fns';
+import { breakItDown } from './breakMilsToReadableTime.js';
 
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;
@@ -6,6 +7,7 @@ const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 
 const intervalCount = interval => {
+  return interval;
   let mills = 0;
 
   mills += interval.days * DAY;
@@ -53,6 +55,7 @@ export function inTargetWindow(interval, targetWindow, checkin) {
 };
 
 export function intervalToString(interval, removeS = false) {
+  interval = breakItDown(interval);
   let outputString = '';
   for (let timePeriod in interval) {
     let i = 0;

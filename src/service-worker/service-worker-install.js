@@ -10,21 +10,21 @@ async function run() {
     .register('/service-worker.js');
 
 
-
   const subscription = await registration.pushManager
     .subscribe({
       userVisibleOnly     : true,
       applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
     });
 
-  await fetch('/subscribe', {
-    method : 'POST',
-    body   : JSON.stringify(subscription),
-    headers: {
-      'content-type': 'application/json'
-    }
-  });
-
+  if (await registration.pushManager.getSubscription() === null) {
+    await fetch('/subscribe', {
+      method : 'POST',
+      body   : JSON.stringify(subscription),
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
 }
 
 // Boilerplate borrowed from https://www.npmjs.com/package/web-push#using-vapid-key-for-applicationserverkey

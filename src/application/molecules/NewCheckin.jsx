@@ -68,7 +68,7 @@ export default function NewCheckin(props) {
   if (pickerOpen) {
     timePicker = <TimedCheckin close={()=>setPickerOpen(false)} {...props} />;
   }
-  let mode = props.profile.mode;
+  let mode = props.mode;
   return (
     <li className={`checkin ${mode}`}>
       <h2 className='title'><span className='focus'>New Checkin</span></h2>
@@ -78,7 +78,7 @@ export default function NewCheckin(props) {
         aria-label='Yes, I did check in'
         className='check-yes'
         onClick={async(e) => {
-          let checkinResponse = await createCheckin(props._id);
+          let checkinResponse = await createCheckin(props.id);
         }}
       ></button>
       <button

@@ -5,31 +5,38 @@ import { BrowserRouter } from 'react-router-dom';
 import { HabitTracker } from './page-templates/HabitTracker';
 import store from './store/store.js';
 import tokenizedUser from './tokenizedUser.js';
-import { getHabits } from './lib/requests.js';
-import { addHabits } from './store/slices/habitsSlice.js';
+import { persistentStoreStartup } from './lib/startupWorker.js';
+import { refreshHabits } from './lib/requests';
+
+window.refreshHabits = refreshHabits;
 
 
+async function hydrateStore() {
 
+  window.quer = await persistentStoreStartup();
+  await window.quer({
+    merkle   : {},
+    messages : [],
+    client_id: window.db.getNodeId(),
+    group_id : 'my-group'
+  });
+  refreshHabits();
+}
 
-let loggedin = tokenizedUser();
+async function bootApp() {
 
-// if (loggedin) {
-// let storeInit = store();
+  hydrateStore();
+  tokenizedUser();
 
-ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <HabitTracker />
-    </BrowserRouter>
-  </Provider>
-  ,
-  document.getElementById('momentum-app'));
+  ReactDOM.render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <HabitTracker />
+      </BrowserRouter>
+    </Provider>
+    ,
+    document.getElementById('momentum-app'));
 
+}
 
-getHabits().then(r=>r.json()).then(habits=>{
-  store.dispatch(addHabits(habits));
-});
-
-export {
-  store
-};
+bootApp();

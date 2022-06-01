@@ -63,7 +63,7 @@
 	padding-left: 0px;
 	margin: 0px;
 	margin-bottom: 5px;
-
+	overflow-y: hidden;
 }
 
 .checkin {
@@ -85,7 +85,12 @@
 	scroll-snap-align: start;
 	scroll-margin: 10px;
 
-	
+	&.new:nth-of-type(2) {
+		animation: 300ms ease-out both rise-to-appear;
+	}
+	&.deleting {
+		animation: 300ms ease-out both drop-away;
+	}
 	&:last-of-type {
     	.score {
     		.status-null & {

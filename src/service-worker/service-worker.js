@@ -1,8 +1,7 @@
-import station from './station.js';
-let v = '0.0.72';
+let v = '0.0.79';
 
-
-station();
+// eslint-disable-next-line no-console
+console.log('Service worker version:', v);
 
 let CACHE_NAME = 'Habit';
 
@@ -13,8 +12,8 @@ const urlsToCache = [
   '/icons/icon-256.png',
   '/icons/icon-512.png',
   '/home',
-  // '/css/style.css',
-  // '/js/app.js',
+  '/css/style.css',
+  '/js/app.js',
   '/fonts/Nunito_Sans/NunitoSans-Bold.ttf',
   '/fonts/Nunito_Sans/NunitoSans-Regular.ttf',
   '/fonts/Nunito_Sans/NunitoSans-BoldItalic.ttf',
@@ -26,7 +25,10 @@ const urlsToCache = [
   '/fonts/fontAwesome/fontawesome-webfont.woff',
   '/fonts/fontAwesome/fontawesome-webfont.woff2',
   '/fonts/fontAwesome/FontAwesome.otf',
-  '/js/service-worker-install.js'
+  '/js/service-worker-install.js',
+  '/sql-wasm.wasm',
+  '/js/crdt-connection.js',
+  '/js/sql-wasm.wasm'
 ];
 const urlsPatternsToCache = [
   '/habit/(([\\d|[a-z]){24}|([\\d|[a-z]){6})'
@@ -130,7 +132,9 @@ self.addEventListener('fetch', function(event) {
     caches.open(CACHE_NAME).then(function(cache) {
       return cache.match(request, {ignoreSearch: true}).then(function(response) {
         return response || fetch(event.request).then(function(response) {
-          // cache.put(event.request, response.clone());
+          if (event.request.method !== 'POST') {
+            cache.put(event.request, response.clone());
+          }
           return response;
         });
       });

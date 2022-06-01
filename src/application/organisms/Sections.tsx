@@ -80,11 +80,12 @@ function sortByStatus(habits: Array<TypeHabit>) {
 
   habits.forEach(habit => {
     let status;
-    if (habit.profile.mode === 'vices') {
-      status = 'Vice';
-    } else {
-      status = inTargetWindow(habit.profile.interval, habit.profile.targetWindow, habit.checkins[0]);
-    }
+    // if (habit?.profile.mode === 'vices') {
+    //   status = 'Vice';
+    // } else {
+    //   status = inTargetWindow(habit.profile.interval, habit.profile.targetWindow, habit.checkins[0]);
+    // }
+    status = 'Blank';
     if (Array.isArray(sections[status])) {
       sections[status].push(habit);
     } else {
@@ -101,7 +102,7 @@ function sortByMode(habits: Array<TypeHabit>) {
   let sections = {};
 
   habits.forEach(habit => {
-    let mode = habit.profile.mode;
+    let mode = "Blank";
     if (Array.isArray(sections[mode])) {
       sections[mode].push(habit);
     } else {
@@ -138,12 +139,12 @@ function Sections(props) {
 
   }
 
-  return sorted.map(section => <Section key={section[0]} data={section} />);
+  return sorted.map((section, key) => <Section key={section[0]} data={section} placement={key} />);
 }
 
 
 function Section(props) {
-  let [isOpen, setIsOpen] = useState(false);
+  let [isOpen, setIsOpen] = useState(props.placement === 0);
   const displayClass = isOpen ? 'open' : 'closed';
 
   return (

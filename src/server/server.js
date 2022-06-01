@@ -1,15 +1,36 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
+import fs from 'fs';
+import crdtDriver from '@awmuncy/sqlite-crdt/src/crdtDriver.js';
+import https from 'https';
 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 
+const options = {
+  key : fs.readFileSync(__dirname + '/cert/key.pem', 'utf8'),
+  cert: fs.readFileSync(__dirname + '/cert/cert.pem', 'utf8')
+};
+
+const port = 5499;
+
+
 import bodyParser from 'body-parser';
 let app = express();
+
+let server = https.createServer(options, app);
 let site = express();
+// server.listen(port);
+app.listen(port, () => console.log(`App server up and running on port ${port}`));
+
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+  next();
+});
 
 import dotenv from 'dotenv';
 const env = dotenv.config().parsed;
@@ -45,9 +66,9 @@ site.use(bodyParser.json());
 /* ^ I don't have know what these do ^ */
 
 
-const port = 5499;
+
 // eslint-disable-next-line no-console
-app.listen(port, () => console.log(`App server up and running on port ${port}`));
+
 const sitePort = 5173;
 // eslint-disable-next-line no-console
 site.listen(sitePort, () => console.log(`Site server up and running on port ${sitePort}`));
@@ -57,61 +78,111 @@ site.listen(sitePort, () => console.log(`Site server up and running on port ${si
 // app.use('/feedback', feedback);
 
 
-app.use(express.static(path.resolve(__dirname, '../../dist/public')));
-site.use(express.static(path.resolve(__dirname, '../../dist/public')));
 
-site.get('/', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
+import initSqlJs from '@jlongster/sql.js';
+let db;
+let crdt;
+async function main() {
 
+  const SQL = await initSqlJs({
+    // Required to load the wasm binary asynchronously. Of course, you can host it wherever you want
+    // You can omit locateFile completely when running in node
+  });
 
-  res.end(homepageTemplate({
-    appUrl: `${env.APPLICATION_URL}`
-  }));
-});
+  try {
+    let data = fs.readFileSync('./db.db');
+    db = new SQL.Database(data);
+  } catch (e) {
+    db = new SQL.Database();
+  }
 
-app.use((req, res, next) => {
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
-  next();
-});
+  // Create a database
+  crdt = await crdtDriver(db, {messagesOnly: true, debug: true, serverMode: true, group: 'my-group'});
 
-
-site.get('/legal', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-
-
-  res.end(legalPage({pageTitle: 'Legal'}));
-});
-
-app.post('/sync', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/json' });
-
-  let content = {};
-  content = JSON.stringify(content);
+  console.log('SQL is ready');
 
 
-  res.end(content);
-});
 
-let routes = [
-  '/home',
-  '/',
-  '/habit/(([\\d|[a-z]){24}|([\\d|[a-z]){6})',
-  '/habits',
-  '/feedback',
-  '*',
-  '/login'
-];
 
-routes.forEach(toHome);
+  app.post('/crdt-sync', async(req, res) => {
 
-function toHome(route) {
-  app.get(route, (req, res) => {
+    let back = await crdt.deliverMessages(req.body);
+
+    let data = crdt.debug.db.export();
+    const buffer = Buffer.from(data);
+    fs.writeFileSync('./db.db', buffer);
+
+
+    res.send(
+      JSON.stringify({
+        status: 'ok',
+        data  : back
+      })
+    );
+  });
+
+  app.use(express.static(path.resolve(__dirname, '../../dist/public')));
+  site.use(express.static(path.resolve(__dirname, '../../dist/public')));
+
+  site.get('/', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
 
-    res.end(appTemplate());
+
+    res.end(homepageTemplate({
+      appUrl: `${env.APPLICATION_URL}`
+    }));
   });
+
+  app.use((req, res, next) => {
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    next();
+  });
+
+
+  site.get('/legal', (req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+
+
+    res.end(legalPage({pageTitle: 'Legal'}));
+  });
+
+  app.post('/sync', (req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/json' });
+
+    let content = {};
+    content = JSON.stringify(content);
+
+
+    res.end(content);
+  });
+
+  let routes = [
+    '/home',
+    '/',
+    '/habit/(([\\d|[a-z]){24}|([\\d|[a-z]){6})',
+    '/habits',
+    '/feedback',
+    '*',
+    '/login'
+  ];
+
+  routes.forEach(toHome);
+
+  function toHome(route) {
+    app.get(route, (req, res) => {
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+
+      res.end(appTemplate());
+    });
+  }
+
+
+  notifications(app);
+
+
+
+
 }
 
-
-notifications(app);
+main();
