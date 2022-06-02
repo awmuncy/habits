@@ -10,10 +10,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 
-const options = {
-  key : fs.readFileSync(__dirname + '/cert/key.pem', 'utf8'),
-  cert: fs.readFileSync(__dirname + '/cert/cert.pem', 'utf8')
-};
+// const options = {
+//   key : fs.readFileSync(__dirname + '/cert/key.pem', 'utf8'),
+//   cert: fs.readFileSync(__dirname + '/cert/cert.pem', 'utf8')
+// };
 
 const port = 5499;
 
@@ -21,7 +21,7 @@ const port = 5499;
 import bodyParser from 'body-parser';
 let app = express();
 
-let server = https.createServer(options, app);
+// let server = https.createServer(options, app);
 let site = express();
 // server.listen(port);
 app.listen(port, () => console.log(`App server up and running on port ${port}`));
