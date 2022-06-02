@@ -58,10 +58,12 @@ async function initDatabase() {
                 h.description,
                 h.mode,
                 h.interval,
-                h.target                
+                h.target,
+                h.tombstone as tombstone      
             FROM habits h
             left join (select id, moment, habit_id from checkins where tombstone is null) c
                 on c.habit_id=h.id
+            WHERE h.tombstone is null
             ORDER BY habit_id desc, c.moment DESC;
     `);
 
