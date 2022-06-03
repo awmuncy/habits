@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { HabitTracker } from './page-templates/HabitTracker';
 import store from './store/store.js';
 import tokenizedUser from './tokenizedUser.js';
-import { persistentStoreStartup } from './lib/startupWorker.js';
+import { workerStartup } from './lib/workerStartup.js';
 import { refreshHabits } from './lib/requests';
 
 window.refreshHabits = refreshHabits;
@@ -13,14 +13,8 @@ window.refreshHabits = refreshHabits;
 
 async function hydrateStore() {
 
-  window.quer = await persistentStoreStartup();
-  await window.quer({
-    merkle   : {},
-    messages : [],
-    client_id: window.db.getNodeId(),
-    group_id : 'my-group'
-  });
-  refreshHabits();
+  await workerStartup();
+
 }
 
 async function bootApp() {

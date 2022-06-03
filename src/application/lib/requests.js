@@ -5,9 +5,8 @@ import store from '../store/store.js';
 import { addHabits } from '../store/slices/habitsSlice.js';
 
 
-export function refreshHabits() {
+export async function refreshHabits(results) {
 
-  let results = window.db.debug.db.exec('SELECT * FROM HabitList;');
   if (!results[0]) {
     return;
   }
@@ -39,6 +38,20 @@ export function refreshHabits() {
 
 
 
+export async function deleteCheckin(checkin) {
+  let q = await window.quer;
+  q.tombstone('checkins', checkin);
+
+}
+
+export async function createCheckin(habitId, moment = null) {
+  let q = await window.quer;
+  q.insert('checkins', {habit_id: habitId, moment: new Date().getTime()});
+}
+
+
+
+
 export async function login(user, password) {
   return await fetch(`${host}/api/auth/login`, {
     method     : 'POST',
@@ -51,44 +64,3 @@ export async function login(user, password) {
     }
   });
 }
-
-export async function deleteCheckin(checkin) {
-  window.db.tombstone('checkins', checkin);
-  refreshHabits();
-
-}
-
-export async function createCheckin(habitId, moment = null) {
-  window.db.insert('checkins', {habit_id: habitId, moment: new Date().getTime()});
-  refreshHabits();
-
-}
-
-export async function getHabits() {
-  return await fetch(`${host}/api/users/${user}/habits`, {
-    method : 'GET',
-    headers: {
-      'Authorization': 'Bearer ' + bearer
-    }
-  });
-};
-
-
-export async function sleepHabit(habitId, moment = null) {
-  let req = await fetch(`${host}/api/users/${user}/habits/${habitId}/sleep`, {
-    method : 'POST',
-    headers: {
-      Authorization : 'Bearer ' + bearer,
-      'Content-Type': 'application/json'
-    },
-    body: moment ? JSON.stringify({value: moment}) : null
-  });
-  let response = await req.json();
-  if (req.status === 200) {
-    store.dispatch({
-      type : 'SLEEP_HABIT',
-      habit: habitId
-    });
-  }
-
-};

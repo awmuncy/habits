@@ -132,7 +132,7 @@ self.addEventListener('fetch', function(event) {
     caches.open(CACHE_NAME).then(function(cache) {
       return cache.match(request, {ignoreSearch: true}).then(function(response) {
         return response || fetch(event.request).then(function(response) {
-          if (event.request.method !== 'POST') {
+          if (event.request.method !== 'POST' && response.status > 400) {
             cache.put(event.request, response.clone());
           }
           return response;

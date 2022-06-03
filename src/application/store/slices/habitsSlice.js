@@ -1,4 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+// const updateCheckin = createAsyncThunk(
+//   'habits/updatedDb',
+//   async (habit_id, moment, thunkAPI) => {
+//     window.databaseConnection.insert
+//   }
+// );
 
 export const habitsSlice = createSlice({
   name        : 'habits',

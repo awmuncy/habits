@@ -14,14 +14,11 @@ const __dirname = dirname(__filename);
 
 
 
-
-const port = 443;
-
-
 import bodyParser from 'body-parser';
 let app = express();
 
 if (env.ssl_cert) {
+  const port = 443;
   const privateKey = fs.readFileSync(env.key_loc, 'utf8');
   const certificate = fs.readFileSync(env.ssl_cert, 'utf8');
   const ca = fs.readFileSync(env.cert_authority_file, 'utf8');
@@ -34,6 +31,7 @@ if (env.ssl_cert) {
   let server = https.createServer(credentials, app);
   server.listen(port);
 } else {
+  const port = 5499;
   app.listen(port, () => console.log(`App server up and running on port ${port}`));
 }
 

@@ -43,7 +43,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "@awmuncy/sqlite-crdt": "*",
+        "@awmuncy/sqlite-crdt": "^0.0.1",
         "@babel/cli": "^7.15.4",
         "@babel/core": "^7.15.5",
         "@emotion/react": "^11.9.0",

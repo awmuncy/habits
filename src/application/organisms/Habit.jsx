@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { sleepHabit } from '../lib/requests.js';
+// import { sleepHabit } from '../lib/requests.js';
 import { Checkin } from '../molecules/Checkin';
 
 import NewCheckin from '../molecules/NewCheckin';
