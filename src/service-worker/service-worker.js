@@ -1,4 +1,4 @@
-let v = '0.0.79';
+let v = '0.0.80';
 
 // eslint-disable-next-line no-console
 console.log('Service worker version:', v);
