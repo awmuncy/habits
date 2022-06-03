@@ -164,3 +164,20 @@
 		transform: translateY(200px);
 	}
 }
+
+@keyframes fade-up {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(200px);
+		opacity: 0;
+	}
+	51% {
+		transform: translateY(-200px);
+	}
+	100% {
+		transform: translate(0px);
+		opacity: 1;
+	}	
+}

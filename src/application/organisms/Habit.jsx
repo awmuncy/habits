@@ -5,20 +5,30 @@ import { Checkin } from '../molecules/Checkin';
 
 import NewCheckin from '../molecules/NewCheckin';
 import { distToUrgent, intervalToString, inTargetWindow } from '../lib/timing';
+import { createCheckin } from '../lib/requests';
 
 
 function FootprintsEssentials(props) {
-
+  let [isClicked, setIsClicked] = useState(false);
 
 
   let statusIcon = inTargetWindow(props.interval, props.target, props.checkins[0]?.[1]);
   let distToTimesUp = distToUrgent(props.interval, props.target, props.checkins[0]?.[1]);
 
   let sleep = props.sleep ? 'sleep' : '';
+  let clicked = isClicked ? "clicked" : "";
 
   return (
     <div className={`essentials status-add ${sleep}`} onClick={e=>{ props.opener[1](!props.opener[0]); }}>
-      <span className={`${statusIcon} aim status-icon `}>
+      <span className={`${statusIcon} aim status-icon ${clicked}`} onClick={e => {
+        setIsClicked(true);
+        setTimeout(() => {
+          setIsClicked(false);
+        }, 500);
+        e.stopPropagation();
+        createCheckin(props.id, new Date().getTime());
+      }
+      }>
 
       </span>
       <div className='title-and-type'>
@@ -27,7 +37,7 @@ function FootprintsEssentials(props) {
           <span className='interval'>{intervalToString(props.interval)}</span>
           ||
           <span className='target'> {intervalToString(props.target, true)}</span> target window
-          || 
+          ||
           {distToTimesUp}
         </span>
       </div>
@@ -51,7 +61,7 @@ function VicesEssentials(props) {
 
   return (
     <div
-      className={`essentials status-add ${sleep}`}
+      className={`essentials vices status-add ${sleep}`}
       onClick={e=>{ props.opener[1](!props.opener[0]); }}
       id={`habit-${props.id}`}>
       <span className={`${statusIcon} aim status-icon `}>

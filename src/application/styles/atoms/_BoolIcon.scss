@@ -1,6 +1,7 @@
 .status-icon {
     font-size: 30px;
     place-self: stretch;
+
     &:after {
         font-family: fontAwesome;
         display: grid;
@@ -14,6 +15,9 @@
         content: '\f146';
         color: #ccc;
 
+    }
+    &.clicked {
+        animation: 300ms ease-out both fade-up;
     }
     &.success:after {
         border-color: var(--fastest);
@@ -33,7 +37,11 @@
         font-size: 16px;
         color: var(--fastest);
     }
-    
+    .essentials.vices &:after {
+        content: '\f05e';
+        color: palevioletred;
+        border-color: grey;
+    }
     &.target:after {
         color: #ccc;
         border-color: var(--fast);

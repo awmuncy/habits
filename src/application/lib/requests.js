@@ -46,7 +46,7 @@ export async function deleteCheckin(checkin) {
 
 export async function createCheckin(habitId, moment = null) {
   let q = await window.quer;
-  q.insert('checkins', {habit_id: habitId, moment: new Date().getTime()});
+  q.insert('checkins', {habit_id: habitId, moment});
 }
 
 

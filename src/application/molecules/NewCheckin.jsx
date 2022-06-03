@@ -15,7 +15,7 @@ function TimedCheckinButtons(props) {
       }}><i className='fa fa-close'></i></button>
       <button onClick={() => {
         props.close();
-        createCheckin(props._id, props.value.getTime());
+        createCheckin(props.id, props.value.getTime());
       }}><i className='fa fa-check'></i></button>
       <button onClick={() => {
         props.setShowDate(!props.showDate);
@@ -78,7 +78,7 @@ export default function NewCheckin(props) {
         aria-label='Yes, I did check in'
         className='check-yes'
         onClick={async(e) => {
-          let checkinResponse = await createCheckin(props.id);
+          let checkinResponse = await createCheckin(props.id, new Date().getTime());
         }}
       ></button>
       <button
