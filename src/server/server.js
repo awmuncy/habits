@@ -4,27 +4,41 @@ import path, { dirname } from 'path';
 import fs from 'fs';
 import crdtDriver from '@awmuncy/sqlite-crdt/src/crdtDriver.js';
 import https from 'https';
+import dotenv from 'dotenv';
+const env = dotenv.config().parsed;
 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 
-// const options = {
-//   key : fs.readFileSync(__dirname + '/cert/key.pem', 'utf8'),
-//   cert: fs.readFileSync(__dirname + '/cert/cert.pem', 'utf8')
-// };
 
-const port = 5499;
+
+
+const port = 443;
 
 
 import bodyParser from 'body-parser';
 let app = express();
 
-// let server = https.createServer(options, app);
+if (env.ssl_cert) {
+  const privateKey = fs.readFileSync(env.key_loc, 'utf8');
+  const certificate = fs.readFileSync(env.ssl_cert, 'utf8');
+  const ca = fs.readFileSync(env.cert_authority_file, 'utf8');
+
+  const credentials = {
+    key: privateKey,
+    cert: certificate,
+    ca: ca
+  };
+  let server = https.createServer(credentials, app);
+  server.listen(port);
+} else {
+  app.listen(port, () => console.log(`App server up and running on port ${port}`));
+}
+
 let site = express();
-// server.listen(port);
-app.listen(port, () => console.log(`App server up and running on port ${port}`));
+
 
 app.use((req, res, next) => {
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
@@ -32,8 +46,7 @@ app.use((req, res, next) => {
   next();
 });
 
-import dotenv from 'dotenv';
-const env = dotenv.config().parsed;
+
 
 
 import notifications from './notifications.js';
@@ -41,7 +54,12 @@ import { appTemplate, homepageTemplate, legalPage } from './useHandlebars.js';
 
 function environment(req, res, next) {
   res.writeHead(200, { 'Content-Type': 'application/javascript' });
-  let encodedEnv = Buffer.from(JSON.stringify(env)).toString('base64');
+  let publicEnv = {
+    ENVIRONMENT    : env.ENVIRONMENT,
+    APPLICATION_URL: env.APPLICATION_URL,
+    SITE_URL       : env.SITE_URL
+  };
+  let encodedEnv = Buffer.from(JSON.stringify(publicEnv)).toString('base64');
   res.end(`const env=JSON.parse(atob("${encodedEnv}"))`);
 }
 
