@@ -87,7 +87,7 @@ function NavSide(props) {
       </ul>
       <footer className='underview'>
         <div className='version'>
-                        Habit Builder pre-alpha release 0.0.72
+                        Habit Builder pre-alpha release 0.0.82
         </div>
         <div className='logout-section'>
           <a href='/logout'
