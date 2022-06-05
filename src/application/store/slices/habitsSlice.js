@@ -7,9 +7,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 //   }
 // );
 
+let hab = JSON.parse(localStorage.getItem('habits_list_prev'));
+
 export const habitsSlice = createSlice({
   name        : 'habits',
-  initialState: [],
+  initialState: hab || [],
   reducers    : {
     addHabits: (state, action) => {
       return action.payload;

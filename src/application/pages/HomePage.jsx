@@ -17,7 +17,7 @@ function HomePage() {
       <main>
         <div className='home-layout'>
           <div className='sidebar'>
-            <Buckets />
+            {/* <Buckets /> */}
           </div>
           <div className='home-main'>
             <Habits />

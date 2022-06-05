@@ -7,6 +7,7 @@ import { addHabits } from '../store/slices/habitsSlice.js';
 
 export async function refreshHabits(results) {
 
+
   if (!results[0]) {
     return;
   }
@@ -32,7 +33,7 @@ export async function refreshHabits(results) {
       habits[index].checkins.push(prunedRow);
     }
   });
-
+  localStorage.setItem('habits_list_prev', JSON.stringify(habits));
   store.dispatch(addHabits(habits));
 }
 
